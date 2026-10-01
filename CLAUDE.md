@@ -6,6 +6,13 @@
 
 ---
 
+## 0. Estado actual (actualizar en cada sesión)
+
+- **Repositorio GitHub público** `tuprofeporelmundo-jpg/tuprofeporelmundo`. La web nueva está en la rama `claude/new-session-irdk25` (en `main` sigue la web antigua; Dana aún no ha autorizado pasarla a `main`). `materiales-venta/` está en `.gitignore`: los PDF de pago no se suben nunca.
+- **Netlify:** cuenta creada por Dana (equipo "tuprofeporelmundo"). Proyecto `tuprofeporelmundo` → **tuprofeporelmundo.netlify.app**, conectado a GitHub y publicando desde la rama `claude/new-session-irdk25`. Form detection activado; formularios `reserva` y `newsletter` detectados. Pendiente: confirmar que pulsó "Make public" y activar avisos por correo de los formularios.
+- **Dominio:** `tuprofeporelmundo.com` (Porkbun). Pendiente: añadirlo en Netlify (www como principal) y cambiar el DNS en Porkbun.
+- **Acceso automático (opción B elegida por Dana):** Claude lo hará por API con las variables de entorno `NETLIFY_AUTH_TOKEN`, `PORKBUN_API_KEY` y `PORKBUN_SECRET_API_KEY`, con `api.netlify.com` y `api.porkbun.com` permitidos en la red del entorno. Antes de cambiar DNS: listar los registros, enseñárselos a Dana y **no tocar MX ni TXT (SPF)**. Después de terminar, recordarle que borre o caduque las claves.
+
 ## 1. Quién es la clienta y cómo trabajar con ella
 
 - **Dana Salgado**, profesora online de **español para extranjeros (A1–C1)** y de **apoyo escolar (primaria y ESO)**. Es de Galdakao (Bizkaia). Ha dado clase en Asturias, Granada, Bilbao y alrededores, y tres años en colegios españoles de Tánger y Rabat. Lleva más de 10 años con clases particulares y ha preparado pruebas de español de distintos niveles.
