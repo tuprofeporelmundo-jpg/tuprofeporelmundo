@@ -1,0 +1,6 @@
+.netlify/
+node_modules/
+.DS_Store
+
+# PDF de pago: NUNCA al repositorio (es público)
+materiales-venta/
