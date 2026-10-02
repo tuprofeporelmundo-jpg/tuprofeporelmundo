@@ -46,7 +46,7 @@ button{font:inherit;font-weight:700;padding:.85rem 1.4rem;border-radius:10px;bor
 :focus-visible{outline:3px solid var(--flower);outline-offset:3px}
 .error{color:var(--danger);font-weight:700}`;
 
-const FLOR = `<svg viewBox="-50 -50 100 100" aria-hidden="true"><g fill="var(--petal)" stroke="var(--flower)" stroke-width="2"><path id="p" d="M0 0 C-16 -6 -22 -32 -8 -44 C6 -50 20 -36 0 0Z"/><use href="#p" transform="rotate(72)"/><use href="#p" transform="rotate(144)"/><use href="#p" transform="rotate(216)"/><use href="#p" transform="rotate(288)"/></g><circle r="6" fill="var(--petal-c)"/></svg>`;
+const FLOR = `<svg viewBox="-50 -50 100 100" aria-hidden="true"><g transform="translate(0 8)"><g fill="var(--petal)" stroke="var(--flower)" stroke-width="2"><path d="M0 24 C-20 26 -42 16 -47 0 C-30 -4 -12 6 0 24Z"/><path d="M0 24 C20 26 42 16 47 0 C30 -4 12 6 0 24Z"/><path d="M0 24 C-20 16 -30 -6 -27 -26 C-12 -20 -2 -2 0 24Z"/><path d="M0 24 C20 16 30 -6 27 -26 C12 -20 2 -2 0 24Z"/><path d="M0 24 C-14 8 -13 -22 0 -42 C13 -22 14 8 0 24Z"/></g></g></svg>`;
 
 function pagina(titulo, cuerpo, status = 200, extra = {}) {
   const html = `<!doctype html><html lang="es"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="robots" content="noindex"><title>${titulo}</title><style>${CSS}</style></head><body><main>${FLOR}${cuerpo}</main></body></html>`;
