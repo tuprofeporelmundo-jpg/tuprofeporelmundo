@@ -17,6 +17,8 @@
 
 - **Curso A1 DELE en Mi aula (2 oct 2026):** `MATERIAL[0]` en `site/aula/banco.js` lista la guía y las unidades 0, 2, 3, 4, 5, 6, 7 y 9 (cuaderno del alumno + solucionario, botones separados). «Mi material» se muestra en carpetas por nivel (A1-C2, `<details>`), abierta la del nivel del alumno. Faltan U01 y U08 completas y el solucionario de U05: al recibirlos, añadir la línea o el campo `s:`. Los PDF se suben a mano al bucket privado `material` de Supabase con el nombre exacto (copia en la carpeta del proyecto `material-A1/`).
 
+- **Web en construcción (2 oct 2026):** `netlify/edge-functions/en-construccion.js` enseña «Próximamente» a todos los visitantes (también en `/aula/`). Dana entra en `/entrar` con su contraseña (se le dio en el hilo; en el código solo hay una huella PBKDF2) y sale en `/salir`; la sesión dura 90 días. Para abrir la web al público: borrar ese archivo.
+
 - **Apoyo escolar (2 oct 2026):** `site/aula/banco-escolar.js` = 150 unidades / 900 preguntas (P1-P6, E1-E4 × Matemáticas, Lengua, Inglés, Ciencias Naturales, Ciencias Sociales; 3 unidades por curso y asignatura) según los saberes básicos de la LOMLOE (RD 157/2022 y RD 217/2022). Se usa en el «Reto de apoyo escolar» de la portada (5 preguntas al día, `tppm-reto-esc`) y en Mi aula (modalidad «Apoyo escolar», `data.track='school'`, curso en `data.esc.c`).
 
 ## 1. Quién es la clienta y cómo trabajar con ella
