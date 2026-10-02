@@ -37,14 +37,28 @@ $$;
 revoke all on function public.borrar_mi_cuenta() from public, anon;
 grant execute on function public.borrar_mi_cuenta() to authenticated;
 
--- 3. Material privado: solo lo abren alumnos con sesión iniciada
+-- 3. Material privado: solo lo abren los alumnos a los que Dana da acceso
+--    (cualquiera puede crearse una cuenta para el test de nivel, así que tener cuenta no basta).
 insert into storage.buckets (id, name, public)
 values ('material', 'material', false)
 on conflict (id) do nothing;
 
+create table if not exists public.acceso_material (
+  email text primary key,
+  anadido timestamptz not null default now()
+);
+alter table public.acceso_material enable row level security;
+
+drop policy if exists "cada alumno ve su acceso" on public.acceso_material;
+create policy "cada alumno ve su acceso" on public.acceso_material
+  for select to authenticated using (lower(email) = lower((select auth.jwt() ->> 'email')));
+
 drop policy if exists "alumnos leen el material" on storage.objects;
 create policy "alumnos leen el material" on storage.objects
-  for select to authenticated using (bucket_id = 'material');
+  for select to authenticated using (
+    bucket_id = 'material'
+    and exists (select 1 from public.acceso_material a where lower(a.email) = lower((select auth.jwt() ->> 'email')))
+  );
 
 -- 4. Vista para Dana: alumnos, nivel y objetivo (se consulta desde el panel de Supabase, no desde la web)
 create or replace view public.resumen_alumnos with (security_invoker = true) as
@@ -67,3 +81,8 @@ revoke all on public.resumen_alumnos from anon, authenticated;
 --    Copia estas dos líneas en una consulta nueva, cambia el usuario y la contraseña, y pulsa Run:
 -- update auth.users set encrypted_password = extensions.crypt('NuevaClave2026', extensions.gen_salt('bf'))
 -- where email = 'jose.maria@tuprofeporelmundo.com';
+
+-- 6. Dar acceso al material a un alumno (cambia el usuario y pulsa Run):
+-- insert into public.acceso_material (email) values ('jose.maria@tuprofeporelmundo.com');
+--    Quitárselo:
+-- delete from public.acceso_material where email = 'jose.maria@tuprofeporelmundo.com';
