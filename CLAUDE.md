@@ -50,7 +50,7 @@ Web de una sola página, **trilingüe (ES/EN/FR)**, con selector de idioma, modo
 
 **Secciones, en orden:** portada con ficha de profesora · Clases (español y apoyo) · Sobre mí · Mi método (4 pasos) · Instagram con postal "frase del día" · **Reto del día** (ahorcado) · **Regalo** (PDF + newsletter) · **Tienda** (7 PDF a 3 €) · **Tarifas** y condiciones · **Horarios** (calendario por zona horaria y petición especial) · Preguntas frecuentes · **Reserva** (formulario) · pie con textos legales · botón flotante del **asistente**.
 
-**Estilo (decidido por Dana, mantener):** tonos marrones y nude, verdes de selva y flores (flor de loto desde el 2 oct 2026, antes frangipani; hojas tropicales). Títulos con serifa del sistema. Variables CSS en `:root`: `--jungle` (#6B4433, color principal), `--flower` (#D98C7E), `--leaf` (#5E7A55), `--ochre` (#C4936B), etc. Las flores y hojas son símbolos SVG (`#fl`, `#fl2`, `#lf`, `#lf2`) reutilizados con `<use>`.
+**Estilo (decidido por Dana, mantener):** tonos marrones y nude, verdes de selva y flores (desde el 2 oct 2026: flor de loto crema `#fl` y flor de cerezo japonés rosa `#fl2`, antes frangipani; hojas tropicales). Títulos con serifa del sistema. Variables CSS en `:root`: `--jungle` (#6B4433, color principal), `--flower` (#D98C7E), `--leaf` (#5E7A55), `--ochre` (#C4936B), etc. Las flores y hojas son símbolos SVG (`#fl`, `#fl2`, `#lf`, `#lf2`) reutilizados con `<use>`.
 
 **Cómo está organizado el JS (todo dentro de `index.html`):**
 - `T` = textos en `es`, `en`, `fr`. Los elementos usan `data-i18n="clave"` (y `data-i18n-ph` en los placeholders). **Toda clave nueva debe existir en los tres idiomas.**
