@@ -5,5 +5,5 @@
 window.AULA_CONFIG={
   supabaseUrl:'https://csnofemrppaqnnwirusx.supabase.co',
   supabaseKey:'sb_publishable_q1Sx5pe8Klw8T6UA11r5MA_d0oclgYt',
-  email:'tuprofeporelmundo@gmail.com'
+  email:'contacto@tuprofeporelmundo.com'
 };

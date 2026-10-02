@@ -1,0 +1,4 @@
+User-agent: *
+Disallow: /aula/
+
+Sitemap: https://tuprofeporelmundo.com/sitemap.xml

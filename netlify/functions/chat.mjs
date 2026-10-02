@@ -20,9 +20,9 @@ Datos de la web (únicos que puedes usar):
 - Las clases son 100 % online por videollamada. Solo necesitas un ordenador o tablet con cámara, micrófono y buena conexión. Antes de la primera clase recibes el enlace.
 - Para reservar, rellena el formulario de "Reservar clase": elige el tipo de clase y la tarifa, y si quieres una franja de Horarios. Dana te confirma por correo el día, la hora y el pago.
 - Dana es profesora nativa de Galdakao, con más de 10 años de clases particulares y experiencia en Asturias, Granada, Bilbao y en colegios españoles de Tánger y Rabat. No usa un método cerrado: analiza tus necesidades y diseña las clases según tu objetivo.
-- Tus datos solo se usan para gestionar tu reserva y tus clases, no se ceden y puedes ejercer tus derechos escribiendo a tuprofeporelmundo@gmail.com. Tienes todo en la Política de privacidad.
-- Puedes escribir a Dana a tuprofeporelmundo@gmail.com o por Instagram (@daanaa.salgado).
-- Contacto: tuprofeporelmundo@gmail.com · Instagram @daanaa.salgado.
+- Tus datos solo se usan para gestionar tu reserva y tus clases, no se ceden y puedes ejercer tus derechos escribiendo a contacto@tuprofeporelmundo.com. Tienes todo en la Política de privacidad.
+- Puedes escribir a Dana a contacto@tuprofeporelmundo.com o por Instagram (@daanaa.salgado).
+- Contacto: contacto@tuprofeporelmundo.com · Instagram @daanaa.salgado.
 
 Normas:
 - Responde en el idioma del alumno (español, inglés o francés), en 2-4 frases, con tono cercano.
@@ -35,8 +35,24 @@ Normas:
 const json = (body, status = 200) =>
   new Response(JSON.stringify(body), { status, headers: { "Content-Type": "application/json" } });
 
-export default async (req) => {
+// Solo responde a peticiones hechas desde la propia web, y como mucho 20 por minuto desde la misma conexión,
+// para que nadie pueda gastar el saldo de la API llamando a la función desde fuera.
+const ORIGINS = /^https:\/\/((www\.)?tuprofeporelmundo\.com|([a-z0-9-]+--)?tuprofeporelmundo\.netlify\.app)$/;
+const hits = new Map();
+const tooMany = (ip) => {
+  const now = Date.now();
+  const recent = (hits.get(ip) || []).filter((t) => now - t < 60_000);
+  recent.push(now);
+  hits.set(ip, recent);
+  if (hits.size > 5000) hits.clear();
+  return recent.length > 20;
+};
+
+export default async (req, context) => {
   if (req.method !== "POST") return json({ error: "method" }, 405);
+  if (!process.env.ANTHROPIC_API_KEY) return json({ error: "disabled" }, 503);
+  if (!ORIGINS.test(req.headers.get("origin") || "")) return json({ error: "origin" }, 403);
+  if (tooMany(context?.ip || req.headers.get("x-nf-client-connection-ip") || "?")) return json({ error: "rate" }, 429);
   let data;
   try { data = await req.json(); } catch { return json({ error: "bad_request" }, 400); }
   const messages = (Array.isArray(data.messages) ? data.messages : [])
