@@ -15,6 +15,8 @@
 
 - **Auditoría (2 oct 2026):** informe completo en la carpeta del proyecto (`auditoria/`). Hecho: texto en español escrito en el HTML (el JS solo traduce), `og.png` 1200×630, `robots.txt`, `sitemap.xml`, cabeceras de seguridad con CSP en `netlify.toml` (si se añade un servicio externo, hay que permitirlo ahí), correo visible `contacto@tuprofeporelmundo.com` (reenvía al Gmail), asistente protegido por origen y límite de uso. El material del aula queda solo para alumnos de `public.acceso_material` (`supabase/cerrar-material.sql`, lo ejecuta Dana). Datos legales de Dana rellenados el 2 oct 2026.
 
+- **Curso A1 DELE en Mi aula (2 oct 2026):** `MATERIAL[0]` en `site/aula/banco.js` lista la guía y las unidades 0, 2, 3, 4, 5, 6, 7 y 9 (cuaderno del alumno + solucionario, botones separados). Faltan U01 y U08 completas y el solucionario de U05: al recibirlos, añadir la línea o el campo `s:`. Los PDF se suben a mano al bucket privado `material` de Supabase con el nombre exacto (copia en la carpeta del proyecto `material-A1/`).
+
 - **Apoyo escolar (2 oct 2026):** `site/aula/banco-escolar.js` = 150 unidades / 900 preguntas (P1-P6, E1-E4 × Matemáticas, Lengua, Inglés, Ciencias Naturales, Ciencias Sociales; 3 unidades por curso y asignatura) según los saberes básicos de la LOMLOE (RD 157/2022 y RD 217/2022). Se usa en el «Reto de apoyo escolar» de la portada (5 preguntas al día, `tppm-reto-esc`) y en Mi aula (modalidad «Apoyo escolar», `data.track='school'`, curso en `data.esc.c`).
 
 ## 1. Quién es la clienta y cómo trabajar con ella

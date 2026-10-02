@@ -188,7 +188,9 @@ input:focus,select:focus{border-color:var(--ochre);outline:none}
 .mat li{display:flex;align-items:center;gap:.75rem;border:1px solid var(--line);border-radius:10px;padding:.6rem .75rem}
 .mat li svg{flex:none;width:22px;height:22px;color:var(--flower)}
 .mat li div{min-width:0;flex:1}
-.mat li span{display:block;font-size:.8rem;color:var(--muted)}
+.mat li div span{display:block;font-size:.8rem;color:var(--muted)}
+.mat-b{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:flex-end}
+@media (max-width:480px){.mat li{flex-wrap:wrap}.mat-b{width:100%;justify-content:flex-start}}
 .row{display:flex;gap:.6rem;flex-wrap:wrap}
 .row .btn{flex:1 1 200px}
 details summary{cursor:pointer;font-weight:700}
@@ -468,7 +470,7 @@ unit_done:'¡Unidad completada!',unit_more:'¡Buen trabajo!',unit_more_p:'Esta u
 rev_t:'Repaso inteligente',rev_p:'{n} preguntas que te costaron esperan repaso.',rev_none:'No tienes nada pendiente. Las preguntas que falles aparecerán aquí.',rev_b:'Empezar el repaso',
 areas_t:'Mis puntos fuertes y débiles',areas_p:'Verde: 75 % o más de aciertos. Ámbar: entre 50 y 74 %. Rojo: menos del 50 %. Cuenta tus últimas 30 respuestas de cada destreza.',
 sk_gram:'Gramática',sk_voc:'Vocabulario',sk_lec:'Comprensión lectora',sk_aud:'Comprensión auditiva',sk_ord:'Construir frases',nodata:'Sin datos aún',
-mat_t:'Mi material',mat_kind:'Sesión y solucionario (PDF)',mat_open:'Abrir',mat_none:'Dana irá subiendo aquí el material del {l}.',mat_local:'Crea tu cuenta para abrir el material de clase.',mat_err:'No se ha podido abrir el archivo. El material es para alumnos con clases: si ya das clase con Dana, pídele que te dé acceso.',
+mat_t:'Mi material',mat_kind:'Sesión y solucionario (PDF)',mat_open:'Abrir',mat_a:'Cuaderno',mat_s:'Solucionario',mat_kind_u:'Cuaderno del alumno y solucionario (PDF)',mat_kind_a:'Cuaderno del alumno (PDF). El solucionario llegará pronto.',mat_kind_g:'Qué trae el curso y cómo usarlo (PDF)',mat_none:'Dana irá subiendo aquí el material del {l}.',mat_local:'Crea tu cuenta para abrir el material de clase.',mat_err:'No se ha podido abrir el archivo. El material es para alumnos con clases: si ya das clase con Dana, pídele que te dé acceso.',
 req_t:'Qué exige el {l} según el Marco Común Europeo',req_focus:'Gramática del nivel:',req_note:'Fuente: escala global del Marco Común Europeo de Referencia (Consejo de Europa) y Plan Curricular del Instituto Cervantes.',
 acc_t:'Mi cuenta',acc_who:'Has entrado como {e}.',acc_local:'Sin cuenta: tu progreso está guardado solo en este dispositivo.',
 retest:'Repetir el test de nivel',change:'Cambiar mi objetivo',logout:'Cerrar sesión',erase:'Borrar mi cuenta y mis datos',erase_local:'Borrar mi progreso',
@@ -508,7 +510,7 @@ unit_done:'Unit completed!',unit_more:'Good work!',unit_more_p:'This unit is {n}
 rev_t:'Smart review',rev_p:'{n} questions you found hard are waiting for review.',rev_none:'Nothing pending. Questions you get wrong will show up here.',rev_b:'Start the review',
 areas_t:'My strengths and weak spots',areas_p:'Green: 75% or more correct. Amber: 50 to 74%. Red: under 50%. Based on your last 30 answers in each skill.',
 sk_gram:'Grammar',sk_voc:'Vocabulary',sk_lec:'Reading',sk_aud:'Listening',sk_ord:'Building sentences',nodata:'No data yet',
-mat_t:'My materials',mat_kind:'Lesson and answer key (PDF)',mat_open:'Open',mat_none:'Dana will upload the {l} materials here.',mat_local:'Create your account to open the class materials.',mat_err:'The file could not be opened. The materials are for students taking lessons: if you already have lessons with Dana, ask her for access.',
+mat_t:'My materials',mat_kind:'Lesson and answer key (PDF)',mat_open:'Open',mat_a:'Workbook',mat_s:'Answer key',mat_kind_u:'Student workbook and answer key (PDF)',mat_kind_a:'Student workbook (PDF). The answer key is coming soon.',mat_kind_g:'What the course includes and how to use it (PDF)',mat_none:'Dana will upload the {l} materials here.',mat_local:'Create your account to open the class materials.',mat_err:'The file could not be opened. The materials are for students taking lessons: if you already have lessons with Dana, ask her for access.',
 req_t:'What {l} requires on the Common European Framework',req_focus:'Grammar at this level:',req_note:'Source: global scale of the Common European Framework of Reference (Council of Europe) and the Instituto Cervantes curriculum.',
 acc_t:'My account',acc_who:'Signed in as {e}.',acc_local:'No account: your progress is saved on this device only.',
 retest:'Retake the level test',change:'Change my goal',logout:'Sign out',erase:'Delete my account and data',erase_local:'Delete my progress',
@@ -548,7 +550,7 @@ unit_done:'Unité terminée !',unit_more:'Bon travail !',unit_more_p:'Cette unit
 rev_t:'Révision intelligente',rev_p:'{n} questions difficiles t’attendent en révision.',rev_none:'Rien en attente. Les questions ratées apparaîtront ici.',rev_b:'Commencer la révision',
 areas_t:'Mes points forts et faibles',areas_p:'Vert : 75 % ou plus de bonnes réponses. Orange : de 50 à 74 %. Rouge : moins de 50 %. Calculé sur tes 30 dernières réponses par compétence.',
 sk_gram:'Grammaire',sk_voc:'Vocabulaire',sk_lec:'Compréhension écrite',sk_aud:'Compréhension orale',sk_ord:'Construire des phrases',nodata:'Pas encore de données',
-mat_t:'Mon matériel',mat_kind:'Séance et corrigé (PDF)',mat_open:'Ouvrir',mat_none:'Dana mettra ici le matériel du {l}.',mat_local:'Crée ton compte pour ouvrir le matériel de cours.',mat_err:'Le fichier n’a pas pu s’ouvrir. Le matériel est réservé aux élèves qui suivent des cours : si tu as déjà cours avec Dana, demande-lui l’accès.',
+mat_t:'Mon matériel',mat_kind:'Séance et corrigé (PDF)',mat_open:'Ouvrir',mat_a:'Cahier',mat_s:'Corrigé',mat_kind_u:'Cahier de l’élève et corrigé (PDF)',mat_kind_a:'Cahier de l’élève (PDF). Le corrigé arrive bientôt.',mat_kind_g:'Ce que contient le cours et comment l’utiliser (PDF)',mat_none:'Dana mettra ici le matériel du {l}.',mat_local:'Crée ton compte pour ouvrir le matériel de cours.',mat_err:'Le fichier n’a pas pu s’ouvrir. Le matériel est réservé aux élèves qui suivent des cours : si tu as déjà cours avec Dana, demande-lui l’accès.',
 req_t:'Ce que demande le {l} selon le Cadre européen commun',req_focus:'Grammaire du niveau :',req_note:'Source : échelle globale du Cadre européen commun de référence (Conseil de l’Europe) et Plan Curricular de l’Instituto Cervantes.',
 acc_t:'Mon compte',acc_who:'Connecté avec {e}.',acc_local:'Sans compte : ta progression est enregistrée uniquement sur cet appareil.',
 retest:'Refaire le test de niveau',change:'Changer mon objectif',logout:'Se déconnecter',erase:'Supprimer mon compte et mes données',erase_local:'Effacer ma progression',
@@ -1004,7 +1006,8 @@ function renderHome(){
     return `<div class="area"><span class="dotc ${d}" aria-hidden="true"></span><span>${t('sk_'+s)}</span><span class="pct">${v===null?t('nodata'):v+' %'}</span></div>`}).join('');
   /* material */
   const mats=[...new Set([w,Math.max(lv,0)])].flatMap(l=>(MATERIAL[l]||[]).map(m=>Object.assign({l},m)));
-  $('mat').innerHTML=mats.length?mats.map((m,k)=>`<li><svg aria-hidden="true"><use href="#i-doc"/></svg><div><b>${esc(m.t)} (${LV[m.l]})</b><span>${REMOTE?t('mat_kind'):t('mat_local')}</span></div><button type="button" class="btn btn-ghost btn-sm" data-f="${esc(m.f)}"${REMOTE?'':' disabled'}>${t('mat_open')}</button></li>`).join('')
+  const matBtn=(f,k)=>`<button type="button" class="btn btn-ghost btn-sm" data-f="${esc(f)}"${REMOTE?'':' disabled'}>${t(k)}</button>`;
+  $('mat').innerHTML=mats.length?mats.map(m=>`<li><svg aria-hidden="true"><use href="#i-doc"/></svg><div><b>${esc(m.t)} (${LV[m.l]})</b><span>${!REMOTE?t('mat_local'):m.a?t(m.s?'mat_kind_u':'mat_kind_a'):t(m.g?'mat_kind_g':'mat_kind')}</span></div><span class="mat-b">${m.a?matBtn(m.a,'mat_a')+(m.s?matBtn(m.s,'mat_s'):''):matBtn(m.f,'mat_open')}</span></li>`).join('')
     :`<li><svg aria-hidden="true"><use href="#i-doc"/></svg><div>${esc(t('mat_none',{l:LV[w]}))}</div></li>`;
   $('mat').querySelectorAll('[data-f]').forEach(b=>b.addEventListener('click',()=>openMaterial(b.dataset.f)));
   /* exigencias del nivel */

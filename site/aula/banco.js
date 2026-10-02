@@ -247,7 +247,17 @@ const BANK=[
 ];
 
 /* Material de clase por nivel (se guarda en privado; solo lo ven alumnos con cuenta). */
-const MATERIAL={1:[
+const MATERIAL={0:[
+ {f:'00_Guia_del_curso_A1_DELE.pdf',t:'Guía del curso',g:1},
+ {a:'A1_U00_Hola_Alumno.pdf',s:'A1_U00_Hola_Solucionario.pdf',t:'Unidad 0 · ¡Hola! Primeros pasos'},
+ {a:'A1_U02_Aprendo_espanol_Alumno.pdf',s:'A1_U02_Aprendo_espanol_Solucionario.pdf',t:'Unidad 2 · Aprendo español'},
+ {a:'A1_U03_El_mundo_hispano_Alumno.pdf',s:'A1_U03_El_mundo_hispano_Solucionario.pdf',t:'Unidad 3 · El mundo hispano'},
+ {a:'A1_U04_De_compras_Alumno.pdf',s:'A1_U04_De_compras_Solucionario.pdf',t:'Unidad 4 · De compras'},
+ {a:'A1_U05_Mi_gente_Alumno.pdf',t:'Unidad 5 · Mi gente'},
+ {a:'A1_U06_Un_dia_normal_Alumno.pdf',s:'A1_U06_Un_dia_normal_Solucionario.pdf',t:'Unidad 6 · Un día normal'},
+ {a:'A1_U07_A_la_mesa_Alumno.pdf',s:'A1_U07_A_la_mesa_Solucionario.pdf',t:'Unidad 7 · ¡A la mesa!'},
+ {a:'A1_U09_Experiencias_Alumno.pdf',s:'A1_U09_Experiencias_Solucionario.pdf',t:'Unidad 9 · Experiencias y habilidades'}
+],1:[
  {f:'01_El_espanol_y_tu_A2_con_solucionario.pdf',t:'El español y tú'},
  {f:'02_Una_vida_de_pelicula_A2_con_solucionario.pdf',t:'Una vida de película'},
  {f:'03_Yo_soy_asi_A2_con_solucionario.pdf',t:'Yo soy así'},
