@@ -101,7 +101,10 @@ input:focus,select:focus{border-color:var(--ochre);outline:none}
 .goal.wide{grid-column:1/-1}
 
 /* preguntas */
-.topline{display:flex;align-items:center;gap:.75rem}
+.topline{display:flex;align-items:center;gap:.75rem;min-width:0}
+.screen{min-width:0;max-width:100%}
+.topline .chip{min-width:0;max-width:55%;overflow:hidden;text-overflow:ellipsis}
+.topline .progress{flex:1;min-width:40px}
 .x{border:0;background:transparent;color:var(--muted);font-size:1.4rem;line-height:1;cursor:pointer;padding:.2rem .4rem}
 .progress{flex:1;height:14px;background:var(--line);border-radius:999px;overflow:hidden}
 .progress i{display:block;height:100%;width:0;background:var(--leaf);border-radius:999px;transition:width .35s}
@@ -160,6 +163,9 @@ input:focus,select:focus{border-color:var(--ochre);outline:none}
 .lamp{flex:none;display:flex;flex-direction:column;gap:4px;background:#33251E;border-radius:10px;padding:5px}
 .lamp i{width:14px;height:14px;border-radius:50%;background:#5a4a40}
 .lamp i.r.on{background:var(--red)}.lamp i.a.on{background:var(--amber)}.lamp i.g.on{background:var(--green)}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.mode{font:inherit;font-weight:700;padding:.7rem .8rem;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.mode[aria-pressed="true"]{border-color:var(--leaf);background:color-mix(in srgb,var(--leaf) 14%,var(--card))}
 .areas{display:grid;gap:.55rem}
 .area{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:.7rem;align-items:center;font-size:.95rem}
 .dotc{width:14px;height:14px;border-radius:50%;background:var(--line)}
@@ -268,7 +274,11 @@ footer.note{max-width:600px;margin:2.2rem auto 0;font-size:.82rem;color:var(--mu
 
   <!-- Objetivo -->
   <section class="screen" id="s-goal" hidden>
-    <div class="stack"><h1 data-i18n="goal_t"></h1><p class="muted" data-i18n="goal_p"></p></div>
+    <div class="modes" id="modes" role="group">
+      <button type="button" class="mode" data-m="es" data-i18n="m_es"></button>
+      <button type="button" class="mode" data-m="school" data-i18n="m_school"></button>
+    </div>
+    <div class="stack"><h1 id="goal-h"></h1><p class="muted" id="goal-p"></p></div>
     <div class="goals" id="goals"></div>
     <div class="card" id="target-box" hidden>
       <label for="target" id="target-l"></label>
@@ -312,6 +322,32 @@ footer.note{max-width:600px;margin:2.2rem auto 0;font-size:.82rem;color:var(--mu
     <h1 id="d-t"></h1>
     <p class="muted" id="d-p"></p>
     <button class="btn btn-main btn-block" id="d-home" data-i18n="back_home"></button>
+  </section>
+
+  <!-- Apoyo escolar -->
+  <section class="screen" id="s-school" hidden>
+    <div class="hello"><h1 id="sc-hello"></h1><span class="chip" id="sc-course"></span><span class="chip" id="sc-xp"></span><span class="chip" id="sc-streak"></span></div>
+    <div class="card">
+      <h2 data-i18n="sc_prog_t"></h2>
+      <div class="areas" id="sc-areas"></div>
+      <p class="small muted" data-i18n="sc_prog_p"></p>
+    </div>
+    <div id="sc-subjects" class="stack"></div>
+    <div class="card">
+      <h2 data-i18n="rev_t"></h2>
+      <p class="small muted" id="sc-rev-p"></p>
+      <button class="btn btn-ghost btn-block" id="sc-review" data-i18n="rev_b"></button>
+    </div>
+    <div class="card">
+      <h2 data-i18n="acc_t"></h2>
+      <p class="small muted" id="sc-who"></p>
+      <div class="row">
+        <button class="btn btn-ghost" id="sc-change" data-i18n="sc_change"></button>
+        <button class="btn btn-ghost" id="sc-logout" data-i18n="logout"></button>
+      </div>
+      <button class="btn btn-danger btn-sm" id="sc-erase"></button>
+      <p class="small muted" data-i18n="sc_norm"></p>
+    </div>
   </section>
 
   <!-- Mi aula -->
@@ -391,13 +427,14 @@ footer.note{max-width:600px;margin:2.2rem auto 0;font-size:.82rem;color:var(--mu
 
 <script src="config.js"></script>
 <script src="banco.js"></script>
+<script src="banco-escolar.js"></script>
 <script>
 const CFG=window.AULA_CONFIG||{};
 const LV=LEVELS.map(l=>l.c);
 const REMOTE=!!(CFG.supabaseUrl&&CFG.supabaseKey);
 
 const T={
-es:{brand:'Mi aula',loading:'Cargando…',local_note:'Estás usando el aula sin cuenta: tu progreso se guarda solo en este dispositivo.',
+es:{brand:'Mi aula',m_es:'Español',m_school:'Apoyo escolar',sc_goal_t:'¿En qué curso estás?',sc_goal_p:'Practica Matemáticas, Lengua, Inglés, Ciencias Naturales y Ciencias Sociales con unidades del currículo oficial de tu curso.',course_l:'Curso',start_school:'Empezar a practicar',sc_prog_t:'Tu semáforo por asignaturas',sc_prog_p:'Verde: lo dominas (80 % o más). Ámbar: vas avanzando. Rojo: conviene repasar.',sc_units:'Unidades de {s}',sc_change:'Cambiar curso o modalidad',sc_norm:'Las unidades siguen los saberes básicos de la LOMLOE: Real Decreto 157/2022 (Primaria) y Real Decreto 217/2022 (ESO).',sc_none:'Esta asignatura todavía no tiene unidades para tu curso.',sc_rev_none:'No tienes preguntas pendientes de repaso.',sc_why:'Por qué: ',loading:'Cargando…',local_note:'Estás usando el aula sin cuenta: tu progreso se guarda solo en este dispositivo.',
 auth_t:'Mi aula',auth_p:'Entra para hacer tu test de nivel, practicar y ver tu material.',tab_in:'Entrar',tab_up:'Crear cuenta',
 email_l:'Correo electrónico',pass_l:'Contraseña',pass_new_l:'Contraseña (mínimo 8 caracteres)',name_l:'Tu nombre',in_b:'Entrar',up_b:'Crear mi cuenta',forgot:'He olvidado mi contraseña',user_l:'Tu usuario',user_new_l:'Elige tu usuario',user_hint:'Será tu dirección del aula. Solo letras, números y puntos, sin tildes.',err_user:'El usuario necesita entre 3 y 30 letras, números o puntos.',err_taken:'Ese usuario ya existe. Prueba otro, por ejemplo con la inicial de tu apellido.',forgot_txt:'Escribe a Dana a {e} y te creará una contraseña nueva.',
 age:'Tengo 14 años o más. Si el alumno tiene menos de 14, crea la cuenta su madre, padre o tutor legal.',
@@ -437,7 +474,7 @@ acc_t:'Mi cuenta',acc_who:'Has entrado como {e}.',acc_local:'Sin cuenta: tu prog
 retest:'Repetir el test de nivel',change:'Cambiar mi objetivo',logout:'Cerrar sesión',erase:'Borrar mi cuenta y mis datos',erase_local:'Borrar mi progreso',
 erase_q:'Se borrarán tu cuenta, tus resultados y tu progreso. No se puede deshacer. ¿Seguro?',erase_q_local:'Se borrará tu progreso de este dispositivo. ¿Seguro?',erase_yes:'Sí, borrar',erase_no:'Cancelar',
 back_home:'Volver a mi aula',back_web:'Volver a la web',priv_t:'Protección de datos del aula',close:'Cerrar'},
-en:{brand:'My classroom',loading:'Loading…',local_note:'You are using the classroom without an account: your progress is saved on this device only.',
+en:{brand:'My classroom',m_es:'Spanish',m_school:'School support',sc_goal_t:'Which school year are you in?',sc_goal_p:'Practise Maths, Spanish Language, English, Natural Sciences and Social Sciences with units from the official Spanish curriculum for your year. Questions are in Spanish, as at school.',course_l:'School year',start_school:'Start practising',sc_prog_t:'Your traffic light by subject',sc_prog_p:'Green: you have mastered it (80% or more). Amber: you are getting there. Red: worth reviewing.',sc_units:'{s} units',sc_change:'Change year or mode',sc_norm:'Units follow the core knowledge of the LOMLOE: Royal Decree 157/2022 (primary) and Royal Decree 217/2022 (secondary).',sc_none:'This subject has no units for your year yet.',sc_rev_none:'You have no questions waiting for review.',sc_why:'Why: ',loading:'Loading…',local_note:'You are using the classroom without an account: your progress is saved on this device only.',
 auth_t:'My classroom',auth_p:'Sign in to take your level test, practise and see your materials.',tab_in:'Sign in',tab_up:'Create account',
 email_l:'Email',pass_l:'Password',pass_new_l:'Password (at least 8 characters)',name_l:'Your first name',in_b:'Sign in',up_b:'Create my account',forgot:'I forgot my password',user_l:'Your username',user_new_l:'Choose your username',user_hint:'It will be your classroom address. Letters, numbers and dots only, no accents.',err_user:'The username needs 3 to 30 letters, numbers or dots.',err_taken:'That username is taken. Try another, for example with your surname initial.',forgot_txt:'Write to Dana at {e} and she will set a new password for you.',
 age:'I am 14 or older. If the student is under 14, their parent or legal guardian creates the account.',
@@ -477,7 +514,7 @@ acc_t:'My account',acc_who:'Signed in as {e}.',acc_local:'No account: your progr
 retest:'Retake the level test',change:'Change my goal',logout:'Sign out',erase:'Delete my account and data',erase_local:'Delete my progress',
 erase_q:'Your account, results and progress will be deleted. This cannot be undone. Are you sure?',erase_q_local:'Your progress on this device will be deleted. Are you sure?',erase_yes:'Yes, delete',erase_no:'Cancel',
 back_home:'Back to my classroom',back_web:'Back to the website',priv_t:'Classroom data protection',close:'Close'},
-fr:{brand:'Ma classe',loading:'Chargement…',local_note:'Tu utilises la classe sans compte : ta progression est enregistrée uniquement sur cet appareil.',
+fr:{brand:'Ma classe',m_es:'Espagnol',m_school:'Soutien scolaire',sc_goal_t:'En quelle année es-tu ?',sc_goal_p:'Entraîne-toi en maths, langue espagnole, anglais, sciences naturelles et sciences sociales avec des unités du programme officiel espagnol de ton année. Les questions sont en espagnol, comme à l’école.',course_l:'Année scolaire',start_school:'Commencer à m’entraîner',sc_prog_t:'Ton feu tricolore par matière',sc_prog_p:'Vert : tu maîtrises (80 % ou plus). Orange : tu progresses. Rouge : à revoir.',sc_units:'Unités de {s}',sc_change:'Changer d’année ou de mode',sc_norm:'Les unités suivent les savoirs de base de la LOMLOE : décret royal 157/2022 (primaire) et décret royal 217/2022 (collège-lycée).',sc_none:'Cette matière n’a pas encore d’unités pour ton année.',sc_rev_none:'Tu n’as aucune question à revoir.',sc_why:'Pourquoi : ',loading:'Chargement…',local_note:'Tu utilises la classe sans compte : ta progression est enregistrée uniquement sur cet appareil.',
 auth_t:'Ma classe',auth_p:'Connecte-toi pour passer ton test de niveau, t’entraîner et voir ton matériel.',tab_in:'Se connecter',tab_up:'Créer un compte',
 email_l:'Adresse e-mail',pass_l:'Mot de passe',pass_new_l:'Mot de passe (8 caractères minimum)',name_l:'Ton prénom',in_b:'Se connecter',up_b:'Créer mon compte',forgot:'J’ai oublié mon mot de passe',user_l:'Ton identifiant',user_new_l:'Choisis ton identifiant',user_hint:'Ce sera ton adresse de la classe. Lettres, chiffres et points uniquement, sans accents.',err_user:'L’identifiant doit avoir de 3 à 30 lettres, chiffres ou points.',err_taken:'Cet identifiant existe déjà. Essaie-en un autre, par exemple avec l’initiale de ton nom.',forgot_txt:'Écris à Dana à {e} et elle te créera un nouveau mot de passe.',
 age:'J’ai 14 ans ou plus. Si l’élève a moins de 14 ans, sa mère, son père ou son tuteur légal crée le compte.',
@@ -569,7 +606,7 @@ const lvName=l=>l<0?t('pre'):LV[l];
 /* ───────── almacenamiento: navegador (sin cuenta) o Supabase (con cuenta) ───────── */
 const KEY='tppm-aula';
 let sb=null,user=null,data=null;
-const fresh=()=>({v:1,goal:null,target:2,level:null,items:{},hist:[],units:{},xp:0,streak:{d:null,n:0},tests:[]});
+const fresh=()=>({v:1,track:'es',esc:{c:null},goal:null,target:2,level:null,items:{},hist:[],units:{},xp:0,streak:{d:null,n:0},tests:[]});
 const store={
   async load(){
     if(!REMOTE){try{return JSON.parse(localStorage.getItem(KEY))||fresh()}catch(e){return fresh()}}
@@ -603,6 +640,7 @@ function applyLang(){
   if(screen==='s-quiz'&&Q.item)renderInstr();
   if(screen==='s-result')renderResult();
   if(screen==='s-home')renderHome();
+  if(screen==='s-school')renderSchool();
   if(screen==='s-done')renderDone();
 }
 document.querySelectorAll('.langsw button').forEach(b=>b.addEventListener('click',()=>{
@@ -667,6 +705,18 @@ $('erase-yes').addEventListener('click',async()=>{
 
 /* ───────── objetivo ───────── */
 function renderGoal(){
+  const school=data.track==='school';
+  document.querySelectorAll('.mode').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.m===data.track)));
+  $('goal-h').textContent=t(school?'sc_goal_t':'goal_t');$('goal-p').textContent=t(school?'sc_goal_p':'goal_p');
+  $('goals').hidden=school;
+  if(school){
+    $('target-box').hidden=false;$('target-l').textContent=t('course_l');
+    $('target').innerHTML=ESC_COURSES.map(x=>`<option value="${x.c}"${x.c===data.esc.c?' selected':''}>${esc(x[lang]||x.es)}</option>`).join('');
+    if(!data.esc.c)data.esc.c=$('target').value;
+    $('target-can').textContent='';
+    $('goal-next').disabled=false;$('goal-next').textContent=t('start_school');$('goal-note').hidden=true;
+    return;
+  }
   $('goals').innerHTML=GOALS.map(g=>`<button type="button" class="goal${g.wide?' wide':''}" data-k="${g.k}" aria-pressed="${data.goal===g.k}"><svg aria-hidden="true"><use href="#${g.i}"/></svg><b>${t('g_'+g.k)}</b><span>${t('g_'+g.k+'_s')}</span></button>`).join('');
   $('goals').querySelectorAll('.goal').forEach(b=>b.addEventListener('click',()=>{data.goal=b.dataset.k;renderGoal()}));
   $('target').innerHTML=LEVELS.map((l,i)=>`<option value="${i}"${i===data.target?' selected':''}>${l.c} · ${l.name[lang]}</option>`).join('');
@@ -677,10 +727,12 @@ function renderGoal(){
   $('goal-next').textContent=data.level===null?t('start_test'):t('save_goal');
   $('goal-note').hidden=data.level!==null;
 }
-$('target').addEventListener('change',e=>{data.target=+e.target.value;renderGoal()});
+$('target').addEventListener('change',e=>{if(data.track==='school')data.esc.c=e.target.value;else data.target=+e.target.value;renderGoal()});
+document.querySelectorAll('.mode').forEach(b=>b.addEventListener('click',()=>{data.track=b.dataset.m;renderGoal()}));
 $('goal-next').addEventListener('click',async()=>{
   await store.save();
-  if(data.level===null)startPlacement();else{renderHome();show('s-home')}
+  if(data.track==='school'){renderSchool();show('s-school')}
+  else if(data.level===null)startPlacement();else{renderHome();show('s-home')}
 });
 
 /* ───────── motor de preguntas ───────── */
@@ -720,7 +772,7 @@ function setProgress(){
 }
 function renderInstr(){
   $('instr').textContent=t('i_'+Q.item.t);
-  $('qchip').textContent=(Q.mode==='test'?t('q_test'):Q.mode==='review'?t('q_review'):Q.mode==='levelup'?t('q_levelup'):(THEMES[Q.unit]||{})[lang]||'')+' · '+LV[Q.item.lv];
+  $('qchip').textContent=Q.mode==='school'||Q.mode==='screview'?schoolChip(Q.item):(Q.mode==='test'?t('q_test'):Q.mode==='review'?t('q_review'):Q.mode==='levelup'?t('q_levelup'):(THEMES[Q.unit]||{})[lang]||'')+' · '+LV[Q.item.lv];
   if(Q.checked)showFeedback();else $('check').textContent=t('check');
   const pl=$('play');if(pl){pl.setAttribute('aria-label',t('play'));$('play-slow').setAttribute('aria-label',t('play_slow'));$('showtxt').textContent=t('showtxt')}
   const g=$('gap');if(g)g.placeholder=t('gap_ph');
@@ -802,6 +854,8 @@ function grade(q){
     $('gap').readOnly=true;const a=norm(Q.ans);
     if(q.a.some(x=>norm(x)===a))return {ok:true};
     if(q.a.some(x=>plain(x)===plain(a)))return {ok:true,accent:true};
+    const num=s=>s.replace(/[\s.](?=\d{3}(\D|$))/g,'');
+    if(/^[\d\s.,−-]+$/.test(a)&&q.a.some(x=>num(norm(x))===num(a)))return {ok:true};
     return {ok:false};
   }
   if(q.t==='order')return {ok:Q.ans.map(b=>b.textContent).join(' ')===q.s};
@@ -811,7 +865,7 @@ function showFeedback(){
   const r=Q.last;
   $('fb').className='feedback '+(r.ok?'ok':'ko');
   $('fb-msg').textContent=r.ok?t('ok'):t('ko');
-  $('fb-sol').textContent=r.accent?t('accent')+solution(Q.item):(!r.ok&&Q.item.t!=='match'?t('sol')+solution(Q.item):'');
+  $('fb-sol').textContent=(r.accent?t('accent')+solution(Q.item):(!r.ok&&Q.item.t!=='match'?t('sol')+solution(Q.item):''))+(Q.item.ex?(r.ok&&!r.accent?'':' · ')+t('sc_why')+Q.item.ex:'');
   const last=Q.mode!=='test'&&Q.i>=Q.queue.length;
   $('check').textContent=last?t('finish'):t('next');
 }
@@ -835,7 +889,7 @@ $('check').addEventListener('click',()=>{
     setProgress();showFeedback();$('check').focus();
   }else nextItem();
 });
-$('quit').addEventListener('click',()=>{store.save();if(data.level===null){renderGoal();show('s-goal')}else{renderHome();show('s-home')}});
+$('quit').addEventListener('click',()=>{store.save();goHome()});
 
 /* ───────── resultados ───────── */
 async function finishPlacement(){
@@ -901,9 +955,13 @@ function renderDone(){
     const p=unitPct(Q.unit);
     $('d-t').textContent=p>=80?t('unit_done'):t('unit_more');
     $('d-p').textContent=p>=80?t('unit_done_p'):t('unit_more_p',{n:p});
+  }else if(Q.mode==='school'){
+    const p=schoolPct(Q.sunit);
+    $('d-t').textContent=p>=80?t('unit_done'):t('unit_more');
+    $('d-p').textContent=p>=80?t('unit_done_p'):t('unit_more_p',{n:p});
   }else{$('d-t').textContent=t('rev_done');$('d-p').textContent=t('rev_done_p')}
 }
-$('d-home').addEventListener('click',()=>{renderHome();show('s-home')});
+$('d-home').addEventListener('click',goHome);
 
 function skillScore(s){
   const r=data.hist.filter(h=>h.sk===s).slice(-30);if(!r.length)return null;
@@ -965,13 +1023,58 @@ async function openMaterial(f){
   $('mat-msg').hidden=true;
   if(win)win.location=r.signedUrl;else location.href=r.signedUrl;
 }
+
+/* ───────── apoyo escolar (banco-escolar.js, currículo LOMLOE) ───────── */
+const SC_ORDER=['mat','len','ing','cn','cs'];
+const SC_Q={};ESC_UNITS.forEach(u=>u.qs.forEach(q=>{SC_Q[q.id]=Object.assign({sk:u.asig,lv:0,su:u.id},q)}));
+const SC_U=Object.fromEntries(ESC_UNITS.map(u=>[u.id,u]));
+const subjName=(a,c)=>{const s=ESC_SUBJ[a];return (c&&c[0]==='E'&&s.eso?s.eso:s.pri)[lang]};
+const courseName=c=>{const x=ESC_COURSES.find(x=>x.c===c);return x?(x[lang]||x.es):c};
+function schoolChip(q){const u=SC_U[q.su];return u?u.u+' · '+subjName(u.asig,u.c):''}
+function schoolPct(uid){const u=SC_U[uid];if(!u)return 0;return Math.round(u.qs.filter(q=>(data.items[q.id]||{}).b>=1).length/u.qs.length*100)}
+function schoolPool(){
+  return Object.keys(data.items).filter(id=>SC_Q[id]&&SC_U[SC_Q[id].su].c===data.esc.c).map(id=>SC_Q[id])
+    .filter(q=>{const it=data.items[q.id];return it.b===0||(it.k<it.s&&it.b<2)}).sort((a,b)=>data.items[a.id].b-data.items[b.id].b);
+}
+function goHome(){
+  if(data.track==='school'&&data.esc&&data.esc.c){renderSchool();show('s-school')}
+  else if(data.level===null){renderGoal();show('s-goal')}else{renderHome();show('s-home')}
+}
+function renderSchool(){
+  const c=data.esc.c,name=user&&user.user_metadata&&user.user_metadata.nombre;
+  $('sc-hello').textContent=name?t('hello',{n:name}):t('hello_anon');
+  $('sc-course').textContent=courseName(c);$('sc-xp').textContent=data.xp+' XP';
+  $('sc-streak').textContent=data.streak.n===1?t('streak1'):t('streak',{n:data.streak.n||0});
+  const units=a=>ESC_UNITS.filter(u=>u.c===c&&u.asig===a);
+  $('sc-areas').innerHTML=SC_ORDER.map(a=>{const us=units(a);const tried=us.some(u=>u.qs.some(q=>data.items[q.id]));
+    const v=us.length?Math.round(us.reduce((s,u)=>s+schoolPct(u.id),0)/us.length):0;const d=!tried?'':v>=80?'g':v>=40?'a':'r';
+    return `<div class="area"><span class="dotc ${d}" aria-hidden="true"></span><span>${esc(subjName(a,c))}</span><span class="pct">${tried?v+' %':t('nodata')}</span></div>`}).join('');
+  $('sc-subjects').innerHTML=SC_ORDER.map(a=>{const us=units(a);
+    return `<div class="card"><h2>${esc(t('sc_units',{s:subjName(a,c)}))}</h2>${us.length?`<div class="path">${us.map(u=>{const p=schoolPct(u.id),d=p>=80;
+      return `<button type="button" class="node ${d?'done':'now'}" data-u="${u.id}"><span class="dot" aria-hidden="true"><svg><use href="#${d?'i-check':'i-star'}"/></svg></span><span class="lbl"><b>${esc(u.u)}</b><span>${esc(u.bloque)}${p?' · '+t('u_prog',{n:p}):''}</span></span></button>`}).join('')}</div>`:`<p class="small muted">${esc(t('sc_none'))}</p>`}</div>`}).join('');
+  $('sc-subjects').querySelectorAll('.node').forEach(b=>b.addEventListener('click',()=>{const u=SC_U[b.dataset.u];startQuiz('school',shuffle(u.qs.map(q=>SC_Q[q.id])),{sunit:u.id})}));
+  const rp=schoolPool().length;
+  $('sc-rev-p').textContent=rp?t('rev_p',{n:rp}):t('sc_rev_none');$('sc-review').disabled=!rp;
+  $('sc-who').textContent=REMOTE?t('acc_who',{e:user.email}):t('acc_local');
+  $('sc-logout').hidden=!REMOTE;$('sc-erase').textContent=REMOTE?t('erase'):t('erase_local');
+}
+$('sc-review').addEventListener('click',()=>{const p=schoolPool();if(p.length)startQuiz('screview',shuffle(p.slice(0,8)))});
+$('sc-change').addEventListener('click',()=>{renderGoal();show('s-goal')});
+$('sc-logout').addEventListener('click',async()=>{if(REMOTE)await sb.auth.signOut()});
+$('sc-erase').addEventListener('click',async()=>{
+  if(!confirm(REMOTE?t('erase_q'):t('erase_q_local')))return;
+  try{await store.erase()}catch(e){alert(t('err_generic'));return}
+  if(!REMOTE){data=fresh();renderGoal();show('s-goal')}
+});
 $('retest').addEventListener('click',startPlacement);
 $('h-goal').addEventListener('click',()=>{renderGoal();show('s-goal')});
 
 /* ───────── arranque ───────── */
 async function enter(){
   try{data=await store.load()}catch(e){data=fresh()}
-  if(!data.goal||data.level===null){renderGoal();show('s-goal')}
+  if(!data.esc)data.esc={c:null};if(!data.track)data.track='es';
+  if(data.track==='school'&&data.esc.c){renderSchool();show('s-school')}
+  else if(!data.goal||data.level===null){renderGoal();show('s-goal')}
   else{renderHome();show('s-home')}
 }
 function loadScript(src){return new Promise((ok,ko)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=ko;document.head.appendChild(s)})}

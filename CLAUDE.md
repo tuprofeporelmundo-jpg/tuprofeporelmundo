@@ -15,6 +15,8 @@
 
 - **Auditoría (2 oct 2026):** informe completo en la carpeta del proyecto (`auditoria/`). Hecho: texto en español escrito en el HTML (el JS solo traduce), `og.png` 1200×630, `robots.txt`, `sitemap.xml`, cabeceras de seguridad con CSP en `netlify.toml` (si se añade un servicio externo, hay que permitirlo ahí), correo visible `contacto@tuprofeporelmundo.com` (reenvía al Gmail), asistente protegido por origen y límite de uso. El material del aula queda solo para alumnos de `public.acceso_material` (`supabase/cerrar-material.sql`, lo ejecuta Dana). Datos legales de Dana rellenados el 2 oct 2026.
 
+- **Apoyo escolar (2 oct 2026):** `site/aula/banco-escolar.js` = 150 unidades / 900 preguntas (P1-P6, E1-E4 × Matemáticas, Lengua, Inglés, Ciencias Naturales, Ciencias Sociales; 3 unidades por curso y asignatura) según los saberes básicos de la LOMLOE (RD 157/2022 y RD 217/2022). Se usa en el «Reto de apoyo escolar» de la portada (5 preguntas al día, `tppm-reto-esc`) y en Mi aula (modalidad «Apoyo escolar», `data.track='school'`, curso en `data.esc.c`).
+
 ## 1. Quién es la clienta y cómo trabajar con ella
 
 - **Dana Salgado**, profesora online de **español para extranjeros (A1–C1)** y de **apoyo escolar (primaria y ESO)**. Es de Galdakao (Bizkaia). Ha dado clase en Asturias, Granada, Bilbao y alrededores, y tres años en colegios españoles de Tánger y Rabat. Lleva más de 10 años con clases particulares y ha preparado pruebas de español de distintos niveles.
