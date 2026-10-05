@@ -50,13 +50,13 @@ tu-profe-por-el-mundo/
 
 Web de una sola página, **trilingüe (ES/EN/FR)**, con selector de idioma, modo oscuro y diseño adaptado al móvil. Es una versión de vista previa publicada en Claude; **todavía no está en el dominio de Dana**.
 
-**Secciones, en orden:** portada con ficha de profesora · Clases (español y apoyo) · Sobre mí · Mi método (4 pasos) · Instagram con postal "frase del día" · **Reto del día** (ahorcado) · **Regalo** (PDF + newsletter) · **Tienda** (7 PDF a 3 €) · **Tarifas** y condiciones · **Horarios** (calendario por zona horaria y petición especial) · Preguntas frecuentes · **Reserva** (formulario) · pie con textos legales · botón flotante del **asistente**.
+**Secciones, en orden:** portada con ficha de profesora · Clases (español y apoyo) · Sobre mí · Mi método (4 pasos) · Instagram con postal "frase del día" · **Reto del día** (ahorcado) · **Regalo** (PDF + newsletter) · **Tienda** (cursos DELE A1, B1, B2, C1; A2 «Próximamente») · **Tarifas** y condiciones · **Horarios** (calendario por zona horaria y petición especial) · Preguntas frecuentes · **Reserva** (formulario) · pie con textos legales · botón flotante del **asistente**.
 
 **Estilo (decidido por Dana, mantener):** tonos marrones y nude, verdes de selva y flores (desde el 2 oct 2026: flor de loto crema `#fl` y flor de cerezo japonés rosa `#fl2`, antes frangipani; hojas tropicales). Títulos con serifa del sistema. Variables CSS en `:root`: `--jungle` (#6B4433, color principal), `--flower` (#D98C7E), `--leaf` (#5E7A55), `--ochre` (#C4936B), etc. Las flores y hojas son símbolos SVG (`#fl`, `#fl2`, `#lf`, `#lf2`) reutilizados con `<use>`.
 
 **Cómo está organizado el JS (todo dentro de `index.html`):**
 - `T` = textos en `es`, `en`, `fr`. Los elementos usan `data-i18n="clave"` (y `data-i18n-ph` en los placeholders). **Toda clave nueva debe existir en los tres idiomas.**
-- `PRODUCTS` = tienda (cada producto tiene un campo `url:""` para su enlace de pago; si está vacío, el botón abre un correo de pedido).
+- `PRODUCTS` = tienda: un producto por nivel con sus 10 unidades (`units`). Se compra el nivel completo (`LEVEL_PRICE` 29,90 €), unidades sueltas (`UNIT_PRICE` 3,90 €) o varios niveles (`PACK_DISCOUNT`: 2 niveles −10 %, 3 o más −20 %, solo sobre niveles completos). Todo va a «Tu pedido», que por ahora abre un correo de pedido con la renuncia al desistimiento marcada. `soon:true` muestra «Próximamente» (A2). `url` queda para un enlace de pago por nivel.
 - `SCHEDULE` = horario (hora de España, `Europe/Madrid`): martes a jueves de 15:00 a 00:00; `busy` = clases fijas; `extra` = reservas puntuales `'AAAA-MM-DD HH'`.
 - `WORDS` = 61 palabras del reto diario (el reto nº 1 es el 1 de octubre de 2026).
 - `KB` = respuestas fijas del asistente; `CHAT_ENDPOINT=''` → con IA, poner `'/.netlify/functions/chat'`.
