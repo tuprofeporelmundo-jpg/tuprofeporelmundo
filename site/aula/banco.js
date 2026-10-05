@@ -250,6 +250,7 @@ const BANK=[
 const MATERIAL={0:[
  {f:'00_Guia_del_curso_A1_DELE.pdf',t:'Guía del curso',g:1},
  {a:'A1_U00_Hola_Alumno.pdf',s:'A1_U00_Hola_Solucionario.pdf',t:'Unidad 0 · ¡Hola! Primeros pasos'},
+ {a:'A1_U01_Quien_eres_Alumno.pdf',s:'A1_U01_Quien_eres_Solucionario.pdf',t:'Unidad 1 · ¿Quién eres?'},
  {a:'A1_U02_Aprendo_espanol_Alumno.pdf',s:'A1_U02_Aprendo_espanol_Solucionario.pdf',t:'Unidad 2 · Aprendo español'},
  {a:'A1_U03_El_mundo_hispano_Alumno.pdf',s:'A1_U03_El_mundo_hispano_Solucionario.pdf',t:'Unidad 3 · El mundo hispano'},
  {a:'A1_U04_De_compras_Alumno.pdf',s:'A1_U04_De_compras_Solucionario.pdf',t:'Unidad 4 · De compras'},
@@ -265,4 +266,28 @@ const MATERIAL={0:[
  {f:'05_Como_va_todo_A2_con_solucionario.pdf',t:'¿Cómo va todo?'},
  {f:'06_Guia_del_ocio_A2_con_solucionario.pdf',t:'Guía del ocio'},
  {f:'07_Mis_experiencias_A2_con_solucionario.pdf',t:'Mis experiencias'}
+],3:[
+ {f:'Guia_curso_B2.pdf',t:'Guía del curso',g:1},
+ {a:'Cuaderno_B2_U01.pdf',s:'Solucionario_B2_U01.pdf',t:'Unidad 1 · Vidas que dejan huella'},
+ {a:'Cuaderno_B2_U02.pdf',s:'Solucionario_B2_U02.pdf',t:'Unidad 2 · La ciudad que queremos'},
+ {a:'Cuaderno_B2_U03.pdf',s:'Solucionario_B2_U03.pdf',t:'Unidad 3 · Lo que sentimos'},
+ {a:'Cuaderno_B2_U04.pdf',s:'Solucionario_B2_U04.pdf',t:'Unidad 4 · Consumir con cabeza'},
+ {a:'Cuaderno_B2_U05.pdf',s:'Solucionario_B2_U05.pdf',t:'Unidad 5 · Si lo hubiera sabido...'},
+ {a:'Cuaderno_B2_U06.pdf',s:'Solucionario_B2_U06.pdf',t:'Unidad 6 · Aunque cueste'},
+ {a:'Cuaderno_B2_U07.pdf',s:'Solucionario_B2_U07.pdf',t:'Unidad 7 · Se ha descubierto que...'},
+ {a:'Cuaderno_B2_U08.pdf',s:'Solucionario_B2_U08.pdf',t:'Unidad 8 · Una obra que no deja indiferente'},
+ {a:'Cuaderno_B2_U09.pdf',s:'Solucionario_B2_U09.pdf',t:'Unidad 9 · Para que nada cambie... o todo'},
+ {a:'Cuaderno_B2_U10.pdf',s:'Solucionario_B2_U10.pdf',t:'Unidad 10 · Hablando se entiende la gente'}
+],4:[
+ {f:'Guia_curso_C1.pdf',t:'Guía del curso',g:1},
+ {a:'Cuaderno_C1_U01.pdf',s:'Solucionario_C1_U01.pdf',t:'Unidad 1 · De aquí y de allá'},
+ {a:'Cuaderno_C1_U02.pdf',s:'Solucionario_C1_U02.pdf',t:'Unidad 2 · Lo que el tiempo no borra'},
+ {a:'Cuaderno_C1_U03.pdf',s:'Solucionario_C1_U03.pdf',t:'Unidad 3 · Como si nada'},
+ {a:'Cuaderno_C1_U04.pdf',s:'Solucionario_C1_U04.pdf',t:'Unidad 4 · Mal que nos pese'},
+ {a:'Cuaderno_C1_U05.pdf',s:'Solucionario_C1_U05.pdf',t:'Unidad 5 · Los límites del saber'},
+ {a:'Cuaderno_C1_U06.pdf',s:'Solucionario_C1_U06.pdf',t:'Unidad 6 · Las palabras no son inocentes'},
+ {a:'Cuaderno_C1_U07.pdf',s:'Solucionario_C1_U07.pdf',t:'Unidad 7 · Siempre y cuando...'},
+ {a:'Cuaderno_C1_U08.pdf',s:'Solucionario_C1_U08.pdf',t:'Unidad 8 · El arte de mirar'},
+ {a:'Cuaderno_C1_U09.pdf',s:'Solucionario_C1_U09.pdf',t:'Unidad 9 · Vivir juntos'},
+ {a:'Cuaderno_C1_U10.pdf',s:'Solucionario_C1_U10.pdf',t:'Unidad 10 · Dicho y hecho'}
 ]};
