@@ -254,9 +254,10 @@ const MATERIAL={0:[
  {a:'A1_U02_Aprendo_espanol_Alumno.pdf',s:'A1_U02_Aprendo_espanol_Solucionario.pdf',t:'Unidad 2 · Aprendo español'},
  {a:'A1_U03_El_mundo_hispano_Alumno.pdf',s:'A1_U03_El_mundo_hispano_Solucionario.pdf',t:'Unidad 3 · El mundo hispano'},
  {a:'A1_U04_De_compras_Alumno.pdf',s:'A1_U04_De_compras_Solucionario.pdf',t:'Unidad 4 · De compras'},
- {a:'A1_U05_Mi_gente_Alumno.pdf',t:'Unidad 5 · Mi gente'},
+ {a:'A1_U05_Mi_gente_Alumno.pdf',s:'A1_U05_Mi_gente_Solucionario.pdf',t:'Unidad 5 · Mi gente'},
  {a:'A1_U06_Un_dia_normal_Alumno.pdf',s:'A1_U06_Un_dia_normal_Solucionario.pdf',t:'Unidad 6 · Un día normal'},
  {a:'A1_U07_A_la_mesa_Alumno.pdf',s:'A1_U07_A_la_mesa_Solucionario.pdf',t:'Unidad 7 · ¡A la mesa!'},
+ {a:'A1_U08_Mi_barrio_Alumno.pdf',s:'A1_U08_Mi_barrio_Solucionario.pdf',t:'Unidad 8 · Mi barrio'},
  {a:'A1_U09_Experiencias_Alumno.pdf',s:'A1_U09_Experiencias_Solucionario.pdf',t:'Unidad 9 · Experiencias y habilidades'}
 ],1:[
  {f:'01_El_espanol_y_tu_A2_con_solucionario.pdf',t:'El español y tú'},
@@ -266,6 +267,18 @@ const MATERIAL={0:[
  {f:'05_Como_va_todo_A2_con_solucionario.pdf',t:'¿Cómo va todo?'},
  {f:'06_Guia_del_ocio_A2_con_solucionario.pdf',t:'Guía del ocio'},
  {f:'07_Mis_experiencias_A2_con_solucionario.pdf',t:'Mis experiencias'}
+],2:[
+ {f:'Guia_curso_B1.pdf',t:'Guía del curso',g:1},
+ {a:'Cuaderno_B1_U01.pdf',s:'Solucionario_B1_U01.pdf',t:'Unidad 1 · Así soy yo'},
+ {a:'Cuaderno_B1_U02.pdf',s:'Solucionario_B1_U02.pdf',t:'Unidad 2 · Cuando era pequeño'},
+ {a:'Cuaderno_B1_U03.pdf',s:'Solucionario_B1_U03.pdf',t:'Unidad 3 · ¿Y qué pasó?'},
+ {a:'Cuaderno_B1_U04.pdf',s:'Solucionario_B1_U04.pdf',t:'Unidad 4 · El mundo que viene'},
+ {a:'Cuaderno_B1_U05.pdf',s:'Solucionario_B1_U05.pdf',t:'Unidad 5 · Cuídate mucho'},
+ {a:'Cuaderno_B1_U06.pdf',s:'Solucionario_B1_U06.pdf',t:'Unidad 6 · ¿Tú qué opinas?'},
+ {a:'Cuaderno_B1_U07.pdf',s:'Solucionario_B1_U07.pdf',t:'Unidad 7 · Se busca'},
+ {a:'Cuaderno_B1_U08.pdf',s:'Solucionario_B1_U08.pdf',t:'Unidad 8 · Buscamos un lugar que...'},
+ {a:'Cuaderno_B1_U09.pdf',s:'Solucionario_B1_U09.pdf',t:'Unidad 9 · Dicen que...'},
+ {a:'Cuaderno_B1_U10.pdf',s:'Solucionario_B1_U10.pdf',t:'Unidad 10 · Si pudiera elegir...'}
 ],3:[
  {f:'Guia_curso_B2.pdf',t:'Guía del curso',g:1},
  {a:'Cuaderno_B2_U01.pdf',s:'Solucionario_B2_U01.pdf',t:'Unidad 1 · Vidas que dejan huella'},
