@@ -1,7 +1,10 @@
 # Tu profe por el mundo
 
-Web estática alojada en GitHub Pages.
+Web de Dana Salgado: clases online de español (A1–C1) y apoyo escolar.
 
-- `index.html`: la web completa (un solo archivo).
-- `CNAME`: dominio personalizado. Cámbialo si registras otro dominio.
-- `.nojekyll`: evita que GitHub procese el sitio con Jekyll.
+- `site/`: lo único que se publica (`index.html` con toda la web y el regalo en PDF).
+- `netlify/functions/chat.mjs`: asistente con IA (desactivado hasta tener clave).
+- `netlify.toml`: configuración de Netlify.
+- `CLAUDE.md`: instrucciones completas del proyecto.
+
+Los PDF de pago (`materiales-venta/`) **no** están en este repositorio, que es público.

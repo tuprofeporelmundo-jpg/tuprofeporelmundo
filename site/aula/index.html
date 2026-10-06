@@ -1,0 +1,1110 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Mi aula · Tu profe por el mundo</title>
+<style>
+/* Una columna estrecha tipo app, con los colores de la web de Dana */
+:root{
+  --bg:#FCF8F5; --bg-2:#F5EBE4; --card:#FFFFFF; --ink:#33251E; --muted:#6F6058; --line:#EADCD2;
+  --jungle:#6B4433; --jungle-2:#80543F; --leaf:#5E7A55; --moss:#3F5B3D; --ochre:#C4936B; --ochre-soft:#F5E6DA;
+  --flower:#D98C7E; --flower-soft:#F8E1DA; --petal-c:#F2C46D;
+  --ok:#3F6B38; --ok-soft:#E3EEDC; --bad:#A8321E; --bad-soft:#F8E0DA;
+  --red:#D9472F; --amber:#E8A630; --green:#5DAE4C;
+  --on-primary:#FFFFFF;
+  --shadow:0 1px 2px rgba(60,36,26,.05),0 12px 28px -14px rgba(60,36,26,.2);
+  --display:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,"Noto Serif",Georgia,serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1D1613; --bg-2:#251C18; --card:#2B211C; --ink:#F4EAE3; --muted:#C2B2A7; --line:#3E3029;
+  --jungle:#E3BCA6; --jungle-2:#EDCBB8; --leaf:#93AE87; --moss:#5F7E5A; --ochre:#D9A87F; --ochre-soft:#3B2C23;
+  --flower:#E89E90; --flower-soft:#4A2F2A; --petal-c:#E9B860;
+  --ok:#A9CF9C; --ok-soft:#26341F; --bad:#FF9F88; --bad-soft:#43231C;
+  --red:#F06B52; --amber:#F2B84B; --green:#7CC66B;
+  --on-primary:#1D1613; --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 28px -14px rgba(0,0,0,.6);
+  color-scheme:dark;
+}}
+:root[data-theme="dark"]{
+  --bg:#1D1613; --bg-2:#251C18; --card:#2B211C; --ink:#F4EAE3; --muted:#C2B2A7; --line:#3E3029;
+  --jungle:#E3BCA6; --jungle-2:#EDCBB8; --leaf:#93AE87; --moss:#5F7E5A; --ochre:#D9A87F; --ochre-soft:#3B2C23;
+  --flower:#E89E90; --flower-soft:#4A2F2A; --petal-c:#E9B860;
+  --ok:#A9CF9C; --ok-soft:#26341F; --bad:#FF9F88; --bad-soft:#43231C;
+  --red:#F06B52; --amber:#F2B84B; --green:#7CC66B;
+  --on-primary:#1D1613; --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 28px -14px rgba(0,0,0,.6);
+  color-scheme:dark;
+}
+[hidden]{display:none!important}
+*,*::before,*::after{box-sizing:border-box}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--display);font-size:1.0625rem;line-height:1.55;padding-inline:16px;padding-block:0 2rem;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:3px solid var(--ochre);outline-offset:3px;border-radius:6px}
+a{color:var(--jungle)}
+h1,h2{font-family:var(--serif);font-weight:700;letter-spacing:-.01em;line-height:1.15;text-wrap:balance;margin:0}
+h1{font-size:clamp(1.7rem,6vw,2.2rem)}
+h2{font-size:1.3rem}
+p{margin:0}
+ul{margin:0;padding-left:1.2rem}
+.muted{color:var(--muted)}
+.small{font-size:.88rem}
+
+header{position:sticky;top:env(safe-area-inset-top,0px);z-index:5;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin-inline:-16px;padding:.7rem 16px}
+.bar{max-width:600px;margin-inline:auto;display:flex;align-items:center;gap:.75rem}
+.logo{display:flex;align-items:center;gap:.5rem;font-family:var(--serif);font-weight:700;color:var(--jungle);font-size:1.05rem;margin-right:auto;text-decoration:none;min-width:0}
+.logo svg{width:28px;height:28px;flex:none}
+.langsw{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden;flex:none}
+.langsw button{border:0;background:transparent;color:var(--muted);font:inherit;font-size:.82rem;font-weight:700;padding:.3rem .65rem;cursor:pointer}
+.langsw button[aria-pressed="true"]{background:var(--jungle);color:var(--on-primary)}
+
+main{max-width:600px;margin-inline:auto;padding-top:1.5rem}
+.screen{display:grid;gap:1.25rem}
+.stack{display:grid;gap:.5rem}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.5rem;padding:.85rem 1.3rem;border-radius:12px;font:inherit;font-weight:700;font-size:1rem;border:2px solid var(--jungle);cursor:pointer;line-height:1.2;text-decoration:none;transition:transform .1s,background .15s}
+.btn:active{transform:translateY(1px)}
+.btn-main{background:var(--jungle);color:var(--on-primary);box-shadow:0 3px 0 color-mix(in srgb,var(--jungle) 60%,#000)}
+.btn-ghost{background:transparent;color:var(--jungle)}
+.btn-danger{background:transparent;color:var(--bad);border-color:var(--bad)}
+.btn[disabled]{opacity:.45;cursor:not-allowed;box-shadow:none}
+.btn-block{width:100%}
+.btn-sm{padding:.45rem .8rem;font-size:.85rem}
+.linkbtn{border:0;background:transparent;color:var(--jungle);font:inherit;font-size:.9rem;text-decoration:underline;cursor:pointer;padding:.2rem}
+
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.25rem;box-shadow:var(--shadow);display:grid;gap:.9rem;min-width:0}
+label{font-weight:700;font-size:.95rem}
+input[type=email],input[type=text],input[type=password],select{width:100%;font:inherit;padding:.75rem .9rem;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--ink)}
+input:focus,select:focus{border-color:var(--ochre);outline:none}
+.field{display:grid;gap:.35rem}
+.dom{color:var(--jungle);overflow-wrap:anywhere}
+.check{display:flex;gap:.6rem;align-items:flex-start;font-weight:400;font-size:.92rem}
+.check input{margin-top:.25rem;width:1.1rem;height:1.1rem;accent-color:var(--jungle);flex:none}
+.legal{font-size:.8rem;color:var(--muted);border-top:1px dashed var(--line);padding-top:.75rem}
+.notice{border-radius:10px;padding:.7rem .9rem;font-size:.92rem;background:var(--ok-soft);color:var(--ok)}
+.notice.err{background:var(--bad-soft);color:var(--bad)}
+.notice.info{background:var(--ochre-soft);color:var(--ink)}
+.tabs{display:grid;grid-template-columns:1fr 1fr;border:2px solid var(--line);border-radius:12px;overflow:hidden}
+.tabs button{border:0;background:transparent;font:inherit;font-weight:700;padding:.65rem;color:var(--muted);cursor:pointer}
+.tabs button[aria-selected="true"]{background:var(--jungle);color:var(--on-primary)}
+
+/* objetivos */
+.goals{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:.75rem}
+@media (max-width:440px){.goals{grid-template-columns:1fr}}
+.goal{display:grid;grid-template-columns:auto 1fr;gap:.2rem .75rem;align-items:center;text-align:left;background:var(--card);border:2px solid var(--line);border-bottom-width:4px;border-radius:14px;padding:.9rem;font:inherit;color:var(--ink);cursor:pointer}
+.goal svg{grid-row:span 2;width:34px;height:34px;color:var(--jungle)}
+.goal b{font-size:1rem}
+.goal span{font-size:.84rem;color:var(--muted)}
+.goal[aria-pressed="true"]{border-color:var(--leaf);background:color-mix(in srgb,var(--leaf) 10%,var(--card))}
+.goal.wide{grid-column:1/-1}
+
+/* preguntas */
+.topline{display:flex;align-items:center;gap:.75rem;min-width:0}
+.screen{min-width:0;max-width:100%}
+.topline .chip{min-width:0;max-width:55%;overflow:hidden;text-overflow:ellipsis}
+.topline .progress{flex:1;min-width:40px}
+.x{border:0;background:transparent;color:var(--muted);font-size:1.4rem;line-height:1;cursor:pointer;padding:.2rem .4rem}
+.progress{flex:1;height:14px;background:var(--line);border-radius:999px;overflow:hidden}
+.progress i{display:block;height:100%;width:0;background:var(--leaf);border-radius:999px;transition:width .35s}
+.chip{font-size:.78rem;font-weight:800;letter-spacing:.06em;color:var(--jungle);background:var(--ochre-soft);border-radius:999px;padding:.2rem .6rem;font-variant-numeric:tabular-nums;white-space:nowrap}
+.instr{font-family:var(--serif);font-size:1.3rem;font-weight:700}
+.prompt{font-size:1.15rem;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem 1.1rem}
+.text{font-family:var(--serif);font-size:1.02rem;line-height:1.65;background:var(--bg-2);border-radius:14px;padding:1rem 1.1rem;max-height:16rem;overflow:auto}
+.opts{display:grid;gap:.6rem}
+.opt{text-align:left;font:inherit;font-size:1.03rem;color:var(--ink);background:var(--card);border:2px solid var(--line);border-bottom-width:4px;border-radius:12px;padding:.8rem 1rem;cursor:pointer}
+.opt[aria-pressed="true"]{border-color:var(--ochre);background:var(--ochre-soft)}
+.opt.good{border-color:var(--ok);background:var(--ok-soft)}
+.opt.wrong{border-color:var(--bad);background:var(--bad-soft)}
+.answer-line{min-height:3.4rem;border-bottom:2px solid var(--line);display:flex;flex-wrap:wrap;gap:.45rem;padding-bottom:.5rem;align-content:flex-start}
+.bank{display:flex;flex-wrap:wrap;gap:.45rem;justify-content:center}
+.tile{font:inherit;font-size:1rem;color:var(--ink);background:var(--card);border:2px solid var(--line);border-bottom-width:4px;border-radius:10px;padding:.45rem .75rem;cursor:pointer}
+.tile[data-used="1"]{visibility:hidden}
+.pairs{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:.6rem}
+.pairs .col{display:grid;gap:.6rem;align-content:start}
+.pairs .tile{width:100%;text-align:center}
+.tile.sel{border-color:var(--ochre);background:var(--ochre-soft)}
+.tile.done{opacity:.4;cursor:default;border-color:var(--ok)}
+.tile.miss{border-color:var(--bad);background:var(--bad-soft)}
+.listen{display:flex;gap:.8rem;flex-wrap:wrap;align-items:center}
+.play{width:72px;height:72px;border-radius:18px;border:0;background:var(--leaf);color:#fff;cursor:pointer;display:grid;place-items:center;box-shadow:0 4px 0 var(--moss)}
+.play.slow{width:52px;height:52px;border-radius:14px}
+.play svg{width:34px;height:34px}
+.play.slow svg{width:24px;height:24px}
+
+.feedback{position:sticky;bottom:env(safe-area-inset-bottom,0px);margin-inline:-16px;padding:1rem 16px;background:var(--bg);border-top:1px solid var(--line);display:grid;gap:.6rem}
+.feedback.ok{background:var(--ok-soft);border-color:transparent}
+.feedback.ko{background:var(--bad-soft);border-color:transparent}
+.feedback .msg{font-weight:800}
+.feedback.ok .msg{color:var(--ok)}
+.feedback.ko .msg{color:var(--bad)}
+.feedback .sol{font-size:.95rem}
+
+/* resultados y aula */
+.result-head{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:center}
+.badge{width:96px;height:96px;position:relative;display:grid;place-items:center}
+.badge svg{position:absolute;inset:0;width:100%;height:100%}
+.badge b{position:relative;font-family:var(--serif);font-size:1.9rem;color:#33251E}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.6rem}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.7rem;text-align:center}
+.stat b{display:block;font-size:1.3rem;font-variant-numeric:tabular-nums;color:var(--jungle)}
+.stat span{font-size:.78rem;color:var(--muted)}
+.can li{margin-bottom:.35rem}
+.hello{display:flex;align-items:center;gap:.6rem;flex-wrap:wrap}
+.hello h1{margin-right:auto}
+.thermo{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px}
+.seg{height:20px;border-radius:6px;background:var(--line);position:relative;overflow:hidden}
+.seg i{position:absolute;inset:0 auto 0 0;background:var(--light)}
+.seg.goal{outline:3px solid var(--jungle);outline-offset:2px}
+.thermo-l{display:grid;grid-template-columns:repeat(6,minmax(0,1fr));gap:4px;font-size:.78rem;font-weight:800;color:var(--muted);text-align:center;font-variant-numeric:tabular-nums}
+.thermo-l .me{color:var(--ink)}
+.light{display:flex;align-items:center;gap:.8rem}
+.lamp{flex:none;display:flex;flex-direction:column;gap:4px;background:#33251E;border-radius:10px;padding:5px}
+.lamp i{width:14px;height:14px;border-radius:50%;background:#5a4a40}
+.lamp i.r.on{background:var(--red)}.lamp i.a.on{background:var(--amber)}.lamp i.g.on{background:var(--green)}
+.modes{display:grid;grid-template-columns:1fr 1fr;gap:.5rem}
+.mode{font:inherit;font-weight:700;padding:.7rem .8rem;border-radius:12px;border:2px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
+.mode[aria-pressed="true"]{border-color:var(--leaf);background:color-mix(in srgb,var(--leaf) 14%,var(--card))}
+.areas{display:grid;gap:.55rem}
+.area{display:grid;grid-template-columns:auto minmax(0,1fr) auto;gap:.7rem;align-items:center;font-size:.95rem}
+.dotc{width:14px;height:14px;border-radius:50%;background:var(--line)}
+.dotc.r{background:var(--red)}.dotc.a{background:var(--amber)}.dotc.g{background:var(--green)}
+.pct{font-variant-numeric:tabular-nums;color:var(--muted);font-size:.85rem}
+.path{display:grid;gap:1rem;padding:.5rem 0}
+.node{display:flex;align-items:center;gap:.9rem;text-align:left;background:transparent;border:0;font:inherit;color:var(--ink);padding:0;cursor:pointer}
+.node[disabled]{cursor:default}
+.node:nth-child(4n+2){padding-left:16%}
+.node:nth-child(4n+3){padding-left:30%}
+.node:nth-child(4n+4){padding-left:16%}
+.dot{flex:none;width:62px;height:62px;border-radius:50%;display:grid;place-items:center;color:var(--muted);background:var(--line);box-shadow:0 5px 0 color-mix(in srgb,var(--line) 70%,#000)}
+.dot svg{width:28px;height:28px}
+.node.now .dot{background:var(--leaf);color:#fff;box-shadow:0 5px 0 var(--moss)}
+.node.done .dot{background:var(--ochre);color:#33251E;box-shadow:0 5px 0 color-mix(in srgb,var(--ochre) 60%,#000)}
+.node .lbl{min-width:0}
+.node .lbl b{display:block;font-size:.98rem}
+.node .lbl span{font-size:.8rem;color:var(--muted)}
+.mat{display:grid;gap:.5rem;margin:0;padding:0;list-style:none}
+.mat li{display:flex;align-items:center;gap:.75rem;border:1px solid var(--line);border-radius:10px;padding:.6rem .75rem}
+.mat li svg{flex:none;width:22px;height:22px;color:var(--flower)}
+.mat li div{min-width:0;flex:1}
+.mat li div span{display:block;font-size:.8rem;color:var(--muted)}
+.mat-b{display:flex;flex-wrap:wrap;gap:.4rem;justify-content:flex-end}
+.mat-fs{display:grid;gap:.5rem}
+.mat-f{border:1px solid var(--line);border-radius:12px;padding:.25rem .75rem}
+.mat-f[open]{padding-bottom:.75rem}
+.mat-f summary{display:flex;align-items:center;gap:.6rem;padding:.55rem 0;list-style:none}
+.mat-f summary::-webkit-details-marker{display:none}
+.mat-f summary svg{flex:none;width:22px;height:22px;color:var(--ochre)}
+.mat-f summary small{margin-left:auto;font-weight:400;font-size:.8rem;color:var(--muted)}
+.mat-f summary::after{content:'▸';color:var(--muted);transition:transform .2s}
+.mat-f[open] summary::after{transform:rotate(90deg)}
+@media (max-width:480px){.mat li{flex-wrap:wrap}.mat-b{width:100%;justify-content:flex-start}}
+.row{display:flex;gap:.6rem;flex-wrap:wrap}
+.row .btn{flex:1 1 200px}
+details summary{cursor:pointer;font-weight:700}
+dialog{border:0;border-radius:16px;padding:0;max-width:min(640px,calc(100% - 32px));background:var(--card);color:var(--ink);box-shadow:var(--shadow)}
+dialog::backdrop{background:rgba(29,22,19,.55)}
+.dlg{padding:1.25rem;display:grid;gap:.75rem;font-size:.93rem}
+.dlg h2{font-size:1.2rem}
+footer.note{max-width:600px;margin:2.2rem auto 0;font-size:.82rem;color:var(--muted);display:flex;gap:1rem;flex-wrap:wrap}
+.celebrate{text-align:center}
+.celebrate .badge{margin-inline:auto;width:120px;height:120px}
+</style>
+</head>
+<body>
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="fl" viewBox="-50 -50 100 100"><g transform="translate(0 8)"><g style="fill:var(--flower-soft);stroke:var(--flower)" stroke-width="2"><path d="M0 24 C-20 26 -42 16 -47 0 C-30 -4 -12 6 0 24Z"/><path d="M0 24 C20 26 42 16 47 0 C30 -4 12 6 0 24Z"/><path d="M0 24 C-20 16 -30 -6 -27 -26 C-12 -20 -2 -2 0 24Z"/><path d="M0 24 C20 16 30 -6 27 -26 C12 -20 2 -2 0 24Z"/><path d="M0 24 C-14 8 -13 -22 0 -42 C13 -22 14 8 0 24Z"/></g></g></symbol>
+    <symbol id="i-plane" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M2 16l20-6-4-2-5 2-6-5-2 1 4 5-4 1-2-2-2 1 2 3z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" d="M3 21h18"/></symbol>
+    <symbol id="i-chat" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M4 5h11a3 3 0 0 1 3 3v5a3 3 0 0 1-3 3H9l-4 3v-3H4a2 2 0 0 1-2-2V7a2 2 0 0 1 2-2z"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M18 9h1a3 3 0 0 1 3 3v6l-3-2h-5"/></symbol>
+    <symbol id="i-film" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2" fill="none" stroke="currentColor" stroke-width="1.8"/><path stroke="currentColor" stroke-width="1.8" d="M7 4v16M17 4v16M3 9h4M3 15h4M17 9h4M17 15h4"/></symbol>
+    <symbol id="i-book" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M12 6c-2-1.5-5-2-9-2v14c4 0 7 .5 9 2 2-1.5 5-2 9-2V4c-4 0-7 .5-9 2z"/><path stroke="currentColor" stroke-width="1.8" d="M12 6v14"/></symbol>
+    <symbol id="i-cert" viewBox="0 0 24 24"><circle cx="12" cy="9" r="5" fill="none" stroke="currentColor" stroke-width="1.8"/><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M9 13.5 7.5 21l4.5-2.5 4.5 2.5-1.5-7.5"/></symbol>
+    <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M4 9h4l5-4v14l-5-4H4z"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M16 9a4 4 0 0 1 0 6M18.5 6.5a7.5 7.5 0 0 1 0 11"/></symbol>
+    <symbol id="i-snail" viewBox="0 0 24 24"><circle cx="13" cy="12" r="5" fill="none" stroke="currentColor" stroke-width="2"/><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" d="M13 12a2 2 0 0 1 2-2M3 19h17M6 19V9M8 19v-4"/></symbol>
+    <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 3l2.7 5.6 6.1.8-4.5 4.2 1.1 6.1L12 16.8 6.6 19.7l1.1-6.1L3.2 9.4l6.1-.8z"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d="M5 12.5l4.5 4.5L19 7.5"/></symbol>
+    <symbol id="i-lock" viewBox="0 0 24 24"><rect x="5" y="10" width="14" height="10" rx="2" fill="currentColor"/><path fill="none" stroke="currentColor" stroke-width="2" d="M8 10V7a4 4 0 0 1 8 0v3"/></symbol>
+    <symbol id="i-folder" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M3 6a1 1 0 0 1 1-1h5l2 2h9a1 1 0 0 1 1 1v10a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1z"/></symbol>
+    <symbol id="i-doc" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M6 3h8l4 4v14H6z M14 3v4h4"/><path stroke="currentColor" stroke-width="1.8" d="M9 12h6M9 16h6"/></symbol>
+  </defs>
+</svg>
+
+<header>
+  <div class="bar">
+    <a class="logo" href="../"><svg aria-hidden="true"><use href="#fl"/></svg><span data-i18n="brand"></span></a>
+    <div class="langsw" role="group" aria-label="Idioma / Language / Langue">
+      <button type="button" data-lang="es">ES</button>
+      <button type="button" data-lang="en">EN</button>
+      <button type="button" data-lang="fr">FR</button>
+    </div>
+  </div>
+</header>
+
+<main>
+  <p class="notice info" id="local-note" hidden data-i18n="local_note"></p>
+
+  <!-- Cargando -->
+  <section class="screen" id="s-load"><p class="muted" data-i18n="loading"></p></section>
+
+  <!-- Entrar / crear cuenta -->
+  <section class="screen" id="s-auth" hidden>
+    <div class="stack"><h1 data-i18n="auth_t"></h1><p class="muted" data-i18n="auth_p"></p></div>
+    <div class="tabs" role="tablist">
+      <button type="button" role="tab" id="tab-in" aria-selected="true" data-i18n="tab_in"></button>
+      <button type="button" role="tab" id="tab-up" aria-selected="false" data-i18n="tab_up"></button>
+    </div>
+    <form class="card" id="f-in" novalidate>
+      <div class="field"><label for="in-user" data-i18n="user_l"></label><input type="text" id="in-user" autocomplete="username" autocapitalize="off" spellcheck="false" required></div>
+      <div class="field"><label for="in-pass" data-i18n="pass_l"></label><input type="password" id="in-pass" autocomplete="current-password" required></div>
+      <p class="notice" id="in-msg" hidden role="status"></p>
+      <button class="btn btn-main btn-block" type="submit" data-i18n="in_b"></button>
+      <button class="linkbtn" type="button" id="forgot" data-i18n="forgot"></button>
+    </form>
+    <form class="card" id="f-up" novalidate hidden>
+      <div class="field"><label for="up-name" data-i18n="name_l"></label><input type="text" id="up-name" autocomplete="given-name" maxlength="40" required></div>
+      <div class="field"><label for="up-user" data-i18n="user_new_l"></label><input type="text" id="up-user" autocomplete="username" autocapitalize="off" spellcheck="false" maxlength="30" required><p class="small"><b class="dom" id="up-addr"></b></p><p class="small muted" data-i18n="user_hint"></p></div>
+      <div class="field"><label for="up-pass" data-i18n="pass_new_l"></label><input type="password" id="up-pass" autocomplete="new-password" minlength="8" required></div>
+      <label class="check"><input type="checkbox" id="up-age"><span data-i18n="age"></span></label>
+      <label class="check"><input type="checkbox" id="up-priv"><span><span data-i18n="priv_ok"></span> <button type="button" class="linkbtn" data-open="privacy" data-i18n="priv_link"></button></span></label>
+      <p class="notice" id="up-msg" hidden role="status"></p>
+      <button class="btn btn-main btn-block" type="submit" data-i18n="up_b"></button>
+      <p class="legal" data-i18n="legal_basic"></p>
+    </form>
+  </section>
+
+  <!-- Nueva contraseña (al volver del correo de recuperación) -->
+  <section class="screen" id="s-newpass" hidden>
+    <h1 data-i18n="np_t"></h1>
+    <form class="card" id="f-np" novalidate>
+      <div class="field"><label for="np-pass" data-i18n="pass_new_l"></label><input type="password" id="np-pass" autocomplete="new-password" minlength="8" required></div>
+      <p class="notice" id="np-msg" hidden role="status"></p>
+      <button class="btn btn-main btn-block" type="submit" data-i18n="np_b"></button>
+    </form>
+  </section>
+
+  <!-- Objetivo -->
+  <section class="screen" id="s-goal" hidden>
+    <div class="modes" id="modes" role="group">
+      <button type="button" class="mode" data-m="es" data-i18n="m_es"></button>
+      <button type="button" class="mode" data-m="school" data-i18n="m_school"></button>
+    </div>
+    <div class="stack"><h1 id="goal-h"></h1><p class="muted" id="goal-p"></p></div>
+    <div class="goals" id="goals"></div>
+    <div class="card" id="target-box" hidden>
+      <label for="target" id="target-l"></label>
+      <select id="target"></select>
+      <p class="small muted" id="target-can"></p>
+    </div>
+    <button class="btn btn-main btn-block" id="goal-next" disabled></button>
+    <p class="small muted" id="goal-note" data-i18n="test_p"></p>
+  </section>
+
+  <!-- Preguntas (test de nivel, unidades, repaso y prueba de nivel) -->
+  <section class="screen" id="s-quiz" hidden>
+    <div class="topline">
+      <button class="x" id="quit" type="button" data-i18n-aria="quit">✕</button>
+      <div class="progress" role="progressbar" aria-valuemin="0" id="prog"><i></i></div>
+      <span class="chip" id="qchip"></span>
+    </div>
+    <p class="instr" id="instr"></p>
+    <div id="qbody" style="display:grid;gap:1rem"></div>
+    <div class="feedback" id="fb">
+      <div aria-live="polite"><p class="msg" id="fb-msg"></p><p class="sol" id="fb-sol"></p></div>
+      <button class="btn btn-main btn-block" id="check" disabled data-i18n="check"></button>
+    </div>
+  </section>
+
+  <!-- Resultado del test de nivel -->
+  <section class="screen" id="s-result" hidden>
+    <div class="result-head">
+      <div class="badge"><svg viewBox="-50 -50 100 100" aria-hidden="true"><use href="#fl"/></svg><b id="r-lv"></b></div>
+      <div class="stack" style="min-width:0"><p class="small muted" data-i18n="res_k"></p><h1 id="r-name"></h1><p class="small muted" id="r-sub"></p></div>
+    </div>
+    <div class="card"><h2 id="r-can-t"></h2><ul class="can" id="r-can"></ul></div>
+    <div class="card" id="r-next-box"><h2 id="r-next-t"></h2><ul class="can" id="r-next"></ul></div>
+    <p class="small muted" data-i18n="res_note"></p>
+    <button class="btn btn-main btn-block" id="to-home" data-i18n="to_home"></button>
+  </section>
+
+  <!-- Fin de una sesión de práctica -->
+  <section class="screen celebrate" id="s-done" hidden>
+    <div class="badge"><svg viewBox="-50 -50 100 100" aria-hidden="true"><use href="#fl"/></svg><b id="d-score"></b></div>
+    <h1 id="d-t"></h1>
+    <p class="muted" id="d-p"></p>
+    <button class="btn btn-main btn-block" id="d-home" data-i18n="back_home"></button>
+  </section>
+
+  <!-- Apoyo escolar -->
+  <section class="screen" id="s-school" hidden>
+    <div class="hello"><h1 id="sc-hello"></h1><span class="chip" id="sc-course"></span><span class="chip" id="sc-xp"></span><span class="chip" id="sc-streak"></span></div>
+    <div class="card">
+      <h2 data-i18n="sc_prog_t"></h2>
+      <div class="areas" id="sc-areas"></div>
+      <p class="small muted" data-i18n="sc_prog_p"></p>
+    </div>
+    <div id="sc-subjects" class="stack"></div>
+    <div class="card">
+      <h2 data-i18n="rev_t"></h2>
+      <p class="small muted" id="sc-rev-p"></p>
+      <button class="btn btn-ghost btn-block" id="sc-review" data-i18n="rev_b"></button>
+    </div>
+    <div class="card">
+      <h2 data-i18n="acc_t"></h2>
+      <p class="small muted" id="sc-who"></p>
+      <div class="row">
+        <button class="btn btn-ghost" id="sc-change" data-i18n="sc_change"></button>
+        <button class="btn btn-ghost" id="sc-logout" data-i18n="logout"></button>
+      </div>
+      <button class="btn btn-danger btn-sm" id="sc-erase"></button>
+      <p class="small muted" data-i18n="sc_norm"></p>
+    </div>
+  </section>
+
+  <!-- Mi aula -->
+  <section class="screen" id="s-home" hidden>
+    <div class="hello"><h1 id="h-hello"></h1><span class="chip" id="h-lv"></span><span class="chip" id="h-xp"></span><span class="chip" id="h-streak"></span></div>
+
+    <div class="card">
+      <h2 data-i18n="prog_t"></h2>
+      <div class="light"><div class="lamp" aria-hidden="true"><i class="r"></i><i class="a"></i><i class="g"></i></div><p id="h-light"></p></div>
+      <div class="stack"><div class="thermo" id="thermo" role="img"></div><div class="thermo-l" id="thermo-l"></div></div>
+      <p class="small muted" data-i18n="prog_p"></p>
+    </div>
+
+    <div class="card">
+      <h2 id="path-t"></h2>
+      <p class="small muted" id="path-p"></p>
+      <div class="path" id="path"></div>
+      <button class="btn btn-main btn-block" id="levelup" hidden></button>
+    </div>
+
+    <div class="card" id="review-box">
+      <h2 data-i18n="rev_t"></h2>
+      <p class="small muted" id="rev-p"></p>
+      <button class="btn btn-ghost btn-block" id="review" data-i18n="rev_b"></button>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="areas_t"></h2>
+      <div class="areas" id="areas"></div>
+      <p class="small muted" data-i18n="areas_p"></p>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="mat_t"></h2>
+      <div class="mat-fs" id="mat"></div>
+      <p class="notice err" id="mat-msg" hidden></p>
+    </div>
+
+    <div class="card">
+      <h2 id="req-t"></h2>
+      <ul class="can" id="req-can"></ul>
+      <p class="small"><b data-i18n="req_focus"></b> <span id="req-focus"></span></p>
+      <p class="small muted" data-i18n="req_note"></p>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="acc_t"></h2>
+      <p class="small muted" id="acc-who"></p>
+      <div class="row">
+        <button class="btn btn-ghost" id="retest" data-i18n="retest"></button>
+        <button class="btn btn-ghost" id="h-goal" data-i18n="change"></button>
+      </div>
+      <div class="row">
+        <button class="btn btn-ghost" id="logout" data-i18n="logout"></button>
+        <button class="btn btn-danger" id="erase"></button>
+      </div>
+      <div class="notice err" id="erase-box" hidden>
+        <p id="erase-q"></p>
+        <div class="row" style="margin-top:.6rem"><button class="btn btn-danger btn-sm" id="erase-yes" data-i18n="erase_yes"></button><button class="btn btn-ghost btn-sm" id="erase-no" data-i18n="erase_no"></button></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer class="note">
+  <a href="../" data-i18n="back_web"></a>
+  <button type="button" class="linkbtn" data-open="privacy" data-i18n="priv_t"></button>
+</footer>
+
+<dialog id="privacy" aria-labelledby="priv-h">
+  <div class="dlg">
+    <h2 id="priv-h" data-i18n="priv_t"></h2>
+    <div id="priv-body"></div>
+    <button class="btn btn-main" type="button" id="priv-close" data-i18n="close"></button>
+  </div>
+</dialog>
+
+<script src="config.js"></script>
+<script src="banco.js"></script>
+<script src="banco-escolar.js"></script>
+<script>
+const CFG=window.AULA_CONFIG||{};
+const LV=LEVELS.map(l=>l.c);
+const REMOTE=!!(CFG.supabaseUrl&&CFG.supabaseKey);
+
+const T={
+es:{brand:'Mi aula',m_es:'Español',m_school:'Apoyo escolar',sc_goal_t:'¿En qué curso estás?',sc_goal_p:'Practica Matemáticas, Lengua, Inglés, Ciencias Naturales y Ciencias Sociales con unidades del currículo oficial de tu curso.',course_l:'Curso',start_school:'Empezar a practicar',sc_prog_t:'Tu semáforo por asignaturas',sc_prog_p:'Verde: lo dominas (80 % o más). Ámbar: vas avanzando. Rojo: conviene repasar.',sc_units:'Unidades de {s}',sc_change:'Cambiar curso o modalidad',sc_norm:'Las unidades siguen los saberes básicos de la LOMLOE: Real Decreto 157/2022 (Primaria) y Real Decreto 217/2022 (ESO).',sc_none:'Esta asignatura todavía no tiene unidades para tu curso.',sc_rev_none:'No tienes preguntas pendientes de repaso.',sc_why:'Por qué: ',loading:'Cargando…',local_note:'Estás usando el aula sin cuenta: tu progreso se guarda solo en este dispositivo.',
+auth_t:'Mi aula',auth_p:'Entra para hacer tu test de nivel, practicar y ver tu material.',tab_in:'Entrar',tab_up:'Crear cuenta',
+email_l:'Correo electrónico',pass_l:'Contraseña',pass_new_l:'Contraseña (mínimo 8 caracteres)',name_l:'Tu nombre',in_b:'Entrar',up_b:'Crear mi cuenta',forgot:'He olvidado mi contraseña',user_l:'Tu usuario',user_new_l:'Elige tu usuario',user_hint:'Será tu dirección del aula. Solo letras, números y puntos, sin tildes.',err_user:'El usuario necesita entre 3 y 30 letras, números o puntos.',err_taken:'Ese usuario ya existe. Prueba otro, por ejemplo con la inicial de tu apellido.',forgot_txt:'Escribe a Dana a {e} y te creará una contraseña nueva.',
+age:'Tengo 14 años o más. Si el alumno tiene menos de 14, crea la cuenta su madre, padre o tutor legal.',
+priv_ok:'He leído la información sobre protección de datos.',priv_link:'Leer',
+legal_basic:'Responsable: Dana Salgado (Tu profe por el mundo). Finalidad: darte acceso al aula y guardar tu progreso. Base legal: prestarte el servicio que pides. Datos: tu nombre, tu usuario y tus resultados. Destinatarios: Supabase, que aloja los datos en la Unión Europea. Derechos: acceso, rectificación, supresión y los demás que explica la información completa.',
+err_email:'Escribe un correo válido.',err_pass:'La contraseña necesita al menos 8 caracteres.',err_name:'Escribe tu nombre.',err_age:'Marca la casilla de la edad para continuar.',err_priv:'Marca que has leído la información sobre protección de datos.',
+err_login:'El usuario o la contraseña no son correctos.',err_generic:'No se ha podido completar. Inténtalo de nuevo en un momento.',
+sent_confirm:'Te hemos enviado un correo. Abre el enlace para activar tu cuenta y vuelve aquí para entrar.',sent_reset:'Si ese correo tiene cuenta, te llegará un enlace para crear una contraseña nueva.',write_email:'Escribe tu correo arriba y vuelve a pulsar aquí.',
+np_t:'Crea tu contraseña nueva',np_b:'Guardar contraseña',np_ok:'Contraseña guardada.',
+goal_t:'¿Para qué quieres el español?',goal_p:'Elige tu objetivo. Tu camino de lecciones se ordena según lo que elijas.',
+g_travel:'Viajar',g_travel_s:'Aeropuerto, hotel, restaurantes',g_friends:'Hablar con amigos',g_friends_s:'Quedar, charlar, bromear',
+g_film:'Cine y series',g_film_s:'Entender diálogos y tramas',g_read:'Leer',g_read_s:'Noticias, cuentos y novelas',
+g_exam:'Examinarme',g_exam_s:'DELE o SIELE de un nivel concreto',
+target_l:'¿Qué nivel quieres alcanzar?',exam_l:'¿De qué nivel es tu examen?',
+start_test:'Empezar el test de nivel',save_goal:'Guardar y volver a mi aula',
+test_p:'El test empieza en A2 y sube o baja según tus respuestas. Se para solo cuando llega a tu límite: entre 6 y 18 preguntas.',
+quit:'Salir',check:'Comprobar',next:'Continuar',finish:'Terminar',ok:'¡Muy bien!',ko:'Casi.',sol:'Respuesta correcta: ',accent:'¡Bien! Ojo con las tildes: ',
+i_choice:'Elige la opción correcta',i_order:'Ordena la frase',i_gap:'Escribe lo que falta',i_listen:'Escucha y elige lo que oyes',i_listenq:'Escucha y responde',i_match:'Une las parejas',i_read:'Lee y responde',
+gap_ph:'Escribe aquí',play:'Escuchar',play_slow:'Escuchar más despacio',showtxt:'No puedo escuchar ahora',
+q_test:'Test',q_review:'Repaso',q_levelup:'Prueba de nivel',
+res_k:'Tu nivel según el Marco Común Europeo',pre:'Inicio',pre_name:'Empiezas desde cero',res_sub:'{n} de {t} respuestas correctas',
+res_can:'Lo que ya sabes hacer ({l})',res_next:'Tu próximo paso: {l}',res_top:'Has superado el nivel más alto. Mantén tu español con el repaso.',
+res_note:'El test mide comprensión, gramática y vocabulario. La expresión oral y escrita la trabajas en clase con Dana.',to_home:'Ir a mi aula',
+hello:'Hola, {n}',hello_anon:'Mi aula',streak:'{n} días seguidos',streak1:'1 día seguido',
+prog_t:'Mi progreso hacia mi objetivo',prog_p:'La casilla marcada es tu objetivo. La barra avanza con cada unidad que completas y sube de nivel cuando apruebas la prueba de nivel.',
+light_g:'Verde: has llegado a tu objetivo ({t}). ¡Enhorabuena! Ahora toca afianzarlo.',light_a:'Ámbar: te falta 1 nivel para tu objetivo ({t}). Vas muy bien.',light_r:'Rojo: te faltan {n} niveles para tu objetivo ({t}). Vamos paso a paso.',
+path_t:'Mi camino hacia el {l}',path_top:'Mi camino: repaso del C2',path_p:'Completa cada unidad acertando al menos el 80 %. Cuando termines las cuatro, se abre la prueba de nivel.',
+u_now:'Toca ahora',u_done:'Completada',u_lock:'Se abre al terminar la anterior',u_prog:'{n} % aprendido',
+levelup_b:'Hacer la prueba de nivel {l}',lu_pass:'¡Has subido al {l}!',lu_pass_p:'Has aprobado la prueba de nivel. Tu camino ya muestra las unidades del siguiente nivel.',lu_fail:'Todavía no',lu_fail_p:'Necesitas 4 de 5 aciertos. Haz un repaso y vuelve a intentarlo cuando quieras.',
+unit_done:'¡Unidad completada!',unit_more:'¡Buen trabajo!',unit_more_p:'Esta unidad lleva un {n} % aprendido. Repítela para llegar al 80 %.',unit_done_p:'Se ha abierto la siguiente unidad de tu camino.',rev_done:'Repaso terminado',rev_done_p:'Las preguntas que fallas vuelven en el repaso hasta que las aciertas varias veces.',
+rev_t:'Repaso inteligente',rev_p:'{n} preguntas que te costaron esperan repaso.',rev_none:'No tienes nada pendiente. Las preguntas que falles aparecerán aquí.',rev_b:'Empezar el repaso',
+areas_t:'Mis puntos fuertes y débiles',areas_p:'Verde: 75 % o más de aciertos. Ámbar: entre 50 y 74 %. Rojo: menos del 50 %. Cuenta tus últimas 30 respuestas de cada destreza.',
+sk_gram:'Gramática',sk_voc:'Vocabulario',sk_lec:'Comprensión lectora',sk_aud:'Comprensión auditiva',sk_ord:'Construir frases',nodata:'Sin datos aún',
+mat_t:'Mi material',mat_kind:'Sesión y solucionario (PDF)',mat_open:'Abrir',mat_a:'Cuaderno',mat_n:'{n} documentos',mat_soon:'Próximamente',mat_s:'Solucionario',mat_kind_u:'Cuaderno del alumno y solucionario (PDF)',mat_kind_a:'Cuaderno del alumno (PDF). El solucionario llegará pronto.',mat_kind_g:'Qué trae el curso y cómo usarlo (PDF)',mat_none:'Dana irá subiendo aquí el material del {l}.',mat_local:'Crea tu cuenta para abrir el material de clase.',mat_err:'No se ha podido abrir el archivo. El material es para alumnos con clases: si ya das clase con Dana, pídele que te dé acceso.',
+req_t:'Qué exige el {l} según el Marco Común Europeo',req_focus:'Gramática del nivel:',req_note:'Fuente: escala global del Marco Común Europeo de Referencia (Consejo de Europa) y Plan Curricular del Instituto Cervantes.',
+acc_t:'Mi cuenta',acc_who:'Has entrado como {e}.',acc_local:'Sin cuenta: tu progreso está guardado solo en este dispositivo.',
+retest:'Repetir el test de nivel',change:'Cambiar mi objetivo',logout:'Cerrar sesión',erase:'Borrar mi cuenta y mis datos',erase_local:'Borrar mi progreso',
+erase_q:'Se borrarán tu cuenta, tus resultados y tu progreso. No se puede deshacer. ¿Seguro?',erase_q_local:'Se borrará tu progreso de este dispositivo. ¿Seguro?',erase_yes:'Sí, borrar',erase_no:'Cancelar',
+back_home:'Volver a mi aula',back_web:'Volver a la web',priv_t:'Protección de datos del aula',close:'Cerrar'},
+en:{brand:'My classroom',m_es:'Spanish',m_school:'School support',sc_goal_t:'Which school year are you in?',sc_goal_p:'Practise Maths, Spanish Language, English, Natural Sciences and Social Sciences with units from the official Spanish curriculum for your year. Questions are in Spanish, as at school.',course_l:'School year',start_school:'Start practising',sc_prog_t:'Your traffic light by subject',sc_prog_p:'Green: you have mastered it (80% or more). Amber: you are getting there. Red: worth reviewing.',sc_units:'{s} units',sc_change:'Change year or mode',sc_norm:'Units follow the core knowledge of the LOMLOE: Royal Decree 157/2022 (primary) and Royal Decree 217/2022 (secondary).',sc_none:'This subject has no units for your year yet.',sc_rev_none:'You have no questions waiting for review.',sc_why:'Why: ',loading:'Loading…',local_note:'You are using the classroom without an account: your progress is saved on this device only.',
+auth_t:'My classroom',auth_p:'Sign in to take your level test, practise and see your materials.',tab_in:'Sign in',tab_up:'Create account',
+email_l:'Email',pass_l:'Password',pass_new_l:'Password (at least 8 characters)',name_l:'Your first name',in_b:'Sign in',up_b:'Create my account',forgot:'I forgot my password',user_l:'Your username',user_new_l:'Choose your username',user_hint:'It will be your classroom address. Letters, numbers and dots only, no accents.',err_user:'The username needs 3 to 30 letters, numbers or dots.',err_taken:'That username is taken. Try another, for example with your surname initial.',forgot_txt:'Write to Dana at {e} and she will set a new password for you.',
+age:'I am 14 or older. If the student is under 14, their parent or legal guardian creates the account.',
+priv_ok:'I have read the data protection information.',priv_link:'Read',
+legal_basic:'Controller: Dana Salgado (Tu profe por el mundo). Purpose: giving you access to the classroom and saving your progress. Legal basis: providing the service you request. Data: your first name, username and results. Recipients: Supabase, which hosts the data in the European Union. Rights: access, rectification, erasure and the others explained in the full information.',
+err_email:'Please enter a valid email.',err_pass:'The password needs at least 8 characters.',err_name:'Please enter your first name.',err_age:'Tick the age box to continue.',err_priv:'Tick the box to confirm you read the data protection information.',
+err_login:'The username or password is not correct.',err_generic:'That did not work. Please try again in a moment.',
+sent_confirm:'We sent you an email. Open the link to activate your account, then come back here to sign in.',sent_reset:'If that email has an account, you will receive a link to set a new password.',write_email:'Type your email above and tap here again.',
+np_t:'Create your new password',np_b:'Save password',np_ok:'Password saved.',
+goal_t:'Why do you want to learn Spanish?',goal_p:'Pick your goal. Your lesson path is ordered around it.',
+g_travel:'Travel',g_travel_s:'Airport, hotel, restaurants',g_friends:'Talk with friends',g_friends_s:'Meet up, chat, joke',
+g_film:'Films and series',g_film_s:'Follow dialogue and plots',g_read:'Reading',g_read_s:'News, stories and novels',
+g_exam:'Pass an exam',g_exam_s:'DELE or SIELE at a given level',
+target_l:'What level do you want to reach?',exam_l:'What level is your exam?',
+start_test:'Start the level test',save_goal:'Save and go back to my classroom',
+test_p:'The test starts at A2 and goes up or down with your answers. It stops on its own when it reaches your limit: between 6 and 18 questions.',
+quit:'Leave',check:'Check',next:'Continue',finish:'Finish',ok:'Well done!',ko:'Almost.',sol:'Correct answer: ',accent:'Good! Watch the accents: ',
+i_choice:'Choose the correct option',i_order:'Put the sentence in order',i_gap:'Type what is missing',i_listen:'Listen and choose what you hear',i_listenq:'Listen and answer',i_match:'Match the pairs',i_read:'Read and answer',
+gap_ph:'Type here',play:'Play',play_slow:'Play slowly',showtxt:'I can’t listen right now',
+q_test:'Test',q_review:'Review',q_levelup:'Level check',
+res_k:'Your level on the Common European Framework',pre:'Start',pre_name:'You are starting from scratch',res_sub:'{n} of {t} answers correct',
+res_can:'What you can already do ({l})',res_next:'Your next step: {l}',res_top:'You passed the highest level. Keep your Spanish sharp with reviews.',
+res_note:'The test measures comprehension, grammar and vocabulary. Speaking and writing are what you work on in class with Dana.',to_home:'Go to my classroom',
+hello:'Hi, {n}',hello_anon:'My classroom',streak:'{n}-day streak',streak1:'1-day streak',
+prog_t:'My progress towards my goal',prog_p:'The outlined box is your goal. The bar moves with every unit you complete and goes up a level when you pass the level check.',
+light_g:'Green: you have reached your goal ({t}). Well done! Now it’s time to consolidate it.',light_a:'Amber: 1 level to go for your goal ({t}). You are doing great.',light_r:'Red: {n} levels to go for your goal ({t}). One step at a time.',
+path_t:'My path to {l}',path_top:'My path: C2 review',path_p:'Complete each unit by getting at least 80% right. When you finish all four, the level check opens.',
+u_now:'Up next',u_done:'Completed',u_lock:'Opens when you finish the previous one',u_prog:'{n}% learnt',
+levelup_b:'Take the {l} level check',lu_pass:'You moved up to {l}!',lu_pass_p:'You passed the level check. Your path now shows the units of the next level.',lu_fail:'Not yet',lu_fail_p:'You need 4 out of 5. Do a review and try again whenever you like.',
+unit_done:'Unit completed!',unit_more:'Good work!',unit_more_p:'This unit is {n}% learnt. Repeat it to reach 80%.',unit_done_p:'The next unit on your path is now open.',rev_done:'Review finished',rev_done_p:'Questions you get wrong come back in the review until you get them right several times.',
+rev_t:'Smart review',rev_p:'{n} questions you found hard are waiting for review.',rev_none:'Nothing pending. Questions you get wrong will show up here.',rev_b:'Start the review',
+areas_t:'My strengths and weak spots',areas_p:'Green: 75% or more correct. Amber: 50 to 74%. Red: under 50%. Based on your last 30 answers in each skill.',
+sk_gram:'Grammar',sk_voc:'Vocabulary',sk_lec:'Reading',sk_aud:'Listening',sk_ord:'Building sentences',nodata:'No data yet',
+mat_t:'My materials',mat_kind:'Lesson and answer key (PDF)',mat_open:'Open',mat_a:'Workbook',mat_n:'{n} documents',mat_soon:'Coming soon',mat_s:'Answer key',mat_kind_u:'Student workbook and answer key (PDF)',mat_kind_a:'Student workbook (PDF). The answer key is coming soon.',mat_kind_g:'What the course includes and how to use it (PDF)',mat_none:'Dana will upload the {l} materials here.',mat_local:'Create your account to open the class materials.',mat_err:'The file could not be opened. The materials are for students taking lessons: if you already have lessons with Dana, ask her for access.',
+req_t:'What {l} requires on the Common European Framework',req_focus:'Grammar at this level:',req_note:'Source: global scale of the Common European Framework of Reference (Council of Europe) and the Instituto Cervantes curriculum.',
+acc_t:'My account',acc_who:'Signed in as {e}.',acc_local:'No account: your progress is saved on this device only.',
+retest:'Retake the level test',change:'Change my goal',logout:'Sign out',erase:'Delete my account and data',erase_local:'Delete my progress',
+erase_q:'Your account, results and progress will be deleted. This cannot be undone. Are you sure?',erase_q_local:'Your progress on this device will be deleted. Are you sure?',erase_yes:'Yes, delete',erase_no:'Cancel',
+back_home:'Back to my classroom',back_web:'Back to the website',priv_t:'Classroom data protection',close:'Close'},
+fr:{brand:'Ma classe',m_es:'Espagnol',m_school:'Soutien scolaire',sc_goal_t:'En quelle année es-tu ?',sc_goal_p:'Entraîne-toi en maths, langue espagnole, anglais, sciences naturelles et sciences sociales avec des unités du programme officiel espagnol de ton année. Les questions sont en espagnol, comme à l’école.',course_l:'Année scolaire',start_school:'Commencer à m’entraîner',sc_prog_t:'Ton feu tricolore par matière',sc_prog_p:'Vert : tu maîtrises (80 % ou plus). Orange : tu progresses. Rouge : à revoir.',sc_units:'Unités de {s}',sc_change:'Changer d’année ou de mode',sc_norm:'Les unités suivent les savoirs de base de la LOMLOE : décret royal 157/2022 (primaire) et décret royal 217/2022 (collège-lycée).',sc_none:'Cette matière n’a pas encore d’unités pour ton année.',sc_rev_none:'Tu n’as aucune question à revoir.',sc_why:'Pourquoi : ',loading:'Chargement…',local_note:'Tu utilises la classe sans compte : ta progression est enregistrée uniquement sur cet appareil.',
+auth_t:'Ma classe',auth_p:'Connecte-toi pour passer ton test de niveau, t’entraîner et voir ton matériel.',tab_in:'Se connecter',tab_up:'Créer un compte',
+email_l:'Adresse e-mail',pass_l:'Mot de passe',pass_new_l:'Mot de passe (8 caractères minimum)',name_l:'Ton prénom',in_b:'Se connecter',up_b:'Créer mon compte',forgot:'J’ai oublié mon mot de passe',user_l:'Ton identifiant',user_new_l:'Choisis ton identifiant',user_hint:'Ce sera ton adresse de la classe. Lettres, chiffres et points uniquement, sans accents.',err_user:'L’identifiant doit avoir de 3 à 30 lettres, chiffres ou points.',err_taken:'Cet identifiant existe déjà. Essaie-en un autre, par exemple avec l’initiale de ton nom.',forgot_txt:'Écris à Dana à {e} et elle te créera un nouveau mot de passe.',
+age:'J’ai 14 ans ou plus. Si l’élève a moins de 14 ans, sa mère, son père ou son tuteur légal crée le compte.',
+priv_ok:'J’ai lu les informations sur la protection des données.',priv_link:'Lire',
+legal_basic:'Responsable : Dana Salgado (Tu profe por el mundo). Finalité : te donner accès à la classe et enregistrer ta progression. Base légale : te fournir le service demandé. Données : ton prénom, ton identifiant et tes résultats. Destinataires : Supabase, qui héberge les données dans l’Union européenne. Droits : accès, rectification, effacement et les autres décrits dans l’information complète.',
+err_email:'Écris une adresse e-mail valide.',err_pass:'Le mot de passe doit avoir au moins 8 caractères.',err_name:'Écris ton prénom.',err_age:'Coche la case sur l’âge pour continuer.',err_priv:'Coche la case pour confirmer que tu as lu les informations sur la protection des données.',
+err_login:'L’identifiant ou le mot de passe n’est pas correct.',err_generic:'Cela n’a pas fonctionné. Réessaie dans un instant.',
+sent_confirm:'Nous t’avons envoyé un e-mail. Ouvre le lien pour activer ton compte, puis reviens ici pour te connecter.',sent_reset:'Si cette adresse a un compte, tu recevras un lien pour créer un nouveau mot de passe.',write_email:'Écris ton e-mail ci-dessus et appuie de nouveau ici.',
+np_t:'Crée ton nouveau mot de passe',np_b:'Enregistrer le mot de passe',np_ok:'Mot de passe enregistré.',
+goal_t:'Pourquoi veux-tu apprendre l’espagnol ?',goal_p:'Choisis ton objectif. Ton parcours de leçons s’organise selon ce choix.',
+g_travel:'Voyager',g_travel_s:'Aéroport, hôtel, restaurants',g_friends:'Parler avec des amis',g_friends_s:'Se retrouver, discuter, plaisanter',
+g_film:'Cinéma et séries',g_film_s:'Suivre les dialogues et les intrigues',g_read:'Lire',g_read_s:'Actualités, contes et romans',
+g_exam:'Passer un examen',g_exam_s:'DELE ou SIELE d’un niveau précis',
+target_l:'Quel niveau veux-tu atteindre ?',exam_l:'De quel niveau est ton examen ?',
+start_test:'Commencer le test de niveau',save_goal:'Enregistrer et revenir à ma classe',
+test_p:'Le test commence au niveau A2 et monte ou descend selon tes réponses. Il s’arrête tout seul quand il atteint ta limite : entre 6 et 18 questions.',
+quit:'Quitter',check:'Vérifier',next:'Continuer',finish:'Terminer',ok:'Très bien !',ko:'Presque.',sol:'Bonne réponse : ',accent:'Bien ! Attention aux accents : ',
+i_choice:'Choisis la bonne réponse',i_order:'Remets la phrase dans l’ordre',i_gap:'Écris ce qui manque',i_listen:'Écoute et choisis ce que tu entends',i_listenq:'Écoute et réponds',i_match:'Associe les paires',i_read:'Lis et réponds',
+gap_ph:'Écris ici',play:'Écouter',play_slow:'Écouter plus lentement',showtxt:'Je ne peux pas écouter maintenant',
+q_test:'Test',q_review:'Révision',q_levelup:'Épreuve de niveau',
+res_k:'Ton niveau selon le Cadre européen commun',pre:'Début',pre_name:'Tu pars de zéro',res_sub:'{n} bonnes réponses sur {t}',
+res_can:'Ce que tu sais déjà faire ({l})',res_next:'Ta prochaine étape : {l}',res_top:'Tu as réussi le niveau le plus élevé. Entretiens ton espagnol avec les révisions.',
+res_note:'Le test mesure la compréhension, la grammaire et le vocabulaire. L’expression orale et écrite se travaille en cours avec Dana.',to_home:'Aller à ma classe',
+hello:'Bonjour, {n}',hello_anon:'Ma classe',streak:'{n} jours de suite',streak1:'1 jour de suite',
+prog_t:'Ma progression vers mon objectif',prog_p:'La case encadrée est ton objectif. La barre avance à chaque unité terminée et monte d’un niveau quand tu réussis l’épreuve de niveau.',
+light_g:'Vert : tu as atteint ton objectif ({t}). Bravo ! Il faut maintenant le consolider.',light_a:'Orange : il te manque 1 niveau pour ton objectif ({t}). Tu avances très bien.',light_r:'Rouge : il te manque {n} niveaux pour ton objectif ({t}). Pas à pas.',
+path_t:'Mon parcours vers le {l}',path_top:'Mon parcours : révision du C2',path_p:'Termine chaque unité avec au moins 80 % de bonnes réponses. Après les quatre, l’épreuve de niveau s’ouvre.',
+u_now:'À faire maintenant',u_done:'Terminée',u_lock:'S’ouvre après la précédente',u_prog:'{n} % appris',
+levelup_b:'Passer l’épreuve de niveau {l}',lu_pass:'Tu passes au {l} !',lu_pass_p:'Tu as réussi l’épreuve de niveau. Ton parcours affiche maintenant les unités du niveau suivant.',lu_fail:'Pas encore',lu_fail_p:'Il faut 4 bonnes réponses sur 5. Fais une révision et réessaie quand tu veux.',
+unit_done:'Unité terminée !',unit_more:'Bon travail !',unit_more_p:'Cette unité est apprise à {n} %. Refais-la pour atteindre 80 %.',unit_done_p:'L’unité suivante de ton parcours est ouverte.',rev_done:'Révision terminée',rev_done_p:'Les questions ratées reviennent dans la révision jusqu’à ce que tu les réussisses plusieurs fois.',
+rev_t:'Révision intelligente',rev_p:'{n} questions difficiles t’attendent en révision.',rev_none:'Rien en attente. Les questions ratées apparaîtront ici.',rev_b:'Commencer la révision',
+areas_t:'Mes points forts et faibles',areas_p:'Vert : 75 % ou plus de bonnes réponses. Orange : de 50 à 74 %. Rouge : moins de 50 %. Calculé sur tes 30 dernières réponses par compétence.',
+sk_gram:'Grammaire',sk_voc:'Vocabulaire',sk_lec:'Compréhension écrite',sk_aud:'Compréhension orale',sk_ord:'Construire des phrases',nodata:'Pas encore de données',
+mat_t:'Mon matériel',mat_kind:'Séance et corrigé (PDF)',mat_open:'Ouvrir',mat_a:'Cahier',mat_n:'{n} documents',mat_soon:'Bientôt',mat_s:'Corrigé',mat_kind_u:'Cahier de l’élève et corrigé (PDF)',mat_kind_a:'Cahier de l’élève (PDF). Le corrigé arrive bientôt.',mat_kind_g:'Ce que contient le cours et comment l’utiliser (PDF)',mat_none:'Dana mettra ici le matériel du {l}.',mat_local:'Crée ton compte pour ouvrir le matériel de cours.',mat_err:'Le fichier n’a pas pu s’ouvrir. Le matériel est réservé aux élèves qui suivent des cours : si tu as déjà cours avec Dana, demande-lui l’accès.',
+req_t:'Ce que demande le {l} selon le Cadre européen commun',req_focus:'Grammaire du niveau :',req_note:'Source : échelle globale du Cadre européen commun de référence (Conseil de l’Europe) et Plan Curricular de l’Instituto Cervantes.',
+acc_t:'Mon compte',acc_who:'Connecté avec {e}.',acc_local:'Sans compte : ta progression est enregistrée uniquement sur cet appareil.',
+retest:'Refaire le test de niveau',change:'Changer mon objectif',logout:'Se déconnecter',erase:'Supprimer mon compte et mes données',erase_local:'Effacer ma progression',
+erase_q:'Ton compte, tes résultats et ta progression seront supprimés. C’est définitif. Tu es sûr·e ?',erase_q_local:'Ta progression sur cet appareil sera effacée. Tu es sûr·e ?',erase_yes:'Oui, supprimer',erase_no:'Annuler',
+back_home:'Retour à ma classe',back_web:'Retour au site',priv_t:'Protection des données de la classe',close:'Fermer'}
+};
+
+const PRIV={
+es:`<p><b>Responsable:</b> Dana Salgado (Tu profe por el mundo). Contacto: <span class="em"></span>.</p>
+<p><b>Qué datos tratamos:</b> tu nombre de pila, tu usuario del aula (usuario@tuprofeporelmundo.com, que sirve para entrar y no es un buzón de correo), tu contraseña (guardada cifrada; nadie puede leerla), tu objetivo y tus respuestas y resultados en el aula.</p>
+<p><b>Para qué:</b> crear y gestionar tu cuenta, calcular tu nivel y tu progreso, y darte acceso al material de clase.</p>
+<p><b>Base legal:</b> la prestación del servicio que solicitas al crear la cuenta (art. 6.1.b del RGPD).</p>
+<p><b>Menores:</b> si el alumno tiene menos de 14 años, la cuenta la crea y la gestiona su madre, padre o tutor legal (art. 7 de la LOPDGDD). Solo pedimos el nombre de pila del alumno y no pedimos ningún correo personal.</p>
+<p><b>Quién más accede:</b> Supabase Inc., como encargado del tratamiento, aloja los datos en servidores de la Unión Europea (Fráncfort). Si su personal técnico accediera desde fuera de la UE, se aplican las cláusulas contractuales tipo de la Comisión Europea. No cedemos tus datos a nadie más ni los usamos para publicidad.</p>
+<p><b>Cuánto tiempo:</b> mientras mantengas tu cuenta. Puedes borrarla tú mismo desde «Mi cuenta» y se eliminan al momento tu cuenta, tus resultados y tu progreso.</p>
+<p><b>Tus derechos:</b> acceso, rectificación, supresión, oposición, limitación y portabilidad, escribiendo a <span class="em"></span>. Si no te atendemos bien, puedes reclamar ante la Agencia Española de Protección de Datos (aepd.es).</p>
+<p><b>Almacenamiento en tu navegador:</b> el aula guarda tu idioma (<code>tppm-lang</code>), tu sesión iniciada (<code>sb-…-auth-token</code>) y, si usas el aula sin cuenta, tu progreso (<code>tppm-aula</code>). Son técnicos y necesarios para el servicio, por eso no piden consentimiento. No usamos cookies de análisis ni de publicidad.</p>`,
+en:`<p><b>Controller:</b> Dana Salgado (Tu profe por el mundo). Contact: <span class="em"></span>.</p>
+<p><b>Data we process:</b> your first name, your classroom username (username@tuprofeporelmundo.com, used to sign in; it is not a mailbox), your password (stored encrypted; nobody can read it), your goal, and your answers and results in the classroom.</p>
+<p><b>Purpose:</b> creating and managing your account, working out your level and progress, and giving you access to class materials.</p>
+<p><b>Legal basis:</b> providing the service you request when you create the account (Art. 6(1)(b) GDPR).</p>
+<p><b>Children:</b> if the student is under 14, the account is created and managed by their parent or legal guardian (Art. 7 of Spain’s LOPDGDD). We only ask for the student’s first name and no personal email.</p>
+<p><b>Who else has access:</b> Supabase Inc., as data processor, hosts the data on servers in the European Union (Frankfurt). If its technical staff access it from outside the EU, the European Commission’s standard contractual clauses apply. We do not share your data with anyone else or use it for advertising.</p>
+<p><b>How long:</b> for as long as you keep your account. You can delete it yourself under “My account”, and your account, results and progress are removed immediately.</p>
+<p><b>Your rights:</b> access, rectification, erasure, objection, restriction and portability, by writing to <span class="em"></span>. If you are not satisfied, you can complain to the Spanish Data Protection Agency (aepd.es).</p>
+<p><b>Storage in your browser:</b> the classroom stores your language (<code>tppm-lang</code>), your signed-in session (<code>sb-…-auth-token</code>) and, if you use it without an account, your progress (<code>tppm-aula</code>). These are technical and necessary for the service, so they do not require consent. We use no analytics or advertising cookies.</p>`,
+fr:`<p><b>Responsable :</b> Dana Salgado (Tu profe por el mundo). Contact : <span class="em"></span>.</p>
+<p><b>Données traitées :</b> ton prénom, ton identifiant de la classe (identifiant@tuprofeporelmundo.com, qui sert à se connecter et n’est pas une boîte mail), ton mot de passe (chiffré ; personne ne peut le lire), ton objectif ainsi que tes réponses et résultats dans la classe.</p>
+<p><b>Finalité :</b> créer et gérer ton compte, calculer ton niveau et ta progression, et te donner accès au matériel de cours.</p>
+<p><b>Base légale :</b> la fourniture du service que tu demandes en créant ton compte (art. 6.1.b du RGPD).</p>
+<p><b>Mineurs :</b> si l’élève a moins de 14 ans, le compte est créé et géré par sa mère, son père ou son tuteur légal (art. 7 de la LOPDGDD espagnole). Nous demandons seulement le prénom de l’élève et aucune adresse e-mail personnelle.</p>
+<p><b>Qui d’autre y accède :</b> Supabase Inc., en tant que sous-traitant, héberge les données sur des serveurs de l’Union européenne (Francfort). Si son personnel technique y accède depuis l’extérieur de l’UE, les clauses contractuelles types de la Commission européenne s’appliquent. Nous ne cédons tes données à personne d’autre et ne les utilisons pas pour la publicité.</p>
+<p><b>Durée :</b> tant que tu gardes ton compte. Tu peux le supprimer toi-même dans « Mon compte » : ton compte, tes résultats et ta progression sont effacés immédiatement.</p>
+<p><b>Tes droits :</b> accès, rectification, effacement, opposition, limitation et portabilité, en écrivant à <span class="em"></span>. Si tu n’es pas satisfait·e, tu peux saisir l’Agence espagnole de protection des données (aepd.es).</p>
+<p><b>Stockage dans ton navigateur :</b> la classe enregistre ta langue (<code>tppm-lang</code>), ta session (<code>sb-…-auth-token</code>) et, si tu l’utilises sans compte, ta progression (<code>tppm-aula</code>). Ils sont techniques et nécessaires au service, donc sans consentement. Nous n’utilisons aucun cookie d’analyse ni de publicité.</p>`
+};
+
+const GOALS=[{k:'travel',i:'i-plane'},{k:'friends',i:'i-chat'},{k:'film',i:'i-film'},{k:'read',i:'i-book'},{k:'exam',i:'i-cert',wide:1}];
+const SKILLS=['gram','voc','lec','aud','ord'];
+const BYID=Object.fromEntries(BANK.map(q=>[q.id,q]));
+
+/* ───────── utilidades ───────── */
+let lang='es';
+try{const s=localStorage.getItem('tppm-lang');if(T[s])lang=s}catch(e){}
+const $=id=>document.getElementById(id);
+const t=(k,v)=>{let s=T[lang][k];if(v)for(const n in v)s=s.split('{'+n+'}').join(v[n]);return s};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
+const sample=(a,n)=>shuffle(a).slice(0,n);
+const norm=s=>s.trim().toLowerCase().replace(/\s+/g,' ').replace(/[.!¡¿?]+$/,'');
+const plain=s=>norm(s).normalize('NFD').replace(/[́̈]/g,'').normalize('NFC');
+const today=()=>new Date().toISOString().slice(0,10);
+const lvName=l=>l<0?t('pre'):LV[l];
+
+/* ───────── almacenamiento: navegador (sin cuenta) o Supabase (con cuenta) ───────── */
+const KEY='tppm-aula';
+let sb=null,user=null,data=null;
+const fresh=()=>({v:1,track:'es',esc:{c:null},goal:null,target:2,level:null,items:{},hist:[],units:{},xp:0,streak:{d:null,n:0},tests:[]});
+const store={
+  async load(){
+    if(!REMOTE){try{return JSON.parse(localStorage.getItem(KEY))||fresh()}catch(e){return fresh()}}
+    const {data:row,error}=await sb.from('progreso').select('datos').eq('user_id',user.id).maybeSingle();
+    if(error)throw error;
+    return row&&row.datos?Object.assign(fresh(),row.datos):fresh();
+  },
+  async save(){
+    if(!REMOTE){try{localStorage.setItem(KEY,JSON.stringify(data))}catch(e){}return}
+    const {error}=await sb.from('progreso').upsert({user_id:user.id,datos:data,actualizado:new Date().toISOString()});
+    if(error)console.warn(error.message);
+  },
+  async erase(){
+    if(!REMOTE){try{localStorage.removeItem(KEY)}catch(e){}return}
+    const {error}=await sb.rpc('borrar_mi_cuenta');
+    if(error)throw error;
+    await sb.auth.signOut();
+  }
+};
+
+/* ───────── idioma y pantallas ───────── */
+let screen='s-load';
+function applyLang(){
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-i18n]').forEach(el=>{el.textContent=t(el.dataset.i18n)});
+  document.querySelectorAll('[data-i18n-aria]').forEach(el=>{el.setAttribute('aria-label',t(el.dataset.i18nAria))});
+  document.querySelectorAll('.langsw button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===lang));
+  $('priv-body').innerHTML=PRIV[lang];
+  $('priv-body').querySelectorAll('.em').forEach(e=>e.textContent=CFG.email||'');
+  if(screen==='s-goal')renderGoal();
+  if(screen==='s-quiz'&&Q.item)renderInstr();
+  if(screen==='s-result')renderResult();
+  if(screen==='s-home')renderHome();
+  if(screen==='s-school')renderSchool();
+  if(screen==='s-done')renderDone();
+}
+document.querySelectorAll('.langsw button').forEach(b=>b.addEventListener('click',()=>{
+  lang=b.dataset.lang;try{localStorage.setItem('tppm-lang',lang)}catch(e){}applyLang();
+}));
+function show(id){
+  document.querySelectorAll('.screen').forEach(s=>s.hidden=s.id!==id);
+  screen=id;window.scrollTo(0,0);
+  const h=$(id).querySelector('h1');if(h){h.setAttribute('tabindex','-1');h.focus({preventScroll:true})}
+}
+document.querySelectorAll('[data-open="privacy"]').forEach(b=>b.addEventListener('click',()=>$('privacy').showModal()));
+$('priv-close').addEventListener('click',()=>$('privacy').close());
+
+/* ───────── cuenta ───────── */
+const DOMAIN=CFG.domain||'tuprofeporelmundo.com';
+const toUser=s=>s.trim().toLowerCase().replace(/@.*$/,'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').replace(/\s+/g,'.').replace(/[^a-z0-9.]/g,'').replace(/\.{2,}/g,'.').replace(/^\.|\.$/g,'');
+const validUser=u=>/^[a-z0-9.]{3,30}$/.test(u);
+const userEmail=u=>u+'@'+DOMAIN;
+const addr=()=>{const u=toUser($('up-user').value);$('up-addr').textContent=(u||'…')+'\u200B@'+DOMAIN};
+function msg(el,text,ok){el.hidden=false;el.textContent=text;el.className='notice'+(ok?'':' err')}
+function setTab(up){$('tab-in').setAttribute('aria-selected',!up);$('tab-up').setAttribute('aria-selected',up);$('f-in').hidden=up;$('f-up').hidden=!up}
+$('tab-in').addEventListener('click',()=>setTab(false));
+$('tab-up').addEventListener('click',()=>setTab(true));
+$('f-in').addEventListener('submit',async e=>{
+  e.preventDefault();const m=$('in-msg'),u=toUser($('in-user').value),pw=$('in-pass').value;
+  if(!validUser(u))return msg(m,t('err_user'));
+  const {error}=await sb.auth.signInWithPassword({email:userEmail(u),password:pw});
+  if(error)return msg(m,/invalid/i.test(error.message)?t('err_login'):t('err_generic'));
+});
+$('forgot').addEventListener('click',()=>msg($('in-msg'),t('forgot_txt',{e:CFG.email||''}),true));
+$('f-up').addEventListener('submit',async e=>{
+  e.preventDefault();const m=$('up-msg');
+  const name=$('up-name').value.trim(),u=toUser($('up-user').value),pw=$('up-pass').value;
+  if(!name)return msg(m,t('err_name'));
+  if(!validUser(u))return msg(m,t('err_user'));
+  if(pw.length<8)return msg(m,t('err_pass'));
+  if(!$('up-age').checked)return msg(m,t('err_age'));
+  if(!$('up-priv').checked)return msg(m,t('err_priv'));
+  const {data:r,error}=await sb.auth.signUp({email:userEmail(u),password:pw,options:{data:{nombre:name,usuario:u,mayor_14_o_tutor:true,idioma:lang}}});
+  if(error)return msg(m,/registered|exists/i.test(error.message)?t('err_taken'):t('err_generic'));
+  if(r.user&&r.user.identities&&r.user.identities.length===0)return msg(m,t('err_taken'));
+  if(!r.session)msg(m,t('sent_confirm'),true);
+});
+$('up-name').addEventListener('input',()=>{const f=$('up-user');if(!f.dataset.touched)f.value=toUser($('up-name').value);addr()});
+$('up-user').addEventListener('input',e=>{e.target.dataset.touched='1';addr()});
+addr();
+$('f-np').addEventListener('submit',async e=>{
+  e.preventDefault();const m=$('np-msg'),pw=$('np-pass').value;
+  if(pw.length<8)return msg(m,t('err_pass'));
+  const {error}=await sb.auth.updateUser({password:pw});
+  if(error)return msg(m,t('err_generic'));
+  msg(m,t('np_ok'),true);setTimeout(enter,900);
+});
+$('logout').addEventListener('click',async()=>{if(REMOTE){await sb.auth.signOut()}else{show('s-goal');renderGoal()}});
+$('erase').addEventListener('click',()=>{$('erase-box').hidden=false;$('erase-q').textContent=REMOTE?t('erase_q'):t('erase_q_local')});
+$('erase-no').addEventListener('click',()=>{$('erase-box').hidden=true});
+$('erase-yes').addEventListener('click',async()=>{
+  try{await store.erase()}catch(e){$('erase-q').textContent=t('err_generic');return}
+  $('erase-box').hidden=true;
+  if(!REMOTE){data=fresh();renderGoal();show('s-goal')}
+});
+
+/* ───────── objetivo ───────── */
+function renderGoal(){
+  const school=data.track==='school';
+  document.querySelectorAll('.mode').forEach(b=>b.setAttribute('aria-pressed',String(b.dataset.m===data.track)));
+  $('goal-h').textContent=t(school?'sc_goal_t':'goal_t');$('goal-p').textContent=t(school?'sc_goal_p':'goal_p');
+  $('goals').hidden=school;
+  if(school){
+    $('target-box').hidden=false;$('target-l').textContent=t('course_l');
+    $('target').innerHTML=ESC_COURSES.map(x=>`<option value="${x.c}"${x.c===data.esc.c?' selected':''}>${esc(x[lang]||x.es)}</option>`).join('');
+    if(!data.esc.c)data.esc.c=$('target').value;
+    $('target-can').textContent='';
+    $('goal-next').disabled=false;$('goal-next').textContent=t('start_school');$('goal-note').hidden=true;
+    return;
+  }
+  $('goals').innerHTML=GOALS.map(g=>`<button type="button" class="goal${g.wide?' wide':''}" data-k="${g.k}" aria-pressed="${data.goal===g.k}"><svg aria-hidden="true"><use href="#${g.i}"/></svg><b>${t('g_'+g.k)}</b><span>${t('g_'+g.k+'_s')}</span></button>`).join('');
+  $('goals').querySelectorAll('.goal').forEach(b=>b.addEventListener('click',()=>{data.goal=b.dataset.k;renderGoal()}));
+  $('target').innerHTML=LEVELS.map((l,i)=>`<option value="${i}"${i===data.target?' selected':''}>${l.c} · ${l.name[lang]}</option>`).join('');
+  $('target-box').hidden=!data.goal;
+  $('target-l').textContent=t(data.goal==='exam'?'exam_l':'target_l');
+  $('target-can').textContent=LEVELS[data.target].can[lang][0];
+  $('goal-next').disabled=!data.goal;
+  $('goal-next').textContent=data.level===null?t('start_test'):t('save_goal');
+  $('goal-note').hidden=data.level!==null;
+}
+$('target').addEventListener('change',e=>{if(data.track==='school')data.esc.c=e.target.value;else data.target=+e.target.value;renderGoal()});
+document.querySelectorAll('.mode').forEach(b=>b.addEventListener('click',()=>{data.track=b.dataset.m;renderGoal()}));
+$('goal-next').addEventListener('click',async()=>{
+  await store.save();
+  if(data.track==='school'){renderSchool();show('s-school')}
+  else if(data.level===null)startPlacement();else{renderHome();show('s-home')}
+});
+
+/* ───────── motor de preguntas ───────── */
+/* Q.mode: test (nivel adaptativo por bloques) · unit · review · levelup */
+const Q={};
+function startQuiz(mode,items,extra){
+  Object.assign(Q,{mode,queue:items,i:0,total:items.length,right:0,item:null,ans:null,checked:false},extra||{});
+  show('s-quiz');nextItem();
+}
+/* Test de nivel: bloques de 3 preguntas por nivel (gramática, comprensión y vocabulario o frases).
+   Empieza en A2; con 2 de 3 aciertos sube, si no baja. Se para al encontrar el límite. */
+function block(lv){
+  const pool=BANK.filter(q=>q.lv===lv);
+  const pickOne=f=>{const c=pool.filter(f);return c[Math.floor(Math.random()*c.length)]};
+  return shuffle([pickOne(q=>q.sk==='gram'),pickOne(q=>q.sk==='lec'||q.sk==='aud'),pickOne(q=>q.sk==='voc'||q.sk==='ord')]);
+}
+function startPlacement(){
+  startQuiz('test',block(1),{cur:1,passed:-1,dir:null,blockRight:0,blockN:0,total:9,asked:0});
+}
+function nextItem(){
+  if(Q.mode==='test'&&Q.i>=Q.queue.length){
+    const pass=Q.blockRight>=2;let done=false;
+    if(pass){Q.passed=Math.max(Q.passed,Q.cur);if(Q.cur===5||Q.dir==='down')done=true;else{Q.dir='up';Q.cur++}}
+    else{if(Q.dir==='up'||Q.cur===0)done=true;else{Q.dir='down';Q.cur--}}
+    if(done)return finishPlacement();
+    Q.queue=Q.queue.concat(block(Q.cur));Q.blockRight=0;
+    Q.total=Math.max(Q.total,Q.i+3+(Q.dir==='up'?3:0));
+  }
+  if(Q.mode!=='test'&&Q.i>=Q.queue.length)return finishSession();
+  Q.item=Q.queue[Q.i];Q.checked=false;Q.ans=null;
+  renderItem();
+}
+function setProgress(){
+  const p=Math.min(100,Q.i/Q.total*100);
+  $('prog').querySelector('i').style.width=p+'%';
+  $('prog').setAttribute('aria-valuemax',Q.total);$('prog').setAttribute('aria-valuenow',Q.i);
+}
+function renderInstr(){
+  $('instr').textContent=t('i_'+Q.item.t);
+  $('qchip').textContent=Q.mode==='school'||Q.mode==='screview'?schoolChip(Q.item):(Q.mode==='test'?t('q_test'):Q.mode==='review'?t('q_review'):Q.mode==='levelup'?t('q_levelup'):(THEMES[Q.unit]||{})[lang]||'')+' · '+LV[Q.item.lv];
+  if(Q.checked)showFeedback();else $('check').textContent=t('check');
+  const pl=$('play');if(pl){pl.setAttribute('aria-label',t('play'));$('play-slow').setAttribute('aria-label',t('play_slow'));$('showtxt').textContent=t('showtxt')}
+  const g=$('gap');if(g)g.placeholder=t('gap_ph');
+}
+function optsHTML(o){return `<div class="opts">${shuffle(o).map(x=>`<button type="button" class="opt" aria-pressed="false">${esc(x)}</button>`).join('')}</div>`}
+function listenHTML(){return `<div class="listen"><button type="button" class="play" id="play"><svg aria-hidden="true"><use href="#i-play"/></svg></button><button type="button" class="play slow" id="play-slow"><svg aria-hidden="true"><use href="#i-snail"/></svg></button><button type="button" class="linkbtn" id="showtxt"></button></div><p class="prompt" id="said" hidden></p>`}
+function renderItem(){
+  const q=Q.item,body=$('qbody');setProgress();
+  $('fb').className='feedback';$('fb-msg').textContent='';$('fb-sol').textContent='';$('check').disabled=true;
+  if(q.t==='choice')body.innerHTML=`<p class="prompt">${esc(q.q)}</p>`+optsHTML(q.o);
+  else if(q.t==='read')body.innerHTML=`<div class="text" tabindex="0">${esc(TEXTS[q.txt])}</div><p class="prompt">${esc(q.q)}</p>`+optsHTML(q.o);
+  else if(q.t==='listen')body.innerHTML=listenHTML()+optsHTML(q.o);
+  else if(q.t==='listenq')body.innerHTML=listenHTML()+`<p class="prompt">${esc(q.q)}</p>`+optsHTML(q.o);
+  else if(q.t==='gap'){
+    body.innerHTML=`<p class="prompt">${esc(q.q)}</p><input type="text" id="gap" autocomplete="off" autocapitalize="off" spellcheck="false">`;
+    const inp=$('gap');inp.addEventListener('input',()=>{Q.ans=inp.value;$('check').disabled=!inp.value.trim()});
+    inp.addEventListener('keydown',e=>{if(e.key==='Enter'&&inp.value.trim()&&!Q.checked)$('check').click()});
+    setTimeout(()=>inp.focus(),50);
+  }else if(q.t==='order'){
+    body.innerHTML=`<div class="answer-line" id="line"></div><div class="bank" id="bank">${shuffle(q.s.split(' ').concat(q.x)).map(w=>`<button type="button" class="tile">${esc(w)}</button>`).join('')}</div>`;
+    Q.ans=[];
+    $('bank').querySelectorAll('.tile').forEach(b=>b.addEventListener('click',()=>{
+      if(Q.checked||b.dataset.used==='1')return;
+      b.dataset.used='1';Q.ans.push(b);
+      const c=document.createElement('button');c.type='button';c.className='tile';c.textContent=b.textContent;
+      c.addEventListener('click',()=>{if(Q.checked)return;Q.ans.splice(Q.ans.indexOf(b),1);b.dataset.used='0';c.remove();$('check').disabled=!Q.ans.length});
+      $('line').appendChild(c);$('check').disabled=false;
+    }));
+  }else if(q.t==='match'){
+    const L=shuffle(q.p.map(p=>p[0])),R=shuffle(q.p.map(p=>p[1]));
+    body.innerHTML=`<div class="pairs"><div class="col">${L.map(w=>`<button type="button" class="tile" data-s="L">${esc(w)}</button>`).join('')}</div><div class="col">${R.map(w=>`<button type="button" class="tile" data-s="R">${esc(w)}</button>`).join('')}</div></div>`;
+    Q.ans={miss:0,done:0,sel:null};
+    body.querySelectorAll('.tile').forEach(b=>b.addEventListener('click',()=>{
+      const a=Q.ans;if(b.classList.contains('done')||Q.checked)return;
+      if(!a.sel||a.sel.dataset.s===b.dataset.s){if(a.sel)a.sel.classList.remove('sel');a.sel=b;b.classList.add('sel');return}
+      const l=a.sel.dataset.s==='L'?a.sel:b,r=l===b?a.sel:b;
+      a.sel.classList.remove('sel');a.sel=null;
+      if(q.p.some(p=>p[0]===l.textContent&&p[1]===r.textContent)){
+        l.classList.add('done');r.classList.add('done');l.disabled=r.disabled=true;a.done++;
+        if(a.done===q.p.length){$('check').disabled=false;$('check').click()}
+      }else{a.miss++;[l,r].forEach(x=>{x.classList.add('miss');setTimeout(()=>x.classList.remove('miss'),450)})}
+    }));
+  }
+  if(q.t==='listen'||q.t==='listenq'){
+    const text=q.t==='listen'?q.o[0]:q.say;
+    $('play').addEventListener('click',()=>say(text,.9));
+    $('play-slow').addEventListener('click',()=>say(text,.6));
+    $('showtxt').addEventListener('click',()=>{$('said').textContent=text;$('said').hidden=false});
+    if(!('speechSynthesis' in window)){$('said').textContent=text;$('said').hidden=false}
+  }
+  body.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
+    if(Q.checked)return;
+    body.querySelectorAll('.opt').forEach(x=>x.setAttribute('aria-pressed',x===b));
+    Q.ans=b;$('check').disabled=false;
+  }));
+  renderInstr();
+}
+function say(text,rate){
+  try{
+    const u=new SpeechSynthesisUtterance(text);u.lang='es-ES';u.rate=rate;
+    const vs=speechSynthesis.getVoices();const v=vs.find(v=>v.lang==='es-ES')||vs.find(v=>/^es/.test(v.lang));if(v)u.voice=v;
+    speechSynthesis.cancel();speechSynthesis.speak(u);
+  }catch(e){const s=$('said');s.textContent=text;s.hidden=false}
+}
+function solution(q){
+  if(['choice','listen','listenq','read'].includes(q.t))return q.o[0];
+  if(q.t==='gap')return q.q.replace('___',q.a[0]).replace(/\s*\([^)]*\)\s*$/,'');
+  if(q.t==='order')return q.s;
+  return '';
+}
+function grade(q){
+  if(['choice','listen','listenq','read'].includes(q.t)){
+    const good=Q.ans.textContent===q.o[0];
+    Q.ans.classList.add(good?'good':'wrong');
+    if(!good)[...Q.ans.parentNode.children].find(x=>x.textContent===q.o[0]).classList.add('good');
+    return {ok:good};
+  }
+  if(q.t==='gap'){
+    $('gap').readOnly=true;const a=norm(Q.ans);
+    if(q.a.some(x=>norm(x)===a))return {ok:true};
+    if(q.a.some(x=>plain(x)===plain(a)))return {ok:true,accent:true};
+    const num=s=>s.replace(/[\s.](?=\d{3}(\D|$))/g,'');
+    if(/^[\d\s.,−-]+$/.test(a)&&q.a.some(x=>num(norm(x))===num(a)))return {ok:true};
+    return {ok:false};
+  }
+  if(q.t==='order')return {ok:Q.ans.map(b=>b.textContent).join(' ')===q.s};
+  if(q.t==='match')return {ok:Q.ans.miss<=1};
+}
+function showFeedback(){
+  const r=Q.last;
+  $('fb').className='feedback '+(r.ok?'ok':'ko');
+  $('fb-msg').textContent=r.ok?t('ok'):t('ko');
+  $('fb-sol').textContent=(r.accent?t('accent')+solution(Q.item):(!r.ok&&Q.item.t!=='match'?t('sol')+solution(Q.item):''))+(Q.item.ex?(r.ok&&!r.accent?'':' · ')+t('sc_why')+Q.item.ex:'');
+  const last=Q.mode!=='test'&&Q.i>=Q.queue.length;
+  $('check').textContent=last?t('finish'):t('next');
+}
+function record(q,ok){
+  const it=data.items[q.id]||{b:0,s:0,k:0};
+  it.s++;if(ok){it.k++;it.b=Math.min(3,it.b+1)}else it.b=0;
+  data.items[q.id]=it;
+  data.hist.push({sk:q.sk,ok});if(data.hist.length>300)data.hist=data.hist.slice(-300);
+  if(ok)data.xp+=10+q.lv*2;
+  const d=today();
+  if(data.streak.d!==d){
+    const y=new Date(Date.now()-864e5).toISOString().slice(0,10);
+    data.streak={d,n:data.streak.d===y?data.streak.n+1:1};
+  }
+}
+$('check').addEventListener('click',()=>{
+  if(!Q.checked){
+    const r=grade(Q.item);Q.checked=true;Q.last=r;Q.i++;
+    if(r.ok){Q.right++;if(Q.mode==='test')Q.blockRight++}
+    record(Q.item,r.ok);
+    setProgress();showFeedback();$('check').focus();
+  }else nextItem();
+});
+$('quit').addEventListener('click',()=>{store.save();goHome()});
+
+/* ───────── resultados ───────── */
+async function finishPlacement(){
+  data.level=Q.passed;
+  data.tests.push({d:today(),lv:Q.passed,ok:Q.right,n:Q.i});
+  await store.save();
+  Q.result={right:Q.right,n:Q.i};
+  renderResult();show('s-result');
+}
+function renderResult(){
+  const lv=data.level,w=Math.min(lv+1,5);
+  $('r-lv').textContent=lvName(lv);
+  $('r-name').textContent=lv<0?t('pre_name'):LEVELS[lv].name[lang];
+  $('r-sub').textContent=t('res_sub',{n:Q.result.right,t:Q.result.n});
+  $('r-can-t').parentNode.hidden=lv<0;
+  if(lv>=0){$('r-can-t').textContent=t('res_can',{l:LV[lv]});$('r-can').innerHTML=LEVELS[lv].can[lang].map(x=>`<li>${esc(x)}</li>`).join('')}
+  if(lv===5){$('r-next-t').textContent=t('res_top');$('r-next').innerHTML=''}
+  else{$('r-next-t').textContent=t('res_next',{l:LV[w]});$('r-next').innerHTML=LEVELS[w].can[lang].map(x=>`<li>${esc(x)}</li>`).join('')}
+}
+$('to-home').addEventListener('click',()=>{renderHome();show('s-home')});
+
+/* ───────── aula: camino, repaso, prueba de nivel ───────── */
+const working=()=>Math.min(data.level+1,5);
+function pathThemes(){
+  const w=working(),order=GOAL_THEMES[data.goal||'exam'];
+  return order.filter(k=>THEMES[k].lv===w);
+}
+function unitPct(th){
+  const items=BANK.filter(q=>q.th===th);
+  return Math.round(items.filter(q=>(data.items[q.id]||{}).b>=1).length/items.length*100);
+}
+const unitDone=th=>unitPct(th)>=80;
+function reviewPool(){
+  return BANK.filter(q=>{const it=data.items[q.id];return it&&q.lv<=working()&&(it.b===0||(it.k<it.s&&it.b<2))})
+    .sort((a,b)=>data.items[a.id].b-data.items[b.id].b);
+}
+function startUnit(th){
+  const items=shuffle(BANK.filter(q=>q.th===th));
+  const rev=sample(reviewPool().filter(q=>q.th!==th),2);
+  startQuiz('unit',items.concat(rev),{unit:th});
+}
+$('review').addEventListener('click',()=>{const p=reviewPool();if(p.length)startQuiz('review',shuffle(p.slice(0,8)))});
+$('levelup').addEventListener('click',()=>{
+  const w=working(),pool=BANK.filter(q=>q.lv===w);
+  const pick=[...SKILLS.map(s=>sample(pool.filter(q=>q.sk===s),1)[0]).filter(Boolean)];
+  startQuiz('levelup',shuffle(pick.concat(sample(pool.filter(q=>!pick.includes(q)),5-pick.length)).slice(0,5)),{target:w});
+});
+async function finishSession(){
+  const r=Q.right,n=Q.queue.length;
+  if(Q.mode==='levelup'){
+    Q.passedLevel=r>=4;
+    if(Q.passedLevel){data.level=Q.target;data.tests.push({d:today(),lv:Q.target,ok:r,n,prueba:true})}
+  }
+  await store.save();
+  Q.done={r,n};renderDone();show('s-done');
+}
+function renderDone(){
+  const {r,n}=Q.done;$('d-score').textContent=r+'/'+n;
+  if(Q.mode==='levelup'){
+    $('d-t').textContent=Q.passedLevel?t('lu_pass',{l:LV[data.level]}):t('lu_fail');
+    $('d-p').textContent=Q.passedLevel?t('lu_pass_p'):t('lu_fail_p');
+  }else if(Q.mode==='unit'){
+    const p=unitPct(Q.unit);
+    $('d-t').textContent=p>=80?t('unit_done'):t('unit_more');
+    $('d-p').textContent=p>=80?t('unit_done_p'):t('unit_more_p',{n:p});
+  }else if(Q.mode==='school'){
+    const p=schoolPct(Q.sunit);
+    $('d-t').textContent=p>=80?t('unit_done'):t('unit_more');
+    $('d-p').textContent=p>=80?t('unit_done_p'):t('unit_more_p',{n:p});
+  }else{$('d-t').textContent=t('rev_done');$('d-p').textContent=t('rev_done_p')}
+}
+$('d-home').addEventListener('click',goHome);
+
+function skillScore(s){
+  const r=data.hist.filter(h=>h.sk===s).slice(-30);if(!r.length)return null;
+  return Math.round(r.filter(h=>h.ok).length/r.length*100);
+}
+function renderHome(){
+  const lv=data.level,w=working(),tg=data.target,gap=tg-lv;
+  const name=user&&user.user_metadata&&user.user_metadata.nombre;
+  $('h-hello').textContent=name?t('hello',{n:name}):t('hello_anon');
+  $('h-lv').textContent=lvName(lv);$('h-xp').textContent=data.xp+' XP';
+  $('h-streak').textContent=data.streak.n===1?t('streak1'):t('streak',{n:data.streak.n||0});
+  /* semáforo y termómetro */
+  const c=gap<=0?'g':gap===1?'a':'r';
+  document.querySelectorAll('.lamp i').forEach(i=>i.classList.toggle('on',i.classList.contains(c)));
+  $('h-light').textContent=t('light_'+c,{t:LV[tg],n:gap});
+  const themes=pathThemes(),doneN=themes.filter(unitDone).length,partial=lv<5?doneN/themes.length:0;
+  const col={g:'var(--green)',a:'var(--amber)',r:'var(--red)'}[c];
+  $('thermo').innerHTML=LV.map((l,k)=>`<span class="seg${k===tg?' goal':''}"><i style="--light:${col};width:${k<=lv?100:k===lv+1?Math.round(partial*100):0}%"></i></span>`).join('');
+  $('thermo').setAttribute('aria-label',$('h-light').textContent);
+  $('thermo-l').innerHTML=LV.map((l,k)=>`<span class="${k===w?'me':''}">${l}</span>`).join('');
+  /* camino */
+  $('path-t').textContent=lv>=5?t('path_top'):t('path_t',{l:LV[w]});
+  $('path-p').textContent=t('path_p');
+  let open=true;
+  $('path').innerHTML=themes.map(th=>{
+    const d=unitDone(th),p=unitPct(th),isNow=!d&&open;
+    const cls=d?'done':isNow?'now':'';const can=d||isNow;
+    if(isNow)open=false;
+    const sub=d?t('u_done'):isNow?t('u_now')+(p?' · '+t('u_prog',{n:p}):''):t('u_lock');
+    return `<button type="button" class="node ${cls}" data-th="${th}"${can?'':' disabled'}><span class="dot" aria-hidden="true"><svg><use href="#${d?'i-check':isNow?'i-star':'i-lock'}"/></svg></span><span class="lbl"><b>${esc(THEMES[th][lang])}</b><span>${LV[w]} · ${sub}</span></span></button>`;
+  }).join('');
+  $('path').querySelectorAll('.node:not([disabled])').forEach(b=>b.addEventListener('click',()=>startUnit(b.dataset.th)));
+  const allDone=doneN===themes.length&&lv<5;
+  $('levelup').hidden=!allDone;$('levelup').textContent=t('levelup_b',{l:LV[w]});
+  /* repaso */
+  const rp=reviewPool().length;
+  $('rev-p').textContent=rp?t('rev_p',{n:rp}):t('rev_none');$('review').disabled=!rp;
+  /* destrezas */
+  $('areas').innerHTML=SKILLS.map(s=>{const v=skillScore(s),d=v===null?'':v>=75?'g':v>=50?'a':'r';
+    return `<div class="area"><span class="dotc ${d}" aria-hidden="true"></span><span>${t('sk_'+s)}</span><span class="pct">${v===null?t('nodata'):v+' %'}</span></div>`}).join('');
+  /* material */
+  const matBtn=(f,k)=>`<button type="button" class="btn btn-ghost btn-sm" data-f="${esc(f)}"${REMOTE?'':' disabled'}>${t(k)}</button>`;
+  const matLi=m=>`<li><svg aria-hidden="true"><use href="#i-doc"/></svg><div><b>${esc(m.t)}</b><span>${!REMOTE?t('mat_local'):m.a?t(m.s?'mat_kind_u':'mat_kind_a'):t(m.g?'mat_kind_g':'mat_kind')}</span></div><span class="mat-b">${m.a?matBtn(m.a,'mat_a')+(m.s?matBtn(m.s,'mat_s'):''):matBtn(m.f,'mat_open')}</span></li>`;
+  $('mat').innerHTML=LV.map((c,l)=>{const ms=MATERIAL[l]||[];
+    return `<details class="mat-f"${l===w?' open':''}><summary><svg aria-hidden="true"><use href="#i-folder"/></svg><span>${c}</span><small>${ms.length?t('mat_n',{n:ms.length}):t('mat_soon')}</small></summary><ul class="mat">${ms.length?ms.map(matLi).join(''):`<li><svg aria-hidden="true"><use href="#i-doc"/></svg><div>${esc(t('mat_none',{l:c}))}</div></li>`}</ul></details>`}).join('');
+  $('mat').querySelectorAll('[data-f]').forEach(b=>b.addEventListener('click',()=>openMaterial(b.dataset.f)));
+  /* exigencias del nivel */
+  $('req-t').textContent=t('req_t',{l:LV[w]});
+  $('req-can').innerHTML=LEVELS[w].can[lang].map(x=>`<li>${esc(x)}</li>`).join('');
+  $('req-focus').textContent=LEVELS[w].focus;
+  /* cuenta */
+  $('acc-who').textContent=REMOTE?t('acc_who',{e:user.email}):t('acc_local');
+  $('logout').hidden=!REMOTE;
+  $('erase').textContent=REMOTE?t('erase'):t('erase_local');
+}
+async function openMaterial(f){
+  const win=window.open('','_blank');
+  const {data:r,error}=await sb.storage.from('material').createSignedUrl(f,600);
+  if(error||!r){if(win)win.close();$('mat-msg').hidden=false;$('mat-msg').textContent=t('mat_err');return}
+  $('mat-msg').hidden=true;
+  if(win)win.location=r.signedUrl;else location.href=r.signedUrl;
+}
+
+/* ───────── apoyo escolar (banco-escolar.js, currículo LOMLOE) ───────── */
+const SC_ORDER=['mat','len','ing','cn','cs'];
+const SC_Q={};ESC_UNITS.forEach(u=>u.qs.forEach(q=>{SC_Q[q.id]=Object.assign({sk:u.asig,lv:0,su:u.id},q)}));
+const SC_U=Object.fromEntries(ESC_UNITS.map(u=>[u.id,u]));
+const subjName=(a,c)=>{const s=ESC_SUBJ[a];return (c&&c[0]==='E'&&s.eso?s.eso:s.pri)[lang]};
+const courseName=c=>{const x=ESC_COURSES.find(x=>x.c===c);return x?(x[lang]||x.es):c};
+function schoolChip(q){const u=SC_U[q.su];return u?u.u+' · '+subjName(u.asig,u.c):''}
+function schoolPct(uid){const u=SC_U[uid];if(!u)return 0;return Math.round(u.qs.filter(q=>(data.items[q.id]||{}).b>=1).length/u.qs.length*100)}
+function schoolPool(){
+  return Object.keys(data.items).filter(id=>SC_Q[id]&&SC_U[SC_Q[id].su].c===data.esc.c).map(id=>SC_Q[id])
+    .filter(q=>{const it=data.items[q.id];return it.b===0||(it.k<it.s&&it.b<2)}).sort((a,b)=>data.items[a.id].b-data.items[b.id].b);
+}
+function goHome(){
+  if(data.track==='school'&&data.esc&&data.esc.c){renderSchool();show('s-school')}
+  else if(data.level===null){renderGoal();show('s-goal')}else{renderHome();show('s-home')}
+}
+function renderSchool(){
+  const c=data.esc.c,name=user&&user.user_metadata&&user.user_metadata.nombre;
+  $('sc-hello').textContent=name?t('hello',{n:name}):t('hello_anon');
+  $('sc-course').textContent=courseName(c);$('sc-xp').textContent=data.xp+' XP';
+  $('sc-streak').textContent=data.streak.n===1?t('streak1'):t('streak',{n:data.streak.n||0});
+  const units=a=>ESC_UNITS.filter(u=>u.c===c&&u.asig===a);
+  $('sc-areas').innerHTML=SC_ORDER.map(a=>{const us=units(a);const tried=us.some(u=>u.qs.some(q=>data.items[q.id]));
+    const v=us.length?Math.round(us.reduce((s,u)=>s+schoolPct(u.id),0)/us.length):0;const d=!tried?'':v>=80?'g':v>=40?'a':'r';
+    return `<div class="area"><span class="dotc ${d}" aria-hidden="true"></span><span>${esc(subjName(a,c))}</span><span class="pct">${tried?v+' %':t('nodata')}</span></div>`}).join('');
+  $('sc-subjects').innerHTML=SC_ORDER.map(a=>{const us=units(a);
+    return `<div class="card"><h2>${esc(t('sc_units',{s:subjName(a,c)}))}</h2>${us.length?`<div class="path">${us.map(u=>{const p=schoolPct(u.id),d=p>=80;
+      return `<button type="button" class="node ${d?'done':'now'}" data-u="${u.id}"><span class="dot" aria-hidden="true"><svg><use href="#${d?'i-check':'i-star'}"/></svg></span><span class="lbl"><b>${esc(u.u)}</b><span>${esc(u.bloque)}${p?' · '+t('u_prog',{n:p}):''}</span></span></button>`}).join('')}</div>`:`<p class="small muted">${esc(t('sc_none'))}</p>`}</div>`}).join('');
+  $('sc-subjects').querySelectorAll('.node').forEach(b=>b.addEventListener('click',()=>{const u=SC_U[b.dataset.u];startQuiz('school',shuffle(u.qs.map(q=>SC_Q[q.id])),{sunit:u.id})}));
+  const rp=schoolPool().length;
+  $('sc-rev-p').textContent=rp?t('rev_p',{n:rp}):t('sc_rev_none');$('sc-review').disabled=!rp;
+  $('sc-who').textContent=REMOTE?t('acc_who',{e:user.email}):t('acc_local');
+  $('sc-logout').hidden=!REMOTE;$('sc-erase').textContent=REMOTE?t('erase'):t('erase_local');
+}
+$('sc-review').addEventListener('click',()=>{const p=schoolPool();if(p.length)startQuiz('screview',shuffle(p.slice(0,8)))});
+$('sc-change').addEventListener('click',()=>{renderGoal();show('s-goal')});
+$('sc-logout').addEventListener('click',async()=>{if(REMOTE)await sb.auth.signOut()});
+$('sc-erase').addEventListener('click',async()=>{
+  if(!confirm(REMOTE?t('erase_q'):t('erase_q_local')))return;
+  try{await store.erase()}catch(e){alert(t('err_generic'));return}
+  if(!REMOTE){data=fresh();renderGoal();show('s-goal')}
+});
+$('retest').addEventListener('click',startPlacement);
+$('h-goal').addEventListener('click',()=>{renderGoal();show('s-goal')});
+
+/* ───────── arranque ───────── */
+async function enter(){
+  try{data=await store.load()}catch(e){data=fresh()}
+  if(!data.esc)data.esc={c:null};if(!data.track)data.track='es';
+  if(data.track==='school'&&data.esc.c){renderSchool();show('s-school')}
+  else if(!data.goal||data.level===null){renderGoal();show('s-goal')}
+  else{renderHome();show('s-home')}
+}
+function loadScript(src){return new Promise((ok,ko)=>{const s=document.createElement('script');s.src=src;s.onload=ok;s.onerror=ko;document.head.appendChild(s)})}
+(async()=>{
+  applyLang();
+  if(!REMOTE){$('local-note').hidden=false;return enter()}
+  await loadScript('supabase.js');
+  sb=supabase.createClient(CFG.supabaseUrl,CFG.supabaseKey);
+  let recovering=false;
+  sb.auth.onAuthStateChange((ev,session)=>{
+    if(ev==='PASSWORD_RECOVERY'){recovering=true;user=session.user;show('s-newpass');return}
+    if(ev==='SIGNED_OUT'){user=null;setTab(false);show('s-auth');return}
+    if(session&&session.user&&(!user||user.id!==session.user.id)&&!recovering){user=session.user;setTimeout(enter,0)}
+  });
+  const {data:{session}}=await sb.auth.getSession();
+  if(!session)show('s-auth');
+})();
+</script>
+</body>
+</html>
