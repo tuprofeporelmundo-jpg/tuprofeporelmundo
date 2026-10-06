@@ -1,0 +1,258 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Apoyo escolar de Primaria y ESO · Tu profe por el mundo</title>
+<meta name="description" content="Apoyo escolar online de 1.º de Primaria a 4.º de ESO según el currículo LOMLOE: resúmenes de estudio, repaso y práctica con corrección automática, y clases 1 a 1 con Dana.">
+<link rel="canonical" href="https://tuprofeporelmundo.com/apoyo/">
+<style>
+:root{
+  --bg:#FCF8F5; --bg-2:#F5EBE4; --card:#FFFFFF; --ink:#33251E; --muted:#6F6058; --line:#EADCD2;
+  --jungle:#6B4433; --jungle-2:#80543F; --leaf:#5E7A55; --moss:#3F5B3D; --ochre:#C4936B; --ochre-soft:#F5E6DA;
+  --flower:#D98C7E; --flower-soft:#F8E1DA; --on-primary:#FFFFFF;
+  --ok:#3F6B38; --ok-soft:#E3EEDC; --bad:#A8321E; --bad-soft:#F8E0DA;
+  --shadow:0 1px 2px rgba(60,36,26,.05),0 12px 28px -14px rgba(60,36,26,.2);
+  --display:ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,"Noto Serif",Georgia,serif;
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1D1613; --bg-2:#251C18; --card:#2B211C; --ink:#F4EAE3; --muted:#C2B2A7; --line:#3E3029;
+  --jungle:#E3BCA6; --jungle-2:#EDCBB8; --leaf:#93AE87; --moss:#5F7E5A; --ochre:#D9A87F; --ochre-soft:#3B2C23;
+  --flower:#E89E90; --flower-soft:#4A2F2A; --on-primary:#1D1613;
+  --ok:#A9CF9C; --ok-soft:#26341F; --bad:#FF9F88; --bad-soft:#43231C;
+  --shadow:0 1px 2px rgba(0,0,0,.3),0 12px 28px -14px rgba(0,0,0,.6); color-scheme:dark;
+}}
+[hidden]{display:none!important}
+*,*::before,*::after{box-sizing:border-box}
+@media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--display);font-size:1.0625rem;line-height:1.6;padding-inline:16px;-webkit-font-smoothing:antialiased}
+:focus-visible{outline:3px solid var(--ochre);outline-offset:3px;border-radius:6px}
+a{color:var(--jungle)}
+h1,h2,h3{font-family:var(--serif);color:var(--jungle);line-height:1.15;margin:0;text-wrap:balance}
+h1{font-size:clamp(1.9rem,6vw,2.8rem)} h2{font-size:clamp(1.4rem,4vw,1.9rem)} h3{font-size:1.15rem}
+p{margin:0} ul{margin:0;padding-left:1.2rem}
+.wrap{max-width:960px;margin-inline:auto}
+header{position:sticky;top:0;z-index:5;background:color-mix(in srgb,var(--bg) 94%,transparent);backdrop-filter:blur(8px);border-bottom:1px solid var(--line);margin-inline:-16px;padding:.6rem 16px}
+.bar{display:flex;align-items:center;gap:.75rem;flex-wrap:wrap}
+.logo{display:flex;align-items:center;gap:.5rem;font-family:var(--serif);font-weight:700;color:var(--jungle);text-decoration:none;margin-right:auto}
+.langsw{display:flex;border:1px solid var(--line);border-radius:999px;overflow:hidden}
+.langsw button{border:0;background:transparent;color:var(--muted);font:inherit;font-size:.82rem;font-weight:700;padding:.3rem .65rem;cursor:pointer}
+.langsw button[aria-pressed="true"]{background:var(--jungle);color:var(--on-primary)}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:.7rem 1.2rem;border-radius:12px;font:inherit;font-weight:700;border:2px solid transparent;cursor:pointer;text-decoration:none}
+.btn-main{background:var(--jungle);color:var(--on-primary)}
+.btn-ghost{background:transparent;color:var(--jungle);border-color:var(--line)}
+.btn-sm{padding:.45rem .9rem;font-size:.95rem}
+section{padding-block:2.2rem}
+.hero{padding-block:2.5rem 1.5rem;display:grid;gap:1rem}
+.lead{font-size:1.15rem;color:var(--muted);max-width:60ch}
+.cta{display:flex;gap:.7rem;flex-wrap:wrap;margin-top:.5rem}
+.cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:1rem;margin-top:1.2rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.1rem;box-shadow:var(--shadow);display:grid;gap:.4rem;align-content:start}
+.muted{color:var(--muted)} .small{font-size:.9rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem;margin:.8rem 0}
+.chip{border:2px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-weight:700;padding:.5rem .95rem;border-radius:999px;cursor:pointer}
+.chip[aria-pressed="true"]{background:var(--jungle);color:var(--on-primary);border-color:var(--jungle)}
+.label{font-size:.82rem;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--muted);margin-top:1rem}
+.units{display:grid;gap:.6rem;margin-top:.8rem}
+.unit{display:flex;gap:.8rem;align-items:center;justify-content:space-between;text-align:left;width:100%;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:.85rem 1rem;font:inherit;color:var(--ink);cursor:pointer}
+.unit[aria-pressed="true"]{border-color:var(--jungle);box-shadow:0 0 0 2px var(--jungle)}
+.unit small{display:block;color:var(--muted)}
+.tag{font-size:.75rem;font-weight:700;background:var(--ochre-soft);color:var(--jungle);border-radius:999px;padding:.15rem .6rem;white-space:nowrap}
+#panel{margin-top:1.2rem;background:var(--card);border:1px solid var(--line);border-radius:18px;padding:1.2rem;box-shadow:var(--shadow);scroll-margin-top:1rem}
+.tabs{display:flex;gap:.4rem;margin:.8rem 0;border-bottom:1px solid var(--line);flex-wrap:wrap}
+.tabs button{border:0;background:transparent;font:inherit;font-weight:700;color:var(--muted);padding:.6rem 1rem;border-bottom:3px solid transparent;cursor:pointer}
+.tabs button[aria-selected="true"]{color:var(--jungle);border-bottom-color:var(--jungle)}
+.tip{background:var(--ochre-soft);border-radius:12px;padding:.8rem 1rem;margin-top:.9rem}
+.ex{background:var(--bg-2);border-radius:12px;padding:.8rem 1rem;margin-top:.9rem}
+.study li{margin:.35rem 0}
+.q{display:grid;gap:.6rem;margin-top:.8rem}
+.opts{display:grid;gap:.5rem}
+.opt{text-align:left;border:2px solid var(--line);background:var(--card);color:var(--ink);font:inherit;padding:.7rem 1rem;border-radius:12px;cursor:pointer}
+.opt.ok{border-color:var(--ok);background:var(--ok-soft)} .opt.bad{border-color:var(--bad);background:var(--bad-soft)}
+.gap{display:flex;gap:.5rem;flex-wrap:wrap}
+.gap input{flex:1;min-width:160px;font:inherit;padding:.65rem .8rem;border-radius:10px;border:2px solid var(--line);background:var(--card);color:var(--ink)}
+.fb{padding:.7rem 1rem;border-radius:12px;font-weight:600}
+.fb.ok{background:var(--ok-soft);color:var(--ok)} .fb.bad{background:var(--bad-soft);color:var(--bad)}
+.progress{height:8px;background:var(--bg-2);border-radius:99px;overflow:hidden}
+.progress i{display:block;height:100%;background:var(--leaf);transition:width .3s}
+.flash{border:2px dashed var(--ochre);border-radius:16px;padding:1.2rem;text-align:center;min-height:130px;display:grid;place-items:center;font-size:1.1rem;cursor:pointer;background:var(--card);color:var(--ink);font:inherit;width:100%}
+.band{background:var(--bg-2);margin-inline:-16px;padding-inline:16px}
+details{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem;margin-top:.6rem}
+summary{font-weight:700;cursor:pointer}
+@media(max-width:600px){header{position:static}}
+footer{padding-block:2rem;color:var(--muted);font-size:.9rem;border-top:1px solid var(--line);margin-top:2rem}
+</style>
+</head>
+<body>
+<header>
+  <div class="wrap bar">
+    <a class="logo" href="../">Tu profe por el mundo</a>
+    <div class="langsw" role="group" aria-label="Idioma">
+      <button type="button" data-lang="es" aria-pressed="true">ES</button>
+      <button type="button" data-lang="en" aria-pressed="false">EN</button>
+      <button type="button" data-lang="fr" aria-pressed="false">FR</button>
+    </div>
+    <a class="btn btn-main btn-sm" href="../#reserva" data-i18n="book">Reservar apoyo escolar</a>
+  </div>
+</header>
+<main class="wrap">
+  <section class="hero" id="inicio">
+    <h1 data-i18n="h1">Apoyo escolar de 1.º de Primaria a 4.º de ESO</h1>
+    <p class="lead" data-i18n="lead">Estudia, repasa y practica cada tema del currículo con resúmenes claros y ejercicios con corrección al instante. Y, cuando haga falta, clases 1 a 1 conmigo.</p>
+    <div class="cta">
+      <a class="btn btn-main" href="#practica" data-i18n="cta1">Empezar a practicar</a>
+      <a class="btn btn-ghost" href="../#reserva" data-i18n="cta2">Reservar una clase</a>
+    </div>
+    <div class="cards">
+      <div class="card"><h3 data-i18n="c1h">Estudia</h3><p class="muted" data-i18n="c1p">Lo esencial de cada tema en pocas líneas, con ejemplos y un truco para recordarlo.</p></div>
+      <div class="card"><h3 data-i18n="c2h">Repasa</h3><p class="muted" data-i18n="c2p">Tarjetas de repaso: lee la pregunta, piensa la respuesta y compruébala.</p></div>
+      <div class="card"><h3 data-i18n="c3h">Practica</h3><p class="muted" data-i18n="c3p">Ejercicios con corrección automática y explicación de cada fallo.</p></div>
+      <div class="card"><h3 data-i18n="c4h">Clases 1 a 1</h3><p class="muted" data-i18n="c4p">Si algo no sale, lo trabajamos juntos con el libro de tu hijo o hija.</p></div>
+    </div>
+  </section>
+
+  <section id="practica" aria-labelledby="pr-h">
+    <h2 id="pr-h" data-i18n="pr_h">Elige curso y asignatura</h2>
+    <p class="muted small" data-i18n="pr_note">Los contenidos están en español porque siguen el currículo español. La web puedes verla en tres idiomas.</p>
+    <p class="label" data-i18n="l_course">Curso</p>
+    <div class="chips" id="courses" role="group"></div>
+    <p class="label" data-i18n="l_subj">Asignatura</p>
+    <div class="chips" id="subjects" role="group"></div>
+    <p class="label" id="l-units" data-i18n="l_units">Temas</p>
+    <div class="units" id="units"></div>
+    <div id="panel" hidden tabindex="-1"></div>
+  </section>
+
+  <section class="band" id="curriculo" aria-labelledby="cu-h">
+    <div class="wrap">
+    <h2 id="cu-h" data-i18n="cu_h">Qué se estudia en cada etapa</h2>
+    <p class="muted" data-i18n="cu_p">El material sigue los saberes básicos del currículo vigente. Los temas de cada curso se agrupan en los bloques que marca la ley.</p>
+    <div id="map"></div>
+    </div>
+  </section>
+
+  <section id="ley" aria-labelledby="ley-h">
+    <h2 id="ley-h" data-i18n="ley_h">En qué ley y currículo me baso</h2>
+    <div class="cards">
+      <div class="card"><h3>LOMLOE</h3><p class="muted" data-i18n="ley1">Ley Orgánica 3/2020, que modifica la ley de educación (LOE). Es la ley vigente y organiza Primaria y ESO por competencias.</p></div>
+      <div class="card"><h3>RD 157/2022</h3><p class="muted" data-i18n="ley2">Enseñanzas mínimas de Primaria: tres ciclos de dos cursos y las áreas de Matemáticas, Lengua, Lengua Extranjera, Conocimiento del Medio, Artística y Educación Física.</p></div>
+      <div class="card"><h3>RD 217/2022</h3><p class="muted" data-i18n="ley3">Enseñanzas mínimas de la ESO, de 1.º a 4.º, con materias comunes como Matemáticas, Lengua, Inglés, Biología y Geología, Física y Química, y Geografía e Historia.</p></div>
+      <div class="card"><h3>Decreto 77/2023</h3><p class="muted" data-i18n="ley4">Currículo de Educación Básica de Euskadi. Cada comunidad completa las enseñanzas mínimas, así que adapto el trabajo al currículo de tu comunidad.</p></div>
+    </div>
+  </section>
+
+  <section class="band" id="libros" aria-labelledby="li-h">
+    <div class="wrap">
+    <h2 id="li-h" data-i18n="li_h">Y tu libro de texto, ¿qué pasa con él?</h2>
+    <p class="muted" data-i18n="li_p">Las editoriales (Santillana, SM, Anaya, Edelvives, Vicens Vives, Oxford, Edebé y otras) desarrollan el mismo currículo con su propio orden y estilo. Trabajo con el libro que ya tiene tu hijo o hija: súbeme fotos o un PDF del tema al reservar. Mi material es propio, no copia ningún libro, y sirve para reforzar lo que se explica en clase.</p>
+    </div>
+  </section>
+
+  <section id="faq" aria-labelledby="fq-h">
+    <h2 id="fq-h" data-i18n="fq_h">Preguntas frecuentes</h2>
+    <details><summary data-i18n="fq1q">¿Es gratis?</summary><p data-i18n="fq1a">Sí. Estudiar, repasar y practicar en esta página es gratis y no hace falta cuenta. Las clases 1 a 1 se reservan aparte.</p></details>
+    <details><summary data-i18n="fq2q">¿Guardáis los resultados?</summary><p data-i18n="fq2a">No. Los ejercicios se corrigen en tu navegador y no se envía ningún dato. Para guardar el progreso está Mi aula.</p></details>
+    <details><summary data-i18n="fq3q">¿Y si mi hijo no está en España?</summary><p data-i18n="fq3a">Las clases son online. Trabajamos el currículo español (o el de tu comunidad) desde cualquier país, con horario en tu zona horaria.</p></details>
+  </section>
+  <footer><a href="../" data-i18n="back">Volver a la web</a> · <a href="../aula/">Mi aula</a></footer>
+</main>
+<script src="../aula/banco-escolar.js"></script>
+<script src="estudio.js"></script>
+<script>
+const T={
+es:{book:"Reservar apoyo escolar",h1:"Apoyo escolar de 1.º de Primaria a 4.º de ESO",lead:"Estudia, repasa y practica cada tema del currículo con resúmenes claros y ejercicios con corrección al instante. Y, cuando haga falta, clases 1 a 1 conmigo.",cta1:"Empezar a practicar",cta2:"Reservar una clase",c1h:"Estudia",c1p:"Lo esencial de cada tema en pocas líneas, con ejemplos y un truco para recordarlo.",c2h:"Repasa",c2p:"Tarjetas de repaso: lee la pregunta, piensa la respuesta y compruébala.",c3h:"Practica",c3p:"Ejercicios con corrección automática y explicación de cada fallo.",c4h:"Clases 1 a 1",c4p:"Si algo no sale, lo trabajamos juntos con el libro de tu hijo o hija.",pr_h:"Elige curso y asignatura",pr_note:"Los contenidos están en español porque siguen el currículo español. La web puedes verla en tres idiomas.",l_course:"Curso",l_subj:"Asignatura",l_units:"Temas",cu_h:"Qué se estudia en cada etapa",cu_p:"El material sigue los saberes básicos del currículo vigente. Los temas de cada curso se agrupan en los bloques que marca la ley.",ley_h:"En qué ley y currículo me baso",ley1:"Ley Orgánica 3/2020, que modifica la ley de educación (LOE). Es la ley vigente y organiza Primaria y ESO por competencias.",ley2:"Enseñanzas mínimas de Primaria: tres ciclos de dos cursos y las áreas de Matemáticas, Lengua, Lengua Extranjera, Conocimiento del Medio, Artística y Educación Física.",ley3:"Enseñanzas mínimas de la ESO, de 1.º a 4.º, con materias comunes como Matemáticas, Lengua, Inglés, Biología y Geología, Física y Química, y Geografía e Historia.",ley4:"Currículo de Educación Básica de Euskadi. Cada comunidad completa las enseñanzas mínimas, así que adapto el trabajo al currículo de tu comunidad.",li_h:"Y tu libro de texto, ¿qué pasa con él?",li_p:"Las editoriales (Santillana, SM, Anaya, Edelvives, Vicens Vives, Oxford, Edebé y otras) desarrollan el mismo currículo con su propio orden y estilo. Trabajo con el libro que ya tiene tu hijo o hija: súbeme fotos o un PDF del tema al reservar. Mi material es propio, no copia ningún libro, y sirve para reforzar lo que se explica en clase.",fq_h:"Preguntas frecuentes",fq1q:"¿Es gratis?",fq1a:"Sí. Estudiar, repasar y practicar en esta página es gratis y no hace falta cuenta. Las clases 1 a 1 se reservan aparte.",fq2q:"¿Guardáis los resultados?",fq2a:"No. Los ejercicios se corrigen en tu navegador y no se envía ningún dato. Para guardar el progreso está Mi aula.",fq3q:"¿Y si mi hijo no está en España?",fq3a:"Las clases son online. Trabajamos el currículo español (o el de tu comunidad) desde cualquier país, con horario en tu zona horaria.",back:"Volver a la web",
+ s_study:"Estudia",s_review:"Repasa",s_practice:"Practica",essential:"Lo esencial",examples:"Ejemplos",trick:"Truco para recordarlo",auto_sum:"Resumen de las ideas clave del tema",show:"Ver respuesta",next:"Siguiente",prev:"Anterior",card:"Tarjeta {a} de {b}",check:"Comprobar",right:"¡Correcto!",wrong:"No del todo.",answer:"Respuesta",again:"Repetir",score:"Has acertado {a} de {b}",great:"¡Muy bien!",keep:"Sigue practicando: repasa y vuelve a intentarlo.",ph:"Escribe tu respuesta",units_n:"{n} preguntas",has_sum:"Resumen",pick:"Elige un tema para empezar.",book_cta:"¿Necesitas ayuda con este tema? Reserva una clase",tap:"Toca para ver la respuesta",blk:"Bloque",ctx:"Pregunta {a} de {b}"},
+en:{book:"Book tutoring",h1:"School support from Primary year 1 to ESO year 4",lead:"Study, review and practise every topic of the curriculum with clear summaries and exercises that are marked instantly. And, when needed, 1-to-1 lessons with me.",cta1:"Start practising",cta2:"Book a lesson",c1h:"Study",c1p:"The essentials of each topic in a few lines, with examples and a memory trick.",c2h:"Review",c2p:"Review cards: read the question, think of the answer and check it.",c3h:"Practise",c3p:"Exercises with automatic marking and an explanation of each mistake.",c4h:"1-to-1 lessons",c4p:"If something doesn't click, we work on it together using your child's textbook.",pr_h:"Choose a year and a subject",pr_note:"The content is in Spanish because it follows the Spanish curriculum. The website is available in three languages.",l_course:"Year",l_subj:"Subject",l_units:"Topics",cu_h:"What is studied at each stage",cu_p:"The material follows the core knowledge (saberes básicos) of the current curriculum. Each year's topics are grouped into the blocks set by law.",ley_h:"The law and curriculum I follow",ley1:"Organic Law 3/2020, which amends the education law (LOE). It is the current law and organises Primary and ESO around competences.",ley2:"Minimum curriculum for Primary: three cycles of two years, with Maths, Spanish language, foreign language, Natural and Social Science, Arts and PE.",ley3:"Minimum curriculum for ESO, years 1 to 4, with common subjects such as Maths, Spanish, English, Biology and Geology, Physics and Chemistry, and Geography and History.",ley4:"Basic Education curriculum for the Basque Country. Each region adds to the minimum curriculum, so I adapt the work to your region's curriculum.",li_h:"And your textbook?",li_p:"Publishers (Santillana, SM, Anaya, Edelvives, Vicens Vives, Oxford, Edebé and others) develop the same curriculum with their own order and style. I work with the book your child already has: send me photos or a PDF of the topic when you book. My material is my own, it doesn't copy any book, and it reinforces what is taught in class.",fq_h:"Frequently asked questions",fq1q:"Is it free?",fq1a:"Yes. Studying, reviewing and practising on this page is free and needs no account. 1-to-1 lessons are booked separately.",fq2q:"Do you save the results?",fq2a:"No. Exercises are marked in your browser and no data is sent. To keep your progress, use My classroom.",fq3q:"What if my child isn't in Spain?",fq3a:"Lessons are online. We work on the Spanish curriculum (or your region's) from any country, with times shown in your time zone.",back:"Back to the website",
+ s_study:"Study",s_review:"Review",s_practice:"Practise",essential:"The essentials",examples:"Examples",trick:"Memory trick",auto_sum:"Summary of the key ideas",show:"Show answer",next:"Next",prev:"Previous",card:"Card {a} of {b}",check:"Check",right:"Correct!",wrong:"Not quite.",answer:"Answer",again:"Try again",score:"You got {a} out of {b}",great:"Well done!",keep:"Keep practising: review and try again.",ph:"Type your answer",units_n:"{n} questions",has_sum:"Summary",pick:"Choose a topic to start.",book_cta:"Need help with this topic? Book a lesson",tap:"Tap to see the answer",blk:"Block",ctx:"Question {a} of {b}"},
+fr:{book:"Réserver un cours",h1:"Soutien scolaire de la 1re année de primaire à la 4e année d'ESO",lead:"Étudie, révise et pratique chaque thème du programme avec des résumés clairs et des exercices corrigés tout de suite. Et, si besoin, des cours individuels avec moi.",cta1:"Commencer à pratiquer",cta2:"Réserver un cours",c1h:"Étudie",c1p:"L'essentiel de chaque thème en quelques lignes, avec des exemples et une astuce pour s'en souvenir.",c2h:"Révise",c2p:"Cartes de révision : lis la question, pense à la réponse et vérifie-la.",c3h:"Pratique",c3p:"Exercices avec correction automatique et explication de chaque erreur.",c4h:"Cours individuels",c4p:"Si quelque chose bloque, on le travaille ensemble avec le manuel de ton enfant.",pr_h:"Choisis une année et une matière",pr_note:"Les contenus sont en espagnol car ils suivent le programme espagnol. Le site est disponible en trois langues.",l_course:"Année",l_subj:"Matière",l_units:"Thèmes",cu_h:"Ce qu'on étudie à chaque étape",cu_p:"Le matériel suit les savoirs de base (saberes básicos) du programme en vigueur. Les thèmes de chaque année sont regroupés selon les blocs fixés par la loi.",ley_h:"La loi et le programme que je suis",ley1:"Loi organique 3/2020, qui modifie la loi sur l'éducation (LOE). C'est la loi en vigueur ; elle organise le primaire et l'ESO par compétences.",ley2:"Programme minimal du primaire : trois cycles de deux ans, avec mathématiques, langue espagnole, langue étrangère, sciences, arts et EPS.",ley3:"Programme minimal de l'ESO, de la 1re à la 4e année, avec des matières communes comme mathématiques, espagnol, anglais, biologie-géologie, physique-chimie et géographie-histoire.",ley4:"Programme d'éducation de base du Pays basque. Chaque communauté complète le programme minimal ; j'adapte donc le travail à celui de ta communauté.",li_h:"Et le manuel scolaire ?",li_p:"Les maisons d'édition (Santillana, SM, Anaya, Edelvives, Vicens Vives, Oxford, Edebé et d'autres) développent le même programme avec leur propre ordre et style. Je travaille avec le livre que ton enfant a déjà : envoie-moi des photos ou un PDF du thème à la réservation. Mon matériel est le mien, il ne copie aucun livre et renforce ce qui se voit en classe.",fq_h:"Questions fréquentes",fq1q:"C'est gratuit ?",fq1a:"Oui. Étudier, réviser et pratiquer sur cette page est gratuit et sans compte. Les cours individuels se réservent à part.",fq2q:"Vous gardez les résultats ?",fq2a:"Non. Les exercices sont corrigés dans ton navigateur et aucune donnée n'est envoyée. Pour garder ta progression, il y a Ma classe.",fq3q:"Et si mon enfant n'est pas en Espagne ?",fq3a:"Les cours sont en ligne. On travaille le programme espagnol (ou celui de ta communauté) depuis n'importe quel pays, avec les horaires dans ton fuseau.",back:"Retour au site",
+ s_study:"Étudie",s_review:"Révise",s_practice:"Pratique",essential:"L'essentiel",examples:"Exemples",trick:"Astuce",auto_sum:"Résumé des idées clés",show:"Voir la réponse",next:"Suivant",prev:"Précédent",card:"Carte {a} sur {b}",check:"Vérifier",right:"Correct !",wrong:"Pas tout à fait.",answer:"Réponse",again:"Recommencer",score:"Tu as réussi {a} sur {b}",great:"Bravo !",keep:"Continue à pratiquer : révise et réessaie.",ph:"Écris ta réponse",units_n:"{n} questions",has_sum:"Résumé",pick:"Choisis un thème pour commencer.",book_cta:"Besoin d'aide sur ce thème ? Réserve un cours",tap:"Touche pour voir la réponse",blk:"Bloc",ctx:"Question {a} sur {b}"}
+};
+let lang='es';try{lang=localStorage.getItem('tppm-lang')||'es'}catch(e){}if(!T[lang])lang='es';
+const $=id=>document.getElementById(id);
+const t=(k,v)=>{let s=(T[lang]&&T[lang][k])||T.es[k]||k;if(v)for(const x in v)s=s.replace('{'+x+'}',v[x]);return s};
+const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const norm=s=>String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[^a-z0-9,.\-/]/g,'');
+const subjName=(a,c)=>{const s=ESC_SUBJ[a];return (c[0]==='E'&&s.eso?s.eso:s.pri)[lang]};
+const courseName=c=>{const x=ESC_COURSES.find(x=>x.c===c);return x[lang]||x.es};
+let C='P1',S='mat',U=null,TAB='study';
+const SUBJ=['mat','len','ing','cn','cs'];
+function applyLang(){
+  document.documentElement.lang=lang;
+  document.querySelectorAll('[data-i18n]').forEach(e=>{const v=T[lang][e.dataset.i18n];if(v!=null)e.textContent=v});
+  document.querySelectorAll('.langsw button').forEach(b=>b.setAttribute('aria-pressed',b.dataset.lang===lang));
+  try{localStorage.setItem('tppm-lang',lang)}catch(e){}
+  renderPick();renderMap();if(U)renderPanel();
+}
+function units(){return ESC_UNITS.filter(u=>u.c===C&&u.asig===S)}
+function renderPick(){
+  $('courses').innerHTML=ESC_COURSES.map(x=>`<button type="button" class="chip" data-c="${x.c}" aria-pressed="${x.c===C}">${esc(x[lang]||x.es)}</button>`).join('');
+  $('subjects').innerHTML=SUBJ.map(a=>`<button type="button" class="chip" data-s="${a}" aria-pressed="${a===S}">${esc(subjName(a,C))}</button>`).join('');
+  $('units').innerHTML=units().map(u=>`<button type="button" class="unit" data-u="${u.id}" aria-pressed="${U&&U.id===u.id}"><span><b>${esc(u.u)}</b><small>${esc(u.bloque)} · ${t('units_n',{n:u.qs.length})}</small></span>${ESTUDIO[u.id]?`<span class="tag">${t('has_sum')}</span>`:''}</button>`).join('');
+}
+function renderMap(){
+  const groups=[['P',[1,2,3,4,5,6]],['E',[1,2,3,4]]];
+  $('map').innerHTML=ESC_COURSES.map(x=>{
+    const us=ESC_UNITS.filter(u=>u.c===x.c);
+    const rows=SUBJ.map(a=>{const l=us.filter(u=>u.asig===a);return `<li><b>${esc(subjName(a,x.c))}:</b> ${l.map(u=>esc(u.u)).join(' · ')}</li>`}).join('');
+    return `<details><summary>${esc(x[lang]||x.es)}</summary><ul>${rows}</ul></details>`}).join('');
+}
+function openPanel(u){U=u;TAB='study';renderPick();renderPanel();$('panel').hidden=false;$('panel').scrollIntoView({behavior:'smooth',block:'start'})}
+function renderPanel(){
+  const p=$('panel');
+  p.innerHTML=`<h2>${esc(U.u)}</h2><p class="muted small">${esc(courseName(U.c))} · ${esc(subjName(U.asig,U.c))} · ${esc(U.bloque)}</p>
+  <div class="tabs" role="tablist">${['study','review','practice'].map(k=>`<button type="button" role="tab" data-t="${k}" aria-selected="${TAB===k}">${t('s_'+k)}</button>`).join('')}</div><div id="tabbody"></div>
+  <p style="margin-top:1.2rem"><a class="btn btn-ghost btn-sm" href="../#reserva">${t('book_cta')}</a></p>`;
+  renderTab();
+}
+function renderTab(){
+  const b=$('tabbody');
+  if(TAB==='study'){
+    const s=ESTUDIO[U.id];
+    if(s){b.innerHTML=`<div class="study"><h3>${t('essential')}</h3><ul>${s.e.map(x=>`<li>${esc(x)}</li>`).join('')}</ul><div class="ex"><b>${t('examples')}</b><ul>${s.ej.map(x=>`<li>${esc(x)}</li>`).join('')}</ul></div><div class="tip"><b>${t('trick')}:</b> ${esc(s.tr)}</div></div>`}
+    else{b.innerHTML=`<div class="study"><h3>${t('auto_sum')}</h3><ul>${U.qs.map(q=>`<li>${esc(q.ex)}</li>`).join('')}</ul></div>`}
+  }else if(TAB==='review'){reviewCard(0)}
+  else{startQuiz()}
+}
+function answerOf(q){return q.t==='choice'?q.o[0]:q.a[0]}
+function reviewCard(i,open){
+  const q=U.qs[i],n=U.qs.length;
+  $('tabbody').innerHTML=`<p class="muted small">${t('card',{a:i+1,b:n})}</p><div class="progress"><i style="width:${(i+1)/n*100}%"></i></div>
+  <div class="q"><button type="button" class="flash" id="flash">${open?`<span><b>${esc(answerOf(q))}</b><br><span class="muted small">${esc(q.ex)}</span></span>`:`<span>${esc(q.q)}<br><span class="muted small">${t('tap')}</span></span>`}</button>
+  <div class="gap"><button class="btn btn-ghost btn-sm" id="rv-p" ${i?'':'disabled'}>${t('prev')}</button><button class="btn btn-main btn-sm" id="rv-n" ${i<n-1?'':'disabled'}>${t('next')}</button></div></div>`;
+  $('flash').onclick=()=>reviewCard(i,!open);
+  $('rv-p').onclick=()=>reviewCard(i-1);$('rv-n').onclick=()=>reviewCard(i+1);
+}
+let Q=[],qi=0,ok=0;
+function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}
+function startQuiz(){Q=shuffle(U.qs);qi=0;ok=0;showQ()}
+function showQ(){
+  const b=$('tabbody');
+  if(qi>=Q.length){const good=ok>=Q.length*.7;b.innerHTML=`<div class="q"><h3>${t('score',{a:ok,b:Q.length})}</h3><p class="fb ${good?'ok':'bad'}">${good?t('great'):t('keep')}</p><div class="gap"><button class="btn btn-main" id="again">${t('again')}</button></div></div>`;$('again').onclick=startQuiz;return}
+  const q=Q[qi];
+  b.innerHTML=`<p class="muted small">${t('ctx',{a:qi+1,b:Q.length})}</p><div class="progress"><i style="width:${qi/Q.length*100}%"></i></div><div class="q"><p><b>${esc(q.q)}</b></p><div id="inp"></div><div id="fb"></div></div>`;
+  const inp=$('inp');
+  const done=(good)=>{if(good)ok++;$('fb').innerHTML=`<p class="fb ${good?'ok':'bad'}">${good?t('right'):t('wrong')+' '+t('answer')+': '+esc(answerOf(q))}</p><p class="muted small">${esc(q.ex)}</p><button class="btn btn-main btn-sm" id="nx">${t('next')}</button>`;$('nx').onclick=()=>{qi++;showQ()};$('nx').focus()};
+  if(q.t==='choice'){
+    inp.className='opts';inp.innerHTML=shuffle(q.o).map(o=>`<button type="button" class="opt">${esc(o)}</button>`).join('');
+    inp.querySelectorAll('.opt').forEach(btn=>btn.onclick=()=>{const good=btn.textContent===q.o[0];inp.querySelectorAll('.opt').forEach(x=>{x.disabled=true;if(x.textContent===q.o[0])x.classList.add('ok')});if(!good)btn.classList.add('bad');done(good)});
+  }else{
+    inp.className='gap';inp.innerHTML=`<input type="text" id="gi" autocomplete="off" placeholder="${esc(t('ph'))}" aria-label="${esc(t('ph'))}"><button class="btn btn-main btn-sm" id="gc">${t('check')}</button>`;
+    const chk=()=>{const v=norm($('gi').value);if(!v)return;$('gi').disabled=true;$('gc').disabled=true;done(q.a.some(a=>norm(a)===v))};
+    $('gc').onclick=chk;$('gi').addEventListener('keydown',e=>{if(e.key==='Enter')chk()});$('gi').focus({preventScroll:true});
+  }
+}
+document.addEventListener('click',e=>{
+  const c=e.target.closest('[data-c]'),s=e.target.closest('[data-s]'),u=e.target.closest('[data-u]'),tb=e.target.closest('[data-t]'),lg=e.target.closest('.langsw button');
+  if(lg){lang=lg.dataset.lang;applyLang();return}
+  if(c){C=c.dataset.c;U=null;$('panel').hidden=true;renderPick()}
+  else if(s){S=s.dataset.s;U=null;$('panel').hidden=true;renderPick()}
+  else if(u){openPanel(ESC_UNITS.find(x=>x.id===u.dataset.u))}
+  else if(tb){TAB=tb.dataset.t;document.querySelectorAll('#panel [data-t]').forEach(x=>x.setAttribute('aria-selected',x===tb));renderTab()}
+});
+applyLang();
+</script>
+</body>
+</html>
