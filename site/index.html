@@ -1151,9 +1151,10 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
 <h3>2. Qué datos tratamos</h3>
 <ul>
 <li><b>Formulario de reserva:</b> nombre, correo electrónico, WhatsApp (opcional), país o zona horaria, disponibilidad y mensaje. En clases de español, además, el nivel que indicas, tu objetivo y el resultado del test de nivel. En apoyo escolar, la etapa, el curso, la asignatura, lo que hay que reforzar y los archivos del tema que subes.</li>
-<li><b>Compra de material en PDF:</b> nombre, correo electrónico y producto comprado. Los datos de pago los trata directamente la plataforma de pago; la titular no tiene acceso a los datos de tu tarjeta.</li>
+<li><b>Compra de material en PDF:</b> nombre, correo electrónico y producto comprado. Los datos de la tarjeta los trata directamente Stripe, la pasarela de pago; la titular no los ve ni los guarda.</li>
 <li><b>Durante las clases:</b> los datos necesarios para impartirlas y hacer el seguimiento (asistencia, trabajos, progreso). Las clases no se graban salvo que se acuerde expresamente y por escrito.</li>
 <li><b>Newsletter:</b> tu correo electrónico y tu idioma, solo si te suscribes. Descargar el regalo no exige dar ningún dato.</li>
+<li><b>Mi aula:</b> tu usuario (una dirección de correo del aula), tu contraseña cifrada y tu progreso en los ejercicios, para darte acceso al material mientras seas alumno.</li>
 <li><b>Comunicaciones:</b> lo que nos cuentes por correo, WhatsApp o Instagram.</li>
 </ul>
 <p>No pedimos datos especialmente protegidos. Te rogamos que no los incluyas en los mensajes ni en los archivos que envíes.</p>
@@ -1170,7 +1171,7 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
 </table>
 <p>No enviamos publicidad ni elaboramos perfiles comerciales. El test de nivel calcula un resultado orientativo de forma automática, pero no se toma ninguna decisión solo con él: la profesora revisa siempre cada caso.</p>
 <h3>4. Menores de edad</h3>
-<p>Las clases para menores las contrata su madre, su padre o su tutor legal, y el formulario pide confirmarlo. De los alumnos menores solo tratamos los datos necesarios para las clases. Sus derechos pueden ejercerlos sus representantes legales o el propio alumno cuando tenga la edad que la ley establece para ello (actualmente, 14 años en España).</p>
+<p>Las clases para menores las contrata su madre, su padre o su tutor legal, y el formulario pide confirmarlo. De los alumnos menores solo tratamos los datos necesarios para las clases. Sus derechos pueden ejercerlos sus representantes legales o el propio alumno cuando tenga la edad que la ley establece para ello (actualmente, 14 años en España). Si el alumno es menor de 14 años, el consentimiento lo da su madre, padre o tutor legal (artículo 7 de la LOPDGDD).</p>
 <h3>5. Cuánto tiempo conservamos los datos</h3>
 <ul>
 <li>Suscriptores de la newsletter: hasta que te des de baja. Cada correo incluye la forma de darte de baja, y también puedes pedirlo escribiendo a contacto@tuprofeporelmundo.com.</li>
@@ -1181,7 +1182,7 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
 <h3>6. Asistente de la web</h3>
 <p>El asistente responde con la información publicada en esta web y no guarda las conversaciones. Si en el futuro funciona con inteligencia artificial, el texto que escribas se enviará a Anthropic, proveedor del servicio, que actuará como encargado del tratamiento. Te pedimos que no escribas datos personales en el asistente.</p>
 <h3>7. Quién puede acceder a tus datos</h3>
-<p>No cedemos tus datos a terceros, salvo obligación legal (por ejemplo, a la Agencia Tributaria). Para prestar el servicio utilizamos proveedores que actúan como encargados del tratamiento y solo tratan los datos siguiendo nuestras instrucciones: correo electrónico (Google), alojamiento de la web y recepción de formularios, videollamada y plataforma de venta y pago de los PDF. Algunos de estos proveedores pueden estar en Estados Unidos; en ese caso, las transferencias se amparan en el Marco de Privacidad de Datos UE-EE. UU. (decisión de adecuación de la Comisión Europea de 10 de julio de 2023) o en cláusulas contractuales tipo aprobadas por la Comisión.</p>
+<p>No cedemos tus datos a terceros, salvo obligación legal (por ejemplo, a la Agencia Tributaria). Para prestar el servicio utilizamos proveedores que actúan como encargados del tratamiento y solo tratan los datos siguiendo nuestras instrucciones: correo electrónico y videollamada (Google), alojamiento de la web y recepción de formularios (Netlify), base de datos y archivos del aula de alumnos (Supabase, con servidores en la Unión Europea) y pagos con tarjeta (Stripe). Algunos de estos proveedores pueden estar en Estados Unidos; en ese caso, las transferencias se amparan en el Marco de Privacidad de Datos UE-EE. UU. (decisión de adecuación de la Comisión Europea de 10 de julio de 2023) o en cláusulas contractuales tipo aprobadas por la Comisión.</p>
 <p>Si nos escribes por Instagram o WhatsApp, Meta trata también esos datos como responsable independiente, según su propia política de privacidad.</p>
 <h3>8. Tus derechos</h3>
 <p>Puedes ejercer tus derechos de acceso, rectificación, supresión, oposición, limitación del tratamiento y portabilidad escribiendo a contacto@tuprofeporelmundo.com, indicando qué derecho quieres ejercer. Te responderemos en el plazo máximo de un mes. Si consideras que no hemos atendido bien tu solicitud, puedes presentar una reclamación ante la Agencia Española de Protección de Datos (www.aepd.es).</p>
@@ -1189,7 +1190,7 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
 <p>Aplicamos medidas técnicas y organizativas adecuadas: conexión cifrada (HTTPS), cuentas protegidas con contraseña robusta y verificación en dos pasos, acceso limitado a la titular y borrado periódico de la información que ya no es necesaria.</p>
 <h3>10. Aula de alumnos</h3>
 <p>Los datos que se tratan en el aula de alumnos (tests de nivel, ejercicios y progreso) se explican en el apartado «Protección de datos del aula», disponible en la propia aula: <a href="aula/">Mi aula</a>.</p>
-<p><small>Última actualización: 2 de octubre de 2026.</small></p>
+<p><small>Última actualización: 6 de octubre de 2026.</small></p>
 </template>
 
 <template id="lg-cookies">
