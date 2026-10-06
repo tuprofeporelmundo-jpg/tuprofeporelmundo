@@ -181,6 +181,7 @@ const norm=s=>String(s).toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'').re
 const subjName=(a,c)=>{const s=ESC_SUBJ[a];return (c[0]==='E'&&s.eso?s.eso:s.pri)[lang]};
 const courseName=c=>{const x=ESC_COURSES.find(x=>x.c===c);return x[lang]||x.es};
 let C='P1',S='mat',U=null,TAB='study';
+(function(){const m=/^#(P[1-6]|E[1-4])(?:-(mat|len|ing|cn|cs))?$/.exec(location.hash);if(m){C=m[1];if(m[2])S=m[2];setTimeout(()=>{const p=document.getElementById('practica');if(p)p.scrollIntoView()},120)}})();
 const SUBJ=['mat','len','ing','cn','cs'];
 function applyLang(){
   document.documentElement.lang=lang;
