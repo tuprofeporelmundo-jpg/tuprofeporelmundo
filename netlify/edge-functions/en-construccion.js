@@ -5,9 +5,9 @@
 // Entrar: /entrar · Salir: /salir
 // La contraseña no está escrita aquí: solo una huella (PBKDF2 + SHA-256).
 
-const SALT = "2b71c3aaf74ae22afd24cb7dfcfad4b9";
+const SALT = "29889d33872fd5ce8b53e9ceac819567";
 const ITER = 150000;
-const HUELLA = "4efcad60dd2915e38d6c589427f62140c95002735b7f5002e7025cc3601f706a";
+const HUELLA = "b812f91e91a97ab7e24831c653b5d9a11aacce8e9b97ab390b676be1673b2f26";
 const COOKIE = "tppm_acceso";
 const LIBRES = new Set(["/og.png", "/robots.txt", "/favicon.ico"]);
 
