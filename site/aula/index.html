@@ -251,7 +251,8 @@ footer.note{max-width:600px;margin:2.2rem auto 0;font-size:.82rem;color:var(--mu
   <!-- Entrar / crear cuenta -->
   <section class="screen" id="s-auth" hidden>
     <div class="stack"><h1 data-i18n="auth_t"></h1><p class="muted" data-i18n="auth_p"></p></div>
-    <div class="tabs" role="tablist">
+    <p class="muted" data-i18n="no_signup"></p>
+    <div class="tabs" role="tablist" hidden>
       <button type="button" role="tab" id="tab-in" aria-selected="true" data-i18n="tab_in"></button>
       <button type="button" role="tab" id="tab-up" aria-selected="false" data-i18n="tab_up"></button>
     </div>
@@ -447,7 +448,7 @@ const REMOTE=!!(CFG.supabaseUrl&&CFG.supabaseKey);
 
 const T={
 es:{brand:'Mi aula',m_es:'Español',m_school:'Apoyo escolar',sc_goal_t:'¿En qué curso estás?',sc_goal_p:'Practica Matemáticas, Lengua, Inglés, Ciencias Naturales y Ciencias Sociales con unidades del currículo oficial de tu curso.',course_l:'Curso',start_school:'Empezar a practicar',sc_prog_t:'Tu semáforo por asignaturas',sc_prog_p:'Verde: lo dominas (80 % o más). Ámbar: vas avanzando. Rojo: conviene repasar.',sc_units:'Unidades de {s}',sc_change:'Cambiar curso o modalidad',sc_norm:'Las unidades siguen los saberes básicos de la LOMLOE: Real Decreto 157/2022 (Primaria) y Real Decreto 217/2022 (ESO).',sc_none:'Esta asignatura todavía no tiene unidades para tu curso.',sc_rev_none:'No tienes preguntas pendientes de repaso.',sc_why:'Por qué: ',loading:'Cargando…',local_note:'Estás usando el aula sin cuenta: tu progreso se guarda solo en este dispositivo.',
-auth_t:'Mi aula',auth_p:'Entra para hacer tu test de nivel, practicar y ver tu material.',tab_in:'Entrar',tab_up:'Crear cuenta',
+auth_t:'Mi aula',auth_p:'Entra para hacer tu test de nivel, practicar y ver tu material.',tab_in:'Entrar',tab_up:'Crear cuenta',no_signup:'Tu profe te da tu usuario y tu contraseña al empezar las clases. ¿Aún no los tienes? Escribe a Dana.',
 email_l:'Correo electrónico',pass_l:'Contraseña',pass_new_l:'Contraseña (mínimo 8 caracteres)',name_l:'Tu nombre',in_b:'Entrar',up_b:'Crear mi cuenta',forgot:'He olvidado mi contraseña',user_l:'Tu usuario',user_new_l:'Elige tu usuario',user_hint:'Será tu dirección del aula. Solo letras, números y puntos, sin tildes.',err_user:'El usuario necesita entre 3 y 30 letras, números o puntos.',err_taken:'Ese usuario ya existe. Prueba otro, por ejemplo con la inicial de tu apellido.',forgot_txt:'Escribe a Dana a {e} y te creará una contraseña nueva.',
 age:'Tengo 14 años o más. Si el alumno tiene menos de 14, crea la cuenta su madre, padre o tutor legal.',
 priv_ok:'He leído la información sobre protección de datos.',priv_link:'Leer',
@@ -480,14 +481,14 @@ unit_done:'¡Unidad completada!',unit_more:'¡Buen trabajo!',unit_more_p:'Esta u
 rev_t:'Repaso inteligente',rev_p:'{n} preguntas que te costaron esperan repaso.',rev_none:'No tienes nada pendiente. Las preguntas que falles aparecerán aquí.',rev_b:'Empezar el repaso',
 areas_t:'Mis puntos fuertes y débiles',areas_p:'Verde: 75 % o más de aciertos. Ámbar: entre 50 y 74 %. Rojo: menos del 50 %. Cuenta tus últimas 30 respuestas de cada destreza.',
 sk_gram:'Gramática',sk_voc:'Vocabulario',sk_lec:'Comprensión lectora',sk_aud:'Comprensión auditiva',sk_ord:'Construir frases',nodata:'Sin datos aún',
-mat_t:'Mi material',mat_kind:'Sesión y solucionario (PDF)',mat_open:'Abrir',mat_a:'Cuaderno',mat_n:'{n} documentos',mat_soon:'Próximamente',mat_s:'Solucionario',mat_kind_u:'Cuaderno del alumno y solucionario (PDF)',mat_kind_a:'Cuaderno del alumno (PDF). El solucionario llegará pronto.',mat_kind_g:'Qué trae el curso y cómo usarlo (PDF)',mat_none:'Dana irá subiendo aquí el material del {l}.',mat_local:'Crea tu cuenta para abrir el material de clase.',mat_err:'No se ha podido abrir el archivo. El material es para alumnos con clases: si ya das clase con Dana, pídele que te dé acceso.',
+mat_t:'Mi material',mat_kind:'Sesión y solucionario (PDF)',mat_open:'Abrir',mat_a:'Cuaderno',mat_n:'{n} documentos',mat_soon:'Próximamente',mat_s:'Solucionario',mat_kind_u:'Cuaderno del alumno y solucionario (PDF)',mat_kind_a:'Cuaderno del alumno (PDF). El solucionario llegará pronto.',mat_kind_g:'Qué trae el curso y cómo usarlo (PDF)',mat_noacc:'Aún no tienes material asignado. Dana te lo activará cuando empecéis las clases.',mat_none:'Dana irá subiendo aquí el material del {l}.',mat_local:'Crea tu cuenta para abrir el material de clase.',mat_err:'No se ha podido abrir el archivo. El material es para alumnos con clases: si ya das clase con Dana, pídele que te dé acceso.',
 req_t:'Qué exige el {l} según el Marco Común Europeo',req_focus:'Gramática del nivel:',req_note:'Fuente: escala global del Marco Común Europeo de Referencia (Consejo de Europa) y Plan Curricular del Instituto Cervantes.',
 acc_t:'Mi cuenta',acc_who:'Has entrado como {e}.',acc_local:'Sin cuenta: tu progreso está guardado solo en este dispositivo.',
 retest:'Repetir el test de nivel',change:'Cambiar mi objetivo',logout:'Cerrar sesión',erase:'Borrar mi cuenta y mis datos',erase_local:'Borrar mi progreso',
 erase_q:'Se borrarán tu cuenta, tus resultados y tu progreso. No se puede deshacer. ¿Seguro?',erase_q_local:'Se borrará tu progreso de este dispositivo. ¿Seguro?',erase_yes:'Sí, borrar',erase_no:'Cancelar',
 back_home:'Volver a mi aula',back_web:'Volver a la web',priv_t:'Protección de datos del aula',close:'Cerrar'},
 en:{brand:'My classroom',m_es:'Spanish',m_school:'School support',sc_goal_t:'Which school year are you in?',sc_goal_p:'Practise Maths, Spanish Language, English, Natural Sciences and Social Sciences with units from the official Spanish curriculum for your year. Questions are in Spanish, as at school.',course_l:'School year',start_school:'Start practising',sc_prog_t:'Your traffic light by subject',sc_prog_p:'Green: you have mastered it (80% or more). Amber: you are getting there. Red: worth reviewing.',sc_units:'{s} units',sc_change:'Change year or mode',sc_norm:'Units follow the core knowledge of the LOMLOE: Royal Decree 157/2022 (primary) and Royal Decree 217/2022 (secondary).',sc_none:'This subject has no units for your year yet.',sc_rev_none:'You have no questions waiting for review.',sc_why:'Why: ',loading:'Loading…',local_note:'You are using the classroom without an account: your progress is saved on this device only.',
-auth_t:'My classroom',auth_p:'Sign in to take your level test, practise and see your materials.',tab_in:'Sign in',tab_up:'Create account',
+auth_t:'My classroom',auth_p:'Sign in to take your level test, practise and see your materials.',tab_in:'Sign in',tab_up:'Create account',no_signup:'Your teacher gives you your username and password when classes start. Don’t have them yet? Write to Dana.',
 email_l:'Email',pass_l:'Password',pass_new_l:'Password (at least 8 characters)',name_l:'Your first name',in_b:'Sign in',up_b:'Create my account',forgot:'I forgot my password',user_l:'Your username',user_new_l:'Choose your username',user_hint:'It will be your classroom address. Letters, numbers and dots only, no accents.',err_user:'The username needs 3 to 30 letters, numbers or dots.',err_taken:'That username is taken. Try another, for example with your surname initial.',forgot_txt:'Write to Dana at {e} and she will set a new password for you.',
 age:'I am 14 or older. If the student is under 14, their parent or legal guardian creates the account.',
 priv_ok:'I have read the data protection information.',priv_link:'Read',
@@ -520,14 +521,14 @@ unit_done:'Unit completed!',unit_more:'Good work!',unit_more_p:'This unit is {n}
 rev_t:'Smart review',rev_p:'{n} questions you found hard are waiting for review.',rev_none:'Nothing pending. Questions you get wrong will show up here.',rev_b:'Start the review',
 areas_t:'My strengths and weak spots',areas_p:'Green: 75% or more correct. Amber: 50 to 74%. Red: under 50%. Based on your last 30 answers in each skill.',
 sk_gram:'Grammar',sk_voc:'Vocabulary',sk_lec:'Reading',sk_aud:'Listening',sk_ord:'Building sentences',nodata:'No data yet',
-mat_t:'My materials',mat_kind:'Lesson and answer key (PDF)',mat_open:'Open',mat_a:'Workbook',mat_n:'{n} documents',mat_soon:'Coming soon',mat_s:'Answer key',mat_kind_u:'Student workbook and answer key (PDF)',mat_kind_a:'Student workbook (PDF). The answer key is coming soon.',mat_kind_g:'What the course includes and how to use it (PDF)',mat_none:'Dana will upload the {l} materials here.',mat_local:'Create your account to open the class materials.',mat_err:'The file could not be opened. The materials are for students taking lessons: if you already have lessons with Dana, ask her for access.',
+mat_t:'My materials',mat_kind:'Lesson and answer key (PDF)',mat_open:'Open',mat_a:'Workbook',mat_n:'{n} documents',mat_soon:'Coming soon',mat_s:'Answer key',mat_kind_u:'Student workbook and answer key (PDF)',mat_kind_a:'Student workbook (PDF). The answer key is coming soon.',mat_kind_g:'What the course includes and how to use it (PDF)',mat_noacc:'No materials assigned yet. Dana will unlock them when classes start.',mat_none:'Dana will upload the {l} materials here.',mat_local:'Create your account to open the class materials.',mat_err:'The file could not be opened. The materials are for students taking lessons: if you already have lessons with Dana, ask her for access.',
 req_t:'What {l} requires on the Common European Framework',req_focus:'Grammar at this level:',req_note:'Source: global scale of the Common European Framework of Reference (Council of Europe) and the Instituto Cervantes curriculum.',
 acc_t:'My account',acc_who:'Signed in as {e}.',acc_local:'No account: your progress is saved on this device only.',
 retest:'Retake the level test',change:'Change my goal',logout:'Sign out',erase:'Delete my account and data',erase_local:'Delete my progress',
 erase_q:'Your account, results and progress will be deleted. This cannot be undone. Are you sure?',erase_q_local:'Your progress on this device will be deleted. Are you sure?',erase_yes:'Yes, delete',erase_no:'Cancel',
 back_home:'Back to my classroom',back_web:'Back to the website',priv_t:'Classroom data protection',close:'Close'},
 fr:{brand:'Ma classe',m_es:'Espagnol',m_school:'Soutien scolaire',sc_goal_t:'En quelle année es-tu ?',sc_goal_p:'Entraîne-toi en maths, langue espagnole, anglais, sciences naturelles et sciences sociales avec des unités du programme officiel espagnol de ton année. Les questions sont en espagnol, comme à l’école.',course_l:'Année scolaire',start_school:'Commencer à m’entraîner',sc_prog_t:'Ton feu tricolore par matière',sc_prog_p:'Vert : tu maîtrises (80 % ou plus). Orange : tu progresses. Rouge : à revoir.',sc_units:'Unités de {s}',sc_change:'Changer d’année ou de mode',sc_norm:'Les unités suivent les savoirs de base de la LOMLOE : décret royal 157/2022 (primaire) et décret royal 217/2022 (collège-lycée).',sc_none:'Cette matière n’a pas encore d’unités pour ton année.',sc_rev_none:'Tu n’as aucune question à revoir.',sc_why:'Pourquoi : ',loading:'Chargement…',local_note:'Tu utilises la classe sans compte : ta progression est enregistrée uniquement sur cet appareil.',
-auth_t:'Ma classe',auth_p:'Connecte-toi pour passer ton test de niveau, t’entraîner et voir ton matériel.',tab_in:'Se connecter',tab_up:'Créer un compte',
+auth_t:'Ma classe',auth_p:'Connecte-toi pour passer ton test de niveau, t’entraîner et voir ton matériel.',tab_in:'Se connecter',tab_up:'Créer un compte',no_signup:'Ta prof te donne ton identifiant et ton mot de passe au début des cours. Tu ne les as pas encore ? Écris à Dana.',
 email_l:'Adresse e-mail',pass_l:'Mot de passe',pass_new_l:'Mot de passe (8 caractères minimum)',name_l:'Ton prénom',in_b:'Se connecter',up_b:'Créer mon compte',forgot:'J’ai oublié mon mot de passe',user_l:'Ton identifiant',user_new_l:'Choisis ton identifiant',user_hint:'Ce sera ton adresse de la classe. Lettres, chiffres et points uniquement, sans accents.',err_user:'L’identifiant doit avoir de 3 à 30 lettres, chiffres ou points.',err_taken:'Cet identifiant existe déjà. Essaie-en un autre, par exemple avec l’initiale de ton nom.',forgot_txt:'Écris à Dana à {e} et elle te créera un nouveau mot de passe.',
 age:'J’ai 14 ans ou plus. Si l’élève a moins de 14 ans, sa mère, son père ou son tuteur légal crée le compte.',
 priv_ok:'J’ai lu les informations sur la protection des données.',priv_link:'Lire',
@@ -560,7 +561,7 @@ unit_done:'Unité terminée !',unit_more:'Bon travail !',unit_more_p:'Cette unit
 rev_t:'Révision intelligente',rev_p:'{n} questions difficiles t’attendent en révision.',rev_none:'Rien en attente. Les questions ratées apparaîtront ici.',rev_b:'Commencer la révision',
 areas_t:'Mes points forts et faibles',areas_p:'Vert : 75 % ou plus de bonnes réponses. Orange : de 50 à 74 %. Rouge : moins de 50 %. Calculé sur tes 30 dernières réponses par compétence.',
 sk_gram:'Grammaire',sk_voc:'Vocabulaire',sk_lec:'Compréhension écrite',sk_aud:'Compréhension orale',sk_ord:'Construire des phrases',nodata:'Pas encore de données',
-mat_t:'Mon matériel',mat_kind:'Séance et corrigé (PDF)',mat_open:'Ouvrir',mat_a:'Cahier',mat_n:'{n} documents',mat_soon:'Bientôt',mat_s:'Corrigé',mat_kind_u:'Cahier de l’élève et corrigé (PDF)',mat_kind_a:'Cahier de l’élève (PDF). Le corrigé arrive bientôt.',mat_kind_g:'Ce que contient le cours et comment l’utiliser (PDF)',mat_none:'Dana mettra ici le matériel du {l}.',mat_local:'Crée ton compte pour ouvrir le matériel de cours.',mat_err:'Le fichier n’a pas pu s’ouvrir. Le matériel est réservé aux élèves qui suivent des cours : si tu as déjà cours avec Dana, demande-lui l’accès.',
+mat_t:'Mon matériel',mat_kind:'Séance et corrigé (PDF)',mat_open:'Ouvrir',mat_a:'Cahier',mat_n:'{n} documents',mat_soon:'Bientôt',mat_s:'Corrigé',mat_kind_u:'Cahier de l’élève et corrigé (PDF)',mat_kind_a:'Cahier de l’élève (PDF). Le corrigé arrive bientôt.',mat_kind_g:'Ce que contient le cours et comment l’utiliser (PDF)',mat_noacc:'Aucun matériel attribué pour l’instant. Dana l’activera au début des cours.',mat_none:'Dana mettra ici le matériel du {l}.',mat_local:'Crée ton compte pour ouvrir le matériel de cours.',mat_err:'Le fichier n’a pas pu s’ouvrir. Le matériel est réservé aux élèves qui suivent des cours : si tu as déjà cours avec Dana, demande-lui l’accès.',
 req_t:'Ce que demande le {l} selon le Cadre européen commun',req_focus:'Grammaire du niveau :',req_note:'Source : échelle globale du Cadre européen commun de référence (Conseil de l’Europe) et Plan Curricular de l’Instituto Cervantes.',
 acc_t:'Mon compte',acc_who:'Connecté avec {e}.',acc_local:'Sans compte : ta progression est enregistrée uniquement sur cet appareil.',
 retest:'Refaire le test de niveau',change:'Changer mon objectif',logout:'Se déconnecter',erase:'Supprimer mon compte et mes données',erase_local:'Effacer ma progression',
@@ -979,6 +980,7 @@ function skillScore(s){
   const r=data.hist.filter(h=>h.sk===s).slice(-30);if(!r.length)return null;
   return Math.round(r.filter(h=>h.ok).length/r.length*100);
 }
+let CARP=null;
 function renderHome(){
   const lv=data.level,w=working(),tg=data.target,gap=tg-lv;
   const name=user&&user.user_metadata&&user.user_metadata.nombre;
@@ -1015,10 +1017,12 @@ function renderHome(){
   $('areas').innerHTML=SKILLS.map(s=>{const v=skillScore(s),d=v===null?'':v>=75?'g':v>=50?'a':'r';
     return `<div class="area"><span class="dotc ${d}" aria-hidden="true"></span><span>${t('sk_'+s)}</span><span class="pct">${v===null?t('nodata'):v+' %'}</span></div>`}).join('');
   /* material */
-  const matBtn=(f,k)=>`<button type="button" class="btn btn-ghost btn-sm" data-f="${esc(f)}"${REMOTE?'':' disabled'}>${t(k)}</button>`;
-  const matLi=m=>`<li><svg aria-hidden="true"><use href="#i-doc"/></svg><div><b>${esc(m.t)}</b><span>${!REMOTE?t('mat_local'):m.a?t(m.s?'mat_kind_u':'mat_kind_a'):t(m.g?'mat_kind_g':'mat_kind')}</span></div><span class="mat-b">${m.a?matBtn(m.a,'mat_a')+(m.s?matBtn(m.s,'mat_s'):''):matBtn(m.f,'mat_open')}</span></li>`;
+  const matBtn=(f,k,c)=>`<button type="button" class="btn btn-ghost btn-sm" data-f="${esc(c+'/'+f)}"${REMOTE?'':' disabled'}>${t(k)}</button>`;
+  const matLi=(m,c)=>`<li><svg aria-hidden="true"><use href="#i-doc"/></svg><div><b>${esc(m.t)}</b><span>${!REMOTE?t('mat_local'):m.a?t(m.s?'mat_kind_u':'mat_kind_a'):t(m.g?'mat_kind_g':'mat_kind')}</span></div><span class="mat-b">${m.a?matBtn(m.a,'mat_a',c)+(m.s?matBtn(m.s,'mat_s',c):''):matBtn(m.f,'mat_open',c)}</span></li>`;
+  if(REMOTE&&CARP===null){CARP=[];sb.from('material_carpetas').select('carpeta').then(r=>{CARP=(r.data||[]).map(x=>x.carpeta);renderHome()})}
   $('mat').innerHTML=LV.map((c,l)=>{const ms=MATERIAL[l]||[];
-    return `<details class="mat-f"${l===w?' open':''}><summary><svg aria-hidden="true"><use href="#i-folder"/></svg><span>${c}</span><small>${ms.length?t('mat_n',{n:ms.length}):t('mat_soon')}</small></summary><ul class="mat">${ms.length?ms.map(matLi).join(''):`<li><svg aria-hidden="true"><use href="#i-doc"/></svg><div>${esc(t('mat_none',{l:c}))}</div></li>`}</ul></details>`}).join('');
+    if(REMOTE&&!(CARP||[]).includes(c))return '';
+    return `<details class="mat-f"${l===w?' open':''}><summary><svg aria-hidden="true"><use href="#i-folder"/></svg><span>${c}</span><small>${ms.length?t('mat_n',{n:ms.length}):t('mat_soon')}</small></summary><ul class="mat">${ms.length?ms.map(m=>matLi(m,c)).join(''):`<li><svg aria-hidden="true"><use href="#i-doc"/></svg><div>${esc(t('mat_none',{l:c}))}</div></li>`}</ul></details>`}).join('')||`<p class="muted">${esc(t('mat_noacc'))}</p>`;
   $('mat').querySelectorAll('[data-f]').forEach(b=>b.addEventListener('click',()=>openMaterial(b.dataset.f)));
   /* exigencias del nivel */
   $('req-t').textContent=t('req_t',{l:LV[w]});
@@ -1099,7 +1103,7 @@ function loadScript(src){return new Promise((ok,ko)=>{const s=document.createEle
   let recovering=false;
   sb.auth.onAuthStateChange((ev,session)=>{
     if(ev==='PASSWORD_RECOVERY'){recovering=true;user=session.user;show('s-newpass');return}
-    if(ev==='SIGNED_OUT'){user=null;setTab(false);show('s-auth');return}
+    if(ev==='SIGNED_OUT'){user=null;CARP=null;setTab(false);show('s-auth');return}
     if(session&&session.user&&(!user||user.id!==session.user.id)&&!recovering){user=session.user;setTimeout(enter,0)}
   });
   const {data:{session}}=await sb.auth.getSession();
