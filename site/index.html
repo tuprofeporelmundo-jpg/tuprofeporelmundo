@@ -479,12 +479,12 @@ dialog.legal::backdrop{background:rgba(40,26,20,.55)}
 .sc-special p{margin:.2rem 0 0;color:var(--muted);font-size:.95rem;max-width:60ch}
 
 /* asistente */
-.chat-fab{position:fixed;left:max(1rem,env(safe-area-inset-left,0px));bottom:calc(1rem + env(safe-area-inset-bottom,0px));z-index:40;width:3.6rem;height:3.6rem;border-radius:50%;border:0;background:var(--jungle);color:var(--on-primary);box-shadow:0 10px 24px -8px rgba(0,0,0,.45);cursor:pointer;display:grid;place-items:center}
+.chat-fab{position:fixed;right:max(1rem,env(safe-area-inset-right,0px));bottom:calc(1rem + env(safe-area-inset-bottom,0px));z-index:40;width:3.6rem;height:3.6rem;border-radius:50%;border:0;background:var(--jungle);color:var(--on-primary);box-shadow:0 10px 24px -8px rgba(0,0,0,.45);cursor:pointer;display:grid;place-items:center}
 .chat-fab:hover{background:var(--jungle-2)}
-.to-top{position:fixed;right:max(1rem,env(safe-area-inset-right,0px));bottom:calc(4.6rem + env(safe-area-inset-bottom,0px));z-index:39;width:3rem;height:3rem;border-radius:50%;border:1.5px solid var(--line);background:var(--card);color:var(--jungle);box-shadow:0 8px 20px -8px rgba(0,0,0,.35);cursor:pointer;display:grid;place-items:center;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .2s,transform .2s,visibility .2s}
+.to-top{position:fixed;right:max(1rem,env(safe-area-inset-right,0px));bottom:calc(5.6rem + env(safe-area-inset-bottom,0px));z-index:39;width:3rem;height:3rem;border-radius:50%;border:1.5px solid var(--line);background:var(--card);color:var(--jungle);box-shadow:0 8px 20px -8px rgba(0,0,0,.35);cursor:pointer;display:grid;place-items:center;opacity:0;visibility:hidden;transform:translateY(10px);transition:opacity .2s,transform .2s,visibility .2s}
 .to-top.show{opacity:1;visibility:visible;transform:none}
 .to-top:hover{background:var(--ochre-soft)}
-.chat-panel{position:fixed;left:max(1rem,env(safe-area-inset-left,0px));bottom:calc(5.4rem + env(safe-area-inset-bottom,0px));z-index:40;width:min(380px,100vw - 2rem);height:min(560px,100% - 7.5rem);background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 24px 48px -16px rgba(0,0,0,.35);display:flex;flex-direction:column;overflow:hidden}
+.chat-panel{position:fixed;right:max(1rem,env(safe-area-inset-right,0px));bottom:calc(5.4rem + env(safe-area-inset-bottom,0px));z-index:40;width:min(380px,100vw - 2rem);height:min(560px,100% - 7.5rem);background:var(--card);border:1px solid var(--line);border-radius:18px;box-shadow:0 24px 48px -16px rgba(0,0,0,.35);display:flex;flex-direction:column;overflow:hidden}
 .chat-panel[hidden]{display:none}
 .chat-head{background:var(--jungle);color:var(--on-primary);padding:.9rem 1rem;display:flex;justify-content:space-between;align-items:center;gap:.5rem}
 .chat-head strong{display:block}
@@ -596,6 +596,7 @@ nav a[aria-current="page"]{color:var(--jungle);font-weight:700;box-shadow:0 2px 
 .pick-card .btn{width:100%;text-align:center}
 @media(max-width:600px){.pick-grid{grid-template-columns:1fr 1fr;gap:.7rem}.pick-card{padding:1rem}.pick-card p,.pick-price,.pick-card .btn-ghost{display:none}.pick-card h3{font-size:1.15rem}.pick-card .btn{padding:.6rem .4rem;font-size:.85rem}.pick-card .nat{font-size:.62rem}}
 @media(max-width:480px){.nat{font-size:.72rem;letter-spacing:.02em;padding:.45rem .8rem}}
+.team .pbody{padding-bottom:.9rem}.trow{display:grid;gap:.1rem;padding:.8rem 1.6rem;border-top:1px solid var(--line);text-decoration:none;color:var(--ink)}.trow:hover,.trow.cur{background:var(--ochre-soft)}.trow strong{font-size:1.05rem}.trow span{color:var(--muted);font-size:.9rem}.trow .nat{font-size:.62rem;padding:.2rem .55rem;margin:.35rem 0 0;justify-self:start;font-style:normal}.team .btn{margin-top:.4rem}
 </style>
 </head>
 <body>
@@ -671,21 +672,9 @@ nav a[aria-current="page"]{color:var(--jungle);font-weight:700;box-shadow:0 2px 
           <a class="btn btn-ghost" href="#test" data-i18n="hero_test">Test de nivel gratis</a>
         </div>
       </div>
-      <article class="profile" aria-label="Dana Salgado">
-        <div class="cover" aria-hidden="true">
+      <article class="profile team" aria-label="Nuestros profesores"><div class="cover" aria-hidden="true">
           <svg viewBox="0 0 400 70" preserveAspectRatio="none"><path d="M0 40 C60 10 120 5 180 25 C240 45 300 15 400 22 V70 H0Z" fill="var(--leaf)"/><path d="M0 55 C90 38 200 45 400 48 V70 H0Z" fill="var(--jungle)"/><use href="#fl" x="300" y="22" width="44" height="44"/><use href="#fl2" x="342" y="34" width="34" height="34"/><use href="#fl" x="60" y="30" width="30" height="30"/></svg>
-        </div>
-        <div class="pbody">
-          <h3>Dana Salgado</h3>
-          <p class="role" data-i18n="card_role">Profesora de español y apoyo escolar</p>
-          <div class="pills"><span data-i18n="pill1">Español A1–C1</span><span data-i18n="pill2">Primaria y ESO</span><span data-i18n="pill3">100 % online</span><span class="pill-price" data-i18n="pill4">Desde 22 € / clase</span></div>
-          <div class="pstats">
-            <div><strong>+10</strong><span data-i18n="me_f1">años de clases particulares</span></div>
-            <div><strong>3</strong><span data-i18n="me_f2">años en colegios españoles de Marruecos</span></div>
-          </div>
-          <a class="btn btn-main btn-block" href="#reserva" data-i18n="nav_book">Reserva tu clase online</a>
-        </div>
-      </article>
+        </div><div class="pbody"><h3>Nuestros profesores</h3><p class="role">Un profesor nativo por idioma</p></div><a class="trow" href="/profesores/" data-go="prof" data-t="es"><strong>Dana Salgado</strong><span>Español y apoyo escolar</span><em class="nat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Nativa · España</em></a><a class="trow" href="/profesores/" data-go="prof" data-t="en"><strong>Chris</strong><span>Inglés</span><em class="nat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Native · Chicago, USA</em></a><a class="trow" href="/profesores/" data-go="prof" data-t="fr"><strong>Profesor/a de francés</strong><span>Francés</span><em class="nat soon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Nativo/a · Próximamente</em></a><div class="pbody"><div class="pills"><span>100 % online</span><span class="pill-price">Desde 22 € / clase</span></div><a class="btn btn-main btn-block" href="#reserva">Reserva tu clase online</a></div></article>
     </div>
     <svg class="landscape" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
       <rect class="sea" x="0" y="80" width="1440" height="30"/>
@@ -714,21 +703,9 @@ nav a[aria-current="page"]{color:var(--jungle);font-weight:700;box-shadow:0 2px 
         <ul class="checks"><li>Plan a partir de su curso, su libro y sus deberes</li><li>Material de estudio y práctica gratis en la web</li><li>Contacto con las familias: te cuento cómo avanza</li></ul>
         <div class="btns"><a class="btn btn-main" href="#reserva" data-type="apoyo">Reservar apoyo escolar</a><a class="btn btn-ghost" href="#apoyo">Ver cómo funciona</a><a class="btn btn-ghost" href="/apoyo/">Estudia y practica gratis</a></div>
       </div>
-      <article class="profile" aria-label="Dana Salgado">
-        <div class="cover" aria-hidden="true">
+      <article class="profile team" aria-label="Nuestros profesores"><div class="cover" aria-hidden="true">
           <svg viewBox="0 0 400 70" preserveAspectRatio="none"><path d="M0 40 C60 10 120 5 180 25 C240 45 300 15 400 22 V70 H0Z" fill="var(--leaf)"/><path d="M0 55 C90 38 200 45 400 48 V70 H0Z" fill="var(--jungle)"/><use href="#fl" x="300" y="22" width="44" height="44"/><use href="#fl2" x="342" y="34" width="34" height="34"/><use href="#fl" x="60" y="30" width="30" height="30"/></svg>
-        </div>
-        <div class="pbody">
-          <h3>Dana Salgado</h3>
-          <p class="role" data-i18n="card_role">Profesora de español y apoyo escolar</p>
-          <div class="pills"><span data-i18n="pill1">Español A1–C1</span><span data-i18n="pill2">Primaria y ESO</span><span data-i18n="pill3">100 % online</span><span class="pill-price" data-i18n="pill4">Desde 22 € / clase</span></div>
-          <div class="pstats">
-            <div><strong>+10</strong><span data-i18n="me_f1">años de clases particulares</span></div>
-            <div><strong>3</strong><span data-i18n="me_f2">años en colegios españoles de Marruecos</span></div>
-          </div>
-          <a class="btn btn-main btn-block" href="#reserva" data-i18n="nav_book">Reserva tu clase online</a>
-        </div>
-      </article>
+        </div><div class="pbody"><h3>Nuestros profesores</h3><p class="role">Un profesor nativo por idioma</p></div><a class="trow" href="/profesores/" data-go="prof" data-t="es"><strong>Dana Salgado</strong><span>Español y apoyo escolar</span><em class="nat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Nativa · España</em></a><a class="trow" href="/profesores/" data-go="prof" data-t="en"><strong>Chris</strong><span>Inglés</span><em class="nat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Native · Chicago, USA</em></a><a class="trow" href="/profesores/" data-go="prof" data-t="fr"><strong>Profesor/a de francés</strong><span>Francés</span><em class="nat soon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Nativo/a · Próximamente</em></a><div class="pbody"><div class="pills"><span>100 % online</span><span class="pill-price">Desde 22 € / clase</span></div><a class="btn btn-main btn-block" href="#reserva">Reserva tu clase online</a></div></article>
     </div>
     <svg class="landscape" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
       <rect class="sea" x="0" y="80" width="1440" height="30"/>
@@ -757,9 +734,9 @@ nav a[aria-current="page"]{color:var(--jungle);font-weight:700;box-shadow:0 2px 
         <ul class="checks"><li>Profesor nativo de inglés, de Chicago (EE. UU.)</li><li>Dos caminos: examen A1–C1 o mejorar tu nivel y conversar</li><li>Test de nivel gratis si no sabes por dónde empezar</li></ul>
         <div class="btns"><a class="btn btn-main" href="#reserva" data-type="ingles">Reservar clase de inglés</a><a class="btn btn-ghost" href="#clases-en">Ver las clases</a><a class="btn btn-ghost" href="#test" data-type="ingles">Test de nivel gratis</a></div>
       </div>
-      <article class="profile" aria-label="Chris"><div class="cover" aria-hidden="true">
+      <article class="profile team" aria-label="Nuestros profesores"><div class="cover" aria-hidden="true">
           <svg viewBox="0 0 400 70" preserveAspectRatio="none"><path d="M0 40 C60 10 120 5 180 25 C240 45 300 15 400 22 V70 H0Z" fill="var(--leaf)"/><path d="M0 55 C90 38 200 45 400 48 V70 H0Z" fill="var(--jungle)"/><use href="#fl" x="300" y="22" width="44" height="44"/><use href="#fl2" x="342" y="34" width="34" height="34"/><use href="#fl" x="60" y="30" width="30" height="30"/></svg>
-        </div><div class="pbody"><span class="nat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Native English teacher</span><h3>Chris</h3><p class="role">Profesor nativo de inglés · Chicago (EE. UU.)</p><div class="pills"><span>Inglés A1–C1</span><span>Exámenes</span><span>Conversación</span><span>100 % online</span><span class="pill-price">Desde 22 € / clase</span></div><div class="pstats"><div><strong>Nativo</strong><span>profesor nativo de inglés</span></div><div><strong>Chicago</strong><span>Estados Unidos</span></div></div><a class="btn btn-main btn-block" href="#reserva" data-type="ingles">Reservar clase de inglés</a></div></article>
+        </div><div class="pbody"><h3>Nuestros profesores</h3><p class="role">Un profesor nativo por idioma</p></div><a class="trow" href="/profesores/" data-go="prof" data-t="es"><strong>Dana Salgado</strong><span>Español y apoyo escolar</span><em class="nat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Nativa · España</em></a><a class="trow" href="/profesores/" data-go="prof" data-t="en"><strong>Chris</strong><span>Inglés</span><em class="nat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Native · Chicago, USA</em></a><a class="trow" href="/profesores/" data-go="prof" data-t="fr"><strong>Profesor/a de francés</strong><span>Francés</span><em class="nat soon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Nativo/a · Próximamente</em></a><div class="pbody"><div class="pills"><span>100 % online</span><span class="pill-price">Desde 22 € / clase</span></div><a class="btn btn-main btn-block" href="#reserva">Reserva tu clase online</a></div></article>
     </div>
     <svg class="landscape" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
       <rect class="sea" x="0" y="80" width="1440" height="30"/>
@@ -788,9 +765,9 @@ nav a[aria-current="page"]{color:var(--jungle);font-weight:700;box-shadow:0 2px 
         <ul class="checks"><li>Profesor/a nativo/a de francés (en proceso de incorporación)</li><li>Dos caminos: examen A1–C1 (DELF/DALF) o mejorar tu nivel y conversar</li><li>Preinscripción sin pago</li></ul>
         <div class="btns"><a class="btn btn-main" href="#reserva" data-type="frances">Preinscribirme en francés</a><a class="btn btn-ghost" href="#clases-fr">Ver las clases</a><a class="btn btn-ghost" href="#test" data-type="frances">Test de nivel gratis</a></div>
       </div>
-      <article class="profile" aria-label="Profesor/a de francés"><div class="cover" aria-hidden="true">
+      <article class="profile team" aria-label="Nuestros profesores"><div class="cover" aria-hidden="true">
           <svg viewBox="0 0 400 70" preserveAspectRatio="none"><path d="M0 40 C60 10 120 5 180 25 C240 45 300 15 400 22 V70 H0Z" fill="var(--leaf)"/><path d="M0 55 C90 38 200 45 400 48 V70 H0Z" fill="var(--jungle)"/><use href="#fl" x="300" y="22" width="44" height="44"/><use href="#fl2" x="342" y="34" width="34" height="34"/><use href="#fl" x="60" y="30" width="30" height="30"/></svg>
-        </div><div class="pbody"><span class="nat soon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Native French teacher</span><h3>Profesor/a de francés</h3><p class="role">Nativo/a de francés · Muy pronto</p><div class="pills"><span>Francés A1–C1</span><span>DELF · DALF</span><span>Conversación</span><span>100 % online</span><span class="pill-price">Desde 22 € / clase</span></div><div class="pstats"><div><strong>Nativo/a</strong><span>profesor/a nativo/a de francés</span></div><div><strong>Pronto</strong><span>preinscripción abierta</span></div></div><a class="btn btn-main btn-block" href="#reserva" data-type="frances">Preinscribirme en francés</a></div></article>
+        </div><div class="pbody"><h3>Nuestros profesores</h3><p class="role">Un profesor nativo por idioma</p></div><a class="trow" href="/profesores/" data-go="prof" data-t="es"><strong>Dana Salgado</strong><span>Español y apoyo escolar</span><em class="nat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Nativa · España</em></a><a class="trow" href="/profesores/" data-go="prof" data-t="en"><strong>Chris</strong><span>Inglés</span><em class="nat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Native · Chicago, USA</em></a><a class="trow" href="/profesores/" data-go="prof" data-t="fr"><strong>Profesor/a de francés</strong><span>Francés</span><em class="nat soon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Nativo/a · Próximamente</em></a><div class="pbody"><div class="pills"><span>100 % online</span><span class="pill-price">Desde 22 € / clase</span></div><a class="btn btn-main btn-block" href="#reserva">Reserva tu clase online</a></div></article>
     </div>
     <svg class="landscape" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
       <rect class="sea" x="0" y="80" width="1440" height="30"/>
@@ -2439,7 +2416,7 @@ const PEND={en:'Chris publicará su calendario muy pronto. Mientras tanto, enví
 function setView(v){
   document.body.setAttribute('data-view',v);
   document.querySelectorAll('[data-go]').forEach(a=>{a.closest('nav,footer')&&(a.dataset.go===v?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'))});
-  document.querySelectorAll('.pick-card').forEach(c=>c.classList.toggle('cur',c.dataset.pick===v));
+  document.querySelectorAll('.pick-card').forEach(c=>c.classList.toggle('cur',c.dataset.pick===v));document.querySelectorAll('.trow').forEach(r=>r.classList.toggle('cur',r.dataset.t===(v==='ap'?'es':v)));
   document.title=V[v].t;
   const md=document.querySelector('meta[name="description"]');if(md)md.content=V[v].d;
   const cn=document.querySelector('link[rel="canonical"]');if(cn)cn.href='https://tuprofeporelmundo.com'+V[v].p;
