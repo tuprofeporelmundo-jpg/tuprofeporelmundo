@@ -7,8 +7,8 @@
 
 const SALT = "29889d33872fd5ce8b53e9ceac819567";
 const ITER = 150000;
-const HUELLA = "b812f91e91a97ab7e24831c653b5d9a11aacce8e9b97ab390b676be1673b2f26";
-const COOKIE = "tppm_acceso";
+const HUELLA = "8f8453091eb7588c06c2ecd33b67275e937008e8490e719089c7c7a93ecb6790";
+const COOKIE = "tppm_acceso2";
 const LIBRES = new Set(["/og.png", "/robots.txt", "/favicon.ico"]);
 
 const hex = (buf) => [...new Uint8Array(buf)].map((b) => b.toString(16).padStart(2, "0")).join("");
