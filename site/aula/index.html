@@ -289,6 +289,8 @@ footer.note{max-width:600px;margin:2.2rem auto 0;font-size:.82rem;color:var(--mu
   <section class="screen" id="s-goal" hidden>
     <div class="modes" id="modes" role="group">
       <button type="button" class="mode" data-m="es" data-i18n="m_es"></button>
+      <button type="button" class="mode" data-m="en" data-i18n="m_en"></button>
+      <button type="button" class="mode" data-m="fr" data-i18n="m_fr"></button>
       <button type="button" class="mode" data-m="school" data-i18n="m_school"></button>
     </div>
     <div class="stack"><h1 id="goal-h"></h1><p class="muted" id="goal-p"></p></div>
@@ -441,13 +443,14 @@ footer.note{max-width:600px;margin:2.2rem auto 0;font-size:.82rem;color:var(--mu
 <script src="config.js"></script>
 <script src="banco.js"></script>
 <script src="banco-escolar.js"></script>
+<script src="banco-idiomas.js"></script>
 <script>
 const CFG=window.AULA_CONFIG||{};
 const LV=LEVELS.map(l=>l.c);
 const REMOTE=!!(CFG.supabaseUrl&&CFG.supabaseKey);
 
 const T={
-es:{brand:'Mi aula',m_es:'Español',m_school:'Apoyo escolar',sc_goal_t:'¿En qué curso estás?',sc_goal_p:'Practica Matemáticas, Lengua, Inglés, Ciencias Naturales y Ciencias Sociales con unidades del currículo oficial de tu curso.',course_l:'Curso',start_school:'Empezar a practicar',sc_prog_t:'Tu semáforo por asignaturas',sc_prog_p:'Verde: lo dominas (80 % o más). Ámbar: vas avanzando. Rojo: conviene repasar.',sc_units:'Unidades de {s}',sc_change:'Cambiar curso o modalidad',sc_norm:'Las unidades siguen los saberes básicos de la LOMLOE: Real Decreto 157/2022 (Primaria) y Real Decreto 217/2022 (ESO).',sc_none:'Esta asignatura todavía no tiene unidades para tu curso.',sc_rev_none:'No tienes preguntas pendientes de repaso.',sc_why:'Por qué: ',loading:'Cargando…',local_note:'Estás usando el aula sin cuenta: tu progreso se guarda solo en este dispositivo.',
+es:{brand:'Mi aula',m_es:'Español',m_en:'Inglés',m_fr:'Francés',m_school:'Apoyo escolar',sc_goal_t:'¿En qué curso estás?',sc_goal_p:'Practica Matemáticas, Lengua, Inglés, Ciencias Naturales y Ciencias Sociales con unidades del currículo oficial de tu curso.',course_l:'Curso',start_school:'Empezar a practicar',sc_prog_t:'Tu semáforo por asignaturas',sc_prog_p:'Verde: lo dominas (80 % o más). Ámbar: vas avanzando. Rojo: conviene repasar.',sc_units:'Unidades de {s}',sc_change:'Cambiar curso o modalidad',sc_norm:'Las unidades siguen los saberes básicos de la LOMLOE: Real Decreto 157/2022 (Primaria) y Real Decreto 217/2022 (ESO).',sc_none:'Esta asignatura todavía no tiene unidades para tu curso.',sc_rev_none:'No tienes preguntas pendientes de repaso.',sc_why:'Por qué: ',loading:'Cargando…',local_note:'Estás usando el aula sin cuenta: tu progreso se guarda solo en este dispositivo.',
 auth_t:'Mi aula',auth_p:'Entra para hacer tu test de nivel, practicar y ver tu material.',tab_in:'Entrar',tab_up:'Crear cuenta',no_signup:'Tu profe te da tu usuario y tu contraseña al empezar las clases. ¿Aún no los tienes? Escribe a Dana.',
 email_l:'Correo electrónico',pass_l:'Contraseña',pass_new_l:'Contraseña (mínimo 8 caracteres)',name_l:'Tu nombre',in_b:'Entrar',up_b:'Crear mi cuenta',forgot:'He olvidado mi contraseña',user_l:'Tu usuario',user_new_l:'Elige tu usuario',user_hint:'Será tu dirección del aula. Solo letras, números y puntos, sin tildes.',err_user:'El usuario necesita entre 3 y 30 letras, números o puntos.',err_taken:'Ese usuario ya existe. Prueba otro, por ejemplo con la inicial de tu apellido.',forgot_txt:'Escribe a Dana a {e} y te creará una contraseña nueva.',
 age:'Tengo 14 años o más. Si el alumno tiene menos de 14, crea la cuenta su madre, padre o tutor legal.',
@@ -487,7 +490,7 @@ acc_t:'Mi cuenta',acc_who:'Has entrado como {e}.',acc_local:'Sin cuenta: tu prog
 retest:'Repetir el test de nivel',change:'Cambiar mi objetivo',logout:'Cerrar sesión',erase:'Borrar mi cuenta y mis datos',erase_local:'Borrar mi progreso',
 erase_q:'Se borrarán tu cuenta, tus resultados y tu progreso. No se puede deshacer. ¿Seguro?',erase_q_local:'Se borrará tu progreso de este dispositivo. ¿Seguro?',erase_yes:'Sí, borrar',erase_no:'Cancelar',
 back_home:'Volver a mi aula',back_web:'Volver a la web',priv_t:'Protección de datos del aula',close:'Cerrar'},
-en:{brand:'My classroom',m_es:'Spanish',m_school:'School support',sc_goal_t:'Which school year are you in?',sc_goal_p:'Practise Maths, Spanish Language, English, Natural Sciences and Social Sciences with units from the official Spanish curriculum for your year. Questions are in Spanish, as at school.',course_l:'School year',start_school:'Start practising',sc_prog_t:'Your traffic light by subject',sc_prog_p:'Green: you have mastered it (80% or more). Amber: you are getting there. Red: worth reviewing.',sc_units:'{s} units',sc_change:'Change year or mode',sc_norm:'Units follow the core knowledge of the LOMLOE: Royal Decree 157/2022 (primary) and Royal Decree 217/2022 (secondary).',sc_none:'This subject has no units for your year yet.',sc_rev_none:'You have no questions waiting for review.',sc_why:'Why: ',loading:'Loading…',local_note:'You are using the classroom without an account: your progress is saved on this device only.',
+en:{brand:'My classroom',m_es:'Spanish',m_en:'English',m_fr:'French',m_school:'School support',sc_goal_t:'Which school year are you in?',sc_goal_p:'Practise Maths, Spanish Language, English, Natural Sciences and Social Sciences with units from the official Spanish curriculum for your year. Questions are in Spanish, as at school.',course_l:'School year',start_school:'Start practising',sc_prog_t:'Your traffic light by subject',sc_prog_p:'Green: you have mastered it (80% or more). Amber: you are getting there. Red: worth reviewing.',sc_units:'{s} units',sc_change:'Change year or mode',sc_norm:'Units follow the core knowledge of the LOMLOE: Royal Decree 157/2022 (primary) and Royal Decree 217/2022 (secondary).',sc_none:'This subject has no units for your year yet.',sc_rev_none:'You have no questions waiting for review.',sc_why:'Why: ',loading:'Loading…',local_note:'You are using the classroom without an account: your progress is saved on this device only.',
 auth_t:'My classroom',auth_p:'Sign in to take your level test, practise and see your materials.',tab_in:'Sign in',tab_up:'Create account',no_signup:'Your teacher gives you your username and password when classes start. Don’t have them yet? Write to Dana.',
 email_l:'Email',pass_l:'Password',pass_new_l:'Password (at least 8 characters)',name_l:'Your first name',in_b:'Sign in',up_b:'Create my account',forgot:'I forgot my password',user_l:'Your username',user_new_l:'Choose your username',user_hint:'It will be your classroom address. Letters, numbers and dots only, no accents.',err_user:'The username needs 3 to 30 letters, numbers or dots.',err_taken:'That username is taken. Try another, for example with your surname initial.',forgot_txt:'Write to Dana at {e} and she will set a new password for you.',
 age:'I am 14 or older. If the student is under 14, their parent or legal guardian creates the account.',
@@ -527,7 +530,7 @@ acc_t:'My account',acc_who:'Signed in as {e}.',acc_local:'No account: your progr
 retest:'Retake the level test',change:'Change my goal',logout:'Sign out',erase:'Delete my account and data',erase_local:'Delete my progress',
 erase_q:'Your account, results and progress will be deleted. This cannot be undone. Are you sure?',erase_q_local:'Your progress on this device will be deleted. Are you sure?',erase_yes:'Yes, delete',erase_no:'Cancel',
 back_home:'Back to my classroom',back_web:'Back to the website',priv_t:'Classroom data protection',close:'Close'},
-fr:{brand:'Ma classe',m_es:'Espagnol',m_school:'Soutien scolaire',sc_goal_t:'En quelle année es-tu ?',sc_goal_p:'Entraîne-toi en maths, langue espagnole, anglais, sciences naturelles et sciences sociales avec des unités du programme officiel espagnol de ton année. Les questions sont en espagnol, comme à l’école.',course_l:'Année scolaire',start_school:'Commencer à m’entraîner',sc_prog_t:'Ton feu tricolore par matière',sc_prog_p:'Vert : tu maîtrises (80 % ou plus). Orange : tu progresses. Rouge : à revoir.',sc_units:'Unités de {s}',sc_change:'Changer d’année ou de mode',sc_norm:'Les unités suivent les savoirs de base de la LOMLOE : décret royal 157/2022 (primaire) et décret royal 217/2022 (collège-lycée).',sc_none:'Cette matière n’a pas encore d’unités pour ton année.',sc_rev_none:'Tu n’as aucune question à revoir.',sc_why:'Pourquoi : ',loading:'Chargement…',local_note:'Tu utilises la classe sans compte : ta progression est enregistrée uniquement sur cet appareil.',
+fr:{brand:'Ma classe',m_es:'Espagnol',m_en:'Anglais',m_fr:'Français',m_school:'Soutien scolaire',sc_goal_t:'En quelle année es-tu ?',sc_goal_p:'Entraîne-toi en maths, langue espagnole, anglais, sciences naturelles et sciences sociales avec des unités du programme officiel espagnol de ton année. Les questions sont en espagnol, comme à l’école.',course_l:'Année scolaire',start_school:'Commencer à m’entraîner',sc_prog_t:'Ton feu tricolore par matière',sc_prog_p:'Vert : tu maîtrises (80 % ou plus). Orange : tu progresses. Rouge : à revoir.',sc_units:'Unités de {s}',sc_change:'Changer d’année ou de mode',sc_norm:'Les unités suivent les savoirs de base de la LOMLOE : décret royal 157/2022 (primaire) et décret royal 217/2022 (collège-lycée).',sc_none:'Cette matière n’a pas encore d’unités pour ton année.',sc_rev_none:'Tu n’as aucune question à revoir.',sc_why:'Pourquoi : ',loading:'Chargement…',local_note:'Tu utilises la classe sans compte : ta progression est enregistrée uniquement sur cet appareil.',
 auth_t:'Ma classe',auth_p:'Connecte-toi pour passer ton test de niveau, t’entraîner et voir ton matériel.',tab_in:'Se connecter',tab_up:'Créer un compte',no_signup:'Ta prof te donne ton identifiant et ton mot de passe au début des cours. Tu ne les as pas encore ? Écris à Dana.',
 email_l:'Adresse e-mail',pass_l:'Mot de passe',pass_new_l:'Mot de passe (8 caractères minimum)',name_l:'Ton prénom',in_b:'Se connecter',up_b:'Créer mon compte',forgot:'J’ai oublié mon mot de passe',user_l:'Ton identifiant',user_new_l:'Choisis ton identifiant',user_hint:'Ce sera ton adresse de la classe. Lettres, chiffres et points uniquement, sans accents.',err_user:'L’identifiant doit avoir de 3 à 30 lettres, chiffres ou points.',err_taken:'Cet identifiant existe déjà. Essaie-en un autre, par exemple avec l’initiale de ton nom.',forgot_txt:'Écris à Dana à {e} et elle te créera un nouveau mot de passe.',
 age:'J’ai 14 ans ou plus. Si l’élève a moins de 14 ans, sa mère, son père ou son tuteur légal crée le compte.',
@@ -607,7 +610,7 @@ const BYID=Object.fromEntries(BANK.map(q=>[q.id,q]));
 let lang='es';
 try{const s=localStorage.getItem('tppm-lang');if(T[s])lang=s}catch(e){}
 const $=id=>document.getElementById(id);
-const t=(k,v)=>{let s=T[lang][k];if(v)for(const n in v)s=s.split('{'+n+'}').join(v[n]);return s};
+const t=(k,v)=>{let s=T[lang][k];if(!/^m_/.test(k))s=tgtWord(s);if(v)for(const n in v)s=s.split('{'+n+'}').join(v[n]);return s};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const sample=(a,n)=>shuffle(a).slice(0,n);
@@ -741,7 +744,7 @@ function renderGoal(){
   $('goal-note').hidden=data.level!==null;
 }
 $('target').addEventListener('change',e=>{if(data.track==='school')data.esc.c=e.target.value;else data.target=+e.target.value;renderGoal()});
-document.querySelectorAll('.mode').forEach(b=>b.addEventListener('click',()=>{data.track=b.dataset.m;renderGoal()}));
+document.querySelectorAll('.mode').forEach(b=>b.addEventListener('click',()=>{switchTrack(b.dataset.m);renderGoal()}));
 $('goal-next').addEventListener('click',async()=>{
   await store.save();
   if(data.track==='school'){renderSchool();show('s-school')}
@@ -845,8 +848,8 @@ function renderItem(){
 }
 function say(text,rate){
   try{
-    const u=new SpeechSynthesisUtterance(text);u.lang='es-ES';u.rate=rate;
-    const vs=speechSynthesis.getVoices();const v=vs.find(v=>v.lang==='es-ES')||vs.find(v=>/^es/.test(v.lang));if(v)u.voice=v;
+    const u=new SpeechSynthesisUtterance(text);const SL={es:'es-ES',en:'en-US',fr:'fr-FR'}[(data&&data.lt)||'es'];u.lang=SL;u.rate=rate;
+    const vs=speechSynthesis.getVoices();const v=vs.find(v=>v.lang===SL)||vs.find(v=>v.lang.slice(0,2)===SL.slice(0,2));if(v)u.voice=v;
     speechSynthesis.cancel();speechSynthesis.speak(u);
   }catch(e){const s=$('said');s.textContent=text;s.hidden=false}
 }
@@ -1020,7 +1023,7 @@ function renderHome(){
   const matBtn=(f,k,c)=>`<button type="button" class="btn btn-ghost btn-sm" data-f="${esc(c+'/'+f)}"${REMOTE?'':' disabled'}>${t(k)}</button>`;
   const matLi=(m,c)=>`<li><svg aria-hidden="true"><use href="#i-doc"/></svg><div><b>${esc(m.t)}</b><span>${!REMOTE?t('mat_local'):m.a?t(m.s?'mat_kind_u':'mat_kind_a'):t(m.g?'mat_kind_g':'mat_kind')}</span></div><span class="mat-b">${m.a?matBtn(m.a,'mat_a',c)+(m.s?matBtn(m.s,'mat_s',c):''):matBtn(m.f,'mat_open',c)}</span></li>`;
   if(REMOTE&&CARP===null){CARP=[];sb.from('material_carpetas').select('carpeta').then(r=>{CARP=(r.data||[]).map(x=>x.carpeta);renderHome()})}
-  $('mat').innerHTML=LV.map((c,l)=>{const ms=MATERIAL[l]||[];
+  $('mat').innerHTML=(((data.lt||'es')!=='es')?[]:LV).map((c,l)=>{const ms=MATERIAL[l]||[];
     if(REMOTE&&!(CARP||[]).includes(c))return '';
     return `<details class="mat-f"${l===w?' open':''}><summary><svg aria-hidden="true"><use href="#i-folder"/></svg><span>${c}</span><small>${ms.length?t('mat_n',{n:ms.length}):t('mat_soon')}</small></summary><ul class="mat">${ms.length?ms.map(m=>matLi(m,c)).join(''):`<li><svg aria-hidden="true"><use href="#i-doc"/></svg><div>${esc(t('mat_none',{l:c}))}</div></li>`}</ul></details>`}).join('')||`<p class="muted">${esc(t('mat_noacc'))}</p>`;
   $('mat').querySelectorAll('[data-f]').forEach(b=>b.addEventListener('click',()=>openMaterial(b.dataset.f)));
@@ -1087,9 +1090,23 @@ $('retest').addEventListener('click',startPlacement);
 $('h-goal').addEventListener('click',()=>{renderGoal();show('s-goal')});
 
 /* ───────── arranque ───────── */
+/* idiomas: español, inglés y francés comparten el mismo aula; cada uno guarda su propio nivel y objetivo */
+const BANKS={es:BANK.slice(),en:BANK_EN,fr:BANK_FR},TEXTS_BY={es:Object.assign({},TEXTS),en:TEXTS_EN,fr:TEXTS_FR};
+function useTrack(n){const k=BANKS[n]?n:'es';BANK.length=0;BANKS[k].forEach(q=>BANK.push(q));Object.keys(BYID).forEach(i=>delete BYID[i]);BANK.forEach(q=>{BYID[q.id]=q});Object.keys(TEXTS).forEach(i=>delete TEXTS[i]);Object.assign(TEXTS,TEXTS_BY[k])}
+const TGT_NAME={es:{es:'español',en:'Spanish',fr:'espagnol'},en:{es:'inglés',en:'English',fr:'anglais'},fr:{es:'francés',en:'French',fr:'français'}};
+function tgtWord(s){let g='es';try{if(data.track==='school')return s;g=(data&&data.lt)||'es'}catch(e){}if(g==='es'||typeof s!=='string')return s;const to=TGT_NAME[g][lang];const re={es:/([Ee])spañol/g,en:/Spanish/g,fr:/([Ee])spagnol/g}[lang];return s.replace(re,(m,c)=>c==='E'?to[0].toUpperCase()+to.slice(1):to)}
+function switchTrack(n){
+  if(!data.prof)data.prof={};
+  if(n!=='school'&&n!==(data.lt||'es')){
+    data.prof[data.lt||'es']={goal:data.goal,target:data.target,level:data.level,units:data.units};
+    const p=data.prof[n]||{goal:null,target:2,level:null,units:{}};
+    data.goal=p.goal;data.target=p.target;data.level=p.level;data.units=p.units||{};data.lt=n;useTrack(n);
+  }
+  data.track=n;
+}
 async function enter(){
   try{data=await store.load()}catch(e){data=fresh()}
-  if(!data.esc)data.esc={c:null};if(!data.track)data.track='es';
+  if(!data.esc)data.esc={c:null};if(!data.track)data.track='es';if(!data.prof)data.prof={};if(!data.lt)data.lt='es';useTrack(data.lt);
   if(data.track==='school'&&data.esc.c){renderSchool();show('s-school')}
   else if(!data.goal||data.level===null){renderGoal();show('s-goal')}
   else{renderHome();show('s-home')}
