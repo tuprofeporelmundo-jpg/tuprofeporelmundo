@@ -2454,7 +2454,7 @@ document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest
   if(href.startsWith('#'))return;
   e.preventDefault();if(location.pathname.replace(/\/+$/,'')!==V[v].p.replace(/\/+$/,''))history.pushState(null,'',V[v].p);
   setView(v);scrollTo({top:0,behavior:'auto'});});
-addEventListener('popstate',()=>setView(vf()));
+addEventListener('popstate',()=>{const n=vf();if(n!==document.body.getAttribute('data-view'))setView(n)});
 // los enlaces #test: elegir el tipo de clase según la pestaña
 document.querySelectorAll('a[href="#test"]:not([data-type])').forEach(a=>{a.dataset.type={en:'ingles',fr:'frances'}[vf()]||'espanol'});
 window.__setView=setView;setView(vf());
