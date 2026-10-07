@@ -372,7 +372,7 @@ form.news{margin-top:1.8rem;background:var(--card);border:1px solid var(--line);
 /* horarios */
 .sc-bar{display:flex;flex-wrap:wrap;gap:1rem 1.5rem;align-items:flex-end;justify-content:space-between;margin-bottom:1.4rem}
 .sc-bar label{max-width:340px;flex:1 1 260px}
-.sc-nav{display:flex;align-items:center;gap:.6rem}
+.sc-tzinfo{display:block;margin-top:.35rem;color:var(--muted);font-size:.85rem;font-weight:400}.sc-nav{display:flex;align-items:center;gap:.6rem}
 .sc-nav button{border:1px solid var(--line);background:var(--card);color:var(--ink);border-radius:10px;width:2.6rem;height:2.6rem;font:inherit;font-size:1.2rem;cursor:pointer}
 .sc-nav button:disabled{opacity:.35;cursor:not-allowed}
 .sc-week{font-weight:700;min-width:12rem;text-align:center}
@@ -530,10 +530,9 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
   .logo{white-space:nowrap}
   .right{display:contents}
   .book-wrap{grid-column:2;grid-row:1}
-  nav{grid-column:1;grid-row:2;min-width:0;-webkit-mask:linear-gradient(90deg,#000 88%,transparent);mask:linear-gradient(90deg,#000 88%,transparent)}
-  nav ul{flex-wrap:nowrap;overflow-x:auto;gap:1.1rem;padding-bottom:.3rem;scrollbar-width:none}
-  nav ul::-webkit-scrollbar{display:none}
-  nav li{flex:none}
+  .bar nav{grid-column:1;grid-row:2;min-width:0}
+  .bar nav ul{flex-wrap:wrap;gap:.3rem 1.1rem;padding-bottom:.3rem}
+  .bar nav li{flex:none}
   .langsw{grid-column:2;grid-row:2;justify-self:end}
 }
 @media (max-width:560px){
@@ -895,7 +894,7 @@ body[data-view="en"] .rt-modes,body[data-view="fr"] .rt-modes{display:none}
       <p class="intro" data-i18n="sc_intro">Doy clase online de martes a jueves, de 15:00 a 00:00 (hora de España). Las horas aparecen en tu zona horaria: elige una franja libre y pasarás al formulario de reserva.</p>
       <p class="pend" id="sc-who" hidden></p><div class="sc-pending" id="sc-pending" hidden></div>
       <div class="sc-bar">
-        <label><span data-i18n="sc_tz">Tu zona horaria</span><select id="sc-tz"></select></label>
+        <label><span data-i18n="sc_city">Tu ciudad</span><input id="sc-city" list="sc-cities" type="text" autocomplete="off" placeholder="Escribe tu ciudad…" data-i18n-ph="sc_city_ph"><datalist id="sc-cities"></datalist><small id="sc-tzinfo" class="sc-tzinfo" aria-live="polite"></small></label>
         <div class="sc-nav">
           <button aria-label="Semana anterior" type="button" id="sc-prev" data-i18n-aria="sc_prev">‹</button>
           <span class="sc-week" id="sc-week" aria-live="polite"></span>
@@ -1814,12 +1813,26 @@ let scWeek=0,scTz='';
 try{scTz=localStorage.getItem('tppm-tz')||''}catch(e){}
 if(!scTz){try{scTz=Intl.DateTimeFormat().resolvedOptions().timeZone||SCHEDULE.tz}catch(e){scTz=SCHEDULE.tz}}
 (function(){
-  const sel=$('sc-tz');let zones=[];
-  try{zones=Intl.supportedValuesOf('timeZone')}catch(e){}
-  if(!zones.length)zones=['Europe/Madrid','Europe/London','Europe/Paris','Europe/Berlin','Africa/Casablanca','America/New_York','America/Chicago','America/Denver','America/Los_Angeles','America/Mexico_City','America/Bogota','America/Lima','America/Santiago','America/Buenos_Aires','America/Sao_Paulo','Asia/Dubai','Asia/Kolkata','Asia/Bangkok','Asia/Shanghai','Asia/Tokyo','Australia/Sydney'];
-  if(!zones.includes(scTz))zones.unshift(scTz);if(!zones.includes('Europe/Madrid'))zones.unshift('Europe/Madrid');
-  zones.forEach(z=>sel.add(new Option(z.replace(/_/g,' '),z)));sel.value=scTz;
-  sel.addEventListener('change',()=>{scTz=sel.value;try{localStorage.setItem('tppm-tz',scTz)}catch(e){}renderSchedule()});
+  const inp=$('sc-city'),dl=$('sc-cities'),info=$('sc-tzinfo');
+  const norm=s=>String(s).normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[_\-.,]/g,' ').replace(/\s+/g,' ').trim();
+  let zones=[];try{zones=Intl.supportedValuesOf('timeZone')}catch(e){}
+  const AL={"londres":"Europe/London","edimburgo":"Europe/London","manchester":"Europe/London","liverpool":"Europe/London","glasgow":"Europe/London","birmingham":"Europe/London","nueva york":"America/New_York","boston":"America/New_York","miami":"America/New_York","washington":"America/New_York","atlanta":"America/New_York","filadelfia":"America/New_York","philadelphia":"America/New_York","orlando":"America/New_York","houston":"America/Chicago","dallas":"America/Chicago","austin":"America/Chicago","san antonio":"America/Chicago","minneapolis":"America/Chicago","new orleans":"America/Chicago","nueva orleans":"America/Chicago","salt lake city":"America/Denver","san francisco":"America/Los_Angeles","seattle":"America/Los_Angeles","san diego":"America/Los_Angeles","portland":"America/Los_Angeles","montreal":"America/Toronto","ottawa":"America/Toronto","calgary":"America/Edmonton","ciudad de mexico":"America/Mexico_City","mexico df":"America/Mexico_City","cdmx":"America/Mexico_City","guadalajara":"America/Mexico_City","monterrey":"America/Monterrey","cancun":"America/Cancun","la habana":"America/Havana","medellin":"America/Bogota","cali":"America/Bogota","cartagena":"America/Bogota","barranquilla":"America/Bogota","rio de janeiro":"America/Sao_Paulo","brasilia":"America/Sao_Paulo","ciudad de panama":"America/Panama","barcelona":"Europe/Madrid","sevilla":"Europe/Madrid","valencia":"Europe/Madrid","bilbao":"Europe/Madrid","granada":"Europe/Madrid","malaga":"Europe/Madrid","zaragoza":"Europe/Madrid","oviedo":"Europe/Madrid","gijon":"Europe/Madrid","santander":"Europe/Madrid","vigo":"Europe/Madrid","pamplona":"Europe/Madrid","alicante":"Europe/Madrid","murcia":"Europe/Madrid","palma de mallorca":"Europe/Madrid","ibiza":"Europe/Madrid","ceuta":"Africa/Ceuta","melilla":"Africa/Ceuta","las palmas":"Atlantic/Canary","tenerife":"Atlantic/Canary","canarias":"Atlantic/Canary","tanger":"Africa/Casablanca","tangier":"Africa/Casablanca","rabat":"Africa/Casablanca","marrakech":"Africa/Casablanca","fez":"Africa/Casablanca","tetuan":"Africa/Casablanca","tunez":"Africa/Tunis","el cairo":"Africa/Cairo","johannesburgo":"Africa/Johannesburg","ciudad del cabo":"Africa/Johannesburg","cape town":"Africa/Johannesburg","lisboa":"Europe/Lisbon","oporto":"Europe/Lisbon","porto":"Europe/Lisbon","paris":"Europe/Paris","lyon":"Europe/Paris","marsella":"Europe/Paris","marseille":"Europe/Paris","burdeos":"Europe/Paris","bordeaux":"Europe/Paris","toulouse":"Europe/Paris","niza":"Europe/Paris","nice":"Europe/Paris","munich":"Europe/Berlin","hamburgo":"Europe/Berlin","hamburg":"Europe/Berlin","frankfurt":"Europe/Berlin","colonia":"Europe/Berlin","cologne":"Europe/Berlin","roma":"Europe/Rome","milan":"Europe/Rome","napoles":"Europe/Rome","naples":"Europe/Rome","venecia":"Europe/Rome","venice":"Europe/Rome","florencia":"Europe/Rome","florence":"Europe/Rome","turin":"Europe/Rome","bruselas":"Europe/Brussels","viena":"Europe/Vienna","ginebra":"Europe/Zurich","geneva":"Europe/Zurich","berna":"Europe/Zurich","luxemburgo":"Europe/Luxembourg","copenhague":"Europe/Copenhagen","estocolmo":"Europe/Stockholm","reikiavik":"Atlantic/Reykjavik","atenas":"Europe/Athens","varsovia":"Europe/Warsaw","praga":"Europe/Prague","bucarest":"Europe/Bucharest","belgrado":"Europe/Belgrade","kiev":"Europe/Kiev","moscu":"Europe/Moscow","san petersburgo":"Europe/Moscow","saint petersburg":"Europe/Moscow","estambul":"Europe/Istanbul","ankara":"Europe/Istanbul","tel aviv":"Asia/Jerusalem","jerusalen":"Asia/Jerusalem","riad":"Asia/Riyadh","teheran":"Asia/Tehran","bagdad":"Asia/Baghdad","abu dhabi":"Asia/Dubai","delhi":"Asia/Kolkata","nueva delhi":"Asia/Kolkata","new delhi":"Asia/Kolkata","mumbai":"Asia/Kolkata","bombay":"Asia/Kolkata","bangalore":"Asia/Kolkata","calcuta":"Asia/Kolkata","pekin":"Asia/Shanghai","beijing":"Asia/Shanghai","shenzhen":"Asia/Shanghai","canton":"Asia/Shanghai","seul":"Asia/Seoul","singapur":"Asia/Singapore","yakarta":"Asia/Jakarta","hanoi":"Asia/Ho_Chi_Minh","sidney":"Australia/Sydney","melbourne":"Australia/Melbourne","canberra":"Australia/Sydney"};
+  const seen={},list=[];
+  const add=(l,z)=>{const k=norm(l);if(k&&!seen[k]){seen[k]=z;list.push([l,z])}};
+  zones.forEach(z=>{if(z.indexOf('/')>0)add(z.split('/').pop().replace(/_/g,' '),z)});
+  Object.keys(AL).forEach(n=>add(n.replace(/(^|\s)\S/g,c=>c.toUpperCase()),AL[n]));
+  list.sort((x,y)=>x[0].localeCompare(y[0]));
+  dl.innerHTML=list.map(x=>'<option value="'+x[0]+'"></option>').join('');
+  const cityOf=z=>z.split('/').pop().replace(/_/g,' ');
+  const offTxt=z=>{const m=Math.round(tzOffset(new Date(),z)/60000),a=Math.abs(m);return 'UTC'+(m<0?'−':'+')+Math.floor(a/60)+(a%60?':'+String(a%60).padStart(2,'0'):'')};
+  let bad=false;
+  window.__tzInfo=function(){inp.placeholder=t('sc_city_ph');info.textContent=bad?t('sc_city_no'):t('sc_city_ok').replace('{c}',cityOf(scTz)).replace('{o}',offTxt(scTz));info.style.color=bad?'#a33':''};
+  function apply(z,label){scTz=z;bad=false;try{localStorage.setItem('tppm-tz',z)}catch(e){}inp.value=label;const fc=$('f-country');if(fc&&!fc.value)fc.value=label;renderSchedule()}
+  function find(v){const k=norm(v);if(!k)return null;const ex=list.find(x=>norm(x[0])===k);if(ex)return ex;return list.find(x=>norm(x[0]).startsWith(k))||null}
+  inp.value=cityOf(scTz);
+  inp.addEventListener('focus',()=>inp.select());
+  inp.addEventListener('input',()=>{const k=norm(inp.value);const ex=list.find(x=>norm(x[0])===k);if(ex)apply(ex[1],ex[0])});
+  inp.addEventListener('change',()=>{const f=find(inp.value);if(f)apply(f[1],f[0]);else{bad=true;window.__tzInfo()}});
   $('sc-prev').addEventListener('click',()=>{if(scWeek>0){scWeek--;renderSchedule()}});
   $('sc-next').addEventListener('click',()=>{if(scWeek<SCHEDULE.weeks-1){scWeek++;renderSchedule()}});
 })();
@@ -1842,7 +1855,7 @@ function buildSlots(){
 }
 const LOC={es:'es-ES',en:'en-GB',fr:'fr-FR'};
 function fmt(d,tz,o){return new Intl.DateTimeFormat(LOC[lang],Object.assign({timeZone:tz},o)).format(d)}
-function renderSchedule(){
+function renderSchedule(){if(window.__tzInfo)window.__tzInfo();
   const {slots,ws}=buildSlots();
   const a=new Date(ws),b=new Date(ws+6*864e5);
   $('sc-week').textContent=fmt(a,'UTC',{day:'numeric',month:'short'})+' – '+fmt(b,'UTC',{day:'numeric',month:'short'});
@@ -2412,7 +2425,7 @@ const K={
 es:{nav_es:'Español',nav_en:'Inglés',nav_fr:'Francés',nav_prof:'Nuestros profesores',f_type_en:'Clases de inglés',f_type_fr:'Clases de francés',g_what:'¿Qué quieres conseguir?',g_exam:'Preparar un examen (A1–C1)',g_conv:'Mejorar mi nivel y conversar (sin examen)',g_unk:'No lo sé todavía: ayúdame a decidirlo',g_examname:'¿Qué examen?',g_more:'Cuéntame más',fr_pend:'Estamos incorporando a nuestro profesor o profesora nativo/a de francés. Tu solicitud queda como preinscripción y te escribimos en cuanto abramos agenda.',hero_lead:'Clases online de español, inglés y francés con profesores nativos, y apoyo escolar de primaria a la ESO, diseñadas a partir de tus necesidades y tus objetivos.',hero_b3:'Español, inglés y francés de A1 a C1, y apoyo escolar de primaria a la ESO',pr_intro:'Las mismas tarifas para todas las clases: español, inglés, francés y apoyo escolar. Sesiones individuales online de 1 hora, con material para la clase y apuntes para seguir avanzando en casa.'},
 en:{nav_es:'Spanish',nav_en:'English',nav_fr:'French',nav_prof:'Our teachers',f_type_en:'English classes',f_type_fr:'French classes',g_what:'What do you want to achieve?',g_exam:'Prepare an exam (A1–C1)',g_conv:'Improve my level and practise conversation (no exam)',g_unk:"I don't know yet: help me decide",g_examname:'Which exam?',g_more:'Tell me more',fr_pend:'We are bringing on our native French teacher. Your request is saved as a pre-registration and we will write to you as soon as the calendar opens.',hero_lead:'Online classes in Spanish, English and French with native teachers, and school support from primary to ESO, designed around your needs and goals.',hero_b3:'Spanish, English and French from A1 to C1, and school support from primary to ESO',pr_intro:'The same rates for every class: Spanish, English, French and school support. One-to-one online sessions of 1 hour, with class materials and notes to keep progressing at home.'},
 fr:{nav_es:'Espagnol',nav_en:'Anglais',nav_fr:'Français',nav_prof:'Nos professeurs',f_type_en:"Cours d'anglais",f_type_fr:'Cours de français',g_what:'Que souhaitez-vous ?',g_exam:'Préparer un examen (A1–C1)',g_conv:'Progresser et converser (sans examen)',g_unk:'Je ne sais pas encore : aidez-moi à choisir',g_examname:'Quel examen ?',g_more:'Dites-m’en plus',fr_pend:'Nous accueillons bientôt notre professeur natif de français. Votre demande est enregistrée comme pré-inscription et nous vous écrirons dès l’ouverture du calendrier.',hero_lead:'Cours en ligne d’espagnol, d’anglais et de français avec des professeurs natifs, et soutien scolaire du primaire à la ESO, conçus selon vos besoins et vos objectifs.',hero_b3:'Espagnol, anglais et français de A1 à C1, et soutien scolaire du primaire à la ESO',pr_intro:'Les mêmes tarifs pour tous les cours : espagnol, anglais, français et soutien scolaire. Séances individuelles en ligne d’1 heure, avec supports de cours et notes pour progresser à la maison.'}};
-K.es.rt_mode_en='Reto de inglés';K.es.rt_mode_fr='Reto de francés';K.en.rt_mode_en='English challenge';K.en.rt_mode_fr='French challenge';K.fr.rt_mode_en='Défi d’anglais';K.fr.rt_mode_fr='Défi de français';K.es.foot_tag='Clases online de español, inglés y francés y apoyo escolar, personalizadas para cada alumno.';K.en.foot_tag='Online Spanish, English and French classes and school support, tailored to each student.';K.fr.foot_tag='Cours en ligne d’espagnol, d’anglais et de français et soutien scolaire, personnalisés pour chaque élève.';K.es.hero_badge='Profesores nativos con más de 10 años de experiencia';K.en.hero_badge='Native teachers with more than 10 years of experience';K.fr.hero_badge='Professeurs natifs avec plus de 10 ans d’expérience';['es','en','fr'].forEach(l=>Object.assign(T[l],K[l]));
+K.es.rt_mode_en='Reto de inglés';K.es.rt_mode_fr='Reto de francés';K.en.rt_mode_en='English challenge';K.en.rt_mode_fr='French challenge';K.fr.rt_mode_en='Défi d’anglais';K.fr.rt_mode_fr='Défi de français';K.es.foot_tag='Clases online de español, inglés y francés y apoyo escolar, personalizadas para cada alumno.';K.en.foot_tag='Online Spanish, English and French classes and school support, tailored to each student.';K.fr.foot_tag='Cours en ligne d’espagnol, d’anglais et de français et soutien scolaire, personnalisés pour chaque élève.';K.es.sc_city="Tu ciudad";K.en.sc_city="Your city";K.fr.sc_city="Ta ville";K.es.sc_city_ph="Escribe tu ciudad…";K.en.sc_city_ph="Type your city…";K.fr.sc_city_ph="Écris ta ville…";K.es.sc_city_ok="Horarios en la hora de {c} ({o}).";K.en.sc_city_ok="Times shown in {c} time ({o}).";K.fr.sc_city_ok="Horaires à l’heure de {c} ({o}).";K.es.sc_city_no="No encuentro esa ciudad. Prueba con otra cercana o con la capital.";K.en.sc_city_no="I can’t find that city. Try a nearby one or the capital.";K.fr.sc_city_no="Je ne trouve pas cette ville. Essaie une ville proche ou la capitale.";K.es.hero_badge='Profesores nativos con más de 10 años de experiencia';K.en.hero_badge='Native teachers with more than 10 years of experience';K.fr.hero_badge='Professeurs natifs avec plus de 10 ans d’expérience';['es','en','fr'].forEach(l=>Object.assign(T[l],K[l]));
 const V={es:{p:'/',t:'Clases online de español, inglés y francés y apoyo escolar · Tu profe por el mundo',d:'Clases online de español para extranjeros (A1-C1), inglés y francés con profesores nativos, y apoyo escolar de primaria y ESO. Primera clase de 30 minutos por 15 €.'},
 en:{p:'/ingles/',t:'Clases de inglés online con profesor nativo de Chicago · Tu profe por el mundo',d:'Prepara tu examen de inglés (A1-C1) o mejora tu nivel y conversa con Chris, profesor nativo de Chicago. Clases online a tu medida.'},
 fr:{p:'/frances/',t:'Clases de francés online con profesor nativo · Tu profe por el mundo',d:'Prepara el DELF/DALF o mejora tu nivel de francés y conversa con un profesor nativo. Preinscripción abierta.'},
