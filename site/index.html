@@ -1827,6 +1827,7 @@ if(!scTz){try{scTz=Intl.DateTimeFormat().resolvedOptions().timeZone||SCHEDULE.tz
   const cityOf=z=>z.split('/').pop().replace(/_/g,' ');
   const offTxt=z=>{const m=Math.round(tzOffset(new Date(),z)/60000),a=Math.abs(m);return 'UTC'+(m<0?'−':'+')+Math.floor(a/60)+(a%60?':'+String(a%60).padStart(2,'0'):'')};
   let bad=false,lbl='';
+  window.__tzLabel=function(){return (lbl||cityOf(scTz))+', '+offTxt(scTz)};
   window.__tzInfo=function(){inp.placeholder=t('sc_city_ph');info.textContent=bad?t('sc_city_no'):t('sc_city_ok').replace('{c}',lbl||cityOf(scTz)).replace('{o}',offTxt(scTz));info.style.color=bad?'#a33':''};
   function apply(z,label){scTz=z;bad=false;lbl=label;try{localStorage.setItem('tppm-tz',z)}catch(e){}inp.value=label;const fc=$('f-country');if(fc&&!fc.value)fc.value=label;renderSchedule()}
   function find(v){const k=norm(v);if(!k)return null;const ex=list.find(x=>norm(x[0])===k);if(ex)return ex;return list.find(x=>norm(x[0]).startsWith(k))||null}
@@ -1884,7 +1885,7 @@ function renderSchedule(){if(window.__tzInfo)window.__tzInfo();
   });
 }
 let picked=null,special=false;
-function specialText(){return t('sp_tag')+' ('+t('sc_tz').toLowerCase()+': '+scTz.replace(/_/g,' ')+')'}
+function specialText(){return t('sp_tag')+' ('+t('sc_tz').toLowerCase()+': '+window.__tzLabel()+')'}
 $('sp-btn').addEventListener('click',()=>{
   picked=null;special=true;
   $('f-slot').value=specialText();$('f-avail').value=specialText();
@@ -1895,7 +1896,7 @@ $('sp-btn').addEventListener('click',()=>{
 function slotText(){
   if(!picked)return '';
   const es=fmt(picked.s,SCHEDULE.tz,{weekday:'long',day:'numeric',month:'long',hour:'2-digit',minute:'2-digit'});
-  return `${picked.label}, ${picked.tm} (${scTz.replace(/_/g,' ')}) · ${t('sc_spain')}: ${es}`;
+  return `${picked.label}, ${picked.tm} (${window.__tzLabel()}) · ${t('sc_spain')}: ${es}`;
 }
 function pickSlot(s,label,tm){
   picked={s,label,tm};special=false;$('sp-wrap').hidden=true;
