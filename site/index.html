@@ -2457,7 +2457,7 @@ document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest
   setView(v);scrollTo({top:0,behavior:'auto'});});
 addEventListener('popstate',()=>{const n=vf();if(n!==document.body.getAttribute('data-view'))setView(n)});
 // los enlaces #test: elegir el tipo de clase según la pestaña
-document.querySelectorAll('a[href="#test"]:not([data-type])').forEach(a=>{a.dataset.type={en:'ingles',fr:'frances'}[vf()]||'espanol'});
+document.querySelectorAll('a[href="#test"]:not([data-type])').forEach(a=>a.addEventListener('click',()=>{const ty={en:'ingles',fr:'frances'}[vf()]||'espanol';$('f-type').value=ty;$('f-type').dispatchEvent(new Event('change'))}));
 window.__setView=setView;setView(vf());
 })();
 buildTest();renderPhrase();setLang(start);
