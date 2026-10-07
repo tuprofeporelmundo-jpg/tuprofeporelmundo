@@ -558,9 +558,48 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
   .tab-book{padding:.5rem .7rem}
   .tab-book::before{display:none}
 }
+
+body[data-view="es"] [data-views]:not([data-views~="es"]),body[data-view="en"] [data-views]:not([data-views~="en"]),body[data-view="fr"] [data-views]:not([data-views~="fr"]),body[data-view="ap"] [data-views]:not([data-views~="ap"]),body[data-view="prof"] [data-views]:not([data-views~="prof"]){display:none!important}
+nav a[aria-current="page"]{color:var(--jungle);font-weight:700;box-shadow:0 2px 0 var(--ochre)}
+.nat{display:inline-flex;align-items:center;gap:.5rem;background:var(--jungle);color:var(--bg);font-weight:800;letter-spacing:.05em;text-transform:uppercase;font-size:.86rem;padding:.5rem 1rem;border-radius:999px;margin-bottom:1.1rem}
+.nat svg{width:18px;height:18px;flex:none}
+.nat.soon{background:transparent;color:var(--jungle);border:2px dashed var(--jungle)}
+.services.single{grid-template-columns:1fr}
+.offers{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:1.4rem}
+.svc h4{margin:0;font-size:.95rem;color:var(--muted);font-weight:600}
+.svc .btns{display:flex;flex-wrap:wrap;gap:.6rem}
+.others{margin-top:2.2rem}
+.others h3{margin:0 0 1rem;font-size:1.2rem}
+.ogrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,230px),1fr));gap:1rem}
+.ocard{display:block;text-decoration:none;color:var(--ink);background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1.1rem 1.2rem;box-shadow:var(--shadow)}
+.ocard:hover{border-color:var(--jungle)}
+.ocard strong{display:block;font-size:1.1rem;margin-bottom:.2rem}
+.ocard span{display:block;color:var(--muted);font-size:.9rem;line-height:1.35}
+.ocard .nat{font-size:.7rem;padding:.25rem .6rem;margin:.5rem 0 0}
+.tband{padding:2.2rem 0}
+.tband .about{align-items:center}
+.tav{width:96px;height:96px;border-radius:50%;background:var(--ochre-soft);color:var(--jungle);display:grid;place-items:center;font-size:2.4rem;font-weight:800;margin-bottom:1rem}
+.pend{background:var(--ochre-soft);border-radius:12px;padding:.9rem 1.1rem;margin:0 0 1rem;font-size:.95rem}
+.sc-pending{background:var(--card);border:1px dashed var(--line);border-radius:14px;padding:1.2rem 1.4rem;margin:1rem 0}
+.pick{padding-top:1.5rem;padding-bottom:1rem}
+.pick h2{margin-bottom:.3rem}
+.pick-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,235px),1fr));gap:1rem;margin-top:1.2rem}
+.pick-card{background:var(--card);border:1px solid var(--line);border-top:5px solid var(--jungle);border-radius:16px;padding:1.3rem;box-shadow:var(--shadow);display:flex;flex-direction:column;gap:.55rem}
+.pick-card.cur{outline:3px solid var(--ochre)}
+.pick-card[data-pick="en"]{border-top-color:var(--leaf)}.pick-card[data-pick="fr"]{border-top-color:var(--ochre)}.pick-card[data-pick="ap"]{border-top-color:var(--moss)}
+.pick-code{width:46px;height:46px;border-radius:12px;background:var(--ochre-soft);color:var(--jungle);display:grid;place-items:center;font-weight:800;font-size:1rem;letter-spacing:.03em}
+.pick-card h3{margin:.2rem 0 0;font-size:1.4rem}
+.pick-card .nat{align-self:flex-start;font-size:.7rem;padding:.3rem .7rem;margin:0}
+.pick-card p{margin:0;color:var(--muted);font-size:.95rem;line-height:1.4;flex:1}
+.pick-price{font-weight:700;font-size:.9rem}
+.pick-card .btns{display:flex;flex-direction:column;gap:.5rem;margin-top:.3rem}
+.pick-card .btn{width:100%;text-align:center}
+@media(max-width:600px){.pick-grid{grid-template-columns:1fr 1fr;gap:.7rem}.pick-card{padding:1rem}.pick-card p,.pick-price,.pick-card .btn-ghost{display:none}.pick-card h3{font-size:1.15rem}.pick-card .btn{padding:.6rem .4rem;font-size:.85rem}.pick-card .nat{font-size:.62rem}}
+@media(max-width:480px){.nat{font-size:.72rem;letter-spacing:.02em;padding:.45rem .8rem}}
 </style>
 </head>
 <body>
+<script>(function(){var m={"":"es","/ingles":"en","/frances":"fr","/apoyo-escolar":"ap","/profesores":"prof"}[location.pathname.replace(/\/+$/,"")];document.body.setAttribute("data-view",m||"es")})()</script>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
   <defs>
     <radialGradient id="g-petal" cx="0" cy="32" r="76" gradientUnits="userSpaceOnUse"><stop offset="0" style="stop-color:var(--petal-c)"/><stop offset=".3" style="stop-color:var(--petal-c);stop-opacity:.55"/><stop offset=".55" style="stop-color:var(--petal)"/><stop offset="1" style="stop-color:var(--petal)"/></radialGradient>
@@ -573,27 +612,28 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
 </svg>
 <header>
   <div class="wrap bar">
-    <a class="logo" href="#inicio">
+    <a class="logo" href="/" data-go="es">
       <svg width="28" height="28" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="14" fill="none" stroke="currentColor" stroke-width="2.5"/><path d="M2 16h28M16 2c5 5 5 23 0 28M16 2c-5 5-5 23 0 28" fill="none" stroke="currentColor" stroke-width="2"/></svg>
       Tu profe por el mundo
     </a>
     <div class="right">
       <nav aria-label="Menu">
         <ul>
-          <li><a href="#clases" data-i18n="nav_classes">Clases</a></li>
-          <li><a href="#apoyo" data-i18n="nav_apoyo">Apoyo escolar</a></li>
-          <li><a href="#como" data-i18n="nav_how">Mi método</a></li>
-          <li><a href="#dana" data-i18n="nav_me">Sobre mí</a></li>
-          <li><a href="#tarifas" data-i18n="nav_prices">Tarifas</a></li>
-          <li><a href="#horarios" data-i18n="nav_sched">Horarios</a></li>
-          <li><a href="#reto" data-i18n="nav_reto">Reto</a></li>
-          <li><a href="#tienda" data-i18n="nav_shop">Tienda</a></li>
-          <li><a href="apoyo/" data-i18n="nav_practica">Práctica gratis</a></li>
+          <li><a href="/" data-go="es" data-i18n="nav_es">Español</a></li>
+          <li><a href="/ingles/" data-go="en" data-i18n="nav_en">Inglés</a></li>
+          <li><a href="/frances/" data-go="fr" data-i18n="nav_fr">Francés</a></li>
+          <li><a href="/apoyo-escolar/" data-go="ap" data-i18n="nav_apoyo">Apoyo escolar</a></li>
+          <li><a href="/profesores/" data-go="prof" data-i18n="nav_prof">Nuestros profesores</a></li>
+          <li data-views="es en fr ap"><a href="#tarifas" data-i18n="nav_prices">Tarifas</a></li>
+          <li data-views="es en fr ap"><a href="#horarios" data-i18n="nav_sched">Horarios</a></li>
+          <li data-views="es"><a href="#reto" data-i18n="nav_reto">Reto</a></li>
+          <li data-views="es"><a href="#tienda" data-i18n="nav_shop">Tienda</a></li>
+          <li data-views="es ap"><a href="/apoyo/" data-i18n="nav_practica">Práctica gratis</a></li>
         </ul>
       </nav>
       <div class="book-wrap">
         <a href="#reserva" class="tab-book" data-i18n="nav_book_s">Reservar clase</a>
-        <a href="aula/" class="aula-link" data-i18n="nav_aula_login">Acceso alumnos · Mi aula</a>
+        <a href="/aula/" class="aula-link" data-i18n="nav_aula_login">Acceso alumnos · Mi aula</a>
       </div>
       <div class="langsw" role="group" aria-label="Idioma / Language / Langue">
         <button type="button" data-lang="es">ES</button>
@@ -605,7 +645,7 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
 </header>
 
 <main id="inicio">
-  <div class="hero">
+  <div class="hero" data-views="es">
     <div class="hero-deco" aria-hidden="true">
       <svg class="hd hd1" viewBox="0 0 120 60"><use href="#lf"/></svg>
       <svg class="hd hd2" viewBox="0 0 120 60"><use href="#lf2"/></svg>
@@ -627,7 +667,7 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
         </ul>
         <div class="btns">
           <a class="btn btn-main" href="#reserva" data-i18n="hero_cta">Reservar clase online</a>
-          <a class="btn btn-ghost" href="#clases" data-i18n="hero_more">Ver las clases</a>
+          <a class="btn btn-ghost" href="#oferta" data-i18n="hero_more">Ver las clases</a>
           <a class="btn btn-ghost" href="#test" data-i18n="hero_test">Test de nivel gratis</a>
         </div>
       </div>
@@ -656,11 +696,117 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
     </svg>
   </div>
 
-  <section id="clases">
+  <div class="hero" data-views="ap">
+    <div class="hero-deco" aria-hidden="true">
+      <svg class="hd hd1" viewBox="0 0 120 60"><use href="#lf"/></svg>
+      <svg class="hd hd2" viewBox="0 0 120 60"><use href="#lf2"/></svg>
+      <svg class="hd hd3" viewBox="0 0 120 60"><use href="#lf"/></svg>
+      <svg class="hd hd4" viewBox="0 0 100 100"><use href="#fl"/></svg>
+      <svg class="hd hd5" viewBox="0 0 100 100"><use href="#fl2"/></svg>
+      <svg class="hd hd6" viewBox="0 0 100 100"><use href="#fl"/></svg>
+      <svg class="hd hd7" viewBox="0 0 100 100"><use href="#fl2"/></svg>
+    </div>
+    <div class="wrap hero-grid">
+      <div>
+        <span class="badge">Profesora nativa con más de 10 años de experiencia</span>
+        <h1>Apoyo escolar online para primaria y ESO.</h1>
+        <p class="lead">Analizo cómo aprende tu hijo o hija y preparo un plan para que entienda lo que estudia, organice sus deberes y llegue a los exámenes con tranquilidad.</p>
+        <ul class="checks"><li>Plan a partir de su curso, su libro y sus deberes</li><li>Material de estudio y práctica gratis en la web</li><li>Contacto con las familias: te cuento cómo avanza</li></ul>
+        <div class="btns"><a class="btn btn-main" href="#reserva" data-type="apoyo">Reservar apoyo escolar</a><a class="btn btn-ghost" href="#apoyo">Ver cómo funciona</a><a class="btn btn-ghost" href="/apoyo/">Estudia y practica gratis</a></div>
+      </div>
+      <article class="profile" aria-label="Dana Salgado">
+        <div class="cover" aria-hidden="true">
+          <svg viewBox="0 0 400 70" preserveAspectRatio="none"><path d="M0 40 C60 10 120 5 180 25 C240 45 300 15 400 22 V70 H0Z" fill="var(--leaf)"/><path d="M0 55 C90 38 200 45 400 48 V70 H0Z" fill="var(--jungle)"/><use href="#fl" x="300" y="22" width="44" height="44"/><use href="#fl2" x="342" y="34" width="34" height="34"/><use href="#fl" x="60" y="30" width="30" height="30"/></svg>
+        </div>
+        <div class="pbody">
+          <h3>Dana Salgado</h3>
+          <p class="role" data-i18n="card_role">Profesora de español y apoyo escolar</p>
+          <div class="pills"><span data-i18n="pill1">Español A1–C1</span><span data-i18n="pill2">Primaria y ESO</span><span data-i18n="pill3">100 % online</span><span class="pill-price" data-i18n="pill4">Desde 22 € / clase</span></div>
+          <div class="pstats">
+            <div><strong>+10</strong><span data-i18n="me_f1">años de clases particulares</span></div>
+            <div><strong>3</strong><span data-i18n="me_f2">años en colegios españoles de Marruecos</span></div>
+          </div>
+          <a class="btn btn-main btn-block" href="#reserva" data-i18n="nav_book">Reserva tu clase online</a>
+        </div>
+      </article>
+    </div>
+    <svg class="landscape" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
+      <rect class="sea" x="0" y="80" width="1440" height="30"/>
+      <path class="h1" d="M0 80 C160 30 300 20 460 50 C600 75 700 40 860 32 C1020 24 1180 55 1300 50 C1370 46 1410 56 1440 60 V85 H0Z"/>
+      <path class="h2" d="M0 86 C120 62 240 58 380 70 C520 82 620 64 760 62 C900 60 1000 76 1140 72 C1260 68 1360 67 1440 74 V90 H0Z"/>
+      <path class="h3" d="M0 92 C200 80 360 84 520 88 C700 93 900 80 1100 84 C1250 87 1360 85 1440 88 V95 H0Z"/>
+      <use href="#lf" x="1120" y="58" width="90" height="45"/><use href="#fl" x="1170" y="66" width="34" height="34"/><use href="#fl2" x="1205" y="78" width="26" height="26"/><use href="#lf2" x="200" y="70" width="70" height="35"/><use href="#fl2" x="240" y="78" width="26" height="26"/><use href="#fl" x="720" y="74" width="22" height="22"/>
+    </svg>
+  </div>
+
+  <div class="hero" data-views="en">
+    <div class="hero-deco" aria-hidden="true">
+      <svg class="hd hd1" viewBox="0 0 120 60"><use href="#lf"/></svg>
+      <svg class="hd hd2" viewBox="0 0 120 60"><use href="#lf2"/></svg>
+      <svg class="hd hd3" viewBox="0 0 120 60"><use href="#lf"/></svg>
+      <svg class="hd hd4" viewBox="0 0 100 100"><use href="#fl"/></svg>
+      <svg class="hd hd5" viewBox="0 0 100 100"><use href="#fl2"/></svg>
+      <svg class="hd hd6" viewBox="0 0 100 100"><use href="#fl"/></svg>
+      <svg class="hd hd7" viewBox="0 0 100 100"><use href="#fl2"/></svg>
+    </div>
+    <div class="wrap hero-grid">
+      <div>
+        <span class="nat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Native English speaker · Chicago, USA</span>
+        <h1>Aprende inglés con un profesor nativo de Chicago.</h1>
+        <p class="lead">Prepara tu examen de inglés (A1–C1) o mejora tu nivel y conversa con naturalidad, sin examen. Clases online a tu medida con Chris.</p>
+        <ul class="checks"><li>Profesor nativo de inglés, de Chicago (EE. UU.)</li><li>Dos caminos: examen A1–C1 o mejorar tu nivel y conversar</li><li>Test de nivel gratis si no sabes por dónde empezar</li></ul>
+        <div class="btns"><a class="btn btn-main" href="#reserva" data-type="ingles">Reservar clase de inglés</a><a class="btn btn-ghost" href="#clases-en">Ver las clases</a><a class="btn btn-ghost" href="#test" data-type="ingles">Test de nivel gratis</a></div>
+      </div>
+      <article class="profile" aria-label="Chris"><div class="cover" aria-hidden="true">
+          <svg viewBox="0 0 400 70" preserveAspectRatio="none"><path d="M0 40 C60 10 120 5 180 25 C240 45 300 15 400 22 V70 H0Z" fill="var(--leaf)"/><path d="M0 55 C90 38 200 45 400 48 V70 H0Z" fill="var(--jungle)"/><use href="#fl" x="300" y="22" width="44" height="44"/><use href="#fl2" x="342" y="34" width="34" height="34"/><use href="#fl" x="60" y="30" width="30" height="30"/></svg>
+        </div><div class="pbody"><span class="nat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Native English teacher</span><h3>Chris</h3><p class="role">Profesor nativo de inglés · Chicago (EE. UU.)</p><div class="pills"><span>Inglés A1–C1</span><span>Exámenes</span><span>Conversación</span><span>100 % online</span><span class="pill-price">Desde 22 € / clase</span></div><div class="pstats"><div><strong>Nativo</strong><span>profesor nativo de inglés</span></div><div><strong>Chicago</strong><span>Estados Unidos</span></div></div><a class="btn btn-main btn-block" href="#reserva" data-type="ingles">Reservar clase de inglés</a></div></article>
+    </div>
+    <svg class="landscape" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
+      <rect class="sea" x="0" y="80" width="1440" height="30"/>
+      <path class="h1" d="M0 80 C160 30 300 20 460 50 C600 75 700 40 860 32 C1020 24 1180 55 1300 50 C1370 46 1410 56 1440 60 V85 H0Z"/>
+      <path class="h2" d="M0 86 C120 62 240 58 380 70 C520 82 620 64 760 62 C900 60 1000 76 1140 72 C1260 68 1360 67 1440 74 V90 H0Z"/>
+      <path class="h3" d="M0 92 C200 80 360 84 520 88 C700 93 900 80 1100 84 C1250 87 1360 85 1440 88 V95 H0Z"/>
+      <use href="#lf" x="1120" y="58" width="90" height="45"/><use href="#fl" x="1170" y="66" width="34" height="34"/><use href="#fl2" x="1205" y="78" width="26" height="26"/><use href="#lf2" x="200" y="70" width="70" height="35"/><use href="#fl2" x="240" y="78" width="26" height="26"/><use href="#fl" x="720" y="74" width="22" height="22"/>
+    </svg>
+  </div>
+
+  <div class="hero" data-views="fr">
+    <div class="hero-deco" aria-hidden="true">
+      <svg class="hd hd1" viewBox="0 0 120 60"><use href="#lf"/></svg>
+      <svg class="hd hd2" viewBox="0 0 120 60"><use href="#lf2"/></svg>
+      <svg class="hd hd3" viewBox="0 0 120 60"><use href="#lf"/></svg>
+      <svg class="hd hd4" viewBox="0 0 100 100"><use href="#fl"/></svg>
+      <svg class="hd hd5" viewBox="0 0 100 100"><use href="#fl2"/></svg>
+      <svg class="hd hd6" viewBox="0 0 100 100"><use href="#fl"/></svg>
+      <svg class="hd hd7" viewBox="0 0 100 100"><use href="#fl2"/></svg>
+    </div>
+    <div class="wrap hero-grid">
+      <div>
+        <span class="nat soon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Profesor/a nativo/a de francés · Próximamente</span>
+        <h1>Aprende francés con un profesor nativo.</h1>
+        <p class="lead">Prepara el DELF o el DALF, o mejora tu nivel y conversa con naturalidad. Estamos incorporando a nuestro profesor o profesora nativo/a de francés: preinscríbete ahora y te avisamos en cuanto abramos agenda.</p>
+        <ul class="checks"><li>Profesor/a nativo/a de francés (en proceso de incorporación)</li><li>Dos caminos: examen A1–C1 (DELF/DALF) o mejorar tu nivel y conversar</li><li>Preinscripción sin pago</li></ul>
+        <div class="btns"><a class="btn btn-main" href="#reserva" data-type="frances">Preinscribirme en francés</a><a class="btn btn-ghost" href="#clases-fr">Ver las clases</a><a class="btn btn-ghost" href="#test" data-type="frances">Test de nivel gratis</a></div>
+      </div>
+      <article class="profile" aria-label="Profesor/a de francés"><div class="cover" aria-hidden="true">
+          <svg viewBox="0 0 400 70" preserveAspectRatio="none"><path d="M0 40 C60 10 120 5 180 25 C240 45 300 15 400 22 V70 H0Z" fill="var(--leaf)"/><path d="M0 55 C90 38 200 45 400 48 V70 H0Z" fill="var(--jungle)"/><use href="#fl" x="300" y="22" width="44" height="44"/><use href="#fl2" x="342" y="34" width="34" height="34"/><use href="#fl" x="60" y="30" width="30" height="30"/></svg>
+        </div><div class="pbody"><span class="nat soon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Native French teacher</span><h3>Profesor/a de francés</h3><p class="role">Nativo/a de francés · Muy pronto</p><div class="pills"><span>Francés A1–C1</span><span>DELF · DALF</span><span>Conversación</span><span>100 % online</span><span class="pill-price">Desde 22 € / clase</span></div><div class="pstats"><div><strong>Nativo/a</strong><span>profesor/a nativo/a de francés</span></div><div><strong>Pronto</strong><span>preinscripción abierta</span></div></div><a class="btn btn-main btn-block" href="#reserva" data-type="frances">Preinscribirme en francés</a></div></article>
+    </div>
+    <svg class="landscape" viewBox="0 0 1440 110" preserveAspectRatio="none" aria-hidden="true">
+      <rect class="sea" x="0" y="80" width="1440" height="30"/>
+      <path class="h1" d="M0 80 C160 30 300 20 460 50 C600 75 700 40 860 32 C1020 24 1180 55 1300 50 C1370 46 1410 56 1440 60 V85 H0Z"/>
+      <path class="h2" d="M0 86 C120 62 240 58 380 70 C520 82 620 64 760 62 C900 60 1000 76 1140 72 C1260 68 1360 67 1440 74 V90 H0Z"/>
+      <path class="h3" d="M0 92 C200 80 360 84 520 88 C700 93 900 80 1100 84 C1250 87 1360 85 1440 88 V95 H0Z"/>
+      <use href="#lf" x="1120" y="58" width="90" height="45"/><use href="#fl" x="1170" y="66" width="34" height="34"/><use href="#fl2" x="1205" y="78" width="26" height="26"/><use href="#lf2" x="200" y="70" width="70" height="35"/><use href="#fl2" x="240" y="78" width="26" height="26"/><use href="#fl" x="720" y="74" width="22" height="22"/>
+    </svg>
+  </div>
+
+  <section id="oferta" data-views="es en fr ap" class="pick"><div class="wrap"><h2>¿Qué quieres aprender?</h2><p class="intro">Elige tu clase y reserva en un minuto. Todas son online, con plan a tu medida.</p><div class="pick-grid"><article class="pick-card" data-pick="es"><span class="pick-code" aria-hidden="true">ES</span><h3>Español</h3><span class="nat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Nativa · España</span><p>Para extranjeros, de A1 a C1. Con una profesora nativa.</p><span class="pick-price">Desde 22 € / clase</span><div class="btns"><a class="btn btn-main" href="#reserva" data-type="espanol">Reservar español</a><a class="btn btn-ghost" href="/" data-go="es">Ver más</a></div></article><article class="pick-card" data-pick="en"><span class="pick-code" aria-hidden="true">EN</span><h3>Inglés</h3><span class="nat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Nativo · Chicago</span><p>Examen A1–C1 o mejorar tu nivel y conversar.</p><span class="pick-price">Desde 22 € / clase</span><div class="btns"><a class="btn btn-main" href="#reserva" data-type="ingles">Reservar inglés</a><a class="btn btn-ghost" href="/ingles/" data-go="en">Ver más</a></div></article><article class="pick-card" data-pick="fr"><span class="pick-code" aria-hidden="true">FR</span><h3>Francés</h3><span class="nat soon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Nativo/a · Próximamente</span><p>Examen DELF/DALF o conversación. Preinscripción abierta.</p><span class="pick-price">Desde 22 € / clase</span><div class="btns"><a class="btn btn-main" href="#reserva" data-type="frances">Preinscribirme en francés</a><a class="btn btn-ghost" href="/frances/" data-go="fr">Ver más</a></div></article><article class="pick-card" data-pick="ap"><span class="pick-code" aria-hidden="true">ESO</span><h3>Apoyo escolar</h3><p>Primaria y ESO, con plan a partir de su curso.</p><span class="pick-price">Desde 22 € / clase</span><div class="btns"><a class="btn btn-main" href="#reserva" data-type="apoyo">Reservar apoyo</a><a class="btn btn-ghost" href="/apoyo-escolar/" data-go="ap">Ver más</a></div></article></div></div></section>
+  <section id="clases" data-views="es">
     <div class="wrap">
       <h2 data-i18n="cls_h2">Qué clases ofrezco</h2>
-      <p class="intro" data-i18n="cls_intro">Dos tipos de clase, un mismo punto de partida: analizar qué necesitas y diseñar el plan que mejor encaja contigo.</p>
-      <div class="services">
+      <p class="intro">Clases de español con una profesora nativa, del nivel A1 al C1.</p>
+      <div class="services single">
         <article class="svc svc-es" id="espanol">
           <h3 data-i18n="es_h2">Español para extranjeros</h3>
           <p data-i18n="es_intro">Clases individuales y en grupos pequeños, con material propio preparado cada semana para que avances sin perderte.</p>
@@ -679,7 +825,11 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
           </ul>
           <a class="btn btn-main" href="#reserva" data-type="espanol" data-i18n="es_cta">Reservar clase de español</a>
         </article>
-        <article class="svc svc-ap" id="apoyo">
+        
+      </div>
+    <div class="others"><h3>También puedes aprender con nosotros</h3><div class="ogrid"><a class="ocard" href="/ingles/" data-go="en"><strong>Inglés</strong><span>Examen A1–C1 o conversación, con un profesor nativo.</span><span class="nat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Nativo · Chicago</span></a><a class="ocard" href="/frances/" data-go="fr"><strong>Francés</strong><span>Examen DELF/DALF o conversación. Preinscripción abierta.</span><span class="nat soon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Nativo/a · Próximamente</span></a><a class="ocard" href="/apoyo-escolar/" data-go="ap"><strong>Apoyo escolar</strong><span>Primaria y ESO, con plan a partir de su curso.</span></a></div></div></div>
+  </section>
+  <section id="clases-ap" data-views="ap"><div class="wrap"><div class="services single"><article class="svc svc-ap" id="apoyo">
           <h3 data-i18n="ap_h2">Apoyo escolar online</h3>
           <p data-i18n="ap_intro">Analizo cómo aprende tu hijo o hija y qué necesita, y preparo un plan para que entienda lo que estudia, organice sus deberes y llegue a los exámenes con tranquilidad.</p>
           <ul class="feat">
@@ -689,13 +839,11 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
             <li><strong data-i18n="st3_h">Contacto con las familias</strong><span data-i18n="st3_p">Te cuento cómo avanza y en qué conviene reforzar.</span></li>
           </ul>
           <a class="btn btn-accent" href="#reserva" data-type="apoyo" data-i18n="ap_cta">Reservar apoyo escolar</a>
-          <a class="btn btn-ghost" href="apoyo/" data-i18n="ap_free">Estudia y practica gratis</a>
-        </article>
-      </div>
-    </div>
-  </section>
-
-  <section id="como" class="alt">
+          <a class="btn btn-ghost" href="/apoyo/" data-i18n="ap_free">Estudia y practica gratis</a>
+        </article></div></div></section>
+  <section id="clases-en" data-views="en"><div class="wrap"><h2>Clases de inglés con profesor nativo</h2><p class="intro">Dos formas de aprender, las dos con plan a tu medida. Elige la tuya o haz el test de nivel gratis si no sabes por dónde empezar.</p><div class="offers"><article class="svc svc-es"><h4>Opción 1</h4><h3>Preparación de examen de inglés</h3><p>Plan de estudio hacia la fecha de tu examen, con práctica de las cuatro destrezas, simulacros y corrección. Del nivel A1 al C1.</p><div class="levels" role="list"><div class="level" role="listitem"><strong>A1</strong><span>Primeras bases</span></div><div class="level" role="listitem"><strong>A2</strong><span>Cambridge A2 Key</span></div><div class="level" role="listitem"><strong>B1</strong><span>B1 Preliminary</span></div><div class="level" role="listitem"><strong>B2</strong><span>B2 First</span></div><div class="level" role="listitem"><strong>C1</strong><span>C1 Advanced</span></div></div><ul class="feat"><li><strong>Exámenes oficiales</strong><span>Cambridge, IELTS, TOEFL y otros.</span></li><li><strong>Simulacros con corrección</strong><span>Writing, speaking, listening y reading, con feedback.</span></li><li><strong>Plan según tu fecha</strong><span>Calendario de estudio hasta el día del examen.</span></li></ul><a class="btn btn-main" href="#reserva" data-type="ingles" data-goal="examen">Reservar preparación de examen</a></article><article class="svc svc-ap"><h4>Opción 2</h4><h3>Mejora tu nivel y conversa, sin examen</h3><p>Para ganar fluidez, perder el miedo a hablar y usar el inglés en tu trabajo, tus viajes o tu día a día. Conversación guiada desde el primer día.</p><div class="levels" role="list"><div class="level" role="listitem"><strong>A1</strong><span data-i18n="lv_a1">Tus primeras conversaciones</span></div><div class="level" role="listitem"><strong>A2</strong><span data-i18n="lv_a2">El día a día y el pasado</span></div><div class="level" role="listitem"><strong>B1</strong><span data-i18n="lv_b1">Opinar, contar y viajar con soltura</span></div><div class="level" role="listitem"><strong>B2</strong><span data-i18n="lv_b2">Debatir y entender matices</span></div><div class="level" role="listitem"><strong>C1</strong><span data-i18n="lv_c1">Precisión y naturalidad</span></div></div><ul class="feat"><li><strong>Conversación guiada</strong><span>Hablas desde el primer día, con temas que te interesan.</span></li><li><strong>Corrección y pronunciación</strong><span>Corrijo tus errores y trabajamos vocabulario y expresiones reales.</span></li><li><strong>Individual o en grupo</strong><span>Clases uno a uno o en un grupo reducido de tu nivel.</span></li></ul><div class="btns"><a class="btn btn-accent" href="#reserva" data-type="ingles" data-goal="conversacion">Reservar clase de conversación</a><a class="btn btn-ghost" href="#test" data-type="ingles">No sé mi nivel: test gratis</a></div></article></div></div></section>
+  <section id="clases-fr" data-views="fr"><div class="wrap"><h2>Clases de francés con profesor nativo/a</h2><p class="intro">Dos formas de aprender, las dos con plan a tu medida. Elige la tuya o haz el test de nivel gratis si no sabes por dónde empezar.</p><div class="offers"><article class="svc svc-es"><h4>Opción 1</h4><h3>Preparación de examen de francés</h3><p>Plan de estudio hacia la fecha de tu examen, con práctica de las cuatro destrezas, simulacros y corrección. Del nivel A1 al C1.</p><div class="levels" role="list"><div class="level" role="listitem"><strong>A1</strong><span>DELF A1</span></div><div class="level" role="listitem"><strong>A2</strong><span>DELF A2</span></div><div class="level" role="listitem"><strong>B1</strong><span>DELF B1</span></div><div class="level" role="listitem"><strong>B2</strong><span>DELF B2</span></div><div class="level" role="listitem"><strong>C1</strong><span>DALF C1</span></div></div><ul class="feat"><li><strong>Exámenes oficiales</strong><span>DELF, DALF y TCF.</span></li><li><strong>Simulacros con corrección</strong><span>Writing, speaking, listening y reading, con feedback.</span></li><li><strong>Plan según tu fecha</strong><span>Calendario de estudio hasta el día del examen.</span></li></ul><a class="btn btn-main" href="#reserva" data-type="frances" data-goal="examen">Reservar preparación de examen</a></article><article class="svc svc-ap"><h4>Opción 2</h4><h3>Mejora tu nivel y conversa, sin examen</h3><p>Para ganar fluidez, perder el miedo a hablar y usar el francés en tu trabajo, tus viajes o tu día a día. Conversación guiada desde el primer día.</p><div class="levels" role="list"><div class="level" role="listitem"><strong>A1</strong><span data-i18n="lv_a1">Tus primeras conversaciones</span></div><div class="level" role="listitem"><strong>A2</strong><span data-i18n="lv_a2">El día a día y el pasado</span></div><div class="level" role="listitem"><strong>B1</strong><span data-i18n="lv_b1">Opinar, contar y viajar con soltura</span></div><div class="level" role="listitem"><strong>B2</strong><span data-i18n="lv_b2">Debatir y entender matices</span></div><div class="level" role="listitem"><strong>C1</strong><span data-i18n="lv_c1">Precisión y naturalidad</span></div></div><ul class="feat"><li><strong>Conversación guiada</strong><span>Hablas desde el primer día, con temas que te interesan.</span></li><li><strong>Corrección y pronunciación</strong><span>Corrijo tus errores y trabajamos vocabulario y expresiones reales.</span></li><li><strong>Individual o en grupo</strong><span>Clases uno a uno o en un grupo reducido de tu nivel.</span></li></ul><div class="btns"><a class="btn btn-accent" href="#reserva" data-type="frances" data-goal="conversacion">Reservar clase de conversación</a><a class="btn btn-ghost" href="#test" data-type="frances">No sé mi nivel: test gratis</a></div></article></div></div></section>
+  <section id="como" class="alt" data-views="es ap">
     <div class="wrap">
       <h2 data-i18n="how_h2">Mi método: clases a tu medida</h2>
       <p class="intro" data-i18n="how_intro">Cada alumno llega con una necesidad distinta: un examen, el trabajo, un viaje, la vida en un país nuevo o una asignatura que se atraganta. Por eso no uso un sistema cerrado: lo construyo para cada clase.</p>
@@ -708,7 +856,8 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
     </div>
   </section>
 
-  <section id="dana">
+  <section data-views="prof" style="padding-bottom:0"><div class="wrap"><h2>Nuestros profesores</h2><p class="intro">Cada idioma, con profesores nativos. Aquí puedes conocer a quién te acompañará en tus clases.</p></div></section>
+  <section id="dana" data-views="prof">
     <div class="wrap about">
       <div class="photo-wrap">
         <svg class="pl" viewBox="0 0 120 60" aria-hidden="true"><use href="#lf"/></svg>
@@ -721,7 +870,7 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
         <svg class="pf pf1" viewBox="0 0 100 100" aria-hidden="true"><use href="#fl"/></svg><svg class="pf pf2" viewBox="0 0 100 100" aria-hidden="true"><use href="#fl2"/></svg>
       </div>
       <div>
-        <p class="me-role" data-i18n="me_role">Profesora de español y apoyo escolar</p>
+        <span class="nat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Profesora nativa de español</span><p class="me-role" data-i18n="me_role">Profesora de español y apoyo escolar</p>
         <h2 data-i18n="me_h2">Dana Salgado</h2>
         <p data-i18n="me_p1">Soy profesora de español para extranjeros, del nivel A1 al C1, y de apoyo escolar para primaria y ESO. Llevo más de diez años dando clases particulares y he preparado pruebas de español de distintos niveles.</p>
         <p data-i18n="me_p2">He dado clase en Asturias, Granada, Bilbao y alrededores, y durante tres años en colegios españoles de Tánger y Rabat, en Marruecos. Trabajar con alumnos de edades, culturas y objetivos tan distintos me ha enseñado a adaptar cada clase a la persona que tengo delante.</p>
@@ -730,8 +879,11 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
       </div>
     </div>
   </section>
+  <section id="chris" class="alt" data-views="prof"><div class="wrap about"><div class="photo-wrap"><svg class="pl" viewBox="0 0 120 60" aria-hidden="true"><use href="#lf"></use></svg><div class="exp-card"><p class="exp-kicker">Chris</p><div class="exp-item"><strong>Nativo</strong><span>profesor nativo de inglés</span></div><div class="exp-item"><strong>Chicago</strong><span>Estados Unidos</span></div><div class="exp-item"><strong>A1–C1</strong><span>exámenes y conversación</span></div></div></div><div><span class="nat"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Native English teacher · Chicago, USA</span><p class="me-role">Profesor de inglés</p><h2>Chris</h2><p>Chris es profesor nativo de inglés, de Chicago (EE. UU.). Da clases online para preparar exámenes de inglés (A1–C1) o para mejorar tu nivel y conversar sin examen.</p><p class="pend">Muy pronto añadiremos aquí su presentación completa y su experiencia.</p><a class="btn btn-main" href="/ingles/" data-go="en">Ver las clases de inglés con Chris</a></div></div></section>
+  <section id="profesor-frances" data-views="prof"><div class="wrap about"><div class="photo-wrap"><svg class="pl" viewBox="0 0 120 60" aria-hidden="true"><use href="#lf"></use></svg><div class="exp-card"><p class="exp-kicker">Próximamente</p><div class="exp-item"><strong>Nativo/a</strong><span>profesor/a nativo/a de francés</span></div><div class="exp-item"><strong>A1–C1</strong><span>DELF, DALF y conversación</span></div><div class="exp-item"><strong>Lista</strong><span>preinscripción abierta</span></div></div></div><div><span class="nat soon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Profesor/a nativo/a de francés · Próximamente</span><p class="me-role">Profesor/a de francés</p><h2>Nuestro próximo profesor o profesora de francés</h2><p>Estamos incorporando a un profesor o profesora nativo/a de francés. Cuando lo tengamos, presentaremos aquí su perfil. Mientras tanto puedes preinscribirte sin pago y te avisamos en cuanto abramos agenda.</p><a class="btn btn-main" href="/frances/" data-go="fr">Ver las clases de francés</a></div></div></section>
+  
 
-  <section id="tarifas" class="alt">
+  <section id="tarifas" class="alt" data-views="es en fr ap">
     <div class="wrap">
       <h2 data-i18n="pr_h2">Tarifas</h2>
       <p class="intro" data-i18n="pr_intro">Las mismas tarifas para español y apoyo escolar. Sesiones individuales online de 1 hora, con material para la clase y apuntes para seguir avanzando en casa.</p>
@@ -759,10 +911,11 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
     </div>
   </section>
 
-  <section id="horarios">
+  <section id="horarios" data-views="es en fr ap">
     <div class="wrap">
       <h2 data-i18n="sc_h2">Horarios disponibles</h2>
       <p class="intro" data-i18n="sc_intro">Doy clase online de martes a jueves, de 15:00 a 00:00 (hora de España). Las horas aparecen en tu zona horaria: elige una franja libre y pasarás al formulario de reserva.</p>
+      <p class="pend" id="sc-who" hidden></p><div class="sc-pending" id="sc-pending" hidden></div>
       <div class="sc-bar">
         <label><span data-i18n="sc_tz">Tu zona horaria</span><select id="sc-tz"></select></label>
         <div class="sc-nav">
@@ -781,7 +934,7 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
     </div>
   </section>
 
-  <section id="faq" class="alt">
+  <section id="faq" class="alt" data-views="es ap">
     <div class="wrap faq">
       <div>
         <h2 data-i18n="faq_h2">Preguntas frecuentes</h2>
@@ -800,7 +953,7 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
     </div>
   </section>
 
-  <section id="reserva">
+  <section id="reserva" data-views="es en fr ap">
     <div class="wrap booking">
       <aside>
         <h2 data-i18n="bk_h2">Reserva tu clase online</h2>
@@ -811,7 +964,7 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
         </div>
       </aside>
 
-      <form id="bookform" name="reserva" method="POST" data-netlify="true" netlify-honeypot="bot-field" enctype="multipart/form-data" novalidate>
+      <form enctype='multipart/form-data' id='bookform' method='POST' name='reserva' novalidate>
         <input type="hidden" name="form-name" value="reserva">
         <input type="hidden" name="idioma-web" id="f-lang">
         <input type="hidden" name="resultado-test" id="f-testres">
@@ -821,6 +974,8 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
           <select name="tipo" id="f-type" required>
             <option value="" data-i18n="f_type_ph">Elige una opción</option>
             <option value="espanol" data-i18n="f_type_es">Clases de español</option>
+            <option value="ingles" data-i18n="f_type_en">Clases de inglés</option>
+            <option value="frances" data-i18n="f_type_fr">Clases de francés</option>
             <option value="apoyo" data-i18n="f_type_ap">Apoyo escolar</option>
           </select>
         </label>
@@ -845,16 +1000,7 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
           <label><span data-i18n="es_goal">¿Para qué quieres aprender español?</span>
             <input placeholder="Por ejemplo: trabajo en un hotel, examen DELE B2, me mudo a Valencia…" name="objetivo" id="f-goal" data-i18n-ph="es_goal_ph">
           </label>
-          <div class="test" id="test">
-            <div>
-              <strong data-i18n="t_h">Test de nivel</strong>
-              <p class="help" data-i18n="t_intro">12 preguntas rápidas. Si no sabes una respuesta, marca «No lo sé»: así puedo orientarte mejor.</p>
-            </div>
-            <div class="progress" aria-hidden="true"><span id="t-prog"></span></div>
-            <div id="t-questions"></div>
-            <button type="button" class="btn btn-ghost" id="t-check" data-i18n="t_btn">Ver mi resultado</button>
-            <div class="result" id="t-result" hidden aria-live="polite"></div>
-          </div>
+          
         </fieldset>
 
         <!-- APOYO -->
@@ -891,6 +1037,55 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
           </label>
         </fieldset>
 
+        <fieldset id="sec-en" class="sub" hidden>
+          <legend>Clases de inglés</legend>
+          <div class="row">
+            <label><span data-i18n="es_level">¿Qué nivel crees que tienes?</span>
+              <select name="nivel-ingles" id="f-enlevel"><option value="No lo sé" data-i18n="es_level_unk">No lo sé</option><option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>C1</option></select>
+            </label>
+            <label><span data-i18n="es_mod">Modalidad</span>
+              <select name="modalidad-ingles"><option value="Individual" data-i18n="es_mod_ind">Individual</option><option value="Grupo" data-i18n="es_mod_grp">En grupo</option></select>
+            </label>
+          </div>
+          <label><span data-i18n="g_what">¿Qué quieres conseguir?</span>
+            <select name="objetivo-ingles" id="f-engoal"><option value="Preparar un examen" data-i18n="g_exam">Preparar un examen (A1–C1)</option><option value="Mejorar mi nivel y conversar (sin examen)" data-i18n="g_conv">Mejorar mi nivel y conversar (sin examen)</option><option value="No lo sé todavía" data-i18n="g_unk">No lo sé todavía: ayúdame a decidirlo</option></select>
+          </label>
+          <label><span><span data-i18n="g_examname">¿Qué examen?</span> <span class="opt" data-i18n="optional">(opcional)</span></span><input name="examen-ingles" placeholder="Por ejemplo: Cambridge B2 First, IELTS, TOEFL…"></label>
+          <label><span><span data-i18n="g_more">Cuéntame más</span> <span class="opt" data-i18n="optional">(opcional)</span></span><textarea name="detalle-ingles"></textarea></label>
+        </fieldset>
+
+        <fieldset id="sec-fr" class="sub" hidden>
+          <legend>Clases de francés</legend><p class="pend" data-i18n="fr_pend">Estamos incorporando a nuestro profesor o profesora nativo/a de francés. Tu solicitud queda como preinscripción y te escribimos en cuanto abramos agenda.</p>
+          <div class="row">
+            <label><span data-i18n="es_level">¿Qué nivel crees que tienes?</span>
+              <select name="nivel-frances" id="f-frlevel"><option value="No lo sé" data-i18n="es_level_unk">No lo sé</option><option>A1</option><option>A2</option><option>B1</option><option>B2</option><option>C1</option></select>
+            </label>
+            <label><span data-i18n="es_mod">Modalidad</span>
+              <select name="modalidad-frances"><option value="Individual" data-i18n="es_mod_ind">Individual</option><option value="Grupo" data-i18n="es_mod_grp">En grupo</option></select>
+            </label>
+          </div>
+          <label><span data-i18n="g_what">¿Qué quieres conseguir?</span>
+            <select name="objetivo-frances" id="f-frgoal"><option value="Preparar un examen" data-i18n="g_exam">Preparar un examen (A1–C1)</option><option value="Mejorar mi nivel y conversar (sin examen)" data-i18n="g_conv">Mejorar mi nivel y conversar (sin examen)</option><option value="No lo sé todavía" data-i18n="g_unk">No lo sé todavía: ayúdame a decidirlo</option></select>
+          </label>
+          <label><span><span data-i18n="g_examname">¿Qué examen?</span> <span class="opt" data-i18n="optional">(opcional)</span></span><input name="examen-frances" placeholder="Por ejemplo: DELF B1, DALF C1, TCF…"></label>
+          <label><span><span data-i18n="g_more">Cuéntame más</span> <span class="opt" data-i18n="optional">(opcional)</span></span><textarea name="detalle-frances"></textarea></label>
+        </fieldset>
+
+        <fieldset id="sec-test" class="sub" hidden>
+          <legend data-i18n="t_h">Test de nivel</legend>
+          <div class="test" id="test">
+            <div>
+              <strong data-i18n="t_h">Test de nivel</strong>
+              <p class="help" data-i18n="t_intro">12 preguntas rápidas. Si no sabes una respuesta, marca «No lo sé»: así puedo orientarte mejor.</p>
+            </div>
+            <div class="progress" aria-hidden="true"><span id="t-prog"></span></div>
+            <div id="t-questions"></div>
+            <button type="button" class="btn btn-ghost" id="t-check" data-i18n="t_btn">Ver mi resultado</button>
+            <div class="result" id="t-result" hidden aria-live="polite"></div>
+          </div>
+        </fieldset>
+
+        <input type="hidden" name="profesor" id="f-prof">
         <input type="hidden" name="franja" id="f-slot">
         <fieldset class="sub" id="sec-common" hidden>
           <legend data-i18n="c_leg">Tus datos</legend>
@@ -931,7 +1126,7 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
     </div>
   </section>
 
-  <section style="padding-top:0">
+  <section style="padding-top:0" data-views="es">
     <div class="wrap insta">
       <svg class="deco" viewBox="0 0 120 60" style="width:260px;top:-40px;left:-60px;transform:rotate(25deg)" aria-hidden="true"><use href="#lf"/></svg>
       <svg class="deco" viewBox="0 0 100 100" style="width:90px;top:14px;left:120px" aria-hidden="true"><use href="#fl"/></svg>
@@ -970,7 +1165,7 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
     </div>
   </section>
 
-  <section id="reto" class="alt">
+  <section id="reto" class="alt" data-views="es">
     <div class="wrap rt-modes" role="group" aria-label="Reto">
       <button type="button" class="rt-mode" data-mode="es" aria-pressed="true" data-i18n="rt_mode_es">Reto de español</button>
       <button type="button" class="rt-mode" data-mode="esc" aria-pressed="false" data-i18n="rt_mode_esc">Reto de apoyo escolar</button>
@@ -1028,7 +1223,7 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
     </div>
   </section>
 
-  <section id="regalo">
+  <section id="regalo" data-views="es">
     <div class="wrap gift">
       <div class="gift-cover" aria-hidden="true">
         <svg class="gc-l" viewBox="0 0 120 60"><use href="#lf"/></svg>
@@ -1041,8 +1236,8 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
         <span class="badge" data-i18n="gf_badge">Gratis</span>
         <h2 data-i18n="gf_h2">Regalo: 50 expresiones para hablar como en España</h2>
         <p class="intro" data-i18n="gf_p">Las frases que los españoles usan cada día y que no vienen en los libros, con su significado, un ejemplo y su equivalente en inglés y en francés. Descárgala gratis: no tienes que darme ningún dato.</p>
-        <a class="btn btn-main" id="gf-dl" href="regalo/50-expresiones-tu-profe-por-el-mundo.pdf" download data-i18n="gf_btn">Descargar la guía (PDF)</a>
-        <form class="news" id="news-form" name="newsletter" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+        <a class="btn btn-main" id="gf-dl" href="/regalo/50-expresiones-tu-profe-por-el-mundo.pdf" download data-i18n="gf_btn">Descargar la guía (PDF)</a>
+        <form class='news' id='news-form' method='POST' name='newsletter' novalidate>
           <input type="hidden" name="form-name" value="newsletter">
           <p hidden><label>No rellenar <input name="bot-field"></label></p>
           <strong data-i18n="nw_h">¿Quieres más?</strong>
@@ -1056,7 +1251,7 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
     </div>
   </section>
 
-  <section id="tienda" class="alt">
+  <section id="tienda" class="alt" data-views="es">
     <div class="wrap">
       <div class="sh-modes" role="group" aria-label="Tienda"><button type="button" class="sh-mode" data-smode="es" aria-pressed="true" data-i18n="shop_mode_es">Español (DELE)</button><button type="button" class="sh-mode" data-smode="esc" aria-pressed="false" data-i18n="shop_mode_esc">Apoyo escolar</button></div>
       <div class="shop-head">
@@ -1087,25 +1282,26 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
   <div class="wrap">
     <div class="fgrid">
       <div class="fbrand">
-        <a class="logo" href="#inicio"><svg class="flower-mini" viewBox="0 0 100 100" aria-hidden="true"><use href="#fl2"/></svg> Tu profe por el mundo</a>
+        <a class="logo" href="/" data-go="es"><svg class="flower-mini" viewBox="0 0 100 100" aria-hidden="true"><use href="#fl2"/></svg> Tu profe por el mundo</a>
         <p data-i18n="foot_tag">Clases online de español y apoyo escolar, personalizadas para cada alumno.</p>
       </div>
       <div>
         <h4 data-i18n="foot_nav">Navegación</h4>
         <ul>
-          <li><a href="#clases" data-i18n="nav_classes">Clases</a></li>
-          <li><a href="#apoyo" data-i18n="nav_apoyo">Apoyo escolar</a></li>
-          <li><a href="#como" data-i18n="nav_how">Mi método</a></li>
-          <li><a href="#dana" data-i18n="nav_me">Sobre mí</a></li>
-          <li><a href="#tarifas" data-i18n="nav_prices">Tarifas</a></li>
-          <li><a href="#horarios" data-i18n="nav_sched">Horarios</a></li>
-          <li><a href="#reto" data-i18n="nav_reto">Reto</a></li>
-          <li><a href="#tienda" data-i18n="nav_shop">Tienda</a></li>
-          <li><a href="apoyo/" data-i18n="nav_practica">Práctica gratis</a></li>
-          <li><a href="#regalo" data-i18n="nav_gift">Regalo</a></li>
-          <li><a href="aula/" data-i18n="nav_aula">Mi aula</a></li>
-          <li><a href="#faq" data-i18n="nav_faq">Preguntas</a></li>
-          <li><a href="#reserva" data-i18n="nav_book">Reserva tu clase online</a></li>
+          <li><a href="/" data-go="es" data-i18n="nav_es">Español</a></li>
+          <li><a href="/ingles/" data-go="en" data-i18n="nav_en">Inglés</a></li>
+          <li><a href="/frances/" data-go="fr" data-i18n="nav_fr">Francés</a></li>
+          <li><a href="/apoyo-escolar/" data-go="ap" data-i18n="nav_apoyo">Apoyo escolar</a></li>
+          <li><a href="/profesores/" data-go="prof" data-i18n="nav_prof">Nuestros profesores</a></li>
+          <li><a href="/#tarifas" data-i18n="nav_prices">Tarifas</a></li>
+          <li><a href="/#horarios" data-i18n="nav_sched">Horarios</a></li>
+          <li><a href="/#reto" data-i18n="nav_reto">Reto</a></li>
+          <li><a href="/#tienda" data-i18n="nav_shop">Tienda</a></li>
+          <li><a href="/apoyo/" data-i18n="nav_practica">Práctica gratis</a></li>
+          <li><a href="/#regalo" data-i18n="nav_gift">Regalo</a></li>
+          <li><a href="/aula/" data-i18n="nav_aula">Mi aula</a></li>
+          <li><a href="/#faq" data-i18n="nav_faq">Preguntas</a></li>
+          <li><a href="/#reserva" data-i18n="nav_book">Reserva tu clase online</a></li>
         </ul>
       </div>
       <div>
@@ -1206,7 +1402,7 @@ footer{background:var(--bg-2);border-top:1px solid var(--line);padding:3.5rem 0 
 <h3>9. Seguridad</h3>
 <p>Aplicamos medidas técnicas y organizativas adecuadas: conexión cifrada (HTTPS), cuentas protegidas con contraseña robusta y verificación en dos pasos, acceso limitado a la titular y borrado periódico de la información que ya no es necesaria.</p>
 <h3>10. Aula de alumnos</h3>
-<p>Los datos que se tratan en el aula de alumnos (tests de nivel, ejercicios y progreso) se explican en el apartado «Protección de datos del aula», disponible en la propia aula: <a href="aula/">Mi aula</a>.</p>
+<p>Los datos que se tratan en el aula de alumnos (tests de nivel, ejercicios y progreso) se explican en el apartado «Protección de datos del aula», disponible en la propia aula: <a href="/aula/">Mi aula</a>.</p>
 <p><small>Última actualización: 6 de octubre de 2026.</small></p>
 </template>
 
@@ -1532,9 +1728,9 @@ function renderEscShop(){
     info.append(el('h3',null,escCName(c)),el('p',null,t('esc_inc')));
     const list=el('ul','unit-list');
     ['mat','len','ing','cn','cs'].forEach((s,k)=>{const li=el('li');const nm=el('span','uname');nm.append(el('span','un',String(k+1)),document.createTextNode(escSName(s,c)));
-      const l=el('a','unit-add',t('esc_go')+' →');l.href='apoyo/#'+c+'-'+s;li.append(nm,l);list.appendChild(li)});
+      const l=el('a','unit-add',t('esc_go')+' →');l.href='/apoyo/#'+c+'-'+s;li.append(nm,l);list.appendChild(li)});
     const buy=el('div','buy');const pr=el('span','price esc-free',t('esc_free'));
-    const open=el('a','btn btn-main',t('esc_open'));open.href='apoyo/#'+c;buy.append(pr,open);
+    const open=el('a','btn btn-main',t('esc_open'));open.href='/apoyo/#'+c;buy.append(pr,open);
     info.append(list,buy);a.append(cv,info);g.appendChild(a)});
   box.appendChild(g);
 }
@@ -1978,7 +2174,7 @@ $('news-form').addEventListener('submit',async e=>{
 });
 
 /* test de nivel */
-const Q=[
+const QS={es:[
  ["Yo ___ de Francia.",["soy","estoy","tengo"],0],
  ["¿Dónde ___ el banco?",["es","está","hay"],1],
  ["Me ___ mucho las playas.",["gusta","gusto","gustan"],2],
@@ -1991,14 +2187,42 @@ const Q=[
  ["Si hubiera estudiado más, ___ el examen.",["aprobaría","habría aprobado","aprobé"],1],
  ["No creo que ___ la verdad.",["ha dicho","haya dicho","dijo"],1],
  ["«Tirar la toalla» significa…",["rendirse","limpiar la casa","enfadarse"],0]
-];
+],en:[
+ ["She ___ a teacher.",["is","are","am"],0],
+ ["___ you like coffee?",["Do","Does","Are"],0],
+ ["There ___ two apples on the table.",["is","are","be"],1],
+ ["Yesterday I ___ to the cinema with my friends.",["go","went","gone"],1],
+ ["When I was a child, I ___ in a small town.",["live","lived","have lived"],1],
+ ["I ___ three emails since this morning.",["wrote","was writing","have written"],2],
+ ["If it rains tomorrow, we ___ at home.",["stay","will stay","would stay"],1],
+ ["I wish I ___ more free time.",["have","had","would have"],1],
+ ["He asked me where I ___ the day before.",["was","had been","have been"],1],
+ ["If I had studied harder, I ___ the exam.",["would pass","passed","would have passed"],2],
+ ["By the time we arrived, the film ___.",["already started","had already started","has already started"],1],
+ ["“To break the ice” means…",["to start a conversation in an awkward situation","to destroy something","to feel cold"],0]
+],fr:[
+ ["Je ___ de Madrid.",["suis","ai","vais"],0],
+ ["Tu ___ un frère ?",["es","as","fais"],1],
+ ["Nous ___ au cinéma ce soir.",["allons","allez","vont"],0],
+ ["Hier, je ___ au restaurant avec mes amis.",["suis allé","ai allé","allais"],0],
+ ["Quand j’étais petit, j’___ dans un village.",["ai habité","habitais","habiterai"],1],
+ ["Cette année, nous ___ trois fois en Italie.",["allions","sommes allés","irons"],1],
+ ["Il faut que tu ___ ton travail avant demain.",["finis","finisses","finiras"],1],
+ ["Si j’avais le temps, je ___ plus souvent.",["voyagerai","voyage","voyagerais"],2],
+ ["Il m’a dit qu’il ___ le lendemain.",["viendra","viendrait","vienne"],1],
+ ["Si j’avais su, je ne ___ pas venu.",["serais","suis","étais"],0],
+ ["Je doute qu’il ___ la vérité.",["dit","dira","dise"],2],
+ ["« Poser un lapin » signifie…",["ne pas venir à un rendez-vous","offrir un animal","raconter une blague"],0]
+]};
+let Q=QS.es,TL='es';const DK={es:'No lo sé',en:"I don't know",fr:'Je ne sais pas'};
+function setTestLang(c){if(c===TL)return;TL=c;Q=QS[c];buildTest();testLevel=null;$('t-prog').style.width='0';$('t-result').hidden=true;$('f-testres').value=''}
 function buildTest(){
   const box=$('t-questions');box.innerHTML='';
   Q.forEach((q,i)=>{
     const d=document.createElement('div');d.className='q';
     const p=document.createElement('p');p.textContent=(i+1)+'. '+q[0];d.appendChild(p);
     const o=document.createElement('div');o.className='opts';o.setAttribute('role','radiogroup');o.setAttribute('aria-label',q[0]);
-    [...q[1],'No lo sé'].forEach((opt,j)=>{
+    [...q[1],DK[TL]].forEach((opt,j)=>{
       const l=document.createElement('label');const r=document.createElement('input');
       r.type='radio';r.name='q'+i;r.value=j;r.addEventListener('change',updProg);
       l.append(r,document.createTextNode(opt));o.appendChild(l);
@@ -2062,10 +2286,11 @@ drop.addEventListener('drop',e=>addFiles(e.dataTransfer.files));
 /* tipo de clase */
 $('f-type').addEventListener('change',()=>{
   const v=$('f-type').value;
-  $('sec-es').hidden=v!=='espanol';$('sec-ap').hidden=v!=='apoyo';$('sec-common').hidden=!v;hideErr();
+  ['es','en','fr'].forEach(c=>{});const TC={espanol:'es',ingles:'en',frances:'fr'};$('sec-es').hidden=v!=='espanol';$('sec-en').hidden=v!=='ingles';$('sec-fr').hidden=v!=='frances';$('sec-ap').hidden=v!=='apoyo';$('sec-test').hidden=!TC[v];$('sec-common').hidden=!v;if(TC[v])setTestLang(TC[v]);$('f-prof').value={espanol:'Dana',ingles:'Chris',frances:'Profesor/a de francés (pendiente de incorporar)',apoyo:'Dana'}[v]||'';hideErr();
 });
 document.querySelectorAll('a[data-type]').forEach(a=>a.addEventListener('click',()=>{
   $('f-type').value=a.dataset.type;$('f-type').dispatchEvent(new Event('change'));
+  const gi={ingles:'f-engoal',frances:'f-frgoal'}[a.dataset.type];if(gi&&a.dataset.goal)$(gi).selectedIndex=a.dataset.goal==='examen'?0:1;
 }));
 
 /* envío */
@@ -2076,7 +2301,7 @@ $('bookform').addEventListener('submit',async e=>{
   const type=$('f-type').value;
   if(!type){showErr(t('e_type'));return}
   if(type==='espanol'&&!$('f-goal').value.trim()){showErr(t('e_goal'));$('f-goal').focus();return}
-  if(type==='espanol'&&!testLevel&&!scoreTest()){$('test').scrollIntoView({block:'center'});return}
+  if(type!=='apoyo'&&!testLevel&&!scoreTest()){$('test').scrollIntoView({block:'center'});return}
   if(type==='apoyo'){
     if(!files.length){showErr(t('e_files'));drop.scrollIntoView({block:'center'});return}
     if(files.reduce((s,f)=>s+f.size,0)>MAX){showErr(t('e_size'));return}
@@ -2088,8 +2313,9 @@ $('bookform').addEventListener('submit',async e=>{
   if(!$('f-privacy').checked){showErr(t('e_privacy'));$('f-privacy').focus();return}
   $('f-lang').value=lang.toUpperCase();
   const fd=new FormData($('bookform'));
-  if(type!=='apoyo'){['etapa','curso','asignatura','asignatura-otra','archivos','tema'].forEach(k=>fd.delete(k))}
-  else{['nivel-espanol','modalidad','resultado-test','objetivo'].forEach(k=>fd.delete(k));fd.delete('archivos');files.forEach(f=>fd.append('archivos',f))}
+  const OWN={espanol:['nivel-espanol','modalidad','objetivo'],ingles:['nivel-ingles','modalidad-ingles','objetivo-ingles','examen-ingles','detalle-ingles'],frances:['nivel-frances','modalidad-frances','objetivo-frances','examen-frances','detalle-frances'],apoyo:['etapa','curso','asignatura','asignatura-otra','archivos','tema']};
+  Object.keys(OWN).forEach(k=>{if(k!==type)OWN[k].forEach(f=>fd.delete(f))});
+  if(type==='apoyo'){fd.delete('resultado-test');fd.delete('archivos');files.forEach(f=>fd.append('archivos',f))}
   const btn=$('f-submit');btn.disabled=true;btn.textContent=t('c_sending');
   let ok=false;
   try{const r=await fetch('/',{method:'POST',body:fd});ok=r.ok}catch(err){ok=false}
@@ -2099,7 +2325,7 @@ $('bookform').addEventListener('submit',async e=>{
   else{
     const lines=[];for(const [k,v] of fd.entries()){if(typeof v==='string'&&v&&!['form-name','bot-field'].includes(k))lines.push(`${k}: ${v}`)}
     if(type==='apoyo')lines.push('archivos: '+files.map(f=>f.name).join(', '));
-    const subj=type==='apoyo'?'Reserva apoyo escolar':'Reserva clase de español';
+    const subj={apoyo:'Reserva apoyo escolar',ingles:'Reserva clase de inglés',frances:'Preinscripción clase de francés'}[type]||'Reserva clase de español';
     location.href=`mailto:${EMAIL}?subject=${encodeURIComponent(subj+' - '+$('f-name').value)}&body=${encodeURIComponent(lines.join('\n'))}`;
     done.textContent=t(type==='apoyo'?'done_mail_files':'done_mail');
   }
@@ -2117,7 +2343,7 @@ const rtePlain=s=>String(s).trim().toLowerCase().replace(/\s+/g,' ').replace(/[.
 const rteEsc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 function rteLoad(){
   if(RTE)return Promise.resolve();
-  return new Promise((ok,ko)=>{const s=document.createElement('script');s.src='aula/banco-escolar.js';
+  return new Promise((ok,ko)=>{const s=document.createElement('script');s.src='/aula/banco-escolar.js';
     s.onload=()=>{RTE={C:ESC_COURSES,S:ESC_SUBJ,U:ESC_UNITS};ok()};s.onerror=ko;document.head.appendChild(s)});
 }
 function rteQuestions(c,day){
@@ -2146,7 +2372,7 @@ function renderRte(){
     g.innerHTML=`<div class="rte-meta"><span>${rteEsc(t('rte_title'))}</span>${dots}</div>
       <p class="rt-msg">${rteEsc(rteT('rte_done',{n:ok,t:tot}))}</p><p>${rteEsc(t(ok===tot?'rte_d5':ok>=3?'rte_d3':'rte_d0'))}</p>
       <p class="help">${rteEsc(t('rte_tom'))}</p>
-      <div class="btns"><a class="btn btn-main" href="aula/">${rteEsc(t('rte_aula'))}</a><a class="btn btn-ghost" href="#reserva" data-type="apoyo" id="rte-book">${rteEsc(t('rte_book'))}</a></div>`;
+      <div class="btns"><a class="btn btn-main" href="/aula/">${rteEsc(t('rte_aula'))}</a><a class="btn btn-ghost" href="#reserva" data-type="apoyo" id="rte-book">${rteEsc(t('rte_book'))}</a></div>`;
     $('rte-book').addEventListener('click',()=>{$('f-type').value='apoyo';$('f-type').dispatchEvent(new Event('change'))});
     return;
   }
@@ -2194,6 +2420,45 @@ document.querySelectorAll('.langsw button').forEach(b=>b.addEventListener('click
 let start='es';
 try{start=localStorage.getItem('tppm-lang')||''}catch(e){}
 if(!start){const n=(navigator.language||'es').slice(0,2);start=T[n]?n:'es'}
+
+/* pestañas: español, inglés, francés, apoyo escolar y profesores */
+(function(){
+const K={
+es:{nav_es:'Español',nav_en:'Inglés',nav_fr:'Francés',nav_prof:'Nuestros profesores',f_type_en:'Clases de inglés',f_type_fr:'Clases de francés',g_what:'¿Qué quieres conseguir?',g_exam:'Preparar un examen (A1–C1)',g_conv:'Mejorar mi nivel y conversar (sin examen)',g_unk:'No lo sé todavía: ayúdame a decidirlo',g_examname:'¿Qué examen?',g_more:'Cuéntame más',fr_pend:'Estamos incorporando a nuestro profesor o profesora nativo/a de francés. Tu solicitud queda como preinscripción y te escribimos en cuanto abramos agenda.',hero_lead:'Clases online de español, inglés y francés con profesores nativos, y apoyo escolar de primaria a la ESO, diseñadas a partir de tus necesidades y tus objetivos.',hero_b3:'Español, inglés y francés de A1 a C1, y apoyo escolar de primaria a la ESO',pr_intro:'Las mismas tarifas para todas las clases: español, inglés, francés y apoyo escolar. Sesiones individuales online de 1 hora, con material para la clase y apuntes para seguir avanzando en casa.'},
+en:{nav_es:'Spanish',nav_en:'English',nav_fr:'French',nav_prof:'Our teachers',f_type_en:'English classes',f_type_fr:'French classes',g_what:'What do you want to achieve?',g_exam:'Prepare an exam (A1–C1)',g_conv:'Improve my level and practise conversation (no exam)',g_unk:"I don't know yet: help me decide",g_examname:'Which exam?',g_more:'Tell me more',fr_pend:'We are bringing on our native French teacher. Your request is saved as a pre-registration and we will write to you as soon as the calendar opens.',hero_lead:'Online classes in Spanish, English and French with native teachers, and school support from primary to ESO, designed around your needs and goals.',hero_b3:'Spanish, English and French from A1 to C1, and school support from primary to ESO',pr_intro:'The same rates for every class: Spanish, English, French and school support. One-to-one online sessions of 1 hour, with class materials and notes to keep progressing at home.'},
+fr:{nav_es:'Espagnol',nav_en:'Anglais',nav_fr:'Français',nav_prof:'Nos professeurs',f_type_en:"Cours d'anglais",f_type_fr:'Cours de français',g_what:'Que souhaitez-vous ?',g_exam:'Préparer un examen (A1–C1)',g_conv:'Progresser et converser (sans examen)',g_unk:'Je ne sais pas encore : aidez-moi à choisir',g_examname:'Quel examen ?',g_more:'Dites-m’en plus',fr_pend:'Nous accueillons bientôt notre professeur natif de français. Votre demande est enregistrée comme pré-inscription et nous vous écrirons dès l’ouverture du calendrier.',hero_lead:'Cours en ligne d’espagnol, d’anglais et de français avec des professeurs natifs, et soutien scolaire du primaire à la ESO, conçus selon vos besoins et vos objectifs.',hero_b3:'Espagnol, anglais et français de A1 à C1, et soutien scolaire du primaire à la ESO',pr_intro:'Les mêmes tarifs pour tous les cours : espagnol, anglais, français et soutien scolaire. Séances individuelles en ligne d’1 heure, avec supports de cours et notes pour progresser à la maison.'}};
+['es','en','fr'].forEach(l=>Object.assign(T[l],K[l]));
+const V={es:{p:'/',t:'Clases online de español, inglés y francés y apoyo escolar · Tu profe por el mundo',d:'Clases online de español para extranjeros (A1-C1), inglés y francés con profesores nativos, y apoyo escolar de primaria y ESO. Primera clase de 30 minutos por 15 €.'},
+en:{p:'/ingles/',t:'Clases de inglés online con profesor nativo de Chicago · Tu profe por el mundo',d:'Prepara tu examen de inglés (A1-C1) o mejora tu nivel y conversa con Chris, profesor nativo de Chicago. Clases online a tu medida.'},
+fr:{p:'/frances/',t:'Clases de francés online con profesor nativo · Tu profe por el mundo',d:'Prepara el DELF/DALF o mejora tu nivel de francés y conversa con un profesor nativo. Preinscripción abierta.'},
+ap:{p:'/apoyo-escolar/',t:'Apoyo escolar online de primaria y ESO · Tu profe por el mundo',d:'Apoyo escolar online para primaria y ESO con plan a partir del curso y el material de tu hijo o hija. Estudia y practica gratis.'},
+prof:{p:'/profesores/',t:'Nuestros profesores · Tu profe por el mundo',d:'Conoce a Dana (español y apoyo escolar), Chris (inglés nativo, de Chicago) y a nuestro futuro profesor nativo de francés.'}};
+const VT={en:'ingles',fr:'frances',ap:'apoyo'};
+const WHO={en:'Horario de Chris, profesor de inglés.',fr:'Horario del profesor o profesora de francés.'};
+const PEND={en:'Chris publicará su calendario muy pronto. Mientras tanto, envíanos tu disponibilidad con una petición especial y te proponemos un horario.',fr:'Todavía no hay agenda abierta para francés. Envía tu disponibilidad con una petición especial o preinscríbete y te escribimos en cuanto la abramos.'};
+function setView(v){
+  document.body.setAttribute('data-view',v);
+  document.querySelectorAll('[data-go]').forEach(a=>{a.closest('nav,footer')&&(a.dataset.go===v?a.setAttribute('aria-current','page'):a.removeAttribute('aria-current'))});
+  document.querySelectorAll('.pick-card').forEach(c=>c.classList.toggle('cur',c.dataset.pick===v));
+  document.title=V[v].t;
+  const md=document.querySelector('meta[name="description"]');if(md)md.content=V[v].d;
+  const cn=document.querySelector('link[rel="canonical"]');if(cn)cn.href='https://tuprofeporelmundo.com'+V[v].p;
+  const pend=!!PEND[v];
+  ['.intro','.sc-bar','.sc-legend','#sc-days','.sc-note'].forEach(s=>{const e=document.querySelector('#horarios '+s);if(e)e.style.display=pend?'none':''});
+  const w=$('sc-who'),pd=$('sc-pending');w.hidden=!pend;pd.hidden=!pend;if(pend){w.textContent=WHO[v];pd.textContent=PEND[v]}
+  const ft=$('f-type');if(VT[v]&&ft.value!==VT[v]){ft.value=VT[v];ft.dispatchEvent(new Event('change'))}
+}
+const vf=()=>({'':'es','/ingles':'en','/frances':'fr','/apoyo-escolar':'ap','/profesores':'prof'}[location.pathname.replace(/\/+$/,'')]||'es');
+document.addEventListener('click',e=>{const a=e.target.closest&&e.target.closest('a[data-go]');if(!a||e.defaultPrevented||e.metaKey||e.ctrlKey||e.shiftKey)return;
+  const v=a.dataset.go,href=a.getAttribute('href');
+  if(href.startsWith('#'))return;
+  e.preventDefault();if(location.pathname.replace(/\/+$/,'')!==V[v].p.replace(/\/+$/,''))history.pushState(null,'',V[v].p);
+  setView(v);scrollTo({top:0,behavior:'auto'});});
+addEventListener('popstate',()=>setView(vf()));
+// los enlaces #test: elegir el tipo de clase según la pestaña
+document.querySelectorAll('a[href="#test"]:not([data-type])').forEach(a=>{a.dataset.type={en:'ingles',fr:'frances'}[vf()]||'espanol'});
+window.__setView=setView;setView(vf());
+})();
 buildTest();renderPhrase();setLang(start);
 if(rteGet().mode==='esc')rteMode('esc');
 $('year').textContent=new Date().getFullYear();
