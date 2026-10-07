@@ -610,7 +610,7 @@ const BYID=Object.fromEntries(BANK.map(q=>[q.id,q]));
 let lang='es';
 try{const s=localStorage.getItem('tppm-lang');if(T[s])lang=s}catch(e){}
 const $=id=>document.getElementById(id);
-const t=(k,v)=>{let s=T[lang][k];if(!/^m_/.test(k))s=tgtWord(s);if(v)for(const n in v)s=s.split('{'+n+'}').join(v[n]);return s};
+const t=(k,v)=>{let s=T[lang][k];if(k==='g_exam_s'){let g;try{g=data&&data.track!=='school'&&data.lt}catch(e){}if(g&&g!=='es')return EXAM_S[g][lang]}if(!/^m_/.test(k))s=tgtWord(s);if(v)for(const n in v)s=s.split('{'+n+'}').join(v[n]);return s};
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const sample=(a,n)=>shuffle(a).slice(0,n);
@@ -1093,6 +1093,7 @@ $('h-goal').addEventListener('click',()=>{renderGoal();show('s-goal')});
 /* idiomas: español, inglés y francés comparten el mismo aula; cada uno guarda su propio nivel y objetivo */
 const BANKS={es:BANK.slice(),en:BANK_EN,fr:BANK_FR},TEXTS_BY={es:Object.assign({},TEXTS),en:TEXTS_EN,fr:TEXTS_FR};
 function useTrack(n){const k=BANKS[n]?n:'es';BANK.length=0;BANKS[k].forEach(q=>BANK.push(q));Object.keys(BYID).forEach(i=>delete BYID[i]);BANK.forEach(q=>{BYID[q.id]=q});Object.keys(TEXTS).forEach(i=>delete TEXTS[i]);Object.assign(TEXTS,TEXTS_BY[k])}
+const EXAM_S={en:{es:'Cambridge, IELTS o TOEFL de un nivel concreto',en:'Cambridge, IELTS or TOEFL at a given level',fr:'Cambridge, IELTS ou TOEFL d’un niveau précis'},fr:{es:'DELF o DALF de un nivel concreto',en:'DELF or DALF at a given level',fr:'DELF ou DALF d’un niveau précis'}};
 const TGT_NAME={es:{es:'español',en:'Spanish',fr:'espagnol'},en:{es:'inglés',en:'English',fr:'anglais'},fr:{es:'francés',en:'French',fr:'français'}};
 function tgtWord(s){let g='es';try{if(data.track==='school')return s;g=(data&&data.lt)||'es'}catch(e){}if(g==='es'||typeof s!=='string')return s;const to=TGT_NAME[g][lang];const re={es:/([Ee])spañol/g,en:/Spanish/g,fr:/([Ee])spagnol/g}[lang];return s.replace(re,(m,c)=>c==='E'?to[0].toUpperCase()+to.slice(1):to)}
 function switchTrack(n){
