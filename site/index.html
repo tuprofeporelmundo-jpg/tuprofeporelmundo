@@ -1834,17 +1834,17 @@ const SCHEDULE={
   from:15, to:24,        // tardes: de 15:00 a 00:00 (hora de España)
   morning:{days:[2,4],from:9,to:12},   // mañanas de martes y jueves, hasta las 12:00 (hora de España)
   weeks:6,               // semanas que se muestran
-  rules:[                // clases fijas: cada una en su zona horaria (Rabat no cambia en octubre; España sí)
-    {days:[2,4],tz:'Africa/Casablanca',s:'10:00',e:'11:00'},     // A2
-    {days:[1,2,3,4],tz:'Africa/Casablanca',s:'16:00',e:'17:00'}, // apoyo
+  rules:[                // clases fijas: cada una en su zona horaria (Rabat va en UTC+0 desde el 20 de septiembre de 2026; España cambia la hora el 25 de octubre)
+    {days:[2,4],tz:'Etc/UTC',s:'10:00',e:'11:00'},     // A2
+    {days:[1,2,3,4],tz:'Etc/UTC',s:'16:00',e:'17:00'}, // apoyo
     {days:[2,4],tz:'Europe/Madrid',s:'17:00',e:'18:00'},         // B1
-    {days:[4],tz:'Africa/Casablanca',s:'17:30',e:'19:30'},       // A2 grupo
-    {days:[2],tz:'Africa/Casablanca',s:'20:00',e:'21:00'}        // apoyo
+    {days:[4],tz:'Etc/UTC',s:'17:30',e:'19:30'},       // A2 grupo
+    {days:[2],tz:'Etc/UTC',s:'20:00',e:'21:00'}        // apoyo
   ],
   closed:[{from:'2026-11-02',to:'2026-11-05'}],   // curso intensivo (días completos)
   extra:[]               // reservas puntuales: 'AAAA-MM-DD HH' (hora de España), p. ej. '2026-10-07 16'
 };
-function tzParts(date,tz){const o={};new Intl.DateTimeFormat('en-US',{timeZone:tz,hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}).formatToParts(date).forEach(p=>o[p.type]=p.value);return o}
+function tzParts(date,tz){if(tz==='Africa/Casablanca'||tz==='Africa/El_Aaiun')tz='Etc/UTC';const o={};new Intl.DateTimeFormat('en-US',{timeZone:tz,hourCycle:'h23',year:'numeric',month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'}).formatToParts(date).forEach(p=>o[p.type]=p.value);return o}
 function tzOffset(date,tz){const p=tzParts(date,tz);return Date.UTC(+p.year,+p.month-1,+p.day,+p.hour%24,+p.minute)-Math.floor(date.getTime()/60000)*60000}
 function madridToDate(y,m,d,h){let t=Date.UTC(y,m,d,h);let g=t-tzOffset(new Date(t),SCHEDULE.tz);g=t-tzOffset(new Date(g),SCHEDULE.tz);return new Date(g)}
 function zdate(y,m,d,h,mi,tz){const t=Date.UTC(y,m,d,h,mi);let g=t-tzOffset(new Date(t),tz);g=t-tzOffset(new Date(g),tz);return new Date(g)}
@@ -1903,13 +1903,14 @@ function buildSlots(){
       if(e<=now)continue;
       let busy=isBusy(ds,dow,y,m,d,s,e);
       if(!busy&&SCHEDULE.extra.includes(ds+' '+String(h).padStart(2,'0')))busy=1;
+      try{const q=tzParts(s,scTz);if(new Date(Date.UTC(+q.year,+q.month-1,+q.day)).getUTCDay()===5)continue}catch(x){}
       out.push({s,e,busy:!!busy,closed:busy===2});
     }
   }
   return {slots:out,ws};
 }
 const LOC={es:'es-ES',en:'en-GB',fr:'fr-FR'};
-function fmt(d,tz,o){return new Intl.DateTimeFormat(LOC[lang],Object.assign({timeZone:tz},o)).format(d)}
+function fmt(d,tz,o){if(tz==='Africa/Casablanca'||tz==='Africa/El_Aaiun')tz='Etc/UTC';return new Intl.DateTimeFormat(LOC[lang],Object.assign({timeZone:tz},o)).format(d)}
 function renderSchedule(){if(window.__tzInfo)window.__tzInfo();
   const {slots,ws}=buildSlots();
   const a=new Date(ws),b=new Date(ws+6*864e5);
