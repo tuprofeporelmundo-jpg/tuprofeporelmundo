@@ -986,7 +986,7 @@ body[data-view="en"] .rt-modes,body[data-view="fr"] .rt-modes{display:none}
         </div>
       </aside>
 
-      <form enctype='multipart/form-data' id='bookform' method='POST' name='reserva' novalidate>
+      <form enctype='multipart/form-data' id='bookform' method='POST' name='reserva' data-netlify="true" netlify-honeypot="bot-field" novalidate>
         <input type="hidden" name="form-name" value="reserva">
         <input type="hidden" name="idioma-web" id="f-lang"><input type="hidden" name="profesor" id="f-prof"><input type="hidden" name="aviso" id="f-aviso">
         <input type="hidden" name="resultado-test" id="f-testres">
@@ -1267,7 +1267,7 @@ body[data-view="en"] .rt-modes,body[data-view="fr"] .rt-modes{display:none}
         <h2 data-i18n="gf_h2">Regalo: 50 expresiones para hablar como en España</h2>
         <p class="intro" data-i18n="gf_p">Las frases que los españoles usan cada día y que no vienen en los libros, con su significado, un ejemplo y su equivalente en inglés y en francés. Descárgala gratis: no tienes que darme ningún dato.</p>
         <a class="btn btn-main" id="gf-dl" href="/regalo/50-expresiones-tu-profe-por-el-mundo.pdf" download data-i18n="gf_btn">Descargar la guía (PDF)</a>
-        <form class='news' id='news-form' method='POST' name='newsletter' novalidate>
+        <form class='news' id='news-form' method='POST' name='newsletter' data-netlify="true" netlify-honeypot="bot-field" novalidate>
           <input type="hidden" name="form-name" value="newsletter">
           <p hidden><label>No rellenar <input name="bot-field"></label></p>
           <strong data-i18n="nw_h">¿Quieres más?</strong>
