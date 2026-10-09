@@ -24,7 +24,10 @@ const TXT = {
 
 export default async (req) => {
   const key = process.env.RESEND_API_KEY;
-  const from = process.env.CONFIRM_FROM;
+  const rawFrom = String(process.env.CONFIRM_FROM || "").replace(/^[\s"']+|[\s"']+$/g, "");
+  const okFrom = /^[^<>]+<[^\s<>@]+@[^\s<>@]+>$/.test(rawFrom) || /^[^\s<>@]+@[^\s<>@]+$/.test(rawFrom);
+  const from = okFrom ? rawFrom : "Tu profe por el mundo <contacto@tuprofeporelmundo.com>";
+  if (!okFrom) console.log("confirmacion: CONFIRM_FROM no valido, se usa el remitente por defecto");
   console.log("confirmacion: RESEND_API_KEY", key ? "ok" : "FALTA", "CONFIRM_FROM", from ? "ok" : "FALTA");
   if (!key || !from) return new Response("disabled", { status: 200 });
   try {
