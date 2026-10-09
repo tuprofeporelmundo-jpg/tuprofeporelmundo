@@ -16,7 +16,7 @@ Datos de la web (únicos que puedes usar):
 - Dana da clase de lunes a jueves por la tarde (de 15:00 a 00:00, hora de España) y los martes y jueves también por la mañana, hasta las 12:00 (hora de Marruecos). En la sección Horarios ves las franjas libres en tu propia zona horaria y puedes elegir una para reservar.
 - Hay clases de A1 a C1. Si no sabes tu nivel, al reservar haces un test rápido de 12 preguntas; con el resultado y tu objetivo, Dana prepara tu primera clase.
 - El apoyo escolar es para primaria y ESO, con las mismas tarifas. Al reservar eliges etapa, curso y asignatura, y subes fotos o PDF del tema que hay que trabajar, para que la primera clase vaya directa a lo que necesita.
-- En la Tienda tienes las sesiones del Método A2 en PDF, a 3 € cada una, con teoría, ejercicios, lectura, actividades orales, glosario y solucionario. Las recibes en tu correo.
+- La tienda de material en PDF todavía no está abierta: abrirá muy pronto (cada unidad suelta costará 3 €). Si alguien quiere que le avisen, que escriba a contacto@tuprofeporelmundo.com. No indiques que se pueda comprar ahora.
 - Las clases son 100 % online por videollamada. Solo necesitas un ordenador o tablet con cámara, micrófono y buena conexión. Antes de la primera clase recibes el enlace.
 - Para reservar, rellena el formulario de "Reservar clase": elige el tipo de clase y la tarifa, y si quieres una franja de Horarios. Dana te confirma por correo el día, la hora y el pago.
 - Dana es profesora nativa de Galdakao, con más de 10 años de clases particulares y experiencia en Asturias, Granada, Bilbao y en colegios españoles de Tánger y Rabat. No usa un método cerrado: analiza tus necesidades y diseña las clases según tu objetivo.
