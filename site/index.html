@@ -1852,11 +1852,11 @@ const SCHEDULE={
   morning:{days:[2,4],tz:'Etc/UTC',from:9,to:12},   // mañanas de martes y jueves, de 9:00 a 12:00 hora de Rabat
   weeks:6,               // semanas que se muestran
   rules:[                // clases fijas: cada una en su zona horaria (Rabat va en UTC+0 desde el 20 de septiembre de 2026; España cambia la hora el 25 de octubre)
-    {days:[2,4],tz:'Etc/UTC',s:'10:00',e:'11:00'},     // A2
-    {days:[1,2,3,4],tz:'Etc/UTC',s:'16:00',e:'17:00'}, // apoyo
-    {days:[2,4],tz:'Europe/Madrid',s:'17:00',e:'18:00'},         // B1
-    {days:[4],tz:'Etc/UTC',s:'17:30',e:'19:30'},       // A2 grupo
-    {days:[2],tz:'Etc/UTC',s:'20:00',e:'21:00'}        // apoyo
+    {days:[2,4],tz:'Etc/UTC',s:'10:00',e:'11:00',l:'A2'},     // A2
+    {days:[1,2,3,4],tz:'Etc/UTC',s:'16:00',e:'17:00',l:'Apoyo'}, // apoyo
+    {days:[2,4],tz:'Europe/Madrid',s:'17:00',e:'18:00',l:'B1'},         // B1
+    {days:[4],tz:'Etc/UTC',s:'17:30',e:'19:30',l:'A2 grupo'},       // A2 grupo
+    {days:[2],tz:'Etc/UTC',s:'20:00',e:'21:00',l:'Apoyo'}        // apoyo
   ],
   closed:[{from:'2026-11-02',to:'2026-11-05'}],   // curso intensivo (días completos)
   extra:[]               // reservas puntuales: 'AAAA-MM-DD HH' (hora de España), p. ej. '2026-10-07 16'
@@ -1895,14 +1895,14 @@ if(!scTz){try{scTz=Intl.DateTimeFormat().resolvedOptions().timeZone||SCHEDULE.tz
 })();
 function isBusy(ds,dow,y,m,d,st,en){
   if(SCHEDULE.closed.some(c=>ds>=c.from&&ds<=c.to))return 2;
-  const hm=x=>x.split(':').map(Number);
+  const hm=x=>x.split(':').map(Number);isBusy.last=[];let hit=0;
   for(const r of SCHEDULE.rules){
     if(!r.days.includes(dow))continue;
     const [h1,m1]=hm(r.s),[h2,m2]=hm(r.e);
     const rs=zdate(y,m,d,h1,m1,r.tz),re=zdate(y,m,d,h2,m2,r.tz);
-    if(st<re&&en>rs)return 1;
+    if(st<re&&en>rs){if(r.l&&!isBusy.last.includes(r.l))isBusy.last.push(r.l);hit=1}
   }
-  return 0;
+  return hit;
 }
 function buildSlots(){
   const now=new Date(),p=tzParts(now,SCHEDULE.tz);
@@ -1918,10 +1918,10 @@ function buildSlots(){
     for(const h of hours){
       const s=madridToDate(y,m,d,h),e=new Date(s.getTime()+36e5);
       if(e<=now)continue;
-      let busy=isBusy(ds,dow,y,m,d,s,e);
+      let busy=isBusy(ds,dow,y,m,d,s,e);const lbl=(isBusy.last||[]).slice();
       if(!busy&&SCHEDULE.extra.includes(ds+' '+String(h).padStart(2,'0')))busy=1;
       try{const q=tzParts(s,scTz);if(new Date(Date.UTC(+q.year,+q.month-1,+q.day)).getUTCDay()===5)continue}catch(x){}
-      out.push({s,e,busy:!!busy,closed:busy===2});
+      out.push({s,e,busy:!!busy,closed:busy===2,lbl});
     }
   }
   return {slots:out,ws};
@@ -1948,7 +1948,7 @@ function renderSchedule(){if(window.__tzInfo)window.__tzInfo();if(typeof scSync=
       const es=fmt(s.s,SCHEDULE.tz,{hour:'2-digit',minute:'2-digit'});
       const el=document.createElement(s.busy?'div':'button');el.className='slot '+(s.busy?'busy':'free');
       const a=document.createElement('span');a.textContent=tm;el.appendChild(a);
-      const sm=document.createElement('small');sm.textContent=s.busy?(s.closed?({es:'Curso intensivo',en:'Intensive course',fr:'Cours intensif'}[lang]||'Curso intensivo'):t('sc_busy')):(same?t('sc_free'):t('sc_spain')+' '+es);el.appendChild(sm);
+      const sm=document.createElement('small');sm.textContent=s.busy?(s.closed?({es:'Curso intensivo',en:'Intensive course',fr:'Cours intensif'}[lang]||'Curso intensivo'):(s.lbl&&s.lbl.length?s.lbl.map(x=>(({en:{'Apoyo':'Tutoring','A2 grupo':'A2 group'},fr:{'Apoyo':'Soutien','A2 grupo':'A2 groupe'}})[lang]||{})[x]||x).join(' · '):t('sc_busy'))):(same?t('sc_free'):t('sc_spain')+' '+es);el.appendChild(sm);
       if(!s.busy){el.type='button';el.setAttribute('aria-label',g.label+', '+tm+' · '+t('sc_free'));el.addEventListener('click',()=>pickSlot(s.s,g.label,tm))}
       list.appendChild(el);
     });
