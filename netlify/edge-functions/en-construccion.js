@@ -86,7 +86,12 @@ ${error ? `<p class="error" role="alert">${error}</p>` : ""}
     error ? 401 : 200,
   );
 
+// Apertura automática: desde el lunes 12 de octubre de 2026 a las 08:00 (hora de Madrid)
+// la web se ve sin contraseña. Para cambiarlo, edita esta fecha.
+const APERTURA = Date.parse("2026-10-12T06:00:00Z");
+
 export default async (req, context) => {
+  if (Date.now() >= APERTURA) return context.next();
   const url = new URL(req.url);
   const ruta = url.pathname.replace(/\/+$/, "") || "/";
 
