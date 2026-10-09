@@ -31,6 +31,27 @@ export default async (req) => {
     const { payload } = await req.json();
     if (!payload || payload.form_name !== "reserva") return new Response("skip", { status: 200 });
     const d = payload.data || {};
+    // Aviso a Dana por correo (Netlify cobra por sus avisos de formulario; este va por Resend).
+    try {
+      const lineas = Object.entries(d)
+        .filter(([k, x]) => !["bot-field", "form-name", "archivos"].includes(k) && x && typeof x === "string")
+        .map(([k, x]) => k + ": " + x);
+      const mail = String(d.email || "").trim();
+      const rn = await fetch("https://api.resend.com/emails", {
+        method: "POST",
+        headers: { authorization: "Bearer " + key, "content-type": "application/json" },
+        body: JSON.stringify({
+          from,
+          to: process.env.NOTIFY_TO || "contacto@tuprofeporelmundo.com",
+          reply_to: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail) ? mail : undefined,
+          subject: "Nueva preinscripcion: " + String(d.nombre || "").slice(0, 60) + " (" + String(d.tipo || "") + ")",
+          text: lineas.join("\n"),
+        }),
+      });
+      console.log("aviso a Dana: Resend respondio", rn.status, (await rn.text()).slice(0, 200));
+    } catch (e) {
+      console.log("aviso a Dana: fallo", String((e && e.message) || e));
+    }
     const to = String(d.email || "").trim();
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(to)) return new Response("no-email", { status: 200 });
     const lang = TXT[String(d["idioma-web"] || "ES").toUpperCase()] || TXT.ES;
