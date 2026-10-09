@@ -25,6 +25,7 @@ const TXT = {
 export default async (req) => {
   const key = process.env.RESEND_API_KEY;
   const from = process.env.CONFIRM_FROM;
+  console.log("confirmacion: RESEND_API_KEY", key ? "ok" : "FALTA", "CONFIRM_FROM", from ? "ok" : "FALTA");
   if (!key || !from) return new Response("disabled", { status: 200 });
   try {
     const { payload } = await req.json();
@@ -45,8 +46,10 @@ export default async (req) => {
         text: lang.body(name),
       }),
     });
+    console.log("confirmacion: Resend respondio", r.status, (await r.text()).slice(0, 300));
     return new Response(r.ok ? "sent" : "error", { status: 200 });
   } catch (e) {
+    console.log("confirmacion: fallo", String(e && e.message || e));
     return new Response("error", { status: 200 });
   }
 };
