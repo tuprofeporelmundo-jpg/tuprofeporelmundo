@@ -1688,7 +1688,7 @@ const phrases=[
  {p:"Ir de Pascuas a Ramos",m:"Hacer algo muy de vez en cuando.",e:"Nos vemos de Pascuas a Ramos.",en:"Once in a blue moon",fr:"Tous les trente-six du mois"},
  {p:"Estar en la edad del pavo",m:"Estar en esa etapa de la adolescencia en la que se hacen tonterías.",e:"Mi sobrino está en la edad del pavo.",en:"To be at the awkward teen age",fr:"Être en pleine crise d'adolescence"}
 ];
-let pi=Math.max(0,Math.floor((Date.now()-Date.UTC(2026,9,12))/864e5))%phrases.length;
+let pi=Math.max(0,Math.floor((Date.now()-Date.UTC(2026,9,14))/864e5))%phrases.length;
 const $=id=>document.getElementById(id);
 const card=$('postcard');
 function renderPhrase(){const f=phrases[pi];$('pc-phrase').textContent=f.p;$('pc-meaning').textContent=f.m;$('pc-example').textContent="«"+f.e+"»";$('pc-en').textContent=f.en;$('pc-fr').textContent=f.fr}
@@ -2058,7 +2058,7 @@ function bindDesist(){
 }
 
 /* reto del día: ahorcado con la palabra del día (cambia a medianoche, hora de España) */
-const RETO_START=Date.UTC(2026,9,12); // reto nº 1 = 12 de octubre de 2026 (lanzamiento público)
+const RETO_START=Date.UTC(2026,9,14); // reto nº 1 = 14 de octubre de 2026 (lanzamiento público)
 const WORDS=[
  ['MALETA','A1','Viajes','Travel','Voyages','Bolsa grande para llevar tu ropa cuando viajas.','suitcase','valise','Mi maleta pesa demasiado.'],
  ['PLAYA','A1','Naturaleza','Nature','Nature','Zona de arena junto al mar.','beach','plage','El domingo vamos a la playa.'],
@@ -2468,7 +2468,7 @@ function rteLoad(){
     s.onload=()=>{RTE={C:ESC_COURSES,S:ESC_SUBJ,U:ESC_UNITS};ok()};s.onerror=ko;document.head.appendChild(s)});
 }
 function rteQuestions(c,day){
-  const n=Math.max(0,Math.floor((Date.parse(day+'T12:00:00Z')-Date.UTC(2026,9,12,12))/864e5));
+  const n=Math.max(0,Math.floor((Date.parse(day+'T12:00:00Z')-Date.UTC(2026,9,14,12))/864e5));
   return RTE_ORDER.map((a,k)=>{const pool=RTE.U.filter(u=>u.c===c&&u.asig===a).flatMap(u=>u.qs);
     return pool.length?Object.assign({asig:a},pool[(n*7+k*13)%pool.length]):null}).filter(Boolean);
 }
