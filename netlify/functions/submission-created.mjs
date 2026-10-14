@@ -42,7 +42,7 @@ export default async (req) => {
       const nombre = cap(v("nombre")).slice(0, 80) || "Sin nombre";
       const SECCIONES = [
         ["Lo que quiere", [["Tipo de clase", "tipo"], ["Tarifa", "tarifa"], ["Cómo reservar", "modo-reserva"], ["Franja elegida", "franja"], ["Disponibilidad", "disponibilidad"], ["Petición especial", "peticion-especial"], ["Profesor elegido", "profesor"], ["Aviso", "aviso"]]],
-        ["Alumno", [["Nombre", "nombre"], ["Email", "email"], ["WhatsApp", "whatsapp"], ["País / zona horaria", "pais-zona-horaria"], ["Idioma de la web", "idioma-web"]]],
+        ["Alumno", [["Nombre", "nombre"], ["Email", "email"], ["WhatsApp", "whatsapp"], ["País / zona horaria", "pais-zona-horaria"], ["Idioma de la web", "idioma-web"], ["Cómo nos conoció", "como-nos-conociste"]]],
         ["Español", [["Nivel", "nivel-espanol"], ["Modalidad", "modalidad"], ["Objetivo", "objetivo"]]],
         ["Apoyo escolar", [["Etapa", "etapa"], ["Curso", "curso"], ["Asignatura", "asignatura"], ["Otra asignatura", "asignatura-otra"], ["Tema", "tema"]]],
         ["Inglés", [["Nivel", "nivel-ingles"], ["Modalidad", "modalidad-ingles"], ["Objetivo", "objetivo-ingles"], ["Examen", "examen-ingles"], ["Detalle", "detalle-ingles"]]],
