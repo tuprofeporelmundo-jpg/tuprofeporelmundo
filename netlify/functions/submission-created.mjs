@@ -9,16 +9,16 @@
 
 const TXT = {
   ES: {
-    subject: "Hemos recibido tu preinscripción · Tu profe por el mundo",
-    body: (n) => `Hola ${n},\n\nHemos recibido tu preinscripción. En cuanto la revisemos te escribiremos a este correo para confirmar el día y la hora de tu clase.\n\nSi tienes cualquier duda, responde a este mensaje.\n\nTu profe por el mundo\nhttps://tuprofeporelmundo.com`,
+    subject: "Hemos recibido tu inscripción · Tu profe por el mundo",
+    body: (n) => `Hola ${n},\n\nHemos recibido tu inscripción. En cuanto la revisemos te escribiremos a este correo para confirmar el día y la hora de tu clase.\n\nSi tienes cualquier duda, responde a este mensaje.\n\nTu profe por el mundo\nhttps://tuprofeporelmundo.com`,
   },
   EN: {
-    subject: "We have received your pre-registration · Tu profe por el mundo",
-    body: (n) => `Hi ${n},\n\nWe have received your pre-registration. Once we have reviewed it, we will write to you at this address to confirm the day and time of your class.\n\nIf you have any questions, just reply to this message.\n\nTu profe por el mundo\nhttps://tuprofeporelmundo.com`,
+    subject: "We have received your registration · Tu profe por el mundo",
+    body: (n) => `Hi ${n},\n\nWe have received your registration. Once we have reviewed it, we will write to you at this address to confirm the day and time of your class.\n\nIf you have any questions, just reply to this message.\n\nTu profe por el mundo\nhttps://tuprofeporelmundo.com`,
   },
   FR: {
-    subject: "Nous avons bien reçu ta préinscription · Tu profe por el mundo",
-    body: (n) => `Bonjour ${n},\n\nNous avons bien reçu ta préinscription. Dès que nous l'aurons examinée, nous t'écrirons à cette adresse pour confirmer le jour et l'heure de ton cours.\n\nSi tu as une question, réponds simplement à ce message.\n\nTu profe por el mundo\nhttps://tuprofeporelmundo.com`,
+    subject: "Nous avons bien reçu ta inscription · Tu profe por el mundo",
+    body: (n) => `Bonjour ${n},\n\nNous avons bien reçu ta inscription. Dès que nous l'aurons examinée, nous t'écrirons à cette adresse pour confirmer le jour et l'heure de ton cours.\n\nSi tu as une question, réponds simplement à ce message.\n\nTu profe por el mundo\nhttps://tuprofeporelmundo.com`,
   },
 };
 
@@ -71,7 +71,7 @@ export default async (req) => {
         (wa.length >= 7 ? `<a href="https://wa.me/${wa}" style="display:inline-block;margin:0 8px 8px 0;padding:10px 16px;background:#25a244;color:#fff;text-decoration:none;border-radius:8px;font:700 14px Arial,sans-serif">Abrir WhatsApp</a>` : "");
       const fecha = new Date().toLocaleString("es-ES", { timeZone: "Europe/Madrid", dateStyle: "long", timeStyle: "short" });
       const cuerpo = `<!doctype html><html><body style="margin:0;padding:24px 12px;background:#faf6f1"><table role="presentation" width="100%" cellpadding="0" cellspacing="0"><tr><td align="center"><table role="presentation" width="100%" cellpadding="0" cellspacing="0" style="max-width:560px;background:#ffffff;border-radius:14px;padding:28px 28px 20px">` +
-        `<tr><td style="font:700 12px Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#8a7f75">Nueva preinscripción</td></tr>` +
+        `<tr><td style="font:700 12px Arial,sans-serif;letter-spacing:.08em;text-transform:uppercase;color:#8a7f75">Nueva inscripción</td></tr>` +
         `<tr><td style="padding:6px 0 4px;font:700 24px Arial,sans-serif;color:#2b2b2b">${esc(nombre)}</td></tr>` +
         `<tr><td style="padding:0 0 16px;font:15px Arial,sans-serif;color:#555">${esc(tipo || "Clase")} · ${esc(fecha)}</td></tr>` +
         `<tr><td style="padding:0 0 4px">${botones}</td></tr>` + html +
@@ -84,9 +84,9 @@ export default async (req) => {
           from,
           to: process.env.NOTIFY_TO || "contacto@tuprofeporelmundo.com",
           reply_to: /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail) ? mail : undefined,
-          subject: "Nueva preinscripción · " + (tipo ? tipo.slice(0, 60) + " · " : "") + nombre,
+          subject: "Nueva inscripción · " + (tipo ? tipo.slice(0, 60) + " · " : "") + nombre,
           html: cuerpo,
-          text: `Nueva preinscripción: ${nombre}\n${fecha}\n` + txt,
+          text: `Nueva inscripción: ${nombre}\n${fecha}\n` + txt,
         }),
       });
       console.log("aviso a Dana: Resend respondio", rn.status, (await rn.text()).slice(0, 200));
