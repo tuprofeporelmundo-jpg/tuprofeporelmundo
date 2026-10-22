@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Revisar reseña · Tu profe por el mundo</title>
+<meta name="robots" content="noindex,nofollow">
+<meta name="referrer" content="no-referrer">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+/* Página privada de Dana: se abre desde el correo de «Reseña nueva» para publicar o descartar una reseña. */
+:root{
+  --bg:#FCF8F5; --card:#FFFFFF; --ink:#33251E; --muted:#6F6058; --line:#EADCD2;
+  --jungle:#6B4433; --leaf:#5E7A55; --ochre:#C4936B; --ochre-soft:#F5E6DA; --star:#C98A2E; --danger:#A8321E; --on-primary:#FFFFFF;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,"Noto Serif",Georgia,serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1D1613; --card:#2B211C; --ink:#F4EAE3; --muted:#C2B2A7; --line:#3E3029;
+  --jungle:#E3BCA6; --leaf:#93AE87; --ochre:#D9A87F; --ochre-soft:#3B2C23; --star:#E9B65A; --danger:#F0A08F; --on-primary:#1D1613; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1D1613; --card:#2B211C; --ink:#F4EAE3; --muted:#C2B2A7; --line:#3E3029;
+  --jungle:#E3BCA6; --leaf:#93AE87; --ochre:#D9A87F; --ochre-soft:#3B2C23; --star:#E9B65A; --danger:#F0A08F; --on-primary:#1D1613; color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--display);font-size:1.0625rem;line-height:1.6;padding:1rem max(16px,env(safe-area-inset-right,0px)) 3rem max(16px,env(safe-area-inset-left,0px));-webkit-font-smoothing:antialiased}
+main{width:min(560px,100%);margin:1rem auto 0;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:1.8rem 1.5rem}
+h1{font-family:var(--serif);font-weight:600;font-size:1.7rem;line-height:1.15;margin:0 0 .4rem}
+.tag{font-size:.78rem;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 .8rem}
+.stars{font-size:1.8rem;letter-spacing:.1em;color:var(--star);margin:.2rem 0}
+.meta{color:var(--muted);font-size:.95rem;margin:0 0 1rem}
+blockquote{margin:0 0 1.4rem;padding:1rem 1.1rem;background:var(--ochre-soft);border-radius:14px;white-space:pre-wrap;overflow-wrap:anywhere}
+.btns{display:flex;flex-wrap:wrap;gap:.7rem}
+button{font:inherit;font-weight:700;border:0;border-radius:999px;padding:.8rem 1.4rem;cursor:pointer;color:var(--on-primary)}
+button.ok{background:var(--leaf)}
+button.no{background:transparent;color:var(--danger);border:1.5px solid var(--danger)}
+button:disabled{opacity:.55;cursor:default}
+:focus-visible{outline:3px solid var(--ochre);outline-offset:3px;border-radius:6px}
+.msg{padding:.9rem 1rem;border-radius:12px;background:var(--ochre-soft);margin:0}
+.err{color:var(--danger)}
+.email{color:var(--muted);font-size:.85rem;margin:1rem 0 0}
+</style>
+</head>
+<body>
+<main>
+  <p class="tag">Reseña pendiente</p>
+  <div id="vista"><p class="msg">Cargando la reseña…</p></div>
+</main>
+<script>
+(function(){
+var URL='https://csnofemrppaqnnwirusx.supabase.co',KEY='sb_publishable_q1Sx5pe8Klw8T6UA11r5MA_d0oclgYt';
+var q=new URLSearchParams(location.search),id=q.get('id')||'',tk=q.get('t')||'',pre=q.get('a')||'';
+var UUID=/^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i;
+var vista=document.getElementById('vista');
+function txt(tag,t,cls){var e=document.createElement(tag);e.textContent=t;if(cls)e.className=cls;return e}
+function aviso(t,cls){vista.textContent='';vista.appendChild(txt('p',t,'msg'+(cls?' '+cls:'')))}
+function rpc(fn,args){return fetch(URL+'/rest/v1/rpc/'+fn,{method:'POST',headers:{apikey:KEY,'Content-Type':'application/json'},body:JSON.stringify(args)}).then(function(r){if(!r.ok)throw new Error(r.status);return r.json()})}
+if(!UUID.test(id)||!UUID.test(tk)){aviso('Este enlace no es válido. Abre la reseña desde el botón del correo.','err');return}
+rpc('resena_para_correo',{p_id:id,p_token:tk}).then(function(rows){
+  var x=rows[0];
+  if(!x){aviso('No encuentro esta reseña. Puede que ya la hayas descartado.','err');return}
+  vista.textContent='';
+  vista.appendChild(txt('h1',x.nombre));
+  vista.appendChild(txt('div','★'.repeat(x.estrellas)+'☆'.repeat(5-x.estrellas),'stars'));
+  vista.appendChild(txt('p',[x.clase==='apoyo'?'Apoyo escolar':'Español',x.nivel,x.pais].filter(Boolean).join(' · '),'meta'));
+  vista.appendChild(txt('blockquote',x.comentario));
+  if(x.aprobada){vista.appendChild(txt('p','Esta reseña ya está publicada.','msg'));return}
+  var b=document.createElement('div');b.className='btns';
+  var ok=txt('button','Publicar en la web','ok'),no=txt('button','Descartar','no');
+  ok.type='button';no.type='button';
+  function mod(accion){ok.disabled=no.disabled=true;
+    rpc('moderar_resena',{p_id:id,p_token:tk,p_accion:accion}).then(function(r){
+      if(r==='aprobada')aviso('Publicada. Ya se ve en la web en cuanto se recargue la portada.');
+      else if(r==='descartada')aviso('Descartada. Se ha borrado la reseña.');
+      else aviso('No he podido hacerlo ('+r+').','err');
+    }).catch(function(){ok.disabled=no.disabled=false;aviso('Error de conexión. Inténtalo otra vez.','err')})}
+  ok.addEventListener('click',function(){mod('aprobar')});
+  no.addEventListener('click',function(){mod('descartar')});
+  b.appendChild(ok);b.appendChild(no);vista.appendChild(b);
+  vista.appendChild(txt('p','Correo de quien opina (no se publica): '+x.email,'email'));
+  (pre==='aprobar'?ok:pre==='descartar'?no:ok).focus();
+}).catch(function(){aviso('No he podido cargar la reseña. Inténtalo otra vez.','err')});
+})();
+</script>
+</body>
+</html>
