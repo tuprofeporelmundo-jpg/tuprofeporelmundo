@@ -1,0 +1,178 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="robots" content="noindex">
+<title>Panel de la profesora · Mi aula</title>
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+/* Panel interno de Dana: mismo sistema visual que Mi aula */
+:root{
+  --bg:#FCF8F5; --bg-2:#F5EBE4; --card:#FFFFFF; --ink:#33251E; --muted:#6F6058; --line:#EADCD2;
+  --jungle:#6B4433; --leaf:#5E7A55; --ochre-soft:#F5E6DA; --on-primary:#FFFFFF;
+  --red:#D9472F; --amber:#E8A630; --green:#5DAE4C; --shadow:0 10px 24px -16px rgba(60,36,26,.35);
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1D1613; --bg-2:#251C18; --card:#2B211C; --ink:#F4EAE3; --muted:#C2B2A7; --line:#3E3029;
+  --jungle:#E3BCA6; --leaf:#93AE87; --ochre-soft:#3B2C23; --on-primary:#1D1613;
+  --red:#F06B52; --amber:#F2B84B; --green:#7CC66B; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1D1613; --bg-2:#251C18; --card:#2B211C; --ink:#F4EAE3; --muted:#C2B2A7; --line:#3E3029;
+  --jungle:#E3BCA6; --leaf:#93AE87; --ochre-soft:#3B2C23; --on-primary:#1D1613;
+  --red:#F06B52; --amber:#F2B84B; --green:#7CC66B; color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.5 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;padding:0 max(16px,env(safe-area-inset-right)) 3rem max(16px,env(safe-area-inset-left))}
+a{color:var(--jungle)}
+:focus-visible{outline:3px solid var(--amber);outline-offset:2px;border-radius:4px}
+.wrap{width:min(980px,100%);margin-inline:auto}
+header{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--line);margin-bottom:1.4rem}
+h1{font-family:var(--serif);font-size:1.6rem;margin:0}
+h2{font-size:1.05rem;margin:0}
+.muted{color:var(--muted)}.small{font-size:.86rem}
+.card{background:var(--card);border:1px solid var(--line);border-radius:16px;padding:1.1rem 1.2rem;box-shadow:var(--shadow)}
+.btn{font:inherit;font-weight:700;border-radius:10px;padding:.65rem 1.1rem;border:2px solid var(--jungle);background:var(--jungle);color:var(--on-primary);cursor:pointer}
+.btn.ghost{background:transparent;color:var(--jungle)}
+label{display:block;font-weight:600;margin:.8rem 0 .3rem}
+input{width:100%;font:inherit;padding:.65rem .8rem;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--ink)}
+.err{color:var(--red);font-weight:600}
+#login{max-width:420px;margin:2rem auto}
+#login .btn{width:100%;margin-top:1.2rem}
+.sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:.8rem;margin-bottom:1rem}
+.sum div{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:.8rem 1rem}
+.sum b{display:block;font-size:1.6rem;line-height:1.1}
+.tools{display:flex;gap:.8rem;align-items:center;flex-wrap:wrap;margin-bottom:1rem}
+.tools input{max-width:320px}
+.list{display:grid;gap:.9rem}
+.st{display:grid;gap:.7rem}
+.st-top{display:flex;justify-content:space-between;gap:.8rem;flex-wrap:wrap;align-items:baseline}
+.st-top h2 span{font-weight:400;color:var(--muted);font-size:.85rem;margin-left:.4rem}
+.chips{display:flex;flex-wrap:wrap;gap:.4rem}
+.chip{font-size:.8rem;font-weight:600;background:var(--ochre-soft);border-radius:999px;padding:.15rem .6rem}
+.chip.g{background:color-mix(in srgb,var(--green) 22%,var(--card))}.chip.a{background:color-mix(in srgb,var(--amber) 25%,var(--card))}.chip.r{background:color-mix(in srgb,var(--red) 20%,var(--card))}
+.bars{display:grid;grid-template-columns:repeat(14,1fr);gap:3px;align-items:end;height:44px}
+.bars i{display:block;background:var(--leaf);border-radius:3px 3px 0 0;min-height:2px}
+.bars i.z{background:var(--line)}
+.bars-l{display:flex;justify-content:space-between;font-size:.72rem;color:var(--muted)}
+.grid2{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.sk{display:grid;grid-template-columns:1fr auto;gap:.2rem .6rem;font-size:.86rem}
+.sk span:nth-child(even){font-weight:700}
+ul.err-l{margin:.3rem 0 0;padding-left:1.1rem;font-size:.86rem}
+ul.err-l li{margin:.15rem 0}
+details summary{cursor:pointer;font-weight:600;font-size:.9rem}
+@media (max-width:640px){.grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><h1>Panel de la profesora</h1><button class="btn ghost" id="out" hidden>Salir</button></header>
+
+  <form class="card" id="login" novalidate>
+    <h2>Entra con tu usuario del aula</h2>
+    <p class="small muted">Solo pueden entrar las cuentas de profesora dadas de alta en Supabase (tabla «profes»).</p>
+    <label for="u">Usuario</label><input id="u" autocomplete="username" required>
+    <label for="p">Contraseña</label><input id="p" type="password" autocomplete="current-password" required>
+    <p class="err" id="lerr" role="alert" hidden></p>
+    <button class="btn" type="submit">Entrar</button>
+  </form>
+
+  <main id="app" hidden>
+    <div class="sum" id="sum"></div>
+    <div class="tools"><label for="q" class="small" style="margin:0">Buscar alumno</label><input id="q" type="search" placeholder="Nombre o usuario"></div>
+    <div class="list" id="list"></div>
+    <p class="small muted">Nivel de práctica: lo calcula la práctica diaria según los aciertos y la dificultad de cada ejercicio. El nivel oficial solo cambia con la prueba de nivel. Destrezas: porcentaje de aciertos en los últimos 30 ejercicios de cada una.</p>
+  </main>
+</div>
+
+<script src="../config.js"></script>
+<script src="../banco.js"></script>
+<script src="../banco-extra.js"></script>
+<script src="../banco-escolar.js"></script>
+<script src="../banco-idiomas.js"></script>
+<script src="../conjugacion.js"></script>
+<script src="../supabase.js"></script>
+<script>
+(function(){
+const CFG=window.AULA_CONFIG||{},DOMAIN=CFG.domain||'tuprofeporelmundo.com';
+const $=id=>document.getElementById(id);
+const esc=s=>String(s==null?'':s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
+const LV=['A1','A2','B1','B2','C1','C2'];
+const LANG={es:'Español',en:'Inglés',fr:'Francés'};
+const SKN={gram:'Gramática',voc:'Vocabulario',lec:'Lectura',aud:'Escucha',ord:'Construir frases',hab:'Hablar'};
+const toUser=s=>s.trim().toLowerCase().replace(/@.*$/,'').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/\s+/g,'.').replace(/[^a-z0-9.]/g,'');
+const day=k=>new Date(Date.now()-k*864e5).toISOString().slice(0,10);
+/* textos de las preguntas, para enseñar en qué falla cada alumno */
+const ALLQ={};[BANK,BANK_EN,BANK_FR].forEach(b=>b.forEach(q=>{ALLQ[q.id]=q}));
+(typeof ESC_UNITS!=='undefined'?ESC_UNITS:[]).forEach(u=>u.qs.forEach(q=>{ALLQ[q.id]=q}));
+function qText(id){
+  if(id.startsWith('cj.')){const q=cjItem(id);return q?q.q.replace('___','…'):id}
+  let base=id,suf='';
+  if(/\.(d|s)$/.test(id)){suf=id.endsWith('.d')?' (dictado)':' (hablar)';base=id.slice(0,-2)}
+  const q=ALLQ[base];if(!q)return id;
+  return (q.q||q.say||q.s||(q.o&&q.o[0])||(q.p&&q.p.map(p=>p.join(' – ')).join(', '))||id)+suf;
+}
+let sb=null,ROWS=[];
+
+function summary(r){
+  const d=r.datos||{},lt=d.lt||'es',school=d.track==='school';
+  const days=d.days||{},last7=[0,1,2,3,4,5,6].map(k=>days[day(k)]||{n:0,ok:0});
+  const n7=last7.reduce((a,x)=>a+x.n,0),ok7=last7.reduce((a,x)=>a+x.ok,0);
+  const st=d.streak||{},active=st.d===day(0)||st.d===day(1);
+  const P=d.dpm&&d.dpm[lt];
+  const hist=d.hist||[];
+  const sk=Object.keys(SKN).map(k=>{const h=hist.filter(x=>x.sk===k).slice(-30);return h.length>=3?[k,Math.round(h.filter(x=>x.ok).length/h.length*100)]:null}).filter(Boolean).sort((a,b)=>a[1]-b[1]);
+  const fails=Object.entries(d.items||{}).filter(([id,it])=>it.b===0&&it.s>0).sort((a,b)=>(b[1].s-b[1].k)-(a[1].s-a[1].k)).slice(0,6).map(([id,it])=>({t:qText(id),f:it.s-it.k,s:it.s}));
+  return {d,lt,school,days,n7,ok7,acc7:n7?Math.round(ok7/n7*100):null,streak:active?(st.n||0):0,today:(days[day(0)]||{}).n||0,goal:d.dg||10,P,sk,fails,ach:Object.keys(d.ach||{}).length};
+}
+function lvl(r){if(r==null)return '—';const l=Math.min(5,Math.max(0,Math.floor(r)));return LV[l]+' · '+Math.round((r-l)*100)+' %'}
+function card(r){
+  const s=summary(r),d=s.d,u=(r.email||'').replace('@'+DOMAIN,'');
+  const mod=s.school?'Apoyo escolar'+(d.esc&&d.esc.c?' · '+d.esc.c:''):LANG[s.lt]||s.lt;
+  const off=d.level==null?'Sin test':d.level<0?'Inicio':LV[d.level];
+  const max=Math.max(s.goal,...[...Array(14).keys()].map(k=>(s.days[day(k)]||{}).n||0));
+  const bars=[...Array(14).keys()].reverse().map(k=>{const x=s.days[day(k)]||{n:0};return `<i class="${x.n?'':'z'}" style="height:${x.n?Math.max(8,Math.round(x.n/max*100)):4}%" title="${day(k)}: ${x.n} ejercicios"></i>`}).join('');
+  const accC=s.acc7==null?'':s.acc7>=75?'g':s.acc7>=50?'a':'r';
+  const last=r.actualizado?new Date(r.actualizado).toLocaleString('es-ES',{day:'numeric',month:'short',hour:'2-digit',minute:'2-digit'}):'nunca';
+  return `<article class="card st" data-k="${esc((r.nombre||'')+' '+u).toLowerCase()}">
+    <div class="st-top"><h2>${esc(r.nombre||u)}<span>${esc(u)}</span></h2><span class="small muted">Última actividad: ${esc(last)}</span></div>
+    <div class="chips"><span class="chip">${esc(mod)}</span>${s.school?'':`<span class="chip">Nivel oficial: ${esc(off)}</span>`}${d.target!=null&&!s.school?`<span class="chip">Objetivo: ${LV[d.target]||'—'}</span>`:''}${!s.school?`<span class="chip">Práctica: ${esc(lvl(s.P&&s.P.r))}</span>`:''}<span class="chip ${s.streak?'g':''}">Racha: ${s.streak} ${s.streak===1?'día':'días'}</span><span class="chip ${s.today>=s.goal?'g':s.today?'a':''}">Hoy: ${s.today}/${s.goal}</span><span class="chip ${accC}">7 días: ${s.n7} ejercicios${s.acc7==null?'':' · '+s.acc7+' % acierto'}</span><span class="chip">${d.xp||0} XP · ${s.ach} logros</span></div>
+    <div><div class="bars" role="img" aria-label="Ejercicios por día, últimas dos semanas">${bars}</div><div class="bars-l"><span>hace 13 días</span><span>hoy</span></div></div>
+    <details><summary>Destrezas y fallos</summary><div class="grid2" style="margin-top:.6rem">
+      <div><b class="small">Destrezas (de peor a mejor)</b><div class="sk" style="margin-top:.3rem">${s.sk.length?s.sk.map(([k,v])=>`<span>${SKN[k]}</span><span>${v} %</span>`).join(''):'<span class="muted">Aún sin datos</span><span></span>'}</div></div>
+      <div><b class="small">Lo que está fallando ahora</b>${s.fails.length?`<ul class="err-l">${s.fails.map(f=>`<li>${esc(f.t)} <span class="muted">(${f.f} de ${f.s} mal)</span></li>`).join('')}</ul>`:'<p class="small muted">Nada pendiente.</p>'}</div>
+    </div></details>
+  </article>`;
+}
+function render(){
+  const rows=ROWS.map(summary);
+  const act=rows.filter(s=>s.today>0).length,str=rows.filter(s=>s.streak>0).length,n7=rows.reduce((a,s)=>a+s.n7,0);
+  $('sum').innerHTML=`<div><b>${ROWS.length}</b><span class="small muted">alumnos</span></div><div><b>${act}</b><span class="small muted">han practicado hoy</span></div><div><b>${str}</b><span class="small muted">con racha activa</span></div><div><b>${n7}</b><span class="small muted">ejercicios en 7 días</span></div>`;
+  $('list').innerHTML=ROWS.map(card).join('')||'<p class="muted">Todavía no hay alumnos.</p>';
+  filter();
+}
+function filter(){const q=$('q').value.trim().toLowerCase();document.querySelectorAll('.st').forEach(c=>{c.hidden=!!q&&!c.dataset.k.includes(q)})}
+$('q').addEventListener('input',filter);
+
+async function load(){
+  const {data,error}=await sb.rpc('panel_alumnos');
+  if(error){$('lerr').hidden=false;$('lerr').textContent=/permiso/.test(error.message)?'Esta cuenta no está dada de alta como profesora (tabla «profes» de Supabase).':'No se han podido cargar los alumnos: '+error.message;$('login').hidden=false;$('app').hidden=true;$('out').hidden=false;return}
+  ROWS=data||[];$('login').hidden=true;$('app').hidden=false;$('out').hidden=false;render();
+}
+$('login').addEventListener('submit',async e=>{
+  e.preventDefault();$('lerr').hidden=true;
+  const u=toUser($('u').value),p=$('p').value;
+  if(!u||!p){$('lerr').hidden=false;$('lerr').textContent='Escribe tu usuario y tu contraseña.';return}
+  const {error}=await sb.auth.signInWithPassword({email:u+'@'+DOMAIN,password:p});
+  if(error){$('lerr').hidden=false;$('lerr').textContent='Usuario o contraseña incorrectos.';return}
+  load();
+});
+$('out').addEventListener('click',async()=>{await sb.auth.signOut();location.reload()});
+
+if(!CFG.supabaseUrl){$('lerr').hidden=false;$('lerr').textContent='El aula no está conectada a Supabase.';return}
+sb=supabase.createClient(CFG.supabaseUrl,CFG.supabaseKey);
+sb.auth.getSession().then(({data})=>{if(data&&data.session)load()});
+})();
+</script>
+</body>
+</html>
