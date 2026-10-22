@@ -21,6 +21,8 @@
 
 - **Web en construcción (2 oct 2026):** `netlify/edge-functions/en-construccion.js` enseña «Próximamente» a todos los visitantes (también en `/aula/`). Dana entra en `/entrar` con su contraseña (se le dio en el hilo; en el código solo hay una huella PBKDF2) y sale en `/salir`; la sesión dura 90 días. Para abrir la web al público: borrar ese archivo.
 
+- **Reseñas (22 oct 2026):** los alumnos (también los antiguos) opinan en `tuprofeporelmundo.com/opinar` (`site/opinar/index.html`, ES/EN/FR, sin cuenta): estrellas 1-5, comentario, nombre público, país y nivel opcionales y correo (no se publica). Se guardan en la tabla `resenas` de Supabase (`supabase/resenas.sql`, lo ejecuta Dana una vez) como pendientes; **Dana las aprueba** marcando `aprobada` en el Table Editor. La portada muestra las aprobadas en `#opiniones` (vistas es y ap) con la media; si no hay ninguna, la sección no aparece. Por ley (Omnibus) se publican también las negativas, salvo insultos, datos personales o fuera de tema. No se añade `aggregateRating` al JSON-LD (Google no admite reseñas propias del negocio).
+
 - **Apoyo escolar (2 oct 2026):** `site/aula/banco-escolar.js` = 150 unidades / 900 preguntas (P1-P6, E1-E4 × Matemáticas, Lengua, Inglés, Ciencias Naturales, Ciencias Sociales; 3 unidades por curso y asignatura) según los saberes básicos de la LOMLOE (RD 157/2022 y RD 217/2022). Se usa en el «Reto de apoyo escolar» de la portada (5 preguntas al día, `tppm-reto-esc`) y en Mi aula (modalidad «Apoyo escolar», `data.track='school'`, curso en `data.esc.c`).
 
 ## 1. Quién es la clienta y cómo trabajar con ella
