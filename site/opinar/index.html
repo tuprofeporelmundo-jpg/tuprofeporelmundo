@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Deja tu opinión · Tu profe por el mundo</title>
+<meta name="description" content="Cuéntanos qué te han parecido tus clases con Dana Salgado.">
+<meta name="robots" content="noindex,follow">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+/* Mismo sistema visual que tuprofeporelmundo.com. Página suelta que Dana envía por enlace a sus alumnos. */
+:root{
+  --bg:#FCF8F5; --bg-2:#F5EBE4; --card:#FFFFFF; --ink:#33251E; --muted:#6F6058; --line:#EADCD2;
+  --jungle:#6B4433; --jungle-2:#563424; --leaf:#5E7A55; --ochre:#C4936B; --ochre-soft:#F5E6DA; --flower:#D98C7E; --flower-soft:#F8E1DA;
+  --star:#C98A2E; --danger:#A8321E; --on-primary:#FFFFFF;
+  --display:"Bricolage Grotesque",ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif;
+  --serif:"Iowan Old Style","Palatino Linotype","Book Antiqua",Palatino,"Noto Serif",Georgia,serif;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#1D1613; --bg-2:#251C18; --card:#2B211C; --ink:#F4EAE3; --muted:#C2B2A7; --line:#3E3029;
+  --jungle:#E3BCA6; --jungle-2:#EFD0BE; --leaf:#93AE87; --ochre:#D9A87F; --ochre-soft:#3B2C23; --flower-soft:#4A2F2A;
+  --star:#E9B65A; --danger:#F0A08F; --on-primary:#1D1613; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#1D1613; --bg-2:#251C18; --card:#2B211C; --ink:#F4EAE3; --muted:#C2B2A7; --line:#3E3029;
+  --jungle:#E3BCA6; --jungle-2:#EFD0BE; --leaf:#93AE87; --ochre:#D9A87F; --ochre-soft:#3B2C23; --flower-soft:#4A2F2A;
+  --star:#E9B65A; --danger:#F0A08F; --on-primary:#1D1613; color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:var(--display);font-size:1.0625rem;line-height:1.6;padding:0 max(16px,env(safe-area-inset-right,0px)) 3rem max(16px,env(safe-area-inset-left,0px));-webkit-font-smoothing:antialiased;min-height:100vh}
+a{color:var(--jungle)}
+:focus-visible{outline:3px solid var(--ochre);outline-offset:3px;border-radius:4px}
+.top{display:flex;align-items:center;justify-content:space-between;gap:1rem;padding-block:1rem;width:min(640px,100%);margin-inline:auto}
+.logo{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:var(--jungle);display:flex;align-items:center;gap:.5rem}
+.logo svg{width:26px;height:26px;flex:none}
+.langsw{display:flex;border:1px solid var(--line);border-radius:10px;overflow:hidden;background:var(--card)}
+.langsw button{font:inherit;font-size:.82rem;font-weight:700;border:0;background:transparent;color:var(--muted);padding:.35rem .6rem;cursor:pointer}
+.langsw button[aria-pressed="true"]{background:var(--ochre-soft);color:var(--ink)}
+main{width:min(640px,100%);margin:.5rem auto 0;background:var(--card);border:1px solid var(--line);border-radius:22px;padding:2rem 1.6rem;box-shadow:0 18px 40px -24px rgba(60,36,26,.35)}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(1.8rem,6vw,2.4rem);line-height:1.12;letter-spacing:-.02em;margin:0 0 .6rem;text-wrap:balance}
+.lead{color:var(--muted);margin:0 0 1.6rem}
+fieldset{border:0;margin:0 0 1.4rem;padding:0;min-width:0}
+legend,.lbl{display:block;font-weight:700;margin-bottom:.45rem;padding:0}
+.opt{font-weight:400;color:var(--muted);font-size:.9rem}
+.hint{display:block;color:var(--muted);font-size:.88rem;margin-top:.3rem}
+.field{margin-bottom:1.2rem}
+input[type=text],input[type=email],textarea,select{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1.5px solid var(--line);border-radius:12px;padding:.7rem .85rem}
+textarea{min-height:8.5rem;resize:vertical}
+input:focus,textarea:focus,select:focus{outline:none;border-color:var(--jungle)}
+.row{display:grid;grid-template-columns:1fr 1fr;gap:0 1rem}
+/* estrellas: 5 radios; se pintan hasta la elegida */
+.stars{display:flex;gap:.25rem}
+.stars input{position:absolute;opacity:0;width:1px;height:1px}
+.stars label{cursor:pointer;line-height:0;padding:.15rem;border-radius:8px}
+.stars svg{width:44px;height:44px;fill:none;stroke:var(--star);stroke-width:1.6;transition:transform .12s}
+.stars label.on svg{fill:var(--star)}
+.stars label:hover svg{transform:scale(1.08)}
+.stars input:focus-visible+label{outline:3px solid var(--ochre);outline-offset:2px}
+.stars-txt{min-height:1.4rem;color:var(--muted);font-size:.92rem;margin-top:.2rem}
+.chips{display:flex;flex-wrap:wrap;gap:.5rem}
+.chips input{position:absolute;opacity:0;width:1px;height:1px}
+.chips label{cursor:pointer;padding:.55rem 1.1rem;border-radius:999px;border:1.5px solid var(--line);background:var(--card)}
+.chips input:checked+label{background:var(--jungle);border-color:var(--jungle);color:var(--on-primary);font-weight:700}
+.chips input:focus-visible+label{outline:3px solid var(--ochre);outline-offset:2px}
+.check{display:grid;grid-template-columns:auto 1fr;gap:.6rem;align-items:start;margin-bottom:.8rem;font-size:.95rem}
+.check input{width:1.15rem;height:1.15rem;margin-top:.2rem;accent-color:var(--jungle)}
+.pv{background:var(--bg-2);border:1px solid var(--line);border-radius:12px;padding:.8rem 1rem;font-size:.85rem;color:var(--muted);margin:1rem 0 1.2rem}
+.pv b{color:var(--ink)}
+.hp{position:absolute;left:-9999px;width:1px;height:1px;overflow:hidden}
+.btn{display:inline-flex;align-items:center;justify-content:center;width:100%;padding:.9rem 1.4rem;border-radius:12px;font:inherit;font-weight:700;font-size:1.05rem;border:2px solid var(--jungle);background:var(--jungle);color:var(--on-primary);cursor:pointer}
+.btn:hover{background:var(--jungle-2);border-color:var(--jungle-2)}
+.btn:disabled{opacity:.6;cursor:wait}
+.err{color:var(--danger);font-weight:600;font-size:.92rem;margin:0 0 .9rem}
+.done{text-align:center;padding:1rem 0}
+.done svg{width:64px;height:64px;color:var(--leaf)}
+.done h2{font-family:var(--serif);font-weight:600;font-size:1.7rem;margin:.6rem 0 .4rem}
+.done p{color:var(--muted);margin:0}
+.verif{width:min(640px,100%);margin:1rem auto 0;color:var(--muted);font-size:.85rem;padding-inline:.4rem}
+@media (max-width:480px){main{padding:1.5rem 1.1rem;border-radius:18px}.row{grid-template-columns:1fr}.stars svg{width:40px;height:40px}}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<header class="top">
+  <span class="logo"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3 3 15 0 18M12 3c-3 3-3 15 0 18"/></svg>Tu profe por el mundo</span>
+  <div class="langsw" role="group" aria-label="Idioma / Language / Langue">
+    <button type="button" data-lang="es">ES</button><button type="button" data-lang="en">EN</button><button type="button" data-lang="fr">FR</button>
+  </div>
+</header>
+
+<main>
+  <div id="form-wrap">
+    <h1 data-t="h1">¿Qué te han parecido las clases?</h1>
+    <p class="lead" data-t="lead">Tu opinión ayuda a otros alumnos a decidirse y me ayuda a mejorar. Solo te llevará un minuto.</p>
+
+    <form id="f" novalidate>
+      <fieldset>
+        <legend data-t="stars">Tu valoración</legend>
+        <div class="stars" id="stars"></div>
+        <div class="stars-txt" id="stars-txt" aria-live="polite"></div>
+      </fieldset>
+
+      <div class="field">
+        <label class="lbl" for="comentario" data-t="comment">Tu comentario</label>
+        <textarea id="comentario" maxlength="1000" required data-tph="comment_ph" placeholder="¿Qué tal las clases? ¿Qué has conseguido? ¿Se lo recomendarías a alguien?"></textarea>
+      </div>
+
+      <fieldset>
+        <legend data-t="class">¿Qué clases has hecho?</legend>
+        <div class="chips">
+          <input type="radio" name="clase" id="c-es" value="espanol" checked><label for="c-es" data-t="c_es">Español</label>
+          <input type="radio" name="clase" id="c-ap" value="apoyo"><label for="c-ap" data-t="c_ap">Apoyo escolar</label>
+        </div>
+      </fieldset>
+
+      <div class="row">
+        <div class="field">
+          <label class="lbl" for="nombre" data-t="name">Nombre que se publica</label>
+          <input type="text" id="nombre" maxlength="60" autocomplete="off" required data-tph="name_ph" placeholder="Por ejemplo: Laura M.">
+          <span class="hint" data-t="name_hint">Basta con tu nombre y la inicial del apellido.</span>
+        </div>
+        <div class="field">
+          <label class="lbl" for="pais"><span data-t="country">País</span> <span class="opt" data-t="optional">(opcional)</span></label>
+          <input type="text" id="pais" maxlength="60" autocomplete="country-name">
+        </div>
+      </div>
+
+      <div class="field">
+        <label class="lbl" for="nivel"><span data-t="level">Nivel o curso</span> <span class="opt" data-t="optional">(opcional)</span></label>
+        <input type="text" id="nivel" maxlength="40" data-tph="level_ph" placeholder="Por ejemplo: B1, DELE B2 o 2.º de la ESO">
+      </div>
+
+      <div class="field">
+        <label class="lbl" for="email" data-t="email">Tu correo electrónico</label>
+        <input type="email" id="email" maxlength="200" autocomplete="email" required>
+        <span class="hint" data-t="email_hint">No se publica. Solo lo uso para comprobar que has sido alumno o alumna.</span>
+      </div>
+
+      <div class="hp" aria-hidden="true"><label for="web">Web</label><input type="text" id="web" tabindex="-1" autocomplete="off"></div>
+
+      <label class="check"><input type="checkbox" id="ok-age"><span data-t="age">Tengo 14 años o más. Si opino sobre las clases de apoyo escolar de un menor, soy su madre, padre o tutor legal.</span></label>
+      <label class="check"><input type="checkbox" id="ok-pub"><span data-t="publish">Acepto que mi opinión, mis estrellas y el nombre, país y nivel que he escrito se publiquen en tuprofeporelmundo.com.</span></label>
+
+      <div class="pv" data-t-html="privacy"><b>Protección de datos.</b> Responsable: Dana Salgado (Tu profe por el mundo). Finalidad: publicar tu opinión en la web y comprobar que has sido alumno. Legitimación: tu consentimiento, que puedes retirar cuando quieras. Tu correo no se publica ni se cede. Los datos se guardan en Supabase (servidores en la UE). Puedes pedir que se corrija o se borre tu opinión, y ejercer tus demás derechos, en contacto@tuprofeporelmundo.com.</div>
+
+      <p class="err" id="err" role="alert" hidden></p>
+      <button class="btn" type="submit" id="send" data-t="send">Enviar mi opinión</button>
+    </form>
+  </div>
+
+  <div class="done" id="done" hidden tabindex="-1">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M7 12.5l3.2 3.2L17 9"/></svg>
+    <h2 data-t="thanks">¡Muchas gracias!</h2>
+    <p data-t="thanks_p">He recibido tu opinión. La publicaré en la web en cuanto la revise.</p>
+  </div>
+</main>
+
+<p class="verif" data-t="verif">Cómo se verifican las opiniones: las envían alumnos y familias con un enlace que les manda Dana, y ella comprueba que esa persona ha sido alumna antes de publicarla. Se publican todas, buenas y malas, salvo las que tengan insultos, datos personales o no hablen de las clases.</p>
+
+<script>
+(function(){
+var URL='https://csnofemrppaqnnwirusx.supabase.co',KEY='sb_publishable_q1Sx5pe8Klw8T6UA11r5MA_d0oclgYt';
+var T={
+es:{h1:'¿Qué te han parecido las clases?',lead:'Tu opinión ayuda a otros alumnos a decidirse y me ayuda a mejorar. Solo te llevará un minuto.',stars:'Tu valoración',star_n:'{n} de 5 estrellas',s1:'Muy mal',s2:'Mal',s3:'Bien',s4:'Muy bien',s5:'¡Excelente!',comment:'Tu comentario',comment_ph:'¿Qué tal las clases? ¿Qué has conseguido? ¿Se lo recomendarías a alguien?',class:'¿Qué clases has hecho?',c_es:'Español',c_ap:'Apoyo escolar',name:'Nombre que se publica',name_ph:'Por ejemplo: Laura M.',name_hint:'Basta con tu nombre y la inicial del apellido.',country:'País',optional:'(opcional)',level:'Nivel o curso',level_ph:'Por ejemplo: B1, DELE B2 o 2.º de la ESO',email:'Tu correo electrónico',email_hint:'No se publica. Solo lo uso para comprobar que has sido alumno o alumna.',age:'Tengo 14 años o más. Si opino sobre las clases de apoyo escolar de un menor, soy su madre, padre o tutor legal.',publish:'Acepto que mi opinión, mis estrellas y el nombre, país y nivel que he escrito se publiquen en tuprofeporelmundo.com.',privacy:'<b>Protección de datos.</b> Responsable: Dana Salgado (Tu profe por el mundo). Finalidad: publicar tu opinión en la web y comprobar que has sido alumno. Legitimación: tu consentimiento, que puedes retirar cuando quieras. Tu correo no se publica ni se cede. Los datos se guardan en Supabase (servidores en la UE). Puedes pedir que se corrija o se borre tu opinión, y ejercer tus demás derechos, en contacto@tuprofeporelmundo.com.',send:'Enviar mi opinión',sending:'Enviando…',thanks:'¡Muchas gracias!',thanks_p:'He recibido tu opinión. La publicaré en la web en cuanto la revise.',verif:'Cómo se verifican las opiniones: las envían alumnos y familias con un enlace que les manda Dana, y ella comprueba que esa persona ha sido alumna antes de publicarla. Se publican todas, buenas y malas, salvo las que tengan insultos, datos personales o no hablen de las clases.',e_stars:'Elige de 1 a 5 estrellas.',e_comment:'Escribe un comentario de al menos 10 caracteres.',e_name:'Escribe el nombre que quieres que aparezca.',e_email:'Escribe un correo electrónico válido.',e_age:'Marca la casilla de la edad o de madre, padre o tutor.',e_pub:'Marca la casilla para aceptar que se publique tu opinión.',e_send:'No se ha podido enviar. Inténtalo de nuevo en un momento o escríbeme a contacto@tuprofeporelmundo.com.'},
+en:{h1:'How did you find the lessons?',lead:'Your review helps other students decide and helps me improve. It only takes a minute.',stars:'Your rating',star_n:'{n} out of 5 stars',s1:'Very poor',s2:'Poor',s3:'Good',s4:'Very good',s5:'Excellent!',comment:'Your review',comment_ph:'How were the lessons? What did you achieve? Would you recommend them?',class:'Which lessons did you take?',c_es:'Spanish',c_ap:'School tutoring',name:'Name to be published',name_ph:'For example: Laura M.',name_hint:'Your first name and surname initial are enough.',country:'Country',optional:'(optional)',level:'Level or school year',level_ph:'For example: B1, DELE B2 or ESO year 2',email:'Your email address',email_hint:'Not published. I only use it to check that you have been my student.',age:'I am 14 or older. If I am reviewing a minor’s school tutoring, I am their mother, father or legal guardian.',publish:'I agree that my review, my stars and the name, country and level I have written will be published on tuprofeporelmundo.com.',privacy:'<b>Data protection.</b> Controller: Dana Salgado (Tu profe por el mundo). Purpose: to publish your review on the website and check that you have been a student. Legal basis: your consent, which you can withdraw at any time. Your email is never published or shared. Data is stored with Supabase (EU servers). You can ask for your review to be corrected or deleted, and exercise your other rights, at contacto@tuprofeporelmundo.com.',send:'Send my review',sending:'Sending…',thanks:'Thank you so much!',thanks_p:'I have received your review. I will publish it on the website as soon as I have checked it.',verif:'How reviews are verified: students and families send them through a link Dana gives them, and she checks that the person has been her student before publishing it. All reviews are published, good and bad, except those with insults, personal data or that are not about the lessons.',e_stars:'Choose from 1 to 5 stars.',e_comment:'Write a review of at least 10 characters.',e_name:'Write the name you want to appear.',e_email:'Enter a valid email address.',e_age:'Tick the age or parent/guardian box.',e_pub:'Tick the box to agree to your review being published.',e_send:'It could not be sent. Please try again in a moment or write to contacto@tuprofeporelmundo.com.'},
+fr:{h1:'Qu’as-tu pensé des cours ?',lead:'Ton avis aide d’autres élèves à se décider et m’aide à m’améliorer. Ça ne prend qu’une minute.',stars:'Ta note',star_n:'{n} étoiles sur 5',s1:'Très mauvais',s2:'Mauvais',s3:'Bien',s4:'Très bien',s5:'Excellent !',comment:'Ton commentaire',comment_ph:'Comment se sont passés les cours ? Qu’as-tu obtenu ? Les recommanderais-tu ?',class:'Quels cours as-tu suivis ?',c_es:'Espagnol',c_ap:'Soutien scolaire',name:'Nom publié',name_ph:'Par exemple : Laura M.',name_hint:'Ton prénom et l’initiale du nom suffisent.',country:'Pays',optional:'(facultatif)',level:'Niveau ou classe',level_ph:'Par exemple : B1, DELE B2 ou 4e',email:'Ton adresse e-mail',email_hint:'Elle n’est pas publiée. Je l’utilise seulement pour vérifier que tu as été mon élève.',age:'J’ai 14 ans ou plus. Si je donne mon avis sur le soutien scolaire d’un mineur, je suis sa mère, son père ou son tuteur légal.',publish:'J’accepte que mon avis, mes étoiles et le nom, le pays et le niveau indiqués soient publiés sur tuprofeporelmundo.com.',privacy:'<b>Protection des données.</b> Responsable : Dana Salgado (Tu profe por el mundo). Finalité : publier ton avis sur le site et vérifier que tu as été élève. Base légale : ton consentement, que tu peux retirer à tout moment. Ton e-mail n’est ni publié ni cédé. Les données sont hébergées chez Supabase (serveurs dans l’UE). Tu peux demander la correction ou la suppression de ton avis, et exercer tes autres droits, à contacto@tuprofeporelmundo.com.',send:'Envoyer mon avis',sending:'Envoi…',thanks:'Merci beaucoup !',thanks_p:'J’ai bien reçu ton avis. Je le publierai sur le site dès que je l’aurai vérifié.',verif:'Comment les avis sont vérifiés : les élèves et les familles les envoient via un lien que Dana leur donne, et elle vérifie que la personne a bien été son élève avant de le publier. Tous les avis sont publiés, bons ou mauvais, sauf ceux contenant des insultes, des données personnelles ou qui ne parlent pas des cours.',e_stars:'Choisis de 1 à 5 étoiles.',e_comment:'Écris un commentaire d’au moins 10 caractères.',e_name:'Écris le nom que tu veux voir affiché.',e_email:'Écris une adresse e-mail valide.',e_age:'Coche la case de l’âge ou du parent/tuteur.',e_pub:'Coche la case pour accepter la publication de ton avis.',e_send:'L’envoi n’a pas fonctionné. Réessaie dans un instant ou écris à contacto@tuprofeporelmundo.com.'}
+};
+var $=function(id){return document.getElementById(id)};
+var lang='es',stars=0;
+function t(k){return (T[lang]&&T[lang][k])||T.es[k]}
+var STAR='<svg viewBox="0 0 24 24" aria-hidden="true"><path stroke-linejoin="round" d="M12 2.8l2.8 5.8 6.3.9-4.6 4.4 1.1 6.3L12 17.2l-5.6 3 1.1-6.3L2.9 9.5l6.3-.9z"/></svg>';
+var box=$('stars');
+for(var i=1;i<=5;i++){box.insertAdjacentHTML('beforeend','<input type="radio" name="estrellas" id="s'+i+'" value="'+i+'"><label for="s'+i+'" data-n="'+i+'">'+STAR+'<span class="hp"></span></label>')}
+function paint(n){box.querySelectorAll('label').forEach(function(l){l.classList.toggle('on',+l.dataset.n<=n)})}
+box.addEventListener('change',function(e){stars=+e.target.value;paint(stars);$('stars-txt').textContent=t('s'+stars)});
+box.querySelectorAll('label').forEach(function(l){l.addEventListener('mouseenter',function(){paint(+l.dataset.n)})});
+box.addEventListener('mouseleave',function(){paint(stars)});
+function setLang(l){
+  lang=T[l]?l:'es';document.documentElement.lang=lang;
+  document.querySelectorAll('[data-t]').forEach(function(el){el.textContent=t(el.dataset.t)});
+  document.querySelectorAll('[data-t-html]').forEach(function(el){el.innerHTML=t(el.dataset.tHtml)});
+  document.querySelectorAll('[data-tph]').forEach(function(el){el.placeholder=t(el.dataset.tph)});
+  box.querySelectorAll('label').forEach(function(l){l.querySelector('.hp').textContent=t('star_n').replace('{n}',l.dataset.n)});
+  if(stars)$('stars-txt').textContent=t('s'+stars);
+  document.querySelectorAll('.langsw button').forEach(function(b){b.setAttribute('aria-pressed',String(b.dataset.lang===lang))});
+  if(!$('err').hidden&&$('err').dataset.k)$('err').textContent=t($('err').dataset.k);
+  try{localStorage.setItem('tppm-lang',lang)}catch(e){}
+}
+document.querySelectorAll('.langsw button').forEach(function(b){b.addEventListener('click',function(){setLang(b.dataset.lang)})});
+var q=new URLSearchParams(location.search).get('lang'),saved=null;
+try{saved=localStorage.getItem('tppm-lang')}catch(e){}
+setLang(q||saved||(navigator.language||'es').slice(0,2));
+
+function fail(k,focus){var e=$('err');e.dataset.k=k;e.textContent=t(k);e.hidden=false;if(focus)focus.focus();return false}
+$('f').addEventListener('submit',function(ev){
+  ev.preventDefault();$('err').hidden=true;
+  if($('web').value)return; // trampa para robots
+  var com=$('comentario').value.trim(),nom=$('nombre').value.trim(),mail=$('email').value.trim();
+  if(!stars)return fail('e_stars',$('s1'));
+  if(com.length<10)return fail('e_comment',$('comentario'));
+  if(nom.length<2)return fail('e_name',$('nombre'));
+  if(!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(mail))return fail('e_email',$('email'));
+  if(!$('ok-age').checked)return fail('e_age',$('ok-age'));
+  if(!$('ok-pub').checked)return fail('e_pub',$('ok-pub'));
+  var b=$('send');b.disabled=true;b.textContent=t('sending');
+  fetch(URL+'/rest/v1/resenas',{method:'POST',headers:{apikey:KEY,'Content-Type':'application/json',Prefer:'return=minimal'},body:JSON.stringify({
+    estrellas:stars,comentario:com,nombre:nom,pais:$('pais').value.trim()||null,nivel:$('nivel').value.trim()||null,
+    clase:document.querySelector('input[name=clase]:checked').value,email:mail,idioma:lang})})
+  .then(function(r){if(!r.ok)throw new Error(r.status);$('form-wrap').hidden=true;$('done').hidden=false;$('done').focus()})
+  .catch(function(){fail('e_send')})
+  .finally(function(){b.disabled=false;b.textContent=t('send')});
+});
+})();
+</script>
+</body>
+</html>
