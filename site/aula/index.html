@@ -233,6 +233,16 @@ footer.note{max-width:600px;margin:2.2rem auto 0;font-size:.82rem;color:var(--mu
 .dl-goal span{margin-right:.2rem}
 .dl-goal button{font:inherit;font-size:.82rem;padding:.3rem .7rem;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
 .dl-goal button[aria-pressed="true"]{background:var(--jungle);border-color:var(--jungle);color:var(--on-primary);font-weight:700}
+.mic{width:88px;height:88px;border-radius:50%;border:0;background:var(--jungle);color:var(--on-primary);cursor:pointer;display:grid;place-items:center;margin-inline:auto;box-shadow:0 4px 0 color-mix(in srgb,var(--jungle) 60%,#000)}
+.mic svg{width:38px;height:38px}
+.mic.on{background:var(--red);animation:pulse 1s ease-in-out infinite}
+@keyframes pulse{50%{transform:scale(1.07)}}
+.heard{text-align:center;color:var(--muted);min-height:1.4em;margin:0}
+.speak-row{display:flex;justify-content:center;gap:1rem;align-items:center;flex-wrap:wrap}
+.dl-rem summary{cursor:pointer;font-size:.9rem;font-weight:600}
+.dl-rem-b{display:flex;flex-wrap:wrap;gap:.5rem;align-items:center;margin:.7rem 0 .3rem}
+.dl-rem-b input{font:inherit;padding:.4rem .6rem;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--ink)}
+.dl-rem p{margin:.3rem 0 0}
 .sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .dl-foot{display:flex;justify-content:space-between;align-items:center;gap:.6rem;flex-wrap:wrap}
 textarea#gap{width:100%;font:inherit;padding:.75rem .9rem;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--ink);resize:vertical}
@@ -419,6 +429,12 @@ textarea#gap:focus{outline:none;border-color:var(--jungle)}
       <button class="btn btn-ghost btn-block" id="dl-ready-b" hidden></button>
       <div class="dl-goal" role="group" aria-labelledby="dl-goal-l"><span class="small" id="dl-goal-l" data-i18n="dl_goal"></span><button type="button" data-g="5"></button><button type="button" data-g="10"></button><button type="button" data-g="20"></button></div>
       <div class="dl-foot"><span class="small" id="dl-frz"></span><button type="button" class="linkbtn small" id="dl-snd"></button></div>
+      <div class="dl-foot" id="dl-mic-row" hidden><span class="small" id="dl-mic-t"></span><button type="button" class="linkbtn small" id="dl-mic"></button></div>
+      <details class="dl-rem"><summary id="dl-rem-s"></summary>
+        <div class="dl-rem-b"><label for="dl-rem-h" id="dl-rem-l"></label><input type="time" id="dl-rem-h" value="19:00">
+        <button type="button" class="btn btn-ghost btn-sm" id="dl-rem-ics"></button><a class="btn btn-ghost btn-sm" id="dl-rem-g" target="_blank" rel="noopener"></a></div>
+        <p class="small muted" id="dl-rem-p"></p></details>
+      <div class="notice info" id="dl-mic-box" hidden><p id="dl-mic-p" style="margin:0 0 .6rem"></p><div class="row"><button type="button" class="btn btn-main btn-sm" id="dl-mic-yes"></button><button type="button" class="btn btn-ghost btn-sm" id="dl-mic-no"></button></div></div>
       <p class="small muted" data-i18n="dl_how"></p>
     </div>
 
@@ -502,6 +518,7 @@ textarea#gap:focus{outline:none;border-color:var(--jungle)}
 <script src="banco.js"></script>
 <script src="banco-escolar.js"></script>
 <script src="banco-idiomas.js"></script>
+<script src="banco-extra.js"></script>
 <script src="conjugacion.js"></script>
 <script>
 const CFG=window.AULA_CONFIG||{};
@@ -638,6 +655,12 @@ Object.assign(T.fr,{dl_t:'Ta pratique quotidienne',dl_sub:'Quelques minutes par 
 Object.assign(T.es,{"i_dict": "Escucha y escribe lo que oyes", "combo": "¡{n} seguidas!", "dl_perfect": "¡Sesión perfecta! +20 XP de regalo.", "frz": "🧊 Protectores de racha: {n}/2", "frz_used": "¡Un protector ha salvado tu racha!", "frz_p": "Ganas un protector cada 7 días seguidos (máximo 2). Si un día no practicas, el protector mantiene tu racha.", "snd_on": "🔊 Sonido activado", "snd_off": "🔇 Sonido desactivado", "ach_t": "Tus logros", "ach_locked": "(sin conseguir)", "ach_new": "Nuevo logro", "ach_first": "Primer paso", "ach_first_p": "Haz tu primer ejercicio.", "ach_goal": "Meta cumplida", "ach_goal_p": "Cumple tu meta diaria por primera vez.", "ach_s3": "3 días seguidos", "ach_s3_p": "Practica 3 días seguidos.", "ach_s7": "Una semana", "ach_s7_p": "Practica 7 días seguidos.", "ach_s30": "Un mes", "ach_s30_p": "Practica 30 días seguidos.", "ach_xp100": "100 XP", "ach_xp100_p": "Consigue 100 puntos de experiencia.", "ach_xp500": "500 XP", "ach_xp500_p": "Consigue 500 puntos de experiencia.", "ach_xp1000": "1000 XP", "ach_xp1000_p": "Consigue 1000 puntos de experiencia.", "ach_ex100": "100 ejercicios", "ach_ex100_p": "Haz 100 ejercicios.", "ach_ex500": "500 ejercicios", "ach_ex500_p": "Haz 500 ejercicios.", "ach_perfect": "Sesión perfecta", "ach_perfect_p": "Termina una práctica diaria sin ningún fallo.", "ach_conj": "Rey de los verbos", "ach_conj_p": "Acierta 50 conjugaciones distintas.", "ach_dict": "Buen oído", "ach_dict_p": "Acierta 20 dictados distintos.", "ach_level": "Nivel superado", "ach_level_p": "Aprueba una prueba de nivel."});
 Object.assign(T.en,{"i_dict": "Listen and type what you hear", "combo": "{n} in a row!", "dl_perfect": "Perfect session! +20 bonus XP.", "frz": "🧊 Streak protectors: {n}/2", "frz_used": "A protector saved your streak!", "frz_p": "You earn a protector every 7 days in a row (2 max). If you miss a day, the protector keeps your streak.", "snd_on": "🔊 Sound on", "snd_off": "🔇 Sound off", "ach_t": "Your achievements", "ach_locked": "(locked)", "ach_new": "New achievement", "ach_first": "First step", "ach_first_p": "Do your first exercise.", "ach_goal": "Goal met", "ach_goal_p": "Meet your daily goal for the first time.", "ach_s3": "3 days in a row", "ach_s3_p": "Practise 3 days in a row.", "ach_s7": "One week", "ach_s7_p": "Practise 7 days in a row.", "ach_s30": "One month", "ach_s30_p": "Practise 30 days in a row.", "ach_xp100": "100 XP", "ach_xp100_p": "Earn 100 experience points.", "ach_xp500": "500 XP", "ach_xp500_p": "Earn 500 experience points.", "ach_xp1000": "1000 XP", "ach_xp1000_p": "Earn 1000 experience points.", "ach_ex100": "100 exercises", "ach_ex100_p": "Do 100 exercises.", "ach_ex500": "500 exercises", "ach_ex500_p": "Do 500 exercises.", "ach_perfect": "Perfect session", "ach_perfect_p": "Finish a daily practice without a single mistake.", "ach_conj": "Verb master", "ach_conj_p": "Get 50 different conjugations right.", "ach_dict": "Good ear", "ach_dict_p": "Get 20 different dictations right.", "ach_level": "Level passed", "ach_level_p": "Pass a level check."});
 Object.assign(T.fr,{"i_dict": "Écoute et écris ce que tu entends", "combo": "{n} d’affilée !", "dl_perfect": "Séance parfaite ! +20 XP en cadeau.", "frz": "🧊 Protecteurs de série : {n}/2", "frz_used": "Un protecteur a sauvé ta série !", "frz_p": "Tu gagnes un protecteur tous les 7 jours d’affilée (2 maximum). Si tu ne pratiques pas un jour, le protecteur garde ta série.", "snd_on": "🔊 Son activé", "snd_off": "🔇 Son désactivé", "ach_t": "Tes réussites", "ach_locked": "(à débloquer)", "ach_new": "Nouvelle réussite", "ach_first": "Premier pas", "ach_first_p": "Fais ton premier exercice.", "ach_goal": "Objectif atteint", "ach_goal_p": "Atteins ton objectif quotidien pour la première fois.", "ach_s3": "3 jours d’affilée", "ach_s3_p": "Pratique 3 jours d’affilée.", "ach_s7": "Une semaine", "ach_s7_p": "Pratique 7 jours d’affilée.", "ach_s30": "Un mois", "ach_s30_p": "Pratique 30 jours d’affilée.", "ach_xp100": "100 XP", "ach_xp100_p": "Gagne 100 points d’expérience.", "ach_xp500": "500 XP", "ach_xp500_p": "Gagne 500 points d’expérience.", "ach_xp1000": "1000 XP", "ach_xp1000_p": "Gagne 1000 points d’expérience.", "ach_ex100": "100 exercices", "ach_ex100_p": "Fais 100 exercices.", "ach_ex500": "500 exercices", "ach_ex500_p": "Fais 500 exercices.", "ach_perfect": "Séance parfaite", "ach_perfect_p": "Termine une pratique quotidienne sans aucune erreur.", "ach_conj": "As des verbes", "ach_conj_p": "Réussis 50 conjugaisons différentes.", "ach_dict": "Bonne oreille", "ach_dict_p": "Réussis 20 dictées différentes.", "ach_level": "Niveau réussi", "ach_level_p": "Réussis une épreuve de niveau."});
+Object.assign(T.es,{"i_speak": "Lee la frase en voz alta", "sp_listening": "Te escucho…", "sp_heard": "Has dicho: «{s}»", "sp_denied": "El navegador no tiene permiso para usar el micrófono. Actívalo en los ajustes o pulsa «Ahora no puedo hablar».", "sp_retry": "No te he oído bien. Pulsa el micrófono y vuelve a intentarlo.", "sp_skip": "Ahora no puedo hablar", "sp_mic": "Pulsa y habla", "sk_hab": "Expresión oral", "mic_off": "🎤 Ejercicios de hablar: desactivados", "mic_on": "🎤 Ejercicios de hablar: activados", "mic_en": "Activar", "mic_dis": "Desactivar", "mic_p": "En los ejercicios de hablar lees una frase en voz alta y tu navegador la convierte en texto para corregirla. Para hacerlo, el navegador envía tu voz a su servicio de reconocimiento (Google en Chrome, Apple en Safari). El aula no graba ni guarda tu voz: solo guarda si has acertado. Puedes desactivarlos cuando quieras.", "mic_yes": "Sí, activar", "mic_no": "Ahora no"});
+Object.assign(T.en,{"i_speak": "Read the sentence aloud", "sp_listening": "Listening…", "sp_heard": "You said: “{s}”", "sp_denied": "Your browser is not allowed to use the microphone. Allow it in the settings or tap “I can’t speak now”.", "sp_retry": "I didn’t catch that. Tap the microphone and try again.", "sp_skip": "I can’t speak now", "sp_mic": "Tap and speak", "sk_hab": "Speaking", "mic_off": "🎤 Speaking exercises: off", "mic_on": "🎤 Speaking exercises: on", "mic_en": "Turn on", "mic_dis": "Turn off", "mic_p": "In speaking exercises you read a sentence aloud and your browser turns it into text to check it. To do so, the browser sends your voice to its recognition service (Google in Chrome, Apple in Safari). The classroom does not record or store your voice: it only saves whether you got it right. You can turn them off at any time.", "mic_yes": "Yes, turn on", "mic_no": "Not now"});
+Object.assign(T.fr,{"i_speak": "Lis la phrase à voix haute", "sp_listening": "Je t’écoute…", "sp_heard": "Tu as dit : « {s} »", "sp_denied": "Le navigateur n’a pas l’autorisation d’utiliser le micro. Active-la dans les réglages ou touche « Je ne peux pas parler maintenant ».", "sp_retry": "Je ne t’ai pas bien entendu. Touche le micro et réessaie.", "sp_skip": "Je ne peux pas parler maintenant", "sp_mic": "Touche et parle", "sk_hab": "Expression orale", "mic_off": "🎤 Exercices d’oral : désactivés", "mic_on": "🎤 Exercices d’oral : activés", "mic_en": "Activer", "mic_dis": "Désactiver", "mic_p": "Dans les exercices d’oral, tu lis une phrase à voix haute et ton navigateur la transforme en texte pour la corriger. Pour cela, le navigateur envoie ta voix à son service de reconnaissance (Google dans Chrome, Apple dans Safari). La classe n’enregistre pas ta voix : elle garde seulement si tu as réussi. Tu peux les désactiver à tout moment.", "mic_yes": "Oui, activer", "mic_no": "Pas maintenant"});
+Object.assign(T.es,{"rem_s": "⏰ Recordatorio diario en tu calendario", "rem_l": "Hora:", "rem_ics": "iPhone, Outlook… (archivo)", "rem_g": "Google Calendar", "rem_p": "Tu calendario te avisará cada día a esa hora. No nos llega ningún dato: el recordatorio se guarda solo en tu móvil u ordenador.", "rem_title": "Práctica diaria · Mi aula", "rem_desc": "¡Es la hora de tu práctica diaria! Entra en"});
+Object.assign(T.en,{"rem_s": "⏰ Daily reminder in your calendar", "rem_l": "Time:", "rem_ics": "iPhone, Outlook… (file)", "rem_g": "Google Calendar", "rem_p": "Your calendar will remind you every day at that time. We receive no data: the reminder is saved only on your phone or computer.", "rem_title": "Daily practice · My classroom", "rem_desc": "Time for your daily practice! Go to"});
+Object.assign(T.fr,{"rem_s": "⏰ Rappel quotidien dans ton agenda", "rem_l": "Heure :", "rem_ics": "iPhone, Outlook… (fichier)", "rem_g": "Google Agenda", "rem_p": "Ton agenda te le rappellera chaque jour à cette heure. Nous ne recevons aucune donnée : le rappel est enregistré seulement sur ton téléphone ou ton ordinateur.", "rem_title": "Pratique quotidienne · Ma classe", "rem_desc": "C’est l’heure de ta pratique quotidienne ! Va sur"});
 const PRIV={
 es:`<p><b>Responsable:</b> Dana Salgado (Tu profe por el mundo). Contacto: <span class="em"></span>.</p>
 <p><b>Qué datos tratamos:</b> tu nombre de pila, tu usuario del aula (usuario@tuprofeporelmundo.com, que sirve para entrar y no es un buzón de correo), tu contraseña (guardada cifrada; nadie puede leerla), tu objetivo y tus respuestas y resultados en el aula.</p>
@@ -667,6 +690,10 @@ fr:`<p><b>Responsable :</b> Dana Salgado (Tu profe por el mundo). Contact : <spa
 <p><b>Tes droits :</b> accès, rectification, effacement, opposition, limitation et portabilité, en écrivant à <span class="em"></span>. Si tu n’es pas satisfait·e, tu peux saisir l’Agence espagnole de protection des données (aepd.es).</p>
 <p><b>Stockage dans ton navigateur :</b> la classe enregistre ta langue (<code>tppm-lang</code>), ta session (<code>sb-…-auth-token</code>) et, si tu l’utilises sans compte, ta progression (<code>tppm-aula</code>). Ils sont techniques et nécessaires au service, donc sans consentement. Nous n’utilisons aucun cookie d’analyse ni de publicité.</p>`
 };
+PRIV.es+="<p><b>Práctica y seguimiento:</b> el aula guarda cada día cuántos ejercicios haces y cómo te van, para adaptar la práctica a ti. Tu profesora puede ver este resumen de tu progreso para preparar las clases.</p><p><b>Ejercicios de hablar (opcionales):</b> solo si los activas. Tu navegador envía tu voz a su propio servicio de reconocimiento (Google en Chrome, Apple en Safari) para convertirla en texto; ese servicio lo presta el fabricante del navegador con sus propias condiciones. El aula no graba ni guarda tu voz, solo si la respuesta es correcta.</p><p><b>Recordatorio diario:</b> si lo pides, el aula crea un archivo de calendario que se guarda en tu propio móvil u ordenador. No recibimos ningún dato.</p>";
+PRIV.en+="<p><b>Practice and follow-up:</b> each day the classroom saves how many exercises you do and how they go, to adapt practice to you. Your teacher can see this summary of your progress to prepare your lessons.</p><p><b>Speaking exercises (optional):</b> only if you turn them on. Your browser sends your voice to its own recognition service (Google in Chrome, Apple in Safari) to turn it into text; that service is provided by the browser maker under its own terms. The classroom does not record or store your voice, only whether the answer is right.</p><p><b>Daily reminder:</b> if you ask for it, the classroom creates a calendar file that is saved on your own phone or computer. We receive no data.</p>";
+PRIV.fr+="<p><b>Pratique et suivi :</b> chaque jour, la classe enregistre combien d’exercices tu fais et comment ils se passent, pour adapter la pratique à toi. Ta professeure peut voir ce résumé de ta progression pour préparer les cours.</p><p><b>Exercices d’oral (facultatifs) :</b> seulement si tu les actives. Ton navigateur envoie ta voix à son propre service de reconnaissance (Google dans Chrome, Apple dans Safari) pour la transformer en texte ; ce service est fourni par l’éditeur du navigateur selon ses propres conditions. La classe n’enregistre pas ta voix, seulement si la réponse est correcte.</p><p><b>Rappel quotidien :</b> si tu le demandes, la classe crée un fichier de calendrier enregistré sur ton propre téléphone ou ordinateur. Nous ne recevons aucune donnée.</p>";
+
 
 const GOALS=[{k:'travel',i:'i-plane'},{k:'friends',i:'i-chat'},{k:'film',i:'i-film'},{k:'read',i:'i-book'},{k:'exam',i:'i-cert',wide:1}];
 const SKILLS=['gram','voc','lec','aud','ord'];
@@ -859,6 +886,7 @@ function renderInstr(){
   if(Q.checked)showFeedback();else $('check').textContent=t('check');
   const pl=$('play');if(pl){pl.setAttribute('aria-label',t('play'));$('play-slow').setAttribute('aria-label',t('play_slow'));$('showtxt').textContent=t('showtxt')}
   const g=$('gap');if(g)g.placeholder=t('gap_ph');
+  const sk=$('sp-skip');if(sk){sk.textContent=t('sp_skip');$('sp-mic').setAttribute('aria-label',t('sp_mic'));$('sp-hear').setAttribute('aria-label',t('play'))}
 }
 function optsHTML(o){return `<div class="opts">${shuffle(o).map(x=>`<button type="button" class="opt" aria-pressed="false">${esc(x)}</button>`).join('')}</div>`}
 function listenHTML(){return `<div class="listen"><button type="button" class="play" id="play"><svg aria-hidden="true"><use href="#i-play"/></svg></button><button type="button" class="play slow" id="play-slow"><svg aria-hidden="true"><use href="#i-snail"/></svg></button><button type="button" class="linkbtn" id="showtxt"></button></div><p class="prompt" id="said" hidden></p>`}
@@ -869,6 +897,21 @@ function renderItem(){
   else if(q.t==='read')body.innerHTML=`<div class="text" tabindex="0">${esc(TEXTS[q.txt])}</div><p class="prompt">${esc(q.q)}</p>`+optsHTML(q.o);
   else if(q.t==='listen')body.innerHTML=listenHTML()+optsHTML(q.o);
   else if(q.t==='listenq')body.innerHTML=listenHTML()+`<p class="prompt">${esc(q.q)}</p>`+optsHTML(q.o);
+  else if(q.t==='speak'){
+    body.innerHTML=`<p class="prompt">${esc(q.say)}</p><div class="speak-row"><button type="button" class="play slow" id="sp-hear"><svg aria-hidden="true"><use href="#i-play"/></svg></button><button type="button" class="mic" id="sp-mic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="9" y="3" width="6" height="11" rx="3"/><path d="M5 11a7 7 0 0 0 14 0M12 18v3"/></svg></button></div><p class="heard" id="sp-heard" aria-live="polite"></p><button type="button" class="linkbtn" id="sp-skip"></button>`;
+    $('sp-hear').addEventListener('click',()=>say(q.say,.85));
+    $('sp-skip').addEventListener('click',()=>{Q.noMicUntil=Date.now()+9e5;Q.i++;nextItem()});
+    $('sp-mic').addEventListener('click',()=>{
+      if(Q.checked)return;
+      const rec=new SR();rec.lang={es:'es-ES',en:'en-US',fr:'fr-FR'}[(data&&data.lt)||'es'];rec.interimResults=false;rec.maxAlternatives=3;
+      const m=$('sp-mic');m.classList.add('on');$('sp-heard').textContent=t('sp_listening');
+      rec.onresult=e=>{const alts=[...e.results[0]].map(r=>r.transcript);const best=alts.sort((x,y)=>speakScore(y,q.say)-speakScore(x,q.say))[0];
+        Q.ans=best;$('sp-heard').textContent=t('sp_heard',{s:best});$('check').disabled=false};
+      rec.onerror=e=>{$('sp-heard').textContent=e.error==='not-allowed'||e.error==='service-not-allowed'?t('sp_denied'):t('sp_retry')};
+      rec.onend=()=>m.classList.remove('on');
+      try{rec.start()}catch(err){m.classList.remove('on')}
+    });
+  }
   else if(q.t==='dict'){
     body.innerHTML=listenHTML()+`<textarea id="gap" rows="2" autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>`;
     const inp=$('gap');inp.addEventListener('input',()=>{Q.ans=inp.value;$('check').disabled=!inp.value.trim()});
@@ -931,7 +974,7 @@ function solution(q){
   if(['choice','listen','listenq','read'].includes(q.t))return q.o[0];
   if(q.t==='gap')return q.q.replace('___',q.a[0]).replace(/\s*\([^)]*\)\s*$/,'');
   if(q.t==='order')return q.s;
-  if(q.t==='dict')return q.say;
+  if(q.t==='dict'||q.t==='speak')return q.say;
   return '';
 }
 function grade(q){
@@ -950,6 +993,7 @@ function grade(q){
     return {ok:false};
   }
   if(q.t==='order')return {ok:Q.ans.map(b=>b.textContent).join(' ')===q.s};
+  if(q.t==='speak')return {ok:speakScore(Q.ans||'',q.say)>=.8};
   if(q.t==='dict'){
     $('gap').readOnly=true;
     const c=x=>norm(x.replace(/[’‘]/g,"'").replace(/[.,;:!¡?¿"«»…—–-]/g,' '));
@@ -1095,12 +1139,22 @@ function skillScore(s){
    según lo difícil que era el ejercicio (como la puntuación Elo). Cada ejercicio se elige para que la probabilidad
    de acierto ronde el 72 %; lo fallado se repite al final de la sesión y vuelve otro día (repaso espaciado). */
 const SRS_DAYS=[0,1,3,7,16,35];
-const T_ADJ={choice:.3,read:.4,match:.4,listen:.5,listenq:.6,order:.6,gap:.7,dict:.8};
+const T_ADJ={choice:.3,read:.4,match:.4,listen:.5,listenq:.6,order:.6,gap:.7,dict:.8,speak:.7};
 /* dictado: cada ejercicio de escuchar da también uno de escribir lo que se oye */
 const dictOf=q=>({id:q.id+'.d',lv:q.lv,sk:'aud',t:'dict',say:q.o[0]});
+/* hablar (opcional): repetir en voz alta una frase de los ejercicios de escuchar; lo reconoce el navegador */
+const SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+const speakOn=()=>!!SR&&data.mic===true&&!(Q.noMicUntil>Date.now());
+const speakOf=q=>({id:q.id+'.s',lv:q.lv,sk:'hab',t:'speak',say:q.o[0]});
+const words=x=>plain(x.replace(/[’‘]/g,"'").replace(/[.,;:!¡?¿"«»…—–-]/g,' ')).split(' ').filter(Boolean);
+function speakScore(said,target){
+  const a=words(said),b=words(target),L=Array(a.length+1).fill(0).map(()=>Array(b.length+1).fill(0));
+  for(let i=1;i<=a.length;i++)for(let j=1;j<=b.length;j++)L[i][j]=a[i-1]===b[j-1]?L[i-1][j-1]+1:Math.max(L[i-1][j],L[i][j-1]);
+  return b.length?L[a.length][b.length]/b.length:0;
+}
 const addDays=n=>new Date(Date.now()+n*864e5).toISOString().slice(0,10);
 const isGen=()=>(data.lt||'es')==='es';
-const itemById=id=>BYID[id]||(id.startsWith('cj.')&&isGen()?cjItem(id):null)||(id.endsWith('.d')&&BYID[id.slice(0,-2)]&&BYID[id.slice(0,-2)].t==='listen'?dictOf(BYID[id.slice(0,-2)]):null);
+const itemById=id=>(id.endsWith('.s')&&BYID[id.slice(0,-2)]&&BYID[id.slice(0,-2)].t==='listen'?speakOf(BYID[id.slice(0,-2)]):null)||BYID[id]||(id.startsWith('cj.')&&isGen()?cjItem(id):null)||(id.endsWith('.d')&&BYID[id.slice(0,-2)]&&BYID[id.slice(0,-2)].t==='listen'?dictOf(BYID[id.slice(0,-2)]):null);
 const diff=q=>q.lv+(T_ADJ[q.t]||.5)+(q.irr?.25:0);
 const pOk=(r,q)=>1/(1+Math.exp(-1.7*(r-diff(q))));
 function dp(){
@@ -1113,7 +1167,7 @@ const dayLog=d=>(data.days||{})[d||today()]||{n:0,ok:0,xp:0};
 function dueList(){
   const d=today();
   return Object.entries(data.items).filter(([id,it])=>it.due&&it.due<=d).map(([id,it])=>({q:itemById(id),it})).filter(x=>x.q)
-    .sort((a,b)=>a.it.due<b.it.due?-1:a.it.due>b.it.due?1:a.it.b-b.it.b).map(x=>x.q);
+    .filter(x=>x.q.t!=='speak'||speakOn()).sort((a,b)=>a.it.due<b.it.due?-1:a.it.due>b.it.due?1:a.it.b-b.it.b).map(x=>x.q);
 }
 /* Elige el siguiente ejercicio de la práctica diaria */
 function dailyNext(){
@@ -1126,6 +1180,7 @@ function dailyNext(){
     const genN=Q.queue.filter(q=>q.gen).length;
     let cands=BANK.filter(q=>!used.has(q.id)&&q.lv>=minLv&&q.lv<=maxLv);
     cands=cands.concat(cands.filter(q=>q.t==='listen').map(dictOf).filter(q=>!used.has(q.id)));
+    if(speakOn()&&Q.queue.filter(q=>q.t==='speak').length<2)cands=cands.concat(cands.filter(q=>q.t==='listen').map(speakOf).filter(q=>!used.has(q.id)));
     if(isGen()&&genN<Math.ceil(goal*.4))cands=cands.concat(sample(cjIds(maxLv,minLv).filter(id=>!used.has(id)),40).map(cjItem));
     if(!cands.length)cands=BANK.filter(q=>!used.has(q.id));
     const weak=s=>{const v=skillScore(s);return v===null?.3:1-v/100};
@@ -1175,8 +1230,30 @@ function renderDaily(){
   document.querySelectorAll('.dl-goal [data-g]').forEach(b=>{b.textContent=t('dl_g'+b.dataset.g);b.setAttribute('aria-pressed',String(+b.dataset.g===g))});
   $('dl-frz').textContent=(data.frzUsed===today()?t('frz_used')+' ':'')+t('frz',{n:data.frz||0});$('dl-frz').title=t('frz_p');
   $('dl-snd').textContent=data.snd===false?t('snd_off'):t('snd_on');$('dl-snd').setAttribute('aria-pressed',String(data.snd!==false));
+  $('dl-mic-row').hidden=!SR;
+  $('dl-mic-t').textContent=data.mic?t('mic_on'):t('mic_off');$('dl-mic').textContent=data.mic?t('mic_dis'):t('mic_en');
+  $('dl-mic-p').textContent=t('mic_p');$('dl-mic-yes').textContent=t('mic_yes');$('dl-mic-no').textContent=t('mic_no');
+  $('dl-rem-s').textContent=t('rem_s');$('dl-rem-l').textContent=t('rem_l');$('dl-rem-ics').textContent=t('rem_ics');$('dl-rem-g').textContent=t('rem_g');$('dl-rem-p').textContent=t('rem_p');remLink();
   renderAch();
 }
+/* recordatorio diario: evento repetido cada día en el calendario del propio alumno (no se envía nada a la web) */
+function remDates(){
+  const [h,m]=($('dl-rem-h').value||'19:00').split(':').map(Number),d=new Date();d.setHours(h,m,0,0);if(d<new Date())d.setDate(d.getDate()+1);
+  const p2=x=>String(x).padStart(2,'0'),f=x=>x.getFullYear()+p2(x.getMonth()+1)+p2(x.getDate())+'T'+p2(x.getHours())+p2(x.getMinutes())+'00';
+  return [f(d),f(new Date(d.getTime()+9e5))];
+}
+const AULA_URL='https://'+DOMAIN+'/aula/';
+function remLink(){
+  const [a,b]=remDates();let tz='';try{tz=Intl.DateTimeFormat().resolvedOptions().timeZone}catch(e){}
+  $('dl-rem-g').href='https://calendar.google.com/calendar/render?action=TEMPLATE&text='+encodeURIComponent(t('rem_title'))+'&dates='+a+'/'+b+'&recur='+encodeURIComponent('RRULE:FREQ=DAILY')+'&details='+encodeURIComponent(t('rem_desc')+' '+AULA_URL)+(tz?'&ctz='+encodeURIComponent(tz):'');
+}
+$('dl-rem-h').addEventListener('input',remLink);
+$('dl-rem-ics').addEventListener('click',()=>{
+  const [a,b]=remDates(),e=x=>x.replace(/[\\,;]/g,m=>'\\'+m),now=new Date().toISOString().replace(/[-:]/g,'').slice(0,15)+'Z';
+  const ics=['BEGIN:VCALENDAR','VERSION:2.0','PRODID:-//Tu profe por el mundo//Mi aula//ES','BEGIN:VEVENT','UID:practica-'+Date.now()+'@'+DOMAIN,'DTSTAMP:'+now,'DTSTART:'+a,'DTEND:'+b,'RRULE:FREQ=DAILY',
+    'SUMMARY:'+e(t('rem_title')),'DESCRIPTION:'+e(t('rem_desc')+' '+AULA_URL),'URL:'+AULA_URL,'BEGIN:VALARM','TRIGGER:PT0M','ACTION:DISPLAY','DESCRIPTION:'+e(t('rem_title')),'END:VALARM','END:VEVENT','END:VCALENDAR'].join('\r\n');
+  const u=URL.createObjectURL(new Blob([ics],{type:'text/calendar'})),l=document.createElement('a');l.href=u;l.download='practica-diaria.ics';document.body.appendChild(l);l.click();l.remove();setTimeout(()=>URL.revokeObjectURL(u),1e4);
+});
 /* logros: se comprueban al terminar cada sesión */
 const ACH=[
  ['first','🌱',()=>(data.cnt||0)>=1],['goal','🎯',()=>Object.values(data.days||{}).some(x=>x.n>=dGoal())],
@@ -1213,6 +1290,9 @@ function petals(){
     document.body.appendChild(s);setTimeout(()=>s.remove(),4800)}
 }
 $('dl-start').addEventListener('click',startDaily);
+$('dl-mic').addEventListener('click',()=>{if(data.mic){data.mic=false;store.save();renderDaily()}else $('dl-mic-box').hidden=false});
+$('dl-mic-yes').addEventListener('click',()=>{data.mic=true;$('dl-mic-box').hidden=true;store.save();renderDaily()});
+$('dl-mic-no').addEventListener('click',()=>{$('dl-mic-box').hidden=true});
 $('dl-snd').addEventListener('click',()=>{data.snd=data.snd===false;store.save();renderDaily();if(data.snd)sfx('ok')});
 $('dl-ready-b').addEventListener('click',()=>$('levelup').click());
 document.querySelectorAll('.dl-goal [data-g]').forEach(b=>b.addEventListener('click',()=>{data.dg=+b.dataset.g;store.save();renderDaily()}));
