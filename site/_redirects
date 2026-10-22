@@ -8,3 +8,7 @@
 /profesores/ /index.html 200
 /opiniones /index.html 200
 /opiniones/ /index.html 200
+/ayuda /tutorial/ 301
+/ayuda/ /tutorial/ 301
+/help /tutorial/?l=en 301
+/aide /tutorial/?l=fr 301

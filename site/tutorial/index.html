@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Vídeos: cómo funciona la web y Mi aula · Tu profe por el mundo</title>
-<meta name="description" content="Vídeos cortos en español, inglés y francés: cómo reservar tus clases online con Dana y cómo practicar cada día en Mi aula.">
+<title>Ayuda: cómo funciona la web y Mi aula · Tu profe por el mundo</title>
+<meta name="description" content="Ayuda y vídeos cortos en español, inglés y francés: cómo reservar tus clases online con Dana y cómo practicar cada día en Mi aula.">
 <meta name="robots" content="noindex,follow">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 <style>
@@ -32,6 +32,13 @@ video{width:100%;height:auto;aspect-ratio:1/2;border-radius:22px;border:1px soli
 .desc{color:var(--muted);margin:0 0 1rem}
 .btn{display:inline-flex;align-items:center;justify-content:center;padding:.8rem 1.3rem;border-radius:10px;font-weight:700;text-decoration:none;border:2px solid var(--jungle);background:var(--jungle);color:var(--on-primary)}
 .dl{display:block;margin-top:.8rem;font-size:.9rem}
+.steps{list-style:none;margin:0 0 2rem;padding:0;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:.7rem}
+.steps li{display:flex;align-items:center;gap:.6rem;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:.8rem .9rem;font-weight:600;line-height:1.3}
+.steps b{flex:none;display:grid;place-items:center;width:1.9rem;height:1.9rem;border-radius:50%;background:var(--jungle);color:var(--on-primary)}
+.toc{display:flex;flex-wrap:wrap;gap:.5rem 1.2rem;margin:0 0 1.6rem;font-weight:700}
+.more{display:block;border-top:1px solid var(--line);padding:1.6rem 0}
+.more ul{padding-left:1.2rem;margin:.4rem 0 0}.more li{margin:.35rem 0}
+@media (max-width:720px){.steps{grid-template-columns:1fr}}
 @media (max-width:720px){section{grid-template-columns:1fr}video{max-width:340px;margin-inline:auto;display:block}}
 </style>
 </head>
@@ -41,6 +48,9 @@ video{width:100%;height:auto;aspect-ratio:1/2;border-radius:22px;border:1px soli
     <div class="langsw" role="group" aria-label="Idioma / Language / Langue"><button type="button" data-l="es">ES</button><button type="button" data-l="en">EN</button><button type="button" data-l="fr">FR</button></div></header>
   <h1 data-t="h1"></h1>
   <p class="lead" data-t="lead"></p>
+  <h2 data-t="how_h"></h2>
+  <ol class="steps"><li><b>1</b><span data-t="s1"></span></li><li><b>2</b><span data-t="s2"></span></li><li><b>3</b><span data-t="s3"></span></li></ol>
+  <nav class="toc" aria-label="Vídeos"><a href="#web" data-t="web_h"></a><a href="#aula" data-t="aula_h"></a><a href="#mas" data-t="more_h"></a></nav>
 
   <section id="web">
     <video controls playsinline muted preload="metadata" id="v-web"></video>
@@ -63,6 +73,15 @@ video{width:100%;height:auto;aspect-ratio:1/2;border-radius:22px;border:1px soli
       <a class="dl" id="d-aula" download data-t="dl"></a>
     </div>
   </section>
+
+  <section class="more" id="mas">
+    <h2 data-t="more_h"></h2>
+    <ul>
+      <li><a href="/#faq" data-t="faq"></a></li>
+      <li><span data-t="mail"></span> <a href="mailto:contacto@tuprofeporelmundo.com">contacto@tuprofeporelmundo.com</a></li>
+      <li><a href="/" data-t="home"></a></li>
+    </ul>
+  </section>
 </div>
 <script>
 (function(){
@@ -70,9 +89,9 @@ video{width:100%;height:auto;aspect-ratio:1/2;border-radius:22px;border:1px soli
 const V={web:{es:'tutorial-tu-profe-por-el-mundo',en:'tutorial-web-en',fr:'tutorial-web-fr'},aula:{es:'tutorial-aula-es',en:'tutorial-aula-en',fr:'tutorial-aula-fr'}};
 const P={web:{es:'portada-video.jpg',en:'portada-web-en.jpg',fr:'portada-web-fr.jpg'},aula:{es:'portada-aula-es.jpg',en:'portada-aula-en.jpg',fr:'portada-aula-fr.jpg'}};
 const T={
- es:{h1:'Vídeos: la web y Mi aula',lead:'Dos vídeos cortos, sin sonido y con subtítulos. Elige el idioma de cada vídeo.',web_h:'La web: cómo reservar tu clase',web_p:'Las clases, las tarifas, los horarios libres en tu zona horaria y cómo reservar con el formulario.',web_b:'Ver los horarios',aula_h:'Mi aula: practica cada día',aula_p:'La práctica diaria que se adapta a ti, la corrección automática, el dictado, los ejercicios de hablar, tu racha y tus logros. Gratis para mis alumnos.',aula_b:'Entrar en Mi aula',dl:'Descargar el vídeo'},
- en:{h1:'Videos: the website and My classroom',lead:'Two short videos, no sound, with captions. Choose the language of each video.',web_h:'The website: how to book your lesson',web_p:'The lessons, the prices, the free times in your time zone and how to book with the form.',web_b:'See the schedule',aula_h:'My classroom: practise every day',aula_p:'Daily practice that adapts to you, automatic correction, dictation, speaking exercises, your streak and your achievements. Free for my students.',aula_b:'Go to My classroom',dl:'Download the video'},
- fr:{h1:'Vidéos : le site et Ma classe',lead:'Deux vidéos courtes, sans son, avec des sous-titres. Choisis la langue de chaque vidéo.',web_h:'Le site : comment réserver ton cours',web_p:'Les cours, les tarifs, les créneaux libres dans ton fuseau horaire et comment réserver avec le formulaire.',web_b:'Voir les horaires',aula_h:'Ma classe : entraîne-toi chaque jour',aula_p:'La pratique quotidienne qui s’adapte à toi, la correction automatique, la dictée, les exercices d’oral, ta série et tes réussites. Gratuit pour mes élèves.',aula_b:'Entrer dans Ma classe',dl:'Télécharger la vidéo'}
+ es:{h1:'Ayuda',lead:'Aquí tienes cómo funciona todo, en pocas palabras y con dos vídeos cortos (sin sonido, con subtítulos). Puedes elegir el idioma de cada vídeo.',how_h:'Reservar una clase, en 3 pasos',s1:'Elige tu clase: español, inglés, francés o apoyo escolar',s2:'En «Horarios», elige un hueco libre (verás la hora de tu país)',s3:'Rellena el formulario. Te confirmo la clase por correo y te explico cómo pagar',more_h:'¿Sigues con dudas?',faq:'Lee las preguntas frecuentes',mail:'Escríbeme:',home:'Volver a la web',web_h:'La web: cómo reservar tu clase',web_p:'Las clases, las tarifas, los horarios libres en tu zona horaria y cómo reservar con el formulario.',web_b:'Ver los horarios',aula_h:'Mi aula: practica cada día',aula_p:'La práctica diaria que se adapta a ti, la corrección automática, el dictado, los ejercicios de hablar, tu racha y tus logros. Gratis para mis alumnos.',aula_b:'Entrar en Mi aula',dl:'Descargar el vídeo'},
+ en:{h1:'Help',lead:'Here is how everything works, in a few words and two short videos (no sound, with captions). You can choose the language of each video.',how_h:'Book a lesson in 3 steps',s1:'Choose your class: Spanish, English, French or school support',s2:'In “Schedule”, pick a free slot (you will see your local time)',s3:'Fill in the form. I confirm the lesson by email and explain how to pay',more_h:'Still have questions?',faq:'Read the frequently asked questions',mail:'Write to me:',home:'Back to the website',web_h:'The website: how to book your lesson',web_p:'The lessons, the prices, the free times in your time zone and how to book with the form.',web_b:'See the schedule',aula_h:'My classroom: practise every day',aula_p:'Daily practice that adapts to you, automatic correction, dictation, speaking exercises, your streak and your achievements. Free for my students.',aula_b:'Go to My classroom',dl:'Download the video'},
+ fr:{h1:'Aide',lead:'Voici comment tout fonctionne, en quelques mots et avec deux vidéos courtes (sans son, avec sous-titres). Tu peux choisir la langue de chaque vidéo.',how_h:'Réserver un cours en 3 étapes',s1:'Choisis ton cours : espagnol, anglais, français ou soutien scolaire',s2:'Dans « Horaires », choisis un créneau libre (tu verras l’heure de ton pays)',s3:'Remplis le formulaire. Je te confirme le cours par e-mail et je t’explique comment payer',more_h:'Encore des questions ?',faq:'Lis les questions fréquentes',mail:'Écris-moi :',home:'Retour au site',web_h:'Le site : comment réserver ton cours',web_p:'Les cours, les tarifs, les créneaux libres dans ton fuseau horaire et comment réserver avec le formulaire.',web_b:'Voir les horaires',aula_h:'Ma classe : entraîne-toi chaque jour',aula_p:'La pratique quotidienne qui s’adapte à toi, la correction automatique, la dictée, les exercices d’oral, ta série et tes réussites. Gratuit pour mes élèves.',aula_b:'Entrer dans Ma classe',dl:'Télécharger la vidéo'}
 };
 const q=new URLSearchParams(location.search);let saved=null;try{saved=localStorage.getItem('tppm-lang')}catch(e){}
 let lang=['es','en','fr'].includes(q.get('l'))?q.get('l'):(['es','en','fr'].includes(saved)?saved:((navigator.language||'es').slice(0,2)));
