@@ -233,7 +233,19 @@ footer.note{max-width:600px;margin:2.2rem auto 0;font-size:.82rem;color:var(--mu
 .dl-goal span{margin-right:.2rem}
 .dl-goal button{font:inherit;font-size:.82rem;padding:.3rem .7rem;border-radius:999px;border:1.5px solid var(--line);background:var(--card);color:var(--ink);cursor:pointer}
 .dl-goal button[aria-pressed="true"]{background:var(--jungle);border-color:var(--jungle);color:var(--on-primary);font-weight:700}
-@media (prefers-reduced-motion:reduce){.dl-ring circle.v{transition:none}}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+.dl-foot{display:flex;justify-content:space-between;align-items:center;gap:.6rem;flex-wrap:wrap}
+textarea#gap{width:100%;font:inherit;padding:.75rem .9rem;border-radius:10px;border:2px solid var(--line);background:var(--bg);color:var(--ink);resize:vertical}
+textarea#gap:focus{outline:none;border-color:var(--jungle)}
+.ach{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(92px,1fr));gap:.6rem}
+.ach li{display:grid;justify-items:center;gap:.25rem;text-align:center;font-size:.78rem;line-height:1.25;padding:.6rem .3rem;border-radius:12px;border:1px solid var(--line);background:var(--bg)}
+.ach li b{font-size:1.6rem;line-height:1}
+.ach li.off{opacity:.45;filter:grayscale(1)}
+.ach-new{grid-template-columns:repeat(auto-fit,minmax(120px,1fr));margin:.4rem 0 1rem}
+.ach-new li{border-color:var(--leaf);background:color-mix(in srgb,var(--leaf) 10%,var(--card));font-size:.85rem}
+.petal{position:fixed;top:-40px;width:28px;height:28px;pointer-events:none;z-index:50;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(540deg)}}
+@media (prefers-reduced-motion:reduce){.dl-ring circle.v{transition:none}.petal{display:none}}
 </style>
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 </head>
@@ -361,6 +373,7 @@ footer.note{max-width:600px;margin:2.2rem auto 0;font-size:.82rem;color:var(--mu
     <div class="badge"><svg viewBox="-50 -50 100 100" aria-hidden="true"><use href="#fl"/></svg><b id="d-score"></b></div>
     <h1 id="d-t"></h1>
     <p class="muted" id="d-p"></p>
+    <ul class="ach ach-new" id="d-ach" hidden></ul>
     <button class="btn btn-main btn-block" id="d-home" data-i18n="back_home"></button>
   </section>
 
@@ -405,7 +418,13 @@ footer.note{max-width:600px;margin:2.2rem auto 0;font-size:.82rem;color:var(--mu
       <button class="btn btn-main btn-block" id="dl-start"></button>
       <button class="btn btn-ghost btn-block" id="dl-ready-b" hidden></button>
       <div class="dl-goal" role="group" aria-labelledby="dl-goal-l"><span class="small" id="dl-goal-l" data-i18n="dl_goal"></span><button type="button" data-g="5"></button><button type="button" data-g="10"></button><button type="button" data-g="20"></button></div>
+      <div class="dl-foot"><span class="small" id="dl-frz"></span><button type="button" class="linkbtn small" id="dl-snd"></button></div>
       <p class="small muted" data-i18n="dl_how"></p>
+    </div>
+
+    <div class="card">
+      <h2 data-i18n="ach_t"></h2>
+      <ul class="ach" id="ach"></ul>
     </div>
 
     <div class="card">
@@ -616,6 +635,9 @@ back_home:'Retour à ma classe',back_web:'Retour au site',priv_t:'Protection des
 Object.assign(T.es,{dl_t:'Tu práctica diaria',dl_sub:'Unos minutos al día, adaptados a ti.',dl_sub_done:'¡Meta de hoy cumplida! Puedes seguir si te apetece.',dl_today:'Hoy: {n} de {g} ejercicios',dl_start:'Empezar la práctica de hoy',dl_cont:'Seguir con la práctica de hoy',dl_more:'Practicar un poco más',dl_week:'Últimos 7 días: meta cumplida {n} días',dl_lvl:'Nivel de práctica: {l}',dl_lvl_p:'{p} % del camino hacia {l}',dl_ready:'Tu práctica diaria muestra que ya te manejas en el {l}. Haz la prueba para subir de nivel.',dl_goal:'Meta diaria:',dl_g5:'5 · suave',dl_g10:'10 · normal',dl_g20:'20 · intensa',dl_how:'Cómo funciona: cada ejercicio se elige según tus respuestas. Si aciertas, sube la dificultad; si fallas, lo repites al final y vuelve otro día para repasarlo. Lo que ya sabes aparece cada vez menos.',q_daily:'Práctica diaria',dl_done_t:'¡Meta de hoy cumplida!',dl_done_p:'Has acertado {r} de {n} ({p} %) y has ganado {x} XP.',dl_up:'Tu nivel de práctica ha subido: mañana, ejercicios un poco más difíciles.',dl_up_l:'¡Tu nivel de práctica ha subido a {l}!',dl_down:'Hoy ha costado más: mañana repasaremos lo que has fallado.',dl_same:'Mañana te espera una práctica nueva, adaptada a cómo te ha ido hoy.'});
 Object.assign(T.en,{dl_t:'Your daily practice',dl_sub:'A few minutes a day, adapted to you.',dl_sub_done:'Today’s goal done! You can keep going if you like.',dl_today:'Today: {n} of {g} exercises',dl_start:'Start today’s practice',dl_cont:'Continue today’s practice',dl_more:'Practise a little more',dl_week:'Last 7 days: goal met on {n} days',dl_lvl:'Practice level: {l}',dl_lvl_p:'{p}% of the way to {l}',dl_ready:'Your daily practice shows you can already handle {l}. Take the check to move up a level.',dl_goal:'Daily goal:',dl_g5:'5 · light',dl_g10:'10 · regular',dl_g20:'20 · intense',dl_how:'How it works: each exercise is chosen from your answers. Get it right and it gets harder; get it wrong and you repeat it at the end and see it again another day. What you already know comes up less and less.',q_daily:'Daily practice',dl_done_t:'Today’s goal done!',dl_done_p:'You got {r} out of {n} right ({p}%) and earned {x} XP.',dl_up:'Your practice level went up: slightly harder exercises tomorrow.',dl_up_l:'Your practice level went up to {l}!',dl_down:'Today was harder: tomorrow we’ll review what you missed.',dl_same:'A new practice is waiting tomorrow, adapted to how you did today.'});
 Object.assign(T.fr,{dl_t:'Ta pratique quotidienne',dl_sub:'Quelques minutes par jour, adaptées à toi.',dl_sub_done:'Objectif du jour atteint ! Tu peux continuer si tu veux.',dl_today:'Aujourd’hui : {n} exercices sur {g}',dl_start:'Commencer la pratique du jour',dl_cont:'Continuer la pratique du jour',dl_more:'M’entraîner encore un peu',dl_week:'7 derniers jours : objectif atteint {n} jours',dl_lvl:'Niveau de pratique : {l}',dl_lvl_p:'{p} % du chemin vers {l}',dl_ready:'Ta pratique quotidienne montre que tu te débrouilles déjà au niveau {l}. Passe l’épreuve pour monter de niveau.',dl_goal:'Objectif quotidien :',dl_g5:'5 · léger',dl_g10:'10 · normal',dl_g20:'20 · intense',dl_how:'Comment ça marche : chaque exercice est choisi selon tes réponses. Si tu réussis, la difficulté augmente ; si tu te trompes, tu le refais à la fin et il revient un autre jour. Ce que tu sais déjà revient de moins en moins.',q_daily:'Pratique quotidienne',dl_done_t:'Objectif du jour atteint !',dl_done_p:'Tu as réussi {r} sur {n} ({p} %) et gagné {x} XP.',dl_up:'Ton niveau de pratique a augmenté : demain, des exercices un peu plus difficiles.',dl_up_l:'Ton niveau de pratique est passé à {l} !',dl_down:'Aujourd’hui, c’était plus dur : demain on révisera ce que tu as raté.',dl_same:'Une nouvelle pratique t’attend demain, adaptée à ta séance d’aujourd’hui.'});
+Object.assign(T.es,{"i_dict": "Escucha y escribe lo que oyes", "combo": "¡{n} seguidas!", "dl_perfect": "¡Sesión perfecta! +20 XP de regalo.", "frz": "🧊 Protectores de racha: {n}/2", "frz_used": "¡Un protector ha salvado tu racha!", "frz_p": "Ganas un protector cada 7 días seguidos (máximo 2). Si un día no practicas, el protector mantiene tu racha.", "snd_on": "🔊 Sonido activado", "snd_off": "🔇 Sonido desactivado", "ach_t": "Tus logros", "ach_locked": "(sin conseguir)", "ach_new": "Nuevo logro", "ach_first": "Primer paso", "ach_first_p": "Haz tu primer ejercicio.", "ach_goal": "Meta cumplida", "ach_goal_p": "Cumple tu meta diaria por primera vez.", "ach_s3": "3 días seguidos", "ach_s3_p": "Practica 3 días seguidos.", "ach_s7": "Una semana", "ach_s7_p": "Practica 7 días seguidos.", "ach_s30": "Un mes", "ach_s30_p": "Practica 30 días seguidos.", "ach_xp100": "100 XP", "ach_xp100_p": "Consigue 100 puntos de experiencia.", "ach_xp500": "500 XP", "ach_xp500_p": "Consigue 500 puntos de experiencia.", "ach_xp1000": "1000 XP", "ach_xp1000_p": "Consigue 1000 puntos de experiencia.", "ach_ex100": "100 ejercicios", "ach_ex100_p": "Haz 100 ejercicios.", "ach_ex500": "500 ejercicios", "ach_ex500_p": "Haz 500 ejercicios.", "ach_perfect": "Sesión perfecta", "ach_perfect_p": "Termina una práctica diaria sin ningún fallo.", "ach_conj": "Rey de los verbos", "ach_conj_p": "Acierta 50 conjugaciones distintas.", "ach_dict": "Buen oído", "ach_dict_p": "Acierta 20 dictados distintos.", "ach_level": "Nivel superado", "ach_level_p": "Aprueba una prueba de nivel."});
+Object.assign(T.en,{"i_dict": "Listen and type what you hear", "combo": "{n} in a row!", "dl_perfect": "Perfect session! +20 bonus XP.", "frz": "🧊 Streak protectors: {n}/2", "frz_used": "A protector saved your streak!", "frz_p": "You earn a protector every 7 days in a row (2 max). If you miss a day, the protector keeps your streak.", "snd_on": "🔊 Sound on", "snd_off": "🔇 Sound off", "ach_t": "Your achievements", "ach_locked": "(locked)", "ach_new": "New achievement", "ach_first": "First step", "ach_first_p": "Do your first exercise.", "ach_goal": "Goal met", "ach_goal_p": "Meet your daily goal for the first time.", "ach_s3": "3 days in a row", "ach_s3_p": "Practise 3 days in a row.", "ach_s7": "One week", "ach_s7_p": "Practise 7 days in a row.", "ach_s30": "One month", "ach_s30_p": "Practise 30 days in a row.", "ach_xp100": "100 XP", "ach_xp100_p": "Earn 100 experience points.", "ach_xp500": "500 XP", "ach_xp500_p": "Earn 500 experience points.", "ach_xp1000": "1000 XP", "ach_xp1000_p": "Earn 1000 experience points.", "ach_ex100": "100 exercises", "ach_ex100_p": "Do 100 exercises.", "ach_ex500": "500 exercises", "ach_ex500_p": "Do 500 exercises.", "ach_perfect": "Perfect session", "ach_perfect_p": "Finish a daily practice without a single mistake.", "ach_conj": "Verb master", "ach_conj_p": "Get 50 different conjugations right.", "ach_dict": "Good ear", "ach_dict_p": "Get 20 different dictations right.", "ach_level": "Level passed", "ach_level_p": "Pass a level check."});
+Object.assign(T.fr,{"i_dict": "Écoute et écris ce que tu entends", "combo": "{n} d’affilée !", "dl_perfect": "Séance parfaite ! +20 XP en cadeau.", "frz": "🧊 Protecteurs de série : {n}/2", "frz_used": "Un protecteur a sauvé ta série !", "frz_p": "Tu gagnes un protecteur tous les 7 jours d’affilée (2 maximum). Si tu ne pratiques pas un jour, le protecteur garde ta série.", "snd_on": "🔊 Son activé", "snd_off": "🔇 Son désactivé", "ach_t": "Tes réussites", "ach_locked": "(à débloquer)", "ach_new": "Nouvelle réussite", "ach_first": "Premier pas", "ach_first_p": "Fais ton premier exercice.", "ach_goal": "Objectif atteint", "ach_goal_p": "Atteins ton objectif quotidien pour la première fois.", "ach_s3": "3 jours d’affilée", "ach_s3_p": "Pratique 3 jours d’affilée.", "ach_s7": "Une semaine", "ach_s7_p": "Pratique 7 jours d’affilée.", "ach_s30": "Un mois", "ach_s30_p": "Pratique 30 jours d’affilée.", "ach_xp100": "100 XP", "ach_xp100_p": "Gagne 100 points d’expérience.", "ach_xp500": "500 XP", "ach_xp500_p": "Gagne 500 points d’expérience.", "ach_xp1000": "1000 XP", "ach_xp1000_p": "Gagne 1000 points d’expérience.", "ach_ex100": "100 exercices", "ach_ex100_p": "Fais 100 exercices.", "ach_ex500": "500 exercices", "ach_ex500_p": "Fais 500 exercices.", "ach_perfect": "Séance parfaite", "ach_perfect_p": "Termine une pratique quotidienne sans aucune erreur.", "ach_conj": "As des verbes", "ach_conj_p": "Réussis 50 conjugaisons différentes.", "ach_dict": "Bonne oreille", "ach_dict_p": "Réussis 20 dictées différentes.", "ach_level": "Niveau réussi", "ach_level_p": "Réussis une épreuve de niveau."});
 const PRIV={
 es:`<p><b>Responsable:</b> Dana Salgado (Tu profe por el mundo). Contacto: <span class="em"></span>.</p>
 <p><b>Qué datos tratamos:</b> tu nombre de pila, tu usuario del aula (usuario@tuprofeporelmundo.com, que sirve para entrar y no es un buzón de correo), tu contraseña (guardada cifrada; nadie puede leerla), tu objetivo y tus respuestas y resultados en el aula.</p>
@@ -847,6 +869,12 @@ function renderItem(){
   else if(q.t==='read')body.innerHTML=`<div class="text" tabindex="0">${esc(TEXTS[q.txt])}</div><p class="prompt">${esc(q.q)}</p>`+optsHTML(q.o);
   else if(q.t==='listen')body.innerHTML=listenHTML()+optsHTML(q.o);
   else if(q.t==='listenq')body.innerHTML=listenHTML()+`<p class="prompt">${esc(q.q)}</p>`+optsHTML(q.o);
+  else if(q.t==='dict'){
+    body.innerHTML=listenHTML()+`<textarea id="gap" rows="2" autocomplete="off" autocapitalize="off" spellcheck="false"></textarea>`;
+    const inp=$('gap');inp.addEventListener('input',()=>{Q.ans=inp.value;$('check').disabled=!inp.value.trim()});
+    inp.addEventListener('keydown',e=>{if(e.key==='Enter'&&!e.shiftKey){e.preventDefault();if(inp.value.trim()&&!Q.checked)$('check').click()}});
+    $('showtxt').hidden=true;
+  }
   else if(q.t==='gap'){
     body.innerHTML=`<p class="prompt">${esc(q.q)}</p><input type="text" id="gap" autocomplete="off" autocapitalize="off" spellcheck="false">`;
     const inp=$('gap');inp.addEventListener('input',()=>{Q.ans=inp.value;$('check').disabled=!inp.value.trim()});
@@ -877,12 +905,13 @@ function renderItem(){
       }else{a.miss++;[l,r].forEach(x=>{x.classList.add('miss');setTimeout(()=>x.classList.remove('miss'),450)})}
     }));
   }
-  if(q.t==='listen'||q.t==='listenq'){
+  if(q.t==='listen'||q.t==='listenq'||q.t==='dict'){
     const text=q.t==='listen'?q.o[0]:q.say;
     $('play').addEventListener('click',()=>say(text,.9));
     $('play-slow').addEventListener('click',()=>say(text,.6));
     $('showtxt').addEventListener('click',()=>{$('said').textContent=text;$('said').hidden=false});
-    if(!('speechSynthesis' in window)){$('said').textContent=text;$('said').hidden=false}
+    if(!('speechSynthesis' in window)&&q.t!=='dict'){$('said').textContent=text;$('said').hidden=false}
+    if(q.t==='dict')setTimeout(()=>say(text,.9),300);
   }
   body.querySelectorAll('.opt').forEach(b=>b.addEventListener('click',()=>{
     if(Q.checked)return;
@@ -902,6 +931,7 @@ function solution(q){
   if(['choice','listen','listenq','read'].includes(q.t))return q.o[0];
   if(q.t==='gap')return q.q.replace('___',q.a[0]).replace(/\s*\([^)]*\)\s*$/,'');
   if(q.t==='order')return q.s;
+  if(q.t==='dict')return q.say;
   return '';
 }
 function grade(q){
@@ -920,12 +950,21 @@ function grade(q){
     return {ok:false};
   }
   if(q.t==='order')return {ok:Q.ans.map(b=>b.textContent).join(' ')===q.s};
+  if(q.t==='dict'){
+    $('gap').readOnly=true;
+    const c=x=>norm(x.replace(/[’‘]/g,"'").replace(/[.,;:!¡?¿"«»…—–-]/g,' '));
+    const a=c(Q.ans),b=c(q.say);
+    if(a===b)return {ok:true};
+    if(plain(a)===plain(b))return {ok:true,accent:true};
+    return {ok:false};
+  }
   if(q.t==='match')return {ok:Q.ans.miss<=1};
 }
 function showFeedback(){
   const r=Q.last;
   $('fb').className='feedback '+(r.ok?'ok':'ko');
   $('fb-msg').textContent=r.ok?t('ok'):t('ko');
+  if(Q.mode==='daily'&&r.ok&&[3,5,10,15,20].includes(Q.daily.combo))$('fb-msg').textContent+=' · '+t('combo',{n:Q.daily.combo});
   $('fb-sol').textContent=(r.accent?t('accent')+solution(Q.item):(!r.ok&&Q.item.t!=='match'?t('sol')+solution(Q.item):''))+(Q.item.ex?(r.ok&&!r.accent?'':' · ')+t('sc_why')+Q.item.ex:'');
   const last=Q.mode==='daily'?Q.daily.fresh>=Q.daily.goal&&!Q.daily.retry.length:Q.mode!=='test'&&Q.i>=Q.queue.length;
   $('check').textContent=last?t('finish'):t('next');
@@ -942,9 +981,14 @@ function record(q,ok){
   if(!data.days)data.days={};
   const L=data.days[d]||(data.days[d]={n:0,ok:0,xp:0});L.n++;if(ok)L.ok++;L.xp+=xp;if(data.track!=='school')L.r=Math.round(dp().r*100)/100;
   const old=addDays(-90);Object.keys(data.days).forEach(k=>{if(k<old)delete data.days[k]});
+  data.cnt=(data.cnt||0)+1;
   if(data.streak.d!==d){
-    const y=new Date(Date.now()-864e5).toISOString().slice(0,10);
-    data.streak={d,n:data.streak.d===y?data.streak.n+1:1};
+    /* protector de racha: cubre los días sin practicar si hay bastantes; se gana uno cada 7 días seguidos (máximo 2) */
+    const gap=data.streak.d?Math.round((Date.parse(d)-Date.parse(data.streak.d))/864e5):0,fz=data.frz||0;
+    if(gap===1)data.streak={d,n:data.streak.n+1};
+    else if(gap>1&&gap-1<=fz){data.frz=fz-(gap-1);data.streak={d,n:data.streak.n+1};data.frzUsed=d}
+    else data.streak={d,n:1};
+    if(data.streak.n%7===0)data.frz=Math.min(2,(data.frz||0)+1);
   }
 }
 $('check').addEventListener('click',()=>{
@@ -952,7 +996,8 @@ $('check').addEventListener('click',()=>{
     const r=grade(Q.item);Q.checked=true;Q.last=r;Q.i++;
     if(r.ok){Q.right++;if(Q.mode==='test')Q.blockRight++}
     record(Q.item,r.ok);
-    if(Q.mode==='daily'){Q.daily.n++;if(r.ok)Q.daily.ok++;else if(!Q.item.retry){Q.daily.retry.push(Object.assign({},Q.item,{retry:true}));Q.total++}}
+    if(Q.mode==='daily'){Q.daily.n++;Q.daily.combo=r.ok?(Q.daily.combo||0)+1:0;if(r.ok)Q.daily.ok++;else if(!Q.item.retry){Q.daily.retry.push(Object.assign({},Q.item,{retry:true}));Q.total++}}
+    sfx(r.ok?'ok':'ko');
     setProgress();showFeedback();$('check').focus();
   }else nextItem();
 });
@@ -1010,8 +1055,12 @@ async function finishSession(){
     Q.passedLevel=r>=4;
     if(Q.passedLevel){data.level=Q.target;data.tests.push({d:today(),lv:Q.target,ok:r,n,prueba:true});const P=dp();P.r=Math.max(P.r,Q.target+.9)}
   }
+  let extra=[];
+  if(Q.mode==='daily'&&Q.daily.n>=5&&Q.daily.ok===Q.daily.n){data.xp+=20;Q.daily.perfect=true;extra.push('perfect')}
+  Q.newAch=checkAch(extra);
   await store.save();
   Q.done={r,n};renderDone();show('s-done');
+  if(Q.mode==='daily'&&!Q.daily.metBefore&&dayLog().n>=dGoal()){sfx('goal');petals()}
 }
 function renderDone(){
   const {r,n}=Q.done;$('d-score').textContent=r+'/'+n;
@@ -1030,8 +1079,10 @@ function renderDone(){
     const D=Q.daily,met=dayLog().n>=dGoal(),a=dailyLevel(D.r0),b=dailyLevel(dp().r);
     $('d-score').textContent=D.ok+'/'+D.n;
     $('d-t').textContent=met?t('dl_done_t'):t('unit_more');
-    $('d-p').textContent=t('dl_done_p',{r:D.ok,n:D.n,p:D.n?Math.round(D.ok/D.n*100):0,x:data.xp-D.xp0})+' '+(b.l>a.l?t('dl_up_l',{l:LV[b.l]}):dp().r>D.r0+.02?t('dl_up'):dp().r<D.r0-.02?t('dl_down'):t('dl_same'));
+    $('d-p').textContent=(D.perfect?t('dl_perfect')+' ':'')+t('dl_done_p',{r:D.ok,n:D.n,p:D.n?Math.round(D.ok/D.n*100):0,x:data.xp-D.xp0})+' '+(b.l>a.l?t('dl_up_l',{l:LV[b.l]}):dp().r>D.r0+.02?t('dl_up'):dp().r<D.r0-.02?t('dl_down'):t('dl_same'));
   }else{$('d-t').textContent=t('rev_done');$('d-p').textContent=t('rev_done_p')}
+  const na=Q.newAch||[];$('d-ach').hidden=!na.length;
+  $('d-ach').innerHTML=na.map(k=>achLi(k,true).replace('<li ','<li aria-label="'+esc(t('ach_new')+': '+t('ach_'+k))+'" ')).join('');
 }
 $('d-home').addEventListener('click',goHome);
 
@@ -1044,10 +1095,12 @@ function skillScore(s){
    según lo difícil que era el ejercicio (como la puntuación Elo). Cada ejercicio se elige para que la probabilidad
    de acierto ronde el 72 %; lo fallado se repite al final de la sesión y vuelve otro día (repaso espaciado). */
 const SRS_DAYS=[0,1,3,7,16,35];
-const T_ADJ={choice:.3,read:.4,match:.4,listen:.5,listenq:.6,order:.6,gap:.7};
+const T_ADJ={choice:.3,read:.4,match:.4,listen:.5,listenq:.6,order:.6,gap:.7,dict:.8};
+/* dictado: cada ejercicio de escuchar da también uno de escribir lo que se oye */
+const dictOf=q=>({id:q.id+'.d',lv:q.lv,sk:'aud',t:'dict',say:q.o[0]});
 const addDays=n=>new Date(Date.now()+n*864e5).toISOString().slice(0,10);
 const isGen=()=>(data.lt||'es')==='es';
-const itemById=id=>BYID[id]||(id.startsWith('cj.')&&isGen()?cjItem(id):null);
+const itemById=id=>BYID[id]||(id.startsWith('cj.')&&isGen()?cjItem(id):null)||(id.endsWith('.d')&&BYID[id.slice(0,-2)]&&BYID[id.slice(0,-2)].t==='listen'?dictOf(BYID[id.slice(0,-2)]):null);
 const diff=q=>q.lv+(T_ADJ[q.t]||.5)+(q.irr?.25:0);
 const pOk=(r,q)=>1/(1+Math.exp(-1.7*(r-diff(q))));
 function dp(){
@@ -1072,6 +1125,7 @@ function dailyNext(){
     if(D.fresh%3===0){const due=dueList().find(q=>!used.has(q.id)&&q.lv<=maxLv);if(due){D.fresh++;return due}}
     const genN=Q.queue.filter(q=>q.gen).length;
     let cands=BANK.filter(q=>!used.has(q.id)&&q.lv>=minLv&&q.lv<=maxLv);
+    cands=cands.concat(cands.filter(q=>q.t==='listen').map(dictOf).filter(q=>!used.has(q.id)));
     if(isGen()&&genN<Math.ceil(goal*.4))cands=cands.concat(sample(cjIds(maxLv,minLv).filter(id=>!used.has(id)),40).map(cjItem));
     if(!cands.length)cands=BANK.filter(q=>!used.has(q.id));
     const weak=s=>{const v=skillScore(s);return v===null?.3:1-v/100};
@@ -1089,7 +1143,7 @@ function dailyNext(){
 }
 function startDaily(){
   const d=dp(),goal=dGoal(),done=dayLog().n;
-  Q.daily={goal:done>=goal?Math.max(5,Math.round(goal/2)):goal-done,fresh:0,retry:[],r0:d.r,xp0:data.xp,ok:0,n:0};
+  Q.daily={goal:done>=goal?Math.max(5,Math.round(goal/2)):goal-done,fresh:0,retry:[],r0:d.r,xp0:data.xp,ok:0,n:0,combo:0,metBefore:done>=goal};
   Object.assign(Q,{mode:'daily',queue:[],i:0,total:Q.daily.goal,right:0,item:null,ans:null,checked:false});
   show('s-quiz');nextItem();
 }
@@ -1119,8 +1173,47 @@ function renderDaily(){
   $('dl-ready').hidden=!rd;$('dl-ready-b').hidden=!rd;
   if(rd){$('dl-ready').textContent=t('dl_ready',{l:LV[working()]});$('dl-ready-b').textContent=t('levelup_b',{l:LV[working()]})}
   document.querySelectorAll('.dl-goal [data-g]').forEach(b=>{b.textContent=t('dl_g'+b.dataset.g);b.setAttribute('aria-pressed',String(+b.dataset.g===g))});
+  $('dl-frz').textContent=(data.frzUsed===today()?t('frz_used')+' ':'')+t('frz',{n:data.frz||0});$('dl-frz').title=t('frz_p');
+  $('dl-snd').textContent=data.snd===false?t('snd_off'):t('snd_on');$('dl-snd').setAttribute('aria-pressed',String(data.snd!==false));
+  renderAch();
+}
+/* logros: se comprueban al terminar cada sesión */
+const ACH=[
+ ['first','🌱',()=>(data.cnt||0)>=1],['goal','🎯',()=>Object.values(data.days||{}).some(x=>x.n>=dGoal())],
+ ['s3','🔥',()=>data.streak.n>=3],['s7','🔥',()=>data.streak.n>=7],['s30','🌋',()=>data.streak.n>=30],
+ ['xp100','⭐',()=>data.xp>=100],['xp500','🌟',()=>data.xp>=500],['xp1000','👑',()=>data.xp>=1000],
+ ['ex100','📚',()=>(data.cnt||0)>=100],['ex500','🎓',()=>(data.cnt||0)>=500],
+ ['perfect','💯',()=>false],['conj','✍️',()=>Object.entries(data.items).filter(([id,it])=>id.startsWith('cj.')&&it.k>0).length>=50],
+ ['dict','🎧',()=>Object.entries(data.items).filter(([id,it])=>id.endsWith('.d')&&it.k>0).length>=20],
+ ['level','🏅',()=>(data.tests||[]).some(x=>x.prueba)]
+];
+function checkAch(extra){
+  if(!data.ach)data.ach={};const nw=[];
+  ACH.forEach(([k,,f])=>{if(!data.ach[k]&&(f()||(extra&&extra.includes(k)))){data.ach[k]=today();nw.push(k)}});
+  return nw;
+}
+const achLi=(k,on)=>{const a=ACH.find(x=>x[0]===k);return `<li class="${on?'':'off'}" title="${esc(t('ach_'+k+'_p'))}"><b aria-hidden="true">${a[1]}</b>${esc(t('ach_'+k))}${on?'':`<span class="sr">${esc(t('ach_locked'))}</span>`}</li>`};
+function renderAch(){$('ach').innerHTML=ACH.map(([k])=>achLi(k,data.ach&&data.ach[k])).join('')}
+/* sonidos cortos generados en el navegador (sin archivos); se pueden silenciar */
+let AC=null;
+function sfx(kind){
+  if(data.snd===false)return;
+  try{
+    AC=AC||new (window.AudioContext||window.webkitAudioContext)();
+    const notes={ok:[660,880],ko:[220,180],goal:[523,659,784,1047]}[kind];
+    notes.forEach((f,i)=>{const o=AC.createOscillator(),g=AC.createGain(),t0=AC.currentTime+i*.11;
+      o.type=kind==='ko'?'triangle':'sine';o.frequency.value=f;g.gain.setValueAtTime(.0001,t0);g.gain.exponentialRampToValueAtTime(.18,t0+.02);g.gain.exponentialRampToValueAtTime(.0001,t0+.22);
+      o.connect(g).connect(AC.destination);o.start(t0);o.stop(t0+.25)});
+  }catch(e){}
+}
+function petals(){
+  if(matchMedia('(prefers-reduced-motion: reduce)').matches)return;
+  for(let i=0;i<26;i++){const s=document.createElementNS('http://www.w3.org/2000/svg','svg');s.setAttribute('viewBox','-50 -50 100 100');s.setAttribute('class','petal');s.setAttribute('aria-hidden','true');
+    s.innerHTML='<use href="#fl"/>';s.style.left=Math.random()*100+'vw';s.style.animationDuration=(2.2+Math.random()*1.8)+'s';s.style.animationDelay=Math.random()*.6+'s';
+    document.body.appendChild(s);setTimeout(()=>s.remove(),4800)}
 }
 $('dl-start').addEventListener('click',startDaily);
+$('dl-snd').addEventListener('click',()=>{data.snd=data.snd===false;store.save();renderDaily();if(data.snd)sfx('ok')});
 $('dl-ready-b').addEventListener('click',()=>$('levelup').click());
 document.querySelectorAll('.dl-goal [data-g]').forEach(b=>b.addEventListener('click',()=>{data.dg=+b.dataset.g;store.save();renderDaily()}));
 
