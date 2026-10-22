@@ -16,7 +16,9 @@ export default async (req) => {
   try {
     const key = process.env.RESEND_API_KEY;
     const fromEnv = process.env.CONFIRM_FROM || "";
-    const from = /^[^<>@\s]+@[^<>@\s]+$|^[^<>]+<[^<>@\s]+@[^<>@\s]+>$/.test(fromEnv.trim()) ? fromEnv.trim() : "";
+    const rawFrom = fromEnv.replace(/^[\s"']+|[\s"']+$/g, "");
+    const okFrom = /^[^<>]+<[^\s<>@]+@[^\s<>@]+>$/.test(rawFrom) || /^[^\s<>@]+@[^\s<>@]+$/.test(rawFrom);
+    const from = okFrom ? rawFrom : "Tu profe por el mundo <contacto@tuprofeporelmundo.com>"; // mismo remitente por defecto que la confirmación de reservas
     if (!key || !from) return json({ ok: false, error: "sin_resend" });
 
     const body = await req.json().catch(() => ({}));
