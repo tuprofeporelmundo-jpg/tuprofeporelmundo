@@ -1,4 +1,4 @@
-// Cada pestaña (inglés, francés, apoyo escolar, profesores) tiene su propio título,
+// Cada pestaña (inglés, francés, apoyo escolar, profesores, opiniones) tiene su propio título,
 // descripción y tarjeta para redes, para que Google y WhatsApp/Instagram no
 // enseñen siempre los de la portada. Si algo falla, se sirve la web tal cual.
 const P = {
@@ -6,6 +6,7 @@ const P = {
   "/frances": { u: "/frances/", v: "fr", t: "Clases de francés online con profesor nativo · Tu profe por el mundo", d: "Prepara el DELF/DALF o mejora tu nivel de francés y conversa con un profesor nativo. Preinscripción abierta." },
   "/apoyo-escolar": { u: "/apoyo-escolar/", v: "ap", t: "Apoyo escolar online de primaria y ESO · Tu profe por el mundo", d: "Apoyo escolar online para primaria y ESO con plan a partir del curso y el material de tu hijo o hija. Estudia y practica gratis." },
   "/profesores": { u: "/profesores/", v: "prof", t: "Nuestros profesores · Tu profe por el mundo", d: "Conoce a Dana (español y apoyo escolar), Chris (inglés nativo, de Chicago) y a nuestro futuro profesor nativo de francés." },
+  "/opiniones": { u: "/opiniones/", v: "op", t: "Opiniones de mis alumnos · Tu profe por el mundo", d: "Lee lo que opinan los alumnos y las familias de las clases online de español y de apoyo escolar con Dana. Opiniones reales, buenas y malas." },
 };
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/"/g, "&quot;");
 const attr = (html, re, val) => html.replace(re, (m, a, b) => a + val + b);
@@ -68,5 +69,5 @@ export default async (req, context) => {
 };
 
 export const config = {
-  path: ["/ingles", "/ingles/", "/frances", "/frances/", "/apoyo-escolar", "/apoyo-escolar/", "/profesores", "/profesores/"],
+  path: ["/ingles", "/ingles/", "/frances", "/frances/", "/apoyo-escolar", "/apoyo-escolar/", "/profesores", "/profesores/", "/opiniones", "/opiniones/"],
 };
