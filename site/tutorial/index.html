@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Vídeo: cómo funciona la web y Mi aula · Tu profe por el mundo</title>
+<meta name="description" content="En un minuto: cómo reservar tus clases online con Dana y cómo practicar cada día en Mi aula.">
+<meta name="robots" content="noindex,follow">
+<link rel="icon" href="/favicon.svg" type="image/svg+xml">
+<style>
+/* Mismo sistema visual que tuprofeporelmundo.com */
+:root{--bg:#FCF8F5;--bg-2:#F5EBE4;--card:#FFFFFF;--ink:#33251E;--muted:#6F6058;--line:#EADCD2;--jungle:#6B4433;--leaf:#5E7A55;--on-primary:#FFFFFF;
+  --serif:"Iowan Old Style","Palatino Linotype",Palatino,Georgia,serif}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#1D1613;--bg-2:#251C18;--card:#2B211C;--ink:#F4EAE3;--muted:#C2B2A7;--line:#3E3029;--jungle:#E3BCA6;--leaf:#93AE87;--on-primary:#1D1613;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#1D1613;--bg-2:#251C18;--card:#2B211C;--ink:#F4EAE3;--muted:#C2B2A7;--line:#3E3029;--jungle:#E3BCA6;--leaf:#93AE87;--on-primary:#1D1613;color-scheme:dark}
+*,*::before,*::after{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:17px/1.6 ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;padding:0 max(16px,env(safe-area-inset-right)) 3rem max(16px,env(safe-area-inset-left))}
+a{color:var(--jungle)}
+:focus-visible{outline:3px solid #C4936B;outline-offset:3px;border-radius:4px}
+.wrap{width:min(860px,100%);margin-inline:auto}
+header{display:flex;justify-content:space-between;align-items:center;gap:1rem;padding:1rem 0;border-bottom:1px solid var(--line)}
+.logo{font-family:var(--serif);font-weight:600;font-size:1.15rem;color:var(--jungle);text-decoration:none}
+h1{font-family:var(--serif);font-weight:600;font-size:clamp(1.8rem,5vw,2.5rem);line-height:1.12;margin:2rem 0 .6rem;text-wrap:balance}
+.lead{color:var(--muted);margin:0 0 1.6rem;max-width:60ch}
+.grid{display:grid;grid-template-columns:minmax(0,360px) 1fr;gap:2rem;align-items:start}
+video{width:100%;height:auto;aspect-ratio:1/2;border-radius:22px;border:1px solid var(--line);background:var(--bg-2);box-shadow:0 18px 40px -24px rgba(60,36,26,.45)}
+ol{margin:0;padding:0;list-style:none;counter-reset:s;display:grid;gap:.9rem}
+ol li{counter-increment:s;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:1rem 1.1rem 1rem 3.3rem;position:relative}
+ol li::before{content:counter(s);position:absolute;left:1rem;top:1rem;width:1.7rem;height:1.7rem;border-radius:8px;background:var(--jungle);color:var(--on-primary);display:grid;place-items:center;font-weight:800;font-size:.9rem}
+ol b{display:block}
+.btns{display:flex;flex-wrap:wrap;gap:.7rem;margin-top:1.4rem}
+.btn{display:inline-flex;align-items:center;justify-content:center;padding:.8rem 1.3rem;border-radius:10px;font-weight:700;text-decoration:none;border:2px solid var(--jungle)}
+.btn-main{background:var(--jungle);color:var(--on-primary)}
+.btn-ghost{color:var(--jungle)}
+.other{color:var(--muted);font-size:.9rem;margin-top:1.6rem}
+@media (max-width:720px){.grid{grid-template-columns:1fr}video{max-width:360px;margin-inline:auto;display:block}}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <header><a class="logo" href="/">Tu profe por el mundo</a><a href="/aula/">Mi aula</a></header>
+  <h1>La web y Mi aula, en un minuto</h1>
+  <p class="lead">Cómo reservar tus clases online y cómo practicar cada día en tu aula. El vídeo no tiene sonido: los subtítulos te lo explican todo.</p>
+  <div class="grid">
+    <video controls playsinline muted preload="metadata" poster="portada-video.jpg" aria-label="Vídeo tutorial de la web y de Mi aula, con subtítulos">
+      <source src="tutorial-tu-profe-por-el-mundo.mp4" type="video/mp4">
+      <source src="tutorial-tu-profe-por-el-mundo.webm" type="video/webm">
+      <a href="tutorial-tu-profe-por-el-mundo.mp4">Descargar el vídeo</a>
+    </video>
+    <div>
+      <ol>
+        <li><b>Elige tu clase</b>Español, inglés, francés o apoyo escolar, con todas las tarifas a la vista.</li>
+        <li><b>Mira los horarios libres</b>En «Horarios», elige la clase y verás las horas libres en tu zona horaria.</li>
+        <li><b>Pulsa una hora y rellena el formulario</b>Cuéntame tu nivel y tu objetivo. Te confirmo la clase por correo.</li>
+        <li><b>Practica cada día en Mi aula</b>Ejercicios que se adaptan a ti, con corrección al momento, tu racha diaria y tus logros.</li>
+      </ol>
+      <div class="btns"><a class="btn btn-main" href="/#horarios">Ver los horarios</a><a class="btn btn-ghost" href="/aula/">Entrar en Mi aula</a></div>
+      <p class="other" lang="en">English: how to book your online lessons and practise every day in your classroom. <span lang="fr">Français : comment réserver tes cours en ligne et t’entraîner chaque jour dans ta classe.</span></p>
+    </div>
+  </div>
+</div>
+</body>
+</html>
