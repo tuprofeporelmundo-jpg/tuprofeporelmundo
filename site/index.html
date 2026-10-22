@@ -5,6 +5,10 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>Clases online de español y apoyo escolar · Tu profe por el mundo</title>
 <link rel="canonical" href="https://tuprofeporelmundo.com/">
+<link rel="alternate" hreflang="es" href="https://tuprofeporelmundo.com/">
+<link rel="alternate" hreflang="en" href="https://tuprofeporelmundo.com/en/">
+<link rel="alternate" hreflang="fr" href="https://tuprofeporelmundo.com/fr/">
+<link rel="alternate" hreflang="x-default" href="https://tuprofeporelmundo.com/">
 <meta name="robots" content="index,follow,max-image-preview:large">
 <meta name="author" content="Dana Salgado">
 <link rel="icon" href="/favicon.svg" type="image/svg+xml">
@@ -1480,6 +1484,9 @@ body.lite .hero-grid{grid-template-columns:1fr;max-width:760px}
           <li><a href="/aula/" data-i18n="nav_aula">Mi aula</a></li>
           <li><a href="/#faq" data-i18n="nav_faq">Preguntas</a></li>
           <li><a href="/ayuda/" data-i18n="nav_help_v">Ayuda y vídeos</a></li>
+          <li><a href="/dele-a2-nacionalidad/" data-i18n="nav_dele_nac">DELE A2 para la nacionalidad</a></li>
+          <li><a href="/en/" hreflang="en" lang="en">Spanish lessons in English</a></li>
+          <li><a href="/fr/" hreflang="fr" lang="fr">Cours d’espagnol en français</a></li>
           <li><a href="/#reserva" data-i18n="nav_book">Reserva tu clase online</a></li>
         </ul>
       </div>
@@ -2682,6 +2689,7 @@ document.querySelectorAll('.langsw button').forEach(b=>b.addEventListener('click
  b.addEventListener('click',()=>{scrollTo({top:0,behavior:matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth'});document.querySelector('.logo').focus({preventScroll:true})})})();
 let start='es';
 try{start=localStorage.getItem('tppm-lang')||''}catch(e){}
+{const ql=new URLSearchParams(location.search).get('lang');if(ql&&T[ql])start=ql}
 if(!start){const n=(navigator.language||'es').slice(0,2);start=T[n]?n:'es'}
 
 /* menú: desplegables y botón Menú del móvil */
@@ -2706,6 +2714,7 @@ K.es.c_how="¿Cómo nos conociste?";K.en.c_how="How did you find us?";K.fr.c_how
 Object.assign(T.es,{nav_cls:'Clases',nav_es_c:'Español para extranjeros',nav_en_c:'Inglés',nav_fr_c:'Francés',nav_free:'Practicar',nav_reto_c:'Reto del día',nav_shop_c:'Tienda de material',nav_help:'Ayuda',nav_help_v:'Ayuda y vídeos',nav_menu:'Menú',how_aria:'Cómo funciona',how_1:'Elige tu clase',how_2:'Elige día y hora en «Horarios»',how_3:'Rellena el formulario y te confirmo por correo',how_vid:'¿Dudas? Mira el vídeo de 1 minuto'});
 Object.assign(T.en,{nav_cls:'Classes',nav_es_c:'Spanish for foreigners',nav_en_c:'English',nav_fr_c:'French',nav_free:'Practise',nav_reto_c:'Daily challenge',nav_shop_c:'Material shop',nav_help:'Help',nav_help_v:'Help and videos',nav_menu:'Menu',how_aria:'How it works',how_1:'Choose your class',how_2:'Pick a day and time in “Schedule”',how_3:'Fill in the form and I confirm by email',how_vid:'Questions? Watch the 1-minute video'});
 Object.assign(T.fr,{nav_cls:'Cours',nav_es_c:'Espagnol pour étrangers',nav_en_c:'Anglais',nav_fr_c:'Français',nav_free:'S’entraîner',nav_reto_c:'Défi du jour',nav_shop_c:'Boutique de matériel',nav_help:'Aide',nav_help_v:'Aide et vidéos',nav_menu:'Menu',how_aria:'Comment ça marche',how_1:'Choisis ton cours',how_2:'Choisis le jour et l’heure dans « Horaires »',how_3:'Remplis le formulaire et je te confirme par e-mail',how_vid:'Des questions ? Regarde la vidéo d’une minute'});
+Object.assign(T.es,{nav_dele_nac:'DELE A2 para la nacionalidad'});Object.assign(T.en,{nav_dele_nac:'DELE A2 for Spanish citizenship'});Object.assign(T.fr,{nav_dele_nac:'DELE A2 pour la nationalité espagnole'});
 Object.assign(T.es,{sc_intro_chris:'Chris da clase online de lunes a viernes, por la mañana y por la tarde (hora de España). Las horas aparecen en tu zona horaria: elige una franja libre y pasarás al formulario de inscripción.'});Object.assign(T.en,{sc_intro_chris:"Chris teaches online Monday to Friday, mornings and afternoons (Spain time). Times are shown in your time zone: pick a free slot and you'll go to the registration form."});Object.assign(T.fr,{sc_intro_chris:"Chris donne cours en ligne du lundi au vendredi, le matin et l'après-midi (heure d'Espagne). Les horaires s'affichent dans ton fuseau horaire : choisis un créneau libre et tu passeras au formulaire de inscription."});
 if(document.body.classList.contains('lite')){Object.assign(T.es,{hero_h1:'Clases de español online y apoyo escolar, a tu medida.',hero_lead:'Clases online de español (A1-C1) y apoyo escolar de primaria a la ESO, diseñadas a partir de tus necesidades y tus objetivos.',hero_b3:'Español de A1 a C1 y apoyo escolar de primaria a la ESO',hero_badge:'Profesora nativa con más de 10 años de experiencia',pr_intro:'Las mismas tarifas para español y apoyo escolar. Sesiones individuales online de 1 hora, con material para la clase y apuntes para seguir avanzando en casa.',foot_tag:'Clases online de español y apoyo escolar, personalizadas para cada alumno.'});Object.assign(T.en,{hero_h1:'Online Spanish lessons and school tutoring, tailored to you.',hero_lead:'Online Spanish lessons (A1-C1) and school tutoring from primary to secondary, designed around your needs and goals.',hero_b3:'Spanish from A1 to C1 and school tutoring from primary to secondary',hero_badge:'Native teacher with over 10 years of experience',foot_tag:'Online Spanish lessons and school tutoring, tailored to every student.'});Object.assign(T.fr,{hero_h1:"Cours d'espagnol en ligne et soutien scolaire, sur mesure.",hero_lead:"Cours d'espagnol en ligne (A1-C1) et soutien scolaire du primaire au collège, conçus à partir de tes besoins et de tes objectifs.",hero_b3:'Espagnol du A1 au C1 et soutien scolaire du primaire au collège',hero_badge:"Professeure native avec plus de 10 ans d'expérience",foot_tag:"Cours d'espagnol et soutien scolaire en ligne, personnalisés pour chaque élève."})}
 const V={es:{p:'/',t:'Clases online de español y apoyo escolar · Tu profe por el mundo',d:'Clases de español online para extranjeros (A1-C1) y apoyo escolar de primaria y ESO con Dana, profesora nativa. Inscripción abierta. Primera clase por 15 €.'},

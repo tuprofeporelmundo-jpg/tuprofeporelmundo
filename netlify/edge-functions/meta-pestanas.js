@@ -59,6 +59,7 @@ export default async (req, context) => {
     html = attr(html, /(<meta property="og:title" content=")[^"]*(")/, esc(m.t));
     html = attr(html, /(<meta property="og:description" content=")[^"]*(")/, esc(m.d));
     html = attr(html, /(<meta property="og:url" content=")[^"]*(")/, full);
+    html = html.replace(/<link rel="alternate" hreflang="[^"]*" href="[^"]*">\n?/g, "");
     html = enrich(html, m);
     const h = new Headers(res.headers);
     h.delete("content-length");
