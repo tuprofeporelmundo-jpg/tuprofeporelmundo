@@ -522,7 +522,9 @@ textarea#gap:focus{outline:none;border-color:var(--jungle)}
 <script src="banco-escolar.js"></script>
 <script src="banco-idiomas.js"></script>
 <script src="banco-extra.js"></script>
+<script src="banco-extra-en.js"></script>
 <script src="conjugacion.js"></script>
+<script src="verbos-en.js"></script>
 <script>
 const CFG=window.AULA_CONFIG||{};
 const LV=LEVELS.map(l=>l.c);
@@ -711,7 +713,7 @@ const t=(k,v)=>{let s=T[lang][k];if(k==='g_exam_s'){let g;try{g=data&&data.track
 const esc=s=>String(s).replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
 const shuffle=a=>{a=a.slice();for(let i=a.length-1;i>0;i--){const j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a};
 const sample=(a,n)=>shuffle(a).slice(0,n);
-const norm=s=>s.trim().toLowerCase().replace(/\s+/g,' ').replace(/[.!¡¿?]+$/,'');
+const norm=s=>s.trim().replace(/[’‘]/g,"'").toLowerCase().replace(/\s+/g,' ').replace(/[.!¡¿?]+$/,'');
 const plain=s=>norm(s).normalize('NFD').replace(/[́̈]/g,'').normalize('NFC');
 const today=()=>new Date().toISOString().slice(0,10);
 const lvName=l=>l<0?t('pre'):LV[l];
@@ -1157,8 +1159,11 @@ function speakScore(said,target){
   return b.length?L[a.length][b.length]/b.length:0;
 }
 const addDays=n=>new Date(Date.now()+n*864e5).toISOString().slice(0,10);
-const isGen=()=>(data.lt||'es')==='es';
-const itemById=id=>(id.endsWith('.s')&&BYID[id.slice(0,-2)]&&BYID[id.slice(0,-2)].t==='listen'?speakOf(BYID[id.slice(0,-2)]):null)||BYID[id]||(id.startsWith('cj.')&&isGen()?cjItem(id):null)||(id.endsWith('.d')&&BYID[id.slice(0,-2)]&&BYID[id.slice(0,-2)].t==='listen'?dictOf(BYID[id.slice(0,-2)]):null);
+/* ejercicios generados: conjugación en español (cj.…) y verbos en inglés (ve.…) */
+const isGen=()=>['es','en'].includes(data.lt||'es');
+const genItem=id=>(data.lt||'es')==='es'?(id.startsWith('cj.')?cjItem(id):null):(data.lt==='en'&&id.startsWith('ve.')?veItem(id):null);
+const genIds=(maxLv,minLv)=>(data.lt||'es')==='en'?veIds(maxLv,minLv):cjIds(maxLv,minLv);
+const itemById=id=>(id.endsWith('.s')&&BYID[id.slice(0,-2)]&&BYID[id.slice(0,-2)].t==='listen'?speakOf(BYID[id.slice(0,-2)]):null)||BYID[id]||genItem(id)||(id.endsWith('.d')&&BYID[id.slice(0,-2)]&&BYID[id.slice(0,-2)].t==='listen'?dictOf(BYID[id.slice(0,-2)]):null);
 const diff=q=>q.lv+(T_ADJ[q.t]||.5)+(q.irr?.25:0);
 const pOk=(r,q)=>1/(1+Math.exp(-1.7*(r-diff(q))));
 function dp(){
@@ -1185,7 +1190,7 @@ function dailyNext(){
     let cands=BANK.filter(q=>!used.has(q.id)&&q.lv>=minLv&&q.lv<=maxLv);
     cands=cands.concat(cands.filter(q=>q.t==='listen').map(dictOf).filter(q=>!used.has(q.id)));
     if(speakOn()&&Q.queue.filter(q=>q.t==='speak').length<2)cands=cands.concat(cands.filter(q=>q.t==='listen').map(speakOf).filter(q=>!used.has(q.id)));
-    if(isGen()&&genN<Math.ceil(goal*.4))cands=cands.concat(sample(cjIds(maxLv,minLv).filter(id=>!used.has(id)),40).map(cjItem));
+    if(isGen()&&genN<Math.ceil(goal*.4))cands=cands.concat(sample(genIds(maxLv,minLv).filter(id=>!used.has(id)),40).map(genItem));
     if(!cands.length)cands=BANK.filter(q=>!used.has(q.id));
     const weak=s=>{const v=skillScore(s);return v===null?.3:1-v/100};
     let best=null,bs=-1e9;
@@ -1264,7 +1269,7 @@ const ACH=[
  ['s3','🔥',()=>data.streak.n>=3],['s7','🔥',()=>data.streak.n>=7],['s30','🌋',()=>data.streak.n>=30],
  ['xp100','⭐',()=>data.xp>=100],['xp500','🌟',()=>data.xp>=500],['xp1000','👑',()=>data.xp>=1000],
  ['ex100','📚',()=>(data.cnt||0)>=100],['ex500','🎓',()=>(data.cnt||0)>=500],
- ['perfect','💯',()=>false],['conj','✍️',()=>Object.entries(data.items).filter(([id,it])=>id.startsWith('cj.')&&it.k>0).length>=50],
+ ['perfect','💯',()=>false],['conj','✍️',()=>Object.entries(data.items).filter(([id,it])=>(id.startsWith('cj.')||id.startsWith('ve.'))&&it.k>0).length>=50],
  ['dict','🎧',()=>Object.entries(data.items).filter(([id,it])=>id.endsWith('.d')&&it.k>0).length>=20],
  ['level','🏅',()=>(data.tests||[]).some(x=>x.prueba)]
 ];
