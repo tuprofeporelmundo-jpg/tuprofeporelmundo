@@ -112,7 +112,7 @@ nav a:hover{color:var(--jungle)}
 .lead{font-size:1.18rem;color:var(--muted);max-width:40ch;margin:0 0 1.6rem}
 .checks{list-style:none;padding:0;margin:0 0 2rem;display:flex;flex-direction:column;gap:.55rem}
 .checks li{display:flex;gap:.65rem;align-items:flex-start;font-weight:500}
-.checks li::before{content:"";flex:none;width:22px;height:22px;margin-top:.1rem;border-radius:50%;background:var(--jungle) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center/13px no-repeat}
+.checks li::before{content:"";flex:none;width:22px;height:22px;margin-top:.1rem;border-radius:50%;background-color:#6B4433;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E");background-position:center;background-size:13px 13px;background-repeat:no-repeat}
 .btns{display:flex;gap:.8rem;flex-wrap:wrap}
 .profile{background:var(--card);border:1px solid var(--line);border-radius:20px;box-shadow:var(--shadow);overflow:hidden}
 .profile .cover{height:96px;background:linear-gradient(180deg,var(--flower-soft),var(--sea-2));position:relative;overflow:hidden}
@@ -615,7 +615,17 @@ header .dd-menu a:hover,header .dd-menu a[aria-current]{background:var(--ochre-s
   .dd-btn{pointer-events:none;width:100%;padding:.95rem .2rem .3rem;font-size:.78rem;font-weight:800;letter-spacing:.06em;text-transform:uppercase;color:var(--muted)}
   .dd-btn::after{display:none}
 }
-@media (max-width:420px){.menu-btn{padding:.45rem .55rem}.bar{column-gap:.45rem}.logo{font-size:.92rem}}
+/* móvil y tablet: botón «Menú» grande a la izquierda, logo en medio e «Inscribirme» a la derecha */
+@media (max-width:1180px){
+  .bar{grid-template-columns:auto minmax(0,1fr) auto;column-gap:.6rem}
+  .menu-btn{grid-column:1;grid-row:1;background:var(--ochre-soft);border:2px solid var(--jungle);color:var(--jungle);font-size:1rem;font-weight:800;padding:.5rem .8rem;border-radius:12px}
+  .menu-btn svg{width:22px;height:22px}
+  .logo{grid-column:2;grid-row:1;min-width:0;white-space:normal;line-height:1.15}
+  .tab-book{grid-column:3;grid-row:1}
+  .aula-link{grid-column:1/3;grid-row:2}
+  .langsw{grid-column:3;grid-row:2;justify-self:end}
+}
+@media (max-width:420px){.bar{column-gap:.45rem}.logo{font-size:.95rem}.logo svg{display:none}.menu-btn{padding:.45rem .6rem}.tab-book{padding:.5rem .7rem}.lg-ico{display:none}}
 
 body[data-view="es"] [data-views]:not([data-views~="es"]),body[data-view="en"] [data-views]:not([data-views~="en"]),body[data-view="fr"] [data-views]:not([data-views~="fr"]),body[data-view="ap"] [data-views]:not([data-views~="ap"]),body[data-view="prof"] [data-views]:not([data-views~="prof"]),body[data-view="op"] [data-views]:not([data-views~="op"]){display:none!important}
 nav a[aria-current="page"]{color:var(--jungle);font-weight:700;box-shadow:0 2px 0 var(--ochre)}
@@ -679,7 +689,7 @@ body.lite .hero-grid{grid-template-columns:1fr;max-width:760px}
 .trust-row li{display:grid;align-content:start;gap:.15rem;background:var(--card);border:1px solid var(--line);border-radius:14px;padding:.8rem 1rem;font-size:.9rem;color:var(--muted)}
 .trust-row strong{font-size:1.35rem;line-height:1.1;color:var(--jungle)}
 .trust-row .tr-mat{grid-template-columns:auto 1fr;align-items:center;gap:.6rem;color:var(--ink);font-weight:600}
-.trust-row .tr-mat::before{content:"";width:22px;height:22px;border-radius:50%;background:var(--jungle) url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E") center/13px no-repeat}
+.trust-row .tr-mat::before{content:"";width:22px;height:22px;border-radius:50%;background-color:#6B4433;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='white' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12l5 5 9-10'/%3E%3C/svg%3E");background-position:center;background-size:13px 13px;background-repeat:no-repeat}
 #tarifas .group-head:first-of-type{margin-top:0}
 .pcard.trial{display:grid;grid-template-columns:auto 1fr auto;grid-template-areas:"h p b" "big s b";gap:.3rem 1.6rem;align-items:center;margin-bottom:1.6rem;padding-top:1.7rem}
 .pcard.trial h3{grid-area:h}.pcard.trial .big{grid-area:big}.pcard.trial .per{grid-area:p}.pcard.trial .save{grid-area:s}.pcard.trial .btn{grid-area:b;margin:0;align-self:center}
