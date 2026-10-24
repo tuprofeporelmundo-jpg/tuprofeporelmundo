@@ -4,7 +4,7 @@
 const P = {
   "/ingles": { u: "/ingles/", v: "en", t: "Clases de inglés online con profesor nativo de Chicago · Tu profe por el mundo", d: "Prepara tu examen de inglés (A1-C1) o mejora tu nivel y conversa con Chris, profesor nativo de Chicago. Clases online a tu medida." },
   "/frances": { u: "/frances/", v: "fr", t: "Clases de francés online con profesor nativo · Tu profe por el mundo", d: "Prepara el DELF/DALF o mejora tu nivel de francés y conversa con un profesor nativo. Preinscripción abierta." },
-  "/apoyo-escolar": { u: "/apoyo-escolar/", v: "ap", t: "Apoyo escolar online de primaria y ESO · Tu profe por el mundo", d: "Apoyo escolar online para primaria y ESO con plan a partir del curso y el material de tu hijo o hija. Estudia y practica gratis." },
+  "/apoyo-escolar": { u: "/apoyo-escolar/", v: "ap", t: "Profe de apoyo escolar online · Primaria y ESO · Tu profe por el mundo", d: "Profe particular online de apoyo escolar para primaria y ESO, con un plan a partir del curso y el material de tu hijo o hija. Estudia y practica gratis." },
   "/profesores": { u: "/profesores/", v: "prof", t: "Nuestros profesores · Tu profe por el mundo", d: "Conoce a Dana (español y apoyo escolar), Chris (inglés nativo, de Chicago) y a nuestro futuro profesor nativo de francés." },
   "/opiniones": { u: "/opiniones/", v: "op", t: "Opiniones de mis alumnos · Tu profe por el mundo", d: "Lee lo que opinan los alumnos y las familias de las clases online de español y de apoyo escolar con Dana. Opiniones reales, buenas y malas." },
 };
